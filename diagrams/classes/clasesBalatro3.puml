@@ -1,0 +1,57 @@
+@startuml
+
+package Model {
+
+class Tienda {
+    + mostrarCartas(): cartasAComprar
+    + venderCarta(): Comprable
+}
+
+interface Comprable {
+    + comprar(): Comprable
+}
+
+interface Comodin {
+    + comprar()
+    + aplicarEfecto(unaJugada: Jugada)
+}
+
+class ComodinJugada {
+    + aplicarEfecto(unaJugada: Jugada)
+}
+class ComodinDescarte {
+    + aplicarEfecto(unaJugada: Jugada)
+}
+class ComodinAleatorio{
+    + aplicarEfecto(unaJugada: Jugada)
+}
+class ComodinCombinacion{
+    + aplicarEfecto(unaJugada: Jugada)
+}
+class ComodinPuntaje{
+    + aplicarEfecto(unaJugada: Jugada)
+}
+
+class Tarot {
+    + comprar()
+    +modificarPuntajeCarta(unaCarta: CartaPoker)
+}
+
+class CartaPoker {
+    - valor
+    - palo
+    + comprar()
+}
+
+
+Tienda o-- Comprable
+Comodin -up-|> Comprable
+CartaPoker -up-|> Comprable
+Tarot -up-|> Comprable
+ComodinJugada -up-|> Comodin
+ComodinDescarte -up-|> Comodin
+ComodinAleatorio -up-|> Comodin
+ComodinCombinacion -up-|> Comodin
+ComodinPuntaje -up-|> Comodin
+}
+@enduml

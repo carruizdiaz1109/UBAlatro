@@ -1,0 +1,7 @@
+
+Clases:
+
+- Balatro: maneja el flujo del juego. Inicia las rondas y chequea si el jugador ganó.
+- Ronda: controla que en cada ronda se le den 8 cartas al jugador y mientras se pueda recibe jugadas que tienen un puntaje.
+- Mano: son las 8 cartas que recibe el jugador
+- Jugada: son las cartas que elige para armar jugadas de poker: escalera, poker, pares, etc.

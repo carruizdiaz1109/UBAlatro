@@ -1,0 +1,76 @@
+@startuml
+
+package Model {
+
+class Jugador {
+    - nombre: string
+    - puntaje: int
+    - manoActual: Mano
+    - comodines: List<Comodin>
+    - cartasTarot: List<Tarot>
+    + Jugador(nombre: string)
+    + repartir()
+    + jugar(): Jugada
+    + descartarCartas()
+    + comprarCartas()
+    + ordenarCartas()
+}
+
+
+class Mazo {
+    +repartir(): Mano
+    +rellenarMano(cantidad: int): List<CartaPoker>
+}
+
+class Mano {
+    - cartas: List[CartaPoker]
+    + seleccionarCarta(): CartaPoker
+    + ordenarCartas()
+    + descartar(cartas: List<CartaPoker>)
+}
+
+class Puntaje {
+    - puntos: int
+    - multiplicador: int
+    + Puntaje(puntos:int, multiplicador:int)
+    + incrementarPuntos(incremento: int)
+    + incrementarMultiplicador(incremento: int)
+    + multiplicarMultiplicador(incremento: int)
+    + calcularPuntaje(): int
+}
+
+class CartaPoker {
+    - valor
+    - palo
+    - puntosAdicionales
+    - multiplicadorAdicional
+    + comprar()
+}
+
+class Ronda {
+    - PuntajeMinimo
+    - DescartesDisponibles
+    - JugadasDisponibles
+    - PuntajeAcumulado
+    + Ronda(puntajeMinimo)
+    + iniciarRonda()
+    + verificarPuntaje(): Puntaje
+}
+
+abstract class Jugada {
+    - sumaCartas: int
+    - Puntaje: Puntaje
+    + Jugada(Lista<CartaPoker>)
+    + calcularPuntaje()
+}
+
+
+
+Jugador o-- Mazo
+Mazo ..> Mano
+Mazo o-- CartaPoker
+Jugador ..> Jugada
+Jugada o-- Puntaje
+Ronda ..> Jugador
+}
+@enduml

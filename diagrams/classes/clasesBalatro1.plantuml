@@ -1,0 +1,59 @@
+@startuml
+
+package Model {
+
+class Balatro {
+    - rondas : int
+    - puntajeActual : int
+    - rondaActual : int
+    + Juego()
+    + iniciarJuego()
+    + verificarPuntaje()
+    + mostrarTienda()
+    - iniciarRonda()
+}
+
+class Jugador {
+    - nombre: string
+    - puntaje: int
+    - manoActual: Mano
+    - mazo: Mazo
+    + Jugador(nombre: string)
+    + repartir()
+    + jugar(): Jugada
+    + descartarCartas()
+    + comprarCartas()
+    + ordenarCartas()
+}
+
+class Tienda {
+    - comodinesAComprar: Lista [Comodin]
+    - tarotAComprar: Lista [Tarot]
+    - cartasAComprar: List[CartaPoker]]
+    + mostrarCartas(): cartasAComprar
+    + venderCarta(): Comprable
+}
+
+class Ronda {
+    - PuntajeMinimo
+    - DescartesDisponibles
+    - JugadasDisponibles
+    - PuntajeAcumulado
+    + Ronda(puntajeMinimo)
+    + iniciarRonda()
+    + verificarPuntaje(): Puntaje
+}
+
+class Panel {
+    + mostrarInformacion(rondaActual: Ronda)
+}
+
+Balatro o-- Jugador
+Balatro o-- Tienda
+Balatro o-- Ronda
+Balatro o-- Panel
+Ronda .up.> Jugador
+Panel .left.> Ronda
+Panel .right.> Tienda
+}
+@enduml
