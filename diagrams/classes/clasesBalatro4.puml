@@ -1,0 +1,66 @@
+@startuml
+skinparam groupInheritance 4
+package Model {
+
+    class Puntaje {
+        - puntos: int
+        - multiplicador: int
+        + Puntaje(puntos:int, multiplicador:int)
+        + incrementarPuntos(incremento: int)
+        + incrementarMultiplicador(incremento: int)
+        + multiplicarMultiplicador(incremento: int)
+        + calcularPuntaje(): int
+    }
+
+    class CartaPoker {
+        - valor
+        - palo
+        - puntosAdicionales
+        - multiplicadorAdicional
+        + comprar()
+    }
+
+    abstract class Jugada {
+        - sumaCartas: int
+        - Puntaje: Puntaje
+        + Jugada(Lista<CartaPoker>)
+        + calcularPuntaje()
+    }
+
+    class CartaAlta {
+    }
+
+    class Par {}
+
+    class DoblePar {}
+
+    class Trio {}
+
+    class Escalera {}
+
+    class Color {}
+
+    class FullHouse {}
+
+    class Poker {}
+
+    class EscaleraColor {}
+
+    class EscaleraReal {}
+
+    Jugada *-up- CartaPoker
+    Jugada o-up- Puntaje
+
+    CartaAlta -up--|> Jugada
+    Par -up--|> Jugada
+    DoblePar -up--|> Jugada
+    Trio -up--|> Jugada
+    Escalera -up--|> Jugada
+    Color -up--|> Jugada
+    FullHouse -up--|> Jugada
+    Poker -up--|> Jugada
+    EscaleraColor -up--|> Jugada
+    EscaleraReal -up--|> Jugada
+    }
+}
+@enduml
