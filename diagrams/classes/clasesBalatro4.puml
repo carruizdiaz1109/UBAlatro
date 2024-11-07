@@ -1,5 +1,4 @@
 @startuml
-skinparam groupInheritance 4
 package Model {
 
     class Puntaje {
@@ -17,38 +16,57 @@ package Model {
         - palo
         - puntosAdicionales
         - multiplicadorAdicional
-        + comprar()
+        + comprar(): CartaPoker
     }
 
     abstract class Jugada {
         - sumaCartas: int
         - Puntaje: Puntaje
         + Jugada(Lista<CartaPoker>)
-        + calcularPuntaje()
+        + {abstract} obtenerPuntaje(): Puntaje
     }
 
     class CartaAlta {
+        + obtenerPuntaje(): Puntaje
     }
 
-    class Par {}
+    class Par {
+    + obtenerPuntaje(): Puntaje
+    }
 
-    class DoblePar {}
+    class DoblePar {
+    + obtenerPuntaje(): Puntaje
+    }
 
-    class Trio {}
+    class Trio {
+    + obtenerPuntaje(): Puntaje
+    }
 
-    class Escalera {}
+    class Escalera {
+    + obtenerPuntaje(): Puntaje
+    }
 
-    class Color {}
+    class Color {
+    + obtenerPuntaje(): Puntaje
+    }
 
-    class FullHouse {}
+    class FullHouse {
+    + obtenerPuntaje(): Puntaje
+    }
 
-    class Poker {}
+    class Poker {
+    + obtenerPuntaje(): Puntaje
+    }
 
-    class EscaleraColor {}
+    class EscaleraColor {
+    + obtenerPuntaje(): Puntaje
+    }
 
-    class EscaleraReal {}
+    class EscaleraReal {
+    + obtenerPuntaje(): Puntaje
+    }
 
-    Jugada *-up- CartaPoker
+    Jugada *-up- "1..5"CartaPoker
     Jugada o-up- Puntaje
 
     CartaAlta -up--|> Jugada

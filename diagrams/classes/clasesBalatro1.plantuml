@@ -6,7 +6,7 @@ class Balatro {
     - rondas : int
     - puntajeActual : int
     - rondaActual : int
-    + Juego()
+    + Juego(nombreJugador)
     + iniciarJuego()
     + verificarPuntaje()
     + mostrarTienda()
@@ -17,7 +17,9 @@ class Jugador {
     - nombre: string
     - puntaje: int
     - manoActual: Mano
-    - mazo: Mazo
+    - comodines: List<Comodin>
+    - cartasTarot: List<Tarot>
+    - cartasSeleccionadas: List<CartaPoker>
     + Jugador(nombre: string)
     + repartir()
     + jugar(): Jugada
@@ -48,10 +50,10 @@ class Panel {
     + mostrarInformacion(rondaActual: Ronda)
 }
 
-Balatro o-- Jugador
-Balatro o-- Tienda
-Balatro o-- Ronda
-Balatro o-- Panel
+Balatro *-- Jugador
+Balatro *-- Tienda
+Balatro o-- "0..8" Ronda
+Balatro *-- Panel
 Ronda .up.> Jugador
 Panel .left.> Ronda
 Panel .right.> Tienda

@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Se verifica que el jugador puede jugar con la mano recibida
+
+actor ":TestCase" as user
+participant ":Juego" as juego
+participant ":Ronda" as ronda
+participant ":Jugador" as jugador
+participant ":Mazo" as mazo
+participant ":Mano" as mano
+
+user -> juego**: Juego(nombreJugador)
+juego -> jugador**: Jugador(nombreJugador)
+jugador --> mazo **: Mazo()
+mazo --> jugador: unMazo
+user -> juego: iniciarJuego()
+
+juego --> ronda**: Ronda(Jugador)
+juego -> ronda: iniciarRonda()
+ronda -> jugador: repartir()
+jugador -> mazo: repartir()
+mazo -> mano **: Mano()
+mano -> mano: rellenar()
+mano --> mazo: unaMano
+mazo --> jugador: unaMano
+
+ronda -> jugador:Jugar()
+
+jugador -> mano: seleccionarCarta(CartaPoker)
+mano --> jugador: unaCarta
+jugador --> jugador: agregarACartaSeleccionadas
+jugador -> ":Jugada" as jugada **: Jugada(seleccionadas)
+jugada --> jugador: unaJugada
+jugador --> ronda: unaJugada
+
+ronda --> user
+
+
+@enduml

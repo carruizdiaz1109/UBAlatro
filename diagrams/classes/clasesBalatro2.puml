@@ -8,6 +8,7 @@ class Jugador {
     - manoActual: Mano
     - comodines: List<Comodin>
     - cartasTarot: List<Tarot>
+    - cartasSeleccionadas: List<CartaPoker>
     + Jugador(nombre: string)
     + repartir()
     + jugar(): Jugada
@@ -18,15 +19,18 @@ class Jugador {
 
 
 class Mazo {
-    +repartir(): Mano
-    +rellenarMano(cantidad: int): List<CartaPoker>
+    - cantidadCartas: int
+    + repartir(): Mano
+    + darCarta(): CartaPoker
 }
 
 class Mano {
     - cartas: List[CartaPoker]
+    - cantidadCartas: int
     + seleccionarCarta(): CartaPoker
     + ordenarCartas()
     + descartar(cartas: List<CartaPoker>)
+    + manoLlena():boolean
 }
 
 class Puntaje {
@@ -44,7 +48,8 @@ class CartaPoker {
     - palo
     - puntosAdicionales
     - multiplicadorAdicional
-    + comprar()
+    + CartaPoker(valor: int, palo: string)
+    + comprar(): CartaPoker
 }
 
 class Ronda {
@@ -61,14 +66,12 @@ abstract class Jugada {
     - sumaCartas: int
     - Puntaje: Puntaje
     + Jugada(Lista<CartaPoker>)
-    + calcularPuntaje()
+    + {abstract}obtenerPuntaje(): Puntaje
 }
-
-
 
 Jugador o-- Mazo
 Mazo ..> Mano
-Mazo o-- CartaPoker
+Mazo o-- "1..*" CartaPoker
 Jugador ..> Jugada
 Jugada o-- Puntaje
 Ronda ..> Jugador

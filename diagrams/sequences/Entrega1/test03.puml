@@ -1,12 +1,14 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+title Se verifica que a un jugador se le reparten 8 cartas de su mazo
+
 actor ":TestCase" as user
 participant ":Juego" as juego
 participant ":Ronda" as ronda
 participant ":Jugador" as jugador
 participant ":Mazo" as mazo
-participant "m: Mano" as mano
+participant ":Mano" as mano
 
 user -> juego**: Juego(nombreJugador)
 juego -> jugador**: Jugador(nombreJugador)
@@ -14,20 +16,19 @@ jugador --> mazo **: Mazo()
 mazo --> jugador: unMazo
 user -> juego: iniciarJuego()
 
-juego -> ronda**: Ronda(Jugador)
+juego --> ronda**: Ronda(Jugador)
 juego -> ronda: iniciarRonda()
 ronda -> jugador: repartir()
 jugador -> mazo: repartir()
-mazo --> mano**: Mano(Lista<CartasPoker>)
-mazo --> jugador:(m)
-
-jugador -> mano: seleccionarCartas()
-mano --> jugador: seleccionadas
-jugador -> ":Poker" as jugada**: Jugada(seleccionadas)
-jugador -> ronda: jugar(poker)
-
-ronda -> jugada: Puntuacion()
-jugada --> ronda: unaPuntuacion
-
-ronda -> juego: unaPuntuacion
+mazo -> mano **: Mano()
+mano -> mano: rellenar()
+loop hasta cantidad = 8
+    mano -> mazo: darCarta()
+    mazo --> mano: CartaPoker
+end
+mano --> mazo: unaMano
+mazo --> jugador: unaMano
+jugador -> mano: manoLlena()
+mano --> jugador: true
+jugador --> user
 @enduml
