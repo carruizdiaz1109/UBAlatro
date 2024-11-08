@@ -12,11 +12,13 @@ package Model {
     }
 
     class CartaPoker {
-        - valor
-        - palo
-        - puntosAdicionales
-        - multiplicadorAdicional
+        - valor: int
+        - palo: String
+        - puntaje: Puntaje
+        - id: int
+        + CartaPoker(valor: int, palo: string, id:int)
         + comprar(): CartaPoker
+        + modificarPuntaje(incremento: int)
     }
 
     abstract class Jugada {
