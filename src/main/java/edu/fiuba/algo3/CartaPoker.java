@@ -4,11 +4,13 @@ public class CartaPoker {
     private int valor;
     private String palo;
     private Puntaje puntaje;
+    int id;
 
-    public CartaPoker(int valor, String palo){
+    public CartaPoker(int valor, String palo, int unId){
         this.valor = valor;
         this.palo = palo;
         this.puntaje = new Puntaje( this.valor, 1);
+        this.id = unId;
     }
 
     public CartaPoker comprar() {
@@ -21,6 +23,10 @@ public class CartaPoker {
 
     public int calcularPuntaje() {
         return this.puntaje.calcularPuntaje();
+    }
+
+    public boolean tieneId(int unId) {
+        return (this.id == unId);
     }
 
 
