@@ -14,4 +14,14 @@ public class CartaPoker {
     public CartaPoker comprar() {
         return this;
     }
+
+    public void modificarPuntaje(int incremento) {
+        this.puntaje.incrementarPuntos(incremento);
+    }
+
+    public int calcularPuntaje() {
+        return this.puntaje.calcularPuntaje();
+    }
+
+
 }
