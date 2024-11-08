@@ -46,7 +46,6 @@ class Puntaje {
 class CartaPoker {
     - valor: int
     - palo: String
-    - puntaje: Puntaje
     - id: int
     + CartaPoker(valor: int, palo: string)
     + comprar(): CartaPoker

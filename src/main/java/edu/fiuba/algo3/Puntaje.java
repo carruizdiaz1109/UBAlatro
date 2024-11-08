@@ -13,8 +13,13 @@ public class Puntaje {
         this.puntos = this.puntos + incremento;
     }
 
-    public void incrementarMultiplicador( int incremento) {}
-    public void multiplicarMultiplicador(int incremento) {}
+    public void incrementarMultiplicador( int incremento) {
+        this.multiplicador = this.multiplicador + incremento;
+    }
+
+    public void multiplicarMultiplicador(int incremento) {
+        this.multiplicador = this.multiplicador * incremento;
+    }
 
     public int calcularPuntaje() {
         return this.multiplicador * this.puntos;
