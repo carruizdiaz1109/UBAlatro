@@ -1,16 +1,18 @@
 package edu.fiuba.algo3;
 
 public class CartaPoker {
+    private static int contadorId = 1;
+
     private int valor;
     private String palo;
     private Puntaje puntaje;
-    int id;
+    private int id;
 
-    public CartaPoker(int valor, String palo, int unId){
+    public CartaPoker(int valor, String palo){
         this.valor = valor;
         this.palo = palo;
         this.puntaje = new Puntaje( this.valor, 1);
-        this.id = unId;
+        this.id = contadorId++;
     }
 
     public CartaPoker comprar() {

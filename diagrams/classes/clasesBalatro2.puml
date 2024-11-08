@@ -48,7 +48,7 @@ class CartaPoker {
     - palo: String
     - puntaje: Puntaje
     - id: int
-    + CartaPoker(valor: int, palo: string, id:int)
+    + CartaPoker(valor: int, palo: string)
     + comprar(): CartaPoker
     + modificarPuntaje(incremento: int)
 }
