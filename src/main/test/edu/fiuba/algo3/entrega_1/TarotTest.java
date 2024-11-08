@@ -11,6 +11,11 @@ public class TarotTest {
 
     @Test
     public void test01SeModificaElValorDeUnaCarta() {
+        CartaPoker cartaPoker = new CartaPoker(4, "Pica");
+        Tarot cartaTarot = new Tarot(5);
+
+        cartaTarot.modificarPuntaje(cartaPoker);
+        assertEquals(9, cartaPoker.calcularPuntaje());
     }
 
 }

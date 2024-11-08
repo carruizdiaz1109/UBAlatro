@@ -33,7 +33,9 @@ class ComodinPuntaje{
 }
 
 class Tarot {
+    - incremento: int
     + comprar()
+    + Tarot(incremento: int)
     +modificarPuntajeCarta(unaCarta: CartaPoker)
 }
 
