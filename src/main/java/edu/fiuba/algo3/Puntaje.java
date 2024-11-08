@@ -9,6 +9,7 @@ public class Puntaje {
         this.puntos = unosPuntos;
     }
 
+
     public void incrementarPuntos(int incremento){
         this.puntos = this.puntos + incremento;
     }
