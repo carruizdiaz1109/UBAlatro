@@ -1,7 +1,7 @@
 package edu.fiuba.algo3;
 
 public class Tarot {
-    public void modificarPuntaje(CartaPoker unaCarta) {
 
-    }
+    public Tarot(){}
+    public void modificarPuntaje(CartaPoker carta) {}
 }

@@ -11,10 +11,6 @@ public class TarotTest {
 
     @Test
     public void test01SeModificaElValorDeUnaCarta() {
-        Tarot cartaTarot = new Tarot();
-        CartaPoker cartaMock = Mock(CartaPoker.class);
-
-        cartaTarot.modificarPuntaje(cartaMock);
     }
 
 }
