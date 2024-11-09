@@ -1,14 +1,26 @@
 package edu.fiuba.algo3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Jugador {
+    private String nombre;
+    private int puntaje;
+    private Mano manoActual;
+    private Mazo mazo;
 
-    public Jugador(){}
+    public Jugador(String nombre){
+        this.nombre = nombre;
+        this.puntaje = 0;
+        this.manoActual = new Mano(new ArrayList<>());
+        this.mazo = new Mazo();
+    }
 
-    public void iniciarRonda(){}
+    public int getPuntaje(){
+        return puntaje;
+    }
 
-    public Jugada jugar(){
-        return (new Jugada());
-    };
-
+    public String getNombre(){
+        return nombre;
+    }
 }
-
