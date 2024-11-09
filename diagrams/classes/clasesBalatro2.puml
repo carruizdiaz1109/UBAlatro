@@ -57,7 +57,7 @@ class Ronda {
     - DescartesDisponibles
     - JugadasDisponibles
     - PuntajeAcumulado
-    + Ronda(puntajeMinimo)
+    + Ronda(jugador: Jugador)
     + iniciarRonda()
     + verificarPuntaje(): Puntaje
 }

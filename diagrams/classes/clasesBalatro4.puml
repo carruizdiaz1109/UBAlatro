@@ -79,6 +79,6 @@ package Model {
     Poker -up--|> Jugada
     EscaleraColor -up--|> Jugada
     EscaleraReal -up--|> Jugada
-    }
+
 }
 @enduml
