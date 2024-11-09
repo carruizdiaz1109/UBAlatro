@@ -32,5 +32,4 @@ public class CartaPoker {
         return (this.id == unId);
     }
 
-
 }

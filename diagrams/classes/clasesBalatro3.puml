@@ -45,7 +45,9 @@ class CartaPoker {
     - id: int
     + CartaPoker(valor: int, palo: Palo)
     + comprar(): CartaPoker
-    + modificarPuntaje(incremento: int)
+    + modificarPuntaje(Puntaje: unPuntaje)
+    + calcularPuntaje(): int
+    + tieneId(unId: int):boolean
 }
 
 
