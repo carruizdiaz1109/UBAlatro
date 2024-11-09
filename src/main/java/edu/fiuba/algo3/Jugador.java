@@ -23,4 +23,13 @@ public class Jugador {
     public String getNombre(){
         return nombre;
     }
+
+    public Mano getManoActual(){
+        return manoActual;
+    }
+
+    public void iniciarRonda(){
+        List<CartaPoker> cartas = mazo.rellenar(8);
+        manoActual = new Mano(cartas);
+    }
 }

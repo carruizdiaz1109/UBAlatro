@@ -20,4 +20,11 @@ public class JugadorTest {
         assertEquals(nombreEsperado, nombreObtenido);
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
+
+    @Test
+    public void test02IniciarRondaAsignaOchoCartasAMano() {
+        Jugador jugador = new Jugador("Juan");
+        jugador.iniciarRonda();
+        assertEquals(8, jugador.getManoActual().getCantidadCartas());
+    }
 }
