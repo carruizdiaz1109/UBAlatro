@@ -33,4 +33,12 @@ public class Mazo {
     protected void mezclar() {
         Collections.shuffle(cartas);
     }
+
+    public CartaPoker darCarta() {
+        if (cantidadCartas == 0) {
+            throw new ErrorMazoVacio();
+        }
+        cantidadCartas--;
+        return cartas.remove(0);
+    }
 }
