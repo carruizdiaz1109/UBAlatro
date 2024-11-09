@@ -55,4 +55,17 @@ public class MazoTest {
         }
         assertThrows(ErrorMazoVacio.class, () -> mazo.darCarta());
     }
+
+    @Test
+    public void test05Rellena5Cartas(){
+        Mazo mazo = new Mazo();
+        int cantidadEsperada = 5;
+        int cantidadObtenidas = 0;
+
+        List<CartaPoker> cartas = new ArrayList<>();
+        cartas = mazo.rellenar(5);
+        cantidadObtenidas = cartas.size();
+
+        assertEquals(cantidadEsperada, cantidadObtenidas);
+    }
 }
