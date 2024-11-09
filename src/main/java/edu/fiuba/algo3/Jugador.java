@@ -38,5 +38,11 @@ public class Jugador {
         CartaPoker cartaSeleccionada = manoActual.seleccionarCarta();
         cartasSeleccionadas.add(cartaSeleccionada);
         return (new Jugada(cartasSeleccionadas));
-    };
+    }
+
+    public List<CartaPoker> descartarCartas(){
+        List<CartaPoker> cartasDescartadas = manoActual.descartar();
+        return cartasDescartadas;
+    }
+
 }
