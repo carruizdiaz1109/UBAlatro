@@ -1,33 +1,41 @@
 package edu.fiuba.algo3;
 
+import java.awt.*;
+
 public class Balatro {
     private int rondas;
     private int puntajeActual;
     private int rondaActual;
 
-    private Jugador jugador = new Jugador();
-    private Ronda ronda = new Ronda();
-    private Panel panel = new Panel();
-    private Tienda tienda = new Tienda();
+    private Jugador jugador;
+    private Ronda ronda;
+    private Panel panel;
+    private Tienda tienda;
 
-    public void juego()
+    public Balatro()
     {
-
+        this.jugador = new Jugador(String nombre);
+        //this.ronda = new Ronda();
+        this.panel = new Panel();
+        this.tienda = new Tienda();
     }
+
     public void iniciarJuego()
     {
-
+        this.ronda = new Ronda();
+        iniciarRonda();
     }
-    public void verificarPuntaje()
+    public void verificarPuntaje() //Deberia mostrar el puntaje actual? o devolver el puntaje actual y compararlo con el puntaje meta
     {
-
+        System.out.println("Puntaje actual del jugador: " + puntajeActual);
+        //return this.puntajeActual;
     }
     public void mostrarTienda()
     {
-
+        tienda.mostrarCartas();
     }
     private void iniciarRonda()
     {
-
+        ronda.iniciarRonda(puntajeActual);
     }
 }
