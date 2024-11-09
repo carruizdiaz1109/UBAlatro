@@ -6,5 +6,9 @@ public class Jugador {
 
     public void iniciarRonda(){}
 
+    public Jugada jugar(){
+        return (new Jugada());
+    };
+
 }
 

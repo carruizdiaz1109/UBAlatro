@@ -17,8 +17,14 @@ public class Ronda {
         this.puntajeAcumulado = 0;
     }
 
-    public void iniciaronda(){
+    public void iniciarRonda(){
         this.jugador.iniciarRonda();
+        Jugada unaJugada = this.jugador.jugar();
+        this.puntajeAcumulado += unaJugada.calcularPuntaje();
+    }
+
+     public boolean verificarPuntaje() {
+        return (this.puntajeMinimo <= this.puntajeAcumulado);
     }
 
 
