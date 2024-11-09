@@ -24,4 +24,16 @@ public class MazoTest {
 
         assertEquals(cantidadCartasEsperadas, cantidadCartasObtenidas);
     }
+
+    @Test
+    public void test02DarCartaReduceCantidad(){
+        int cantidadEsperada = 51;
+        int cantidadFinal = 0;
+
+        Mazo mazo = new Mazo();
+        mazo.darCarta();
+        cantidadFinal = mazo.getCantidadCartas();
+
+        assertEquals(cantidadFinal, cantidadEsperada);
+    }
 }
