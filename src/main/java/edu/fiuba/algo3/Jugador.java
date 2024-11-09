@@ -45,4 +45,11 @@ public class Jugador {
         return cartasDescartadas;
     }
 
+    public void comprarCartas(int cantidad){
+        List<CartaPoker> cartasCompradas = mazo.rellenar(cantidad);
+        for (CartaPoker carta : cartasCompradas){
+            manoActual.recibirCarta(carta);
+        }
+    }
+
 }
