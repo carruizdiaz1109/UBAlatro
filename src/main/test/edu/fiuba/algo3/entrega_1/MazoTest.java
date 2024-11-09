@@ -68,4 +68,22 @@ public class MazoTest {
 
         assertEquals(cantidadEsperada, cantidadObtenidas);
     }
+
+    @Test
+    public void test06GuardarCartaAumentaCantidad(){
+        Mazo mazo = new Mazo();
+        int cantidadEsperada = 50;
+        int cantidadObtenida = 0;
+
+        mazo.darCarta();
+        mazo.darCarta();
+        CartaPoker cartaObtenida = mazo.darCarta();
+
+        mazo.guardarCarta(cartaObtenida);
+
+        cantidadObtenida = mazo.getCantidadCartas();
+
+        assertEquals(cantidadEsperada, cantidadObtenida);
+
+    }
 }

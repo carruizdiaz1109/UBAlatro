@@ -55,4 +55,9 @@ public class Mazo {
 
         return cartasRellenadas;
     }
+
+    public void guardarCarta(CartaPoker carta){
+        cartas.add(carta);
+        cantidadCartas++;
+    }
 }
