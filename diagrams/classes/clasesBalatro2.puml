@@ -10,7 +10,7 @@ class Jugador {
     - cartasTarot: List<Tarot>
     - cartasSeleccionadas: List<CartaPoker>
     + Jugador(nombre: string)
-    + repartir()
+    + iniciarRonda()
     + jugar(): Jugada
     + descartarCartas()
     + comprarCartas()
@@ -45,9 +45,9 @@ class Puntaje {
 
 class CartaPoker {
     - valor: int
-    - palo: String
+    - palo: Palo
     - id: int
-    + CartaPoker(valor: int, palo: string)
+    + CartaPoker(valor: int, palo: Palo)
     + comprar(): CartaPoker
     + modificarPuntaje(incremento: int)
 }
@@ -57,7 +57,7 @@ class Ronda {
     - DescartesDisponibles
     - JugadasDisponibles
     - PuntajeAcumulado
-    + Ronda(puntajeMinimo)
+    + Ronda(jugador: Jugador)
     + iniciarRonda()
     + verificarPuntaje(): Puntaje
 }
