@@ -41,4 +41,8 @@ public class Mazo {
         cantidadCartas--;
         return cartas.remove(0);
     }
+
+    public List<CartaPoker> getCartas() {
+        return cartas;
+    }
 }

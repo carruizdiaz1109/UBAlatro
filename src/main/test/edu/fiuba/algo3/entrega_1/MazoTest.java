@@ -36,4 +36,14 @@ public class MazoTest {
 
         assertEquals(cantidadFinal, cantidadEsperada);
     }
+
+    @Test
+    public void test03DarCartaDevuelvePrimerCarta(){
+        Mazo mazo = new Mazo();
+        List<CartaPoker> cartas = mazo.getCartas();
+        CartaPoker cartaEsperada = cartas.get(0);
+        CartaPoker cartaObtenida = mazo.darCarta();
+
+        assertEquals(cartaEsperada, cartaObtenida);
+    }
 }
