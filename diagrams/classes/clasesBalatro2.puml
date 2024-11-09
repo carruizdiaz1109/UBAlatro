@@ -10,7 +10,7 @@ class Jugador {
     - cartasTarot: List<Tarot>
     - cartasSeleccionadas: List<CartaPoker>
     + Jugador(nombre: string)
-    + repartir()
+    + iniciarRonda()
     + jugar(): Jugada
     + descartarCartas()
     + comprarCartas()
@@ -57,7 +57,7 @@ class Ronda {
     - DescartesDisponibles
     - JugadasDisponibles
     - PuntajeAcumulado
-    + Ronda(puntajeMinimo)
+    + Ronda(jugador: Jugador)
     + iniciarRonda()
     + verificarPuntaje(): Puntaje
 }
