@@ -18,7 +18,7 @@ user -> juego: iniciarJuego()
 
 juego --> ronda**: Ronda(Jugador)
 juego -> ronda: iniciarRonda()
-ronda -> jugador: repartir()
+ronda -> jugador: iniciarRonda()
 jugador -> mazo: repartir()
 mazo -> mano **: Mano()
 mano -> mano: rellenar()

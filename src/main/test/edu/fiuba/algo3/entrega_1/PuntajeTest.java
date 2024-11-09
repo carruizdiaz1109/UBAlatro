@@ -3,11 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.CartaPoker;
 import edu.fiuba.algo3.Puntaje;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
 
 public class PuntajeTest {
 
