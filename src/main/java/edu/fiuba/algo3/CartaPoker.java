@@ -32,5 +32,8 @@ public class CartaPoker {
         return (this.id == unId);
     }
 
+    public boolean esMayorA(CartaPoker otraCarta) {
+        return (this.valor > otraCarta.valor);
+    }
 
 }
