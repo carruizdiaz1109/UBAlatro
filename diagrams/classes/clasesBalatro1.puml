@@ -43,7 +43,7 @@ class Ronda {
     - PuntajeAcumulado
     + Ronda(jugador: Jugador)
     + iniciarRonda()
-    + verificarPuntaje(): Puntaje
+    + verificarPuntaje(): boolean
 }
 
 class Panel {
