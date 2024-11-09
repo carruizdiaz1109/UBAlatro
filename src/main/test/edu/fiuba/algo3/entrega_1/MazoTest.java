@@ -46,4 +46,13 @@ public class MazoTest {
 
         assertEquals(cartaEsperada, cartaObtenida);
     }
+
+    @Test
+    public void test04DarCartaConMazoVacioTiraError(){
+        Mazo mazo = new Mazo();
+        while (mazo.getCantidadCartas() > 0) {
+            mazo.darCarta();
+        }
+        assertThrows(ErrorMazoVacio.class, () -> mazo.darCarta());
+    }
 }
