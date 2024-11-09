@@ -17,11 +17,13 @@ public class Puntaje {
         this.multiplicador = this.multiplicador + incremento;
     }
 
-    public void multiplicarMultiplicador(int incremento) {
-        this.multiplicador = this.multiplicador * incremento;
+   public int calcularPuntaje() {
+        return this.multiplicador * this.puntos;
     }
 
-    public int calcularPuntaje() {
-        return this.multiplicador * this.puntos;
+    public Puntaje sumarPuntaje(Puntaje unPuntaje) {
+        unPuntaje.incrementarPuntos(this.puntos);
+        unPuntaje.incrementarMultiplicador(this.multiplicador);
+        return unPuntaje;
     }
 }
