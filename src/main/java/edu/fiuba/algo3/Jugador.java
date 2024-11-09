@@ -52,4 +52,8 @@ public class Jugador {
         }
     }
 
+    public void ordenarCartas(){
+        manoActual.ordenarCartas();
+    }
+
 }
