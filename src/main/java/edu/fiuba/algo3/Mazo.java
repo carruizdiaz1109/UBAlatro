@@ -16,9 +16,9 @@ public class Mazo {
 
     protected void inicializarMazo(){
         cartas.clear();
-        String[] palos = {"Pica", "Diamantes", "Corazones", "Treboles"};
+        Palo[] palos = Palo.values();
         int[] valores = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-        for (String palo : palos) {
+        for (Palo palo : palos) {
             for (int valor : valores) {
                 cartas.add(new CartaPoker(valor, palo));
                 cantidadCartas++;
