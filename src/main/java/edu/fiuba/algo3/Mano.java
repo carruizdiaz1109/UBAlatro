@@ -16,6 +16,13 @@ public class Mano {
         this.capacidad = 8;
     }
 
+    public Mano(ArrayList<CartaPoker> cartas) {
+        this.cartas = cartas;
+        this.seleccionadas = new ArrayList<CartaPoker>();
+        this.cantidadCartas = cartas.size();
+        this.capacidad = 8;
+    }
+
     public void eliminarCartas() {
         cartas.clear();
     }
@@ -31,19 +38,29 @@ public class Mano {
         return cantidadCartas == capacidad;
     }
 
-    public void seleccionarCarta(CartaPoker carta) {
-        seleccionadas.add(carta);
+    public void seleccionarCarta(int indice) {
+        if (indice >= 0 && indice < cartas.size()) {
+            CartaPoker carta = cartas.get(indice);
+            if (!seleccionadas.contains(carta)) {
+                seleccionadas.add(carta);
+            }
+        }
     }
 
-    public void deseleccionarCarta(CartaPoker carta) {
-        seleccionadas.remove(carta);
+    public void deseleccionarCarta(int indice) {
+        if (indice >= 0 && indice < cartas.size()) {
+            CartaPoker carta = cartas.get(indice);
+            seleccionadas.remove(carta);
+        }
     }
 
+    /*
     public void ordenarCartas() {
 
     }
+    */
 
-    public void descartar(ArrayList<CartaPoker> cartas) {
-
+    public void descartar() {
+        if(!seleccionadas.isEmpty()) seleccionadas.clear();
     }
 }
