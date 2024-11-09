@@ -86,4 +86,17 @@ public class MazoTest {
         assertEquals(cantidadEsperada, cantidadObtenida);
 
     }
+
+    @Test
+    public void test07GuardarCartaColocaAlFinalDelMazoCarta(){
+        Mazo mazo = new Mazo();
+
+        CartaPoker cartaObtenida = mazo.darCarta();
+        mazo.guardarCarta(cartaObtenida);
+        List<CartaPoker> cartas = mazo.getCartas();
+
+        CartaPoker ultimaCarta = cartas.get(cartas.size() - 1);
+
+        assertEquals(ultimaCarta, cartaObtenida);
+    }
 }
