@@ -15,7 +15,6 @@ public class Balatro {
     public Balatro()
     {
         this.jugador = new Jugador(String nombre);
-        //this.ronda = new Ronda();
         this.panel = new Panel();
         this.tienda = new Tienda();
     }
