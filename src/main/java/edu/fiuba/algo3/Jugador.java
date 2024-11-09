@@ -32,4 +32,11 @@ public class Jugador {
         List<CartaPoker> cartas = mazo.rellenar(8);
         manoActual = new Mano(cartas);
     }
+
+    public Jugada jugar(){
+        List<CartaPoker> cartasSeleccionadas = new ArrayList<>();
+        CartaPoker cartaSeleccionada = manoActual.seleccionarCarta();
+        cartasSeleccionadas.add(cartaSeleccionada);
+        return (new Jugada(cartasSeleccionadas));
+    };
 }
