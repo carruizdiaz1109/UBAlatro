@@ -8,25 +8,27 @@ public class Balatro {
     public Balatro(String nombreJugador) {
         this.rondas = 8;
         this.jugador = new Jugador(nombreJugador);
-
+        this.rondaActual = null;
     }
 
     public void iniciarJuego() {
         int i = 0;
-        this.rondaActual = crearRonda();
-        while ( i < this.rondas && verificarResultado()){
+        this.rondaActual = this.crearRonda();
+        while ( i < this.rondas && this.verificarResultado()){
             this.rondaActual.iniciarRonda();
-            this.rondaActual = crearRonda();
+            if (this.verificarResultado()) {
+                this.rondaActual = this.crearRonda();
+            }
+            i++;
         }
-
     }
 
     protected Ronda crearRonda() {
-        return new Ronda(this.jugador);
+        return (new Ronda(this.jugador));
     }
 
    public boolean verificarResultado(){
-        return (this.rondaActual.verificarResultado());
+        return (this.rondaActual.verificarPuntaje());
     }
 
 }
