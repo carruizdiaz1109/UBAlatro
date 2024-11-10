@@ -1,1 +1,8 @@
+# Ignorar archivos compilados
+*.class
+
+# Ignorar la carpeta del IDE IntelliJ IDEA
+.idea/
+
+# Ignorar el directorio 'target' en proyectos Maven/Gradle
 /target/
