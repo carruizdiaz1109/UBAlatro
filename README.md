@@ -7,7 +7,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Integrante 1** - [Trebejo Luis](https://github.com/luistrebejoIt)
 * **Integrante 2** - [Ruiz Diaz Carolina](https://github.com/carruizdiaz1109)
 * **Integrante 3** - [Sparta Mateo](https://github.com/mateoSparta)
-* **Integrante 4** - [integrante4](https://github.com/integrante4)
+* **Integrante 4** - [Pizzi Mariana](https://github.com/Mariana-Pizzi)
 
 Corrector: Diego Sánchez
 

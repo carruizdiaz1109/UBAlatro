@@ -1,23 +1,26 @@
 @startuml
 package Model {
 
-    class Puntaje {
-        - puntos: int
-        - multiplicador: int
-        + Puntaje(puntos:int, multiplicador:int)
-        + incrementarPuntos(incremento: int)
-        + incrementarMultiplicador(incremento: int)
-        + multiplicarMultiplicador(incremento: int)
-        + calcularPuntaje(): int
-    }
+   class Puntaje {
+       - puntos: int
+       - multiplicador: int
+       + Puntaje(puntos:int, multiplicador:int)
+       + incrementarPuntos(incremento: int)
+       + incrementarMultiplicador(incremento: int)
+       + calcularPuntaje(): int
+       + sumarPuntaje(unPuntaje: Puntaje):Puntaje
+   }
 
-    class CartaPoker {
-        - valor
-        - palo
-        - puntosAdicionales
-        - multiplicadorAdicional
-        + comprar(): CartaPoker
-    }
+   class CartaPoker {
+       - valor: int
+       - palo: Palo
+       - id: int
+       + CartaPoker(valor: int, palo: Palo)
+       + comprar(): CartaPoker
+       + modificarPuntaje(Puntaje: unPuntaje)
+       + calcularPuntaje(): int
+       + tieneId(unId: int):boolean
+   }
 
     abstract class Jugada {
         - sumaCartas: int
@@ -79,6 +82,6 @@ package Model {
     Poker -up--|> Jugada
     EscaleraColor -up--|> Jugada
     EscaleraReal -up--|> Jugada
-    }
+
 }
 @enduml

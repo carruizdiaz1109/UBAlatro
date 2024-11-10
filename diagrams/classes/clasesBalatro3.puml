@@ -33,14 +33,21 @@ class ComodinPuntaje{
 }
 
 class Tarot {
+    - incremento: int
     + comprar()
+    + Tarot(incremento: int)
     +modificarPuntajeCarta(unaCarta: CartaPoker)
 }
 
 class CartaPoker {
-    - valor
-    - palo
-    + comprar()
+    - valor: int
+    - palo: Palo
+    - id: int
+    + CartaPoker(valor: int, palo: Palo)
+    + comprar(): CartaPoker
+    + modificarPuntaje(Puntaje: unPuntaje)
+    + calcularPuntaje(): int
+    + tieneId(unId: int):boolean
 }
 
 

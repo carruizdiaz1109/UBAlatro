@@ -16,7 +16,7 @@ user -> juego: iniciarJuego()
 
 juego --> ronda**: Ronda(Jugador)
 juego -> ronda: iniciarRonda()
-ronda -> jugador: repartir()
+ronda -> jugador: iniciarRonda()
 jugador -> mazo: cartasSuficientes()
 mazo --> jugador: true
 
