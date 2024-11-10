@@ -1,15 +1,15 @@
 @startuml
 package Model {
 
-    class Puntaje {
-        - puntos: int
-        - multiplicador: int
-        + Puntaje(puntos:int, multiplicador:int)
-        + incrementarPuntos(incremento: int)
-        + incrementarMultiplicador(incremento: int)
-        + multiplicarMultiplicador(incremento: int)
-        + calcularPuntaje(): int
-    }
+   class Puntaje {
+       - puntos: int
+       - multiplicador: int
+       + Puntaje(puntos:int, multiplicador:int)
+       + incrementarPuntos(incremento: int)
+       + incrementarMultiplicador(incremento: int)
+       + calcularPuntaje(): int
+       + sumarPuntaje(unPuntaje: Puntaje):Puntaje
+   }
 
    class CartaPoker {
        - valor: int
@@ -17,7 +17,9 @@ package Model {
        - id: int
        + CartaPoker(valor: int, palo: Palo)
        + comprar(): CartaPoker
-       + modificarPuntaje(incremento: int)
+       + modificarPuntaje(Puntaje: unPuntaje)
+       + calcularPuntaje(): int
+       + tieneId(unId: int):boolean
    }
 
     abstract class Jugada {

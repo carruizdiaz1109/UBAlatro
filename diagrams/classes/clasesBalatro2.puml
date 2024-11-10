@@ -10,7 +10,7 @@ class Jugador {
     - cartasTarot: List<Tarot>
     - cartasSeleccionadas: List<CartaPoker>
     + Jugador(nombre: string)
-    + repartir()
+    + iniciarRonda()
     + jugar(): Jugada
     + descartarCartas()
     + comprarCartas()
@@ -39,8 +39,8 @@ class Puntaje {
     + Puntaje(puntos:int, multiplicador:int)
     + incrementarPuntos(incremento: int)
     + incrementarMultiplicador(incremento: int)
-    + multiplicarMultiplicador(incremento: int)
     + calcularPuntaje(): int
+    + sumarPuntaje(unPuntaje: Puntaje):Puntaje
 }
 
 class CartaPoker {
@@ -49,7 +49,9 @@ class CartaPoker {
     - id: int
     + CartaPoker(valor: int, palo: Palo)
     + comprar(): CartaPoker
-    + modificarPuntaje(incremento: int)
+    + modificarPuntaje(Puntaje: unPuntaje)
+    + calcularPuntaje(): int
+    + tieneId(unId: int):boolean
 }
 
 class Ronda {
@@ -57,9 +59,9 @@ class Ronda {
     - DescartesDisponibles
     - JugadasDisponibles
     - PuntajeAcumulado
-    + Ronda(puntajeMinimo)
+    + Ronda(jugador: Jugador)
     + iniciarRonda()
-    + verificarPuntaje(): Puntaje
+    + verificarPuntaje(): boolean
 }
 
 abstract class Jugada {
