@@ -56,9 +56,10 @@ public class Mazo {
         return cartasRellenadas;
     }
 
-    public ArrayList<CartaPoker> repartir(){
+    public Mano repartir(){
         ArrayList<CartaPoker> cartasRepartidas = rellenar(8);
-        return cartasRepartidas;
+        Mano mano = new Mano(cartasRepartidas);
+        return mano;
     }
 
     public void guardarCarta(CartaPoker carta){
