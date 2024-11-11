@@ -12,9 +12,24 @@ public class BalatroTest {
 
     @Test
     public void test01IniciarBalatroLlamaAMetodoDeRondaOchoVeces() {
+        Ronda rondaMock = Mockito.mock(Ronda.class);
+        Balatro balatro = new Balatro("Pablo") {
+            @Override
+            protected Ronda crearRonda() {
+                return rondaMock;
+            }
+        };
+        when(rondaMock.verificarPuntaje()).thenReturn(true);
 
+        balatro.iniciarJuego();
 
+        verify(rondaMock, times(8)).iniciarRonda();
     }
+    /*@Test
+    public void test02BalatroCreaAlJugador()
+    {
+        Balatro balatro = new Balatro("Pablo");
+    }*/
 }
 
 
