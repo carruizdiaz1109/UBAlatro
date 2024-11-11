@@ -6,10 +6,13 @@ class Jugador {
     - nombre: string
     - puntaje: int
     - manoActual: Mano
+    - mazo: Mazo
     - comodines: List<Comodin>
     - cartasTarot: List<Tarot>
     - cartasSeleccionadas: List<CartaPoker>
     + Jugador(nombre: string)
+    + esMismoPuntaje(unPuntaje: int): boolean
+    + esMismoNombre(unNombre: String): boolean
     + iniciarRonda()
     + jugar(): Jugada
     + descartarCartas()
@@ -19,17 +22,27 @@ class Jugador {
 
 
 class Mazo {
+    -cartas: List<CartaPoker>
     - cantidadCartas: int
-    + repartir(): Mano
+    # inicializarMazo()
+    # mezclar()
     + darCarta(): CartaPoker
+    + rellenar(cantidad: int): ArrayList<CartaPoker>
+    + repartir(): Mano
 }
 
 class Mano {
-    - cartas: List[CartaPoker]
+    - cartas: ArrayList<CartaPoker>
+    - seleccionadas: ArrayList<CartaPoker>
     - cantidadCartas: int
-    + seleccionarCarta(): CartaPoker
+    - capacidad: int
+    + Mano(cartas: ArrayList<CartaPoker>)
+    + eliminarCartas()
+    + agregarCarta(carta: CartaPoker)
+    + seleccionarCarta(indice: int): CartaPoker
+    + deseleccionarCarta(indice: int)
     + ordenarCartas()
-    + descartar(cartas: List<CartaPoker>)
+    + descartar()
     + manoLlena():boolean
 }
 
@@ -55,19 +68,24 @@ class CartaPoker {
 }
 
 class Ronda {
-    - PuntajeMinimo
-    - DescartesDisponibles
-    - JugadasDisponibles
-    - PuntajeAcumulado
+    - PuntajeMinimo: int
+    - DescartesDisponibles: int
+    - JugadasDisponibles: int
+    - PuntajeAcumulado: int
     + Ronda(jugador: Jugador)
     + iniciarRonda()
     + verificarPuntaje(): boolean
 }
 
 abstract class Jugada {
-    - sumaCartas: int
+    - sumaValores: int
     - Puntaje: Puntaje
+    # cartas: List<CartaPoker>
     + Jugada(Lista<CartaPoker>)
+    + crearJugada(List<CartaPoker>)
+    + sumarValores()
+    + calcularPuntaje(): int
+    + {abstract}esJugada(List<CartaPoker>): boolean
     + {abstract}obtenerPuntaje(): Puntaje
 }
 
