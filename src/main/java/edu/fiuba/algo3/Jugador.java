@@ -17,7 +17,6 @@ public class Jugador {
     }
 
     public boolean esMismoPuntaje(int unPuntaje){
-
         return this.puntaje == unPuntaje;
     }
 
@@ -30,8 +29,7 @@ public class Jugador {
     }
 
     public void iniciarRonda(){
-        List<CartaPoker> cartas = mazo.rellenar(8);
-        manoActual = new Mano(cartas);
+        manoActual = mazo.repartir();
     }
 
     public Jugada jugar(){
