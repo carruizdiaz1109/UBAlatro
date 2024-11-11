@@ -46,6 +46,10 @@ public class Mazo {
         return cartas;
     }
 
+    public int getCantidadCartas() {
+        return cantidadCartas;
+    }
+
     public ArrayList<CartaPoker> rellenar(int cantidad){
         ArrayList<CartaPoker> cartasRellenadas = new ArrayList<>();
 
