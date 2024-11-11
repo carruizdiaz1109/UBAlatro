@@ -35,29 +35,8 @@ public class Mazo {
     }
 
     public CartaPoker darCarta() {
-        if (cantidadCartas == 0) {
-            throw new ErrorMazoVacio();
-        }
-        cantidadCartas--;
-        return cartas.remove(0);
-    }
-
-    public List<CartaPoker> getCartas() {
-        return cartas;
-    }
-
-    public List<CartaPoker> rellenar(int cantidad){
-        List<CartaPoker> cartasRellenadas = new ArrayList<>();
-
-        for(int i = 0 ; i < cantidad && cantidadCartas != 0; i++){
-            cartasRellenadas.add(darCarta());
-        }
-
-        return cartasRellenadas;
-    }
-
-    public void guardarCarta(CartaPoker carta){
-        cartas.add(carta);
-        cantidadCartas++;
+        CartaPoker carta = cartas.get(0);
+        cartas.remove(0);
+        return carta;
     }
 }
