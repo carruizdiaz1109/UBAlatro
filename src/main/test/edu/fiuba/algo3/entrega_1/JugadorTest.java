@@ -18,9 +18,10 @@ public class JugadorTest {
     }
 
     @Test
-    public void test02IniciarRondaAsignaOchoCartasAMano() {
+    public void test02JugadorSeInicializaConPuntajeCorrecto() {
         Jugador jugador = new Jugador("Juan");
-        jugador.iniciarRonda();
-        assertEquals(8, jugador.getManoActual().getCantidadCartas());
+        int puntajeEsperado = 0;
+
+        assertTrue(jugador.esMismoPuntaje(puntajeEsperado));
     }
 }

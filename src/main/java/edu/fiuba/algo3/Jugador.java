@@ -17,11 +17,12 @@ public class Jugador {
     }
 
     public boolean esMismoPuntaje(int unPuntaje){
+
         return this.puntaje == unPuntaje;
     }
 
-    public String getNombre(){
-        return nombre;
+    public boolean esMismoNombre(String unNombre){
+        return nombre.equals(unNombre);
     }
 
     public Mano getManoActual(){
