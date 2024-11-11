@@ -25,6 +25,9 @@ public class Jugador {
     }
 
     public void iniciarRonda(){
+        if(!mazo.esCantidadDeCartasSuficiente()){
+            throw new ErrorMazoVacio();
+        }
         manoActual = mazo.repartir();
     }
 
