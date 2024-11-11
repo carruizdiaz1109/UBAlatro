@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.CartaPoker;
+import edu.fiuba.algo3.Puntaje;
 import edu.fiuba.algo3.Palo;
 import org.junit.jupiter.api.Test;
 
@@ -27,10 +28,12 @@ public class CartaPokerTest {
     @Test
     public void test03SeModificaElPuntajeDeLaCarta(){
         CartaPoker cartaPoker = new CartaPoker(5, Palo.CORAZONES);
-        cartaPoker.modificarPuntaje(3);
+        Puntaje unPuntaje = new Puntaje(4,1);
+
+        cartaPoker.modificarPuntaje(unPuntaje);
         int resultado = cartaPoker.calcularPuntaje();
 
-        assertEquals(8,resultado);
+        assertEquals(18,resultado);
     }
 
 }

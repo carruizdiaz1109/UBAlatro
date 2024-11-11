@@ -40,20 +40,4 @@ public class Jugador {
         return (new Jugada(cartasSeleccionadas));
     }
 
-    public List<CartaPoker> descartarCartas(){
-        List<CartaPoker> cartasDescartadas = manoActual.descartar();
-        return cartasDescartadas;
-    }
-
-    public void comprarCartas(int cantidad){
-        List<CartaPoker> cartasCompradas = mazo.rellenar(cantidad);
-        for (CartaPoker carta : cartasCompradas){
-            manoActual.recibirCarta(carta);
-        }
-    }
-
-    public void ordenarCartas(){
-        manoActual.ordenarCartas();
-    }
-
 }

@@ -20,8 +20,8 @@ public class CartaPoker {
         return this;
     }
 
-    public void modificarPuntaje(int incremento) {
-        this.puntaje.incrementarPuntos(incremento);
+    public void modificarPuntaje(Puntaje unPuntaje) {
+        this.puntaje = this.puntaje.sumarPuntaje(unPuntaje);
     }
 
     public int calcularPuntaje() {
@@ -31,6 +31,5 @@ public class CartaPoker {
     public boolean tieneId(int unId) {
         return (this.id == unId);
     }
-
 
 }

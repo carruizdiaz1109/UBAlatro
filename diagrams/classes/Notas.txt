@@ -5,3 +5,6 @@ Clases:
 - Ronda: controla que en cada ronda se le den 8 cartas al jugador y mientras se pueda recibe jugadas que tienen un puntaje.
 - Mano: son las 8 cartas que recibe el jugador
 - Jugada: son las cartas que elige para armar jugadas de poker: escalera, poker, pares, etc.
+
+
+- tal vez podemos cambiar la flecha de comprable a carta, comodin etc por implementacion de la interfaz, en vez de herencia. (Caro pregunta)
