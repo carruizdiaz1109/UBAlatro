@@ -34,5 +34,4 @@ public class Jugador {
         cartasSeleccionadas.add(cartaSeleccionada);
         return (new Jugada(cartasSeleccionadas));
     }
-
 }
