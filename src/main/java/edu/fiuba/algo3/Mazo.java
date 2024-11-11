@@ -46,8 +46,8 @@ public class Mazo {
         return cartas;
     }
 
-    public List<CartaPoker> rellenar(int cantidad){
-        List<CartaPoker> cartasRellenadas = new ArrayList<>();
+    public ArrayList<CartaPoker> rellenar(int cantidad){
+        ArrayList<CartaPoker> cartasRellenadas = new ArrayList<>();
 
         for(int i = 0 ; i < cantidad && cantidadCartas != 0; i++){
             cartasRellenadas.add(darCarta());
@@ -56,8 +56,15 @@ public class Mazo {
         return cartasRellenadas;
     }
 
-    public void guardarCarta(CartaPoker carta){
+    public Mano repartir(){
+        ArrayList<CartaPoker> cartasRepartidas = rellenar(8);
+        Mano mano = new Mano(cartasRepartidas);
+        return mano;
+    }
+
+    public void guardarCarta(CartaPoker carta) {
         cartas.add(carta);
         cantidadCartas++;
     }
+
 }
