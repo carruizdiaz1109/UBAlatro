@@ -24,17 +24,13 @@ public class Jugador {
         return nombre.equals(unNombre);
     }
 
-    public Mano getManoActual(){
-        return manoActual;
-    }
-
     public void iniciarRonda(){
         manoActual = mazo.repartir();
     }
 
-    public Jugada jugar(){
+    public Jugada jugar(int indice){
         List<CartaPoker> cartasSeleccionadas = new ArrayList<>();
-        CartaPoker cartaSeleccionada = manoActual.seleccionarCarta();
+        CartaPoker cartaSeleccionada = manoActual.seleccionarCarta(indice);
         cartasSeleccionadas.add(cartaSeleccionada);
         return (new Jugada(cartasSeleccionadas));
     }
