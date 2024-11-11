@@ -16,7 +16,7 @@ public class TarotTest {
     @Test
     public void test01SeModificaElValorDeUnaCarta() {
         CartaPoker cartaPoker = new CartaPoker(4, Palo.PICAS);
-        Puntaje puntaje = new Puntaje(3,0);
+        Puntaje puntaje = new Puntaje(3,1);
         Tarot cartaTarot = new Tarot(puntaje);
 
         cartaTarot.modificarPuntaje(cartaPoker);
