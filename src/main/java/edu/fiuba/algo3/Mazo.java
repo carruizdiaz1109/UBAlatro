@@ -26,8 +26,8 @@ public class Mazo {
         }
     }
 
-    public int getCantidadCartas() {
-        return cantidadCartas;
+    public boolean esCantidadDeCartasSuficiente() {
+        return cantidadCartas > 0;
     }
 
     protected void mezclar() {
@@ -44,6 +44,10 @@ public class Mazo {
 
     public List<CartaPoker> getCartas() {
         return cartas;
+    }
+
+    public int getCantidadCartas() {
+        return cantidadCartas;
     }
 
     public ArrayList<CartaPoker> rellenar(int cantidad){

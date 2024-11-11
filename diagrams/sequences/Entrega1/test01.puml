@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Se verifica que un jugador posea cartas suficientes para empezar el juego en su mazo.
+
+actor ":TestCase" as user
+participant ":Jugador" as jugador
+participant ":Mazo" as mazo
+
+user -> jugador**: Jugador(Juan)
+jugador -> mazo**: Mazo()
+user -> jugador: esPosibleIniciarRonda()
+jugador -> mazo: esCantidadDeCartasSuficiente()
+mazo --> jugador: true
+jugador --> user: true
+
+@enduml

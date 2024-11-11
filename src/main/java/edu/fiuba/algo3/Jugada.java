@@ -38,4 +38,5 @@ public abstract class Jugada {
         puntaje.incrementarPuntos(sumaValores);
         return puntaje.calcularPuntaje();
     }
+
 }

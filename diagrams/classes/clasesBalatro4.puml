@@ -11,22 +11,27 @@ package Model {
        + sumarPuntaje(unPuntaje: Puntaje):Puntaje
    }
 
-   class CartaPoker {
-       - valor: int
-       - palo: Palo
-       - id: int
-       + CartaPoker(valor: int, palo: Palo)
-       + comprar(): CartaPoker
-       + modificarPuntaje(Puntaje: unPuntaje)
-       + calcularPuntaje(): int
-       + tieneId(unId: int):boolean
-   }
+    class CartaPoker {
+        - valor: int
+        - palo: Palo
+        - id: int
+        + CartaPoker(valor: int, palo: Palo)
+        + comprar(): CartaPoker
+        + modificarPuntaje(Puntaje: unPuntaje)
+        + calcularPuntaje(): int
+        + tieneId(unId: int):boolean
+    }
 
     abstract class Jugada {
-        - sumaCartas: int
+        - sumaValores: int
         - Puntaje: Puntaje
+        # cartas: List<CartaPoker>
         + Jugada(Lista<CartaPoker>)
-        + {abstract} obtenerPuntaje(): Puntaje
+        + crearJugada(List<CartaPoker>)
+        + sumarValores()
+        + calcularPuntaje(): int
+        + {abstract}esJugada(List<CartaPoker>): boolean
+        + {abstract}obtenerPuntaje(): Puntaje
     }
 
     class CartaAlta {
