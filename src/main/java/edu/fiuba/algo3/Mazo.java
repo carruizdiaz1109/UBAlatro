@@ -26,8 +26,8 @@ public class Mazo {
         }
     }
 
-    public int getCantidadCartas() {
-        return cantidadCartas;
+    public boolean esCantidadDeCartasSuficiente() {
+        return cantidadCartas > 0;
     }
 
     protected void mezclar() {
