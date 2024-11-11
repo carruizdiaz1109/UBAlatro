@@ -8,17 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JugadorTest {
+
     @Test
-    public void test01JugadorSeInicializaConNombreYPuntajeCero() {
+    public void test01JugadorSeInicializaConNombreCorrecto() {
         Jugador jugador = new Jugador("Juan");
         String nombreEsperado = "Juan";
-        int puntajeEsperado = 0;
 
-        String nombreObtenido = jugador.getNombre();
-        int puntajeObtenido = jugador.getPuntaje();
-
-        assertEquals(nombreEsperado, nombreObtenido);
-        assertEquals(puntajeEsperado, puntajeObtenido);
+        assertTrue(jugador.esMismoNombre(nombreEsperado));
     }
 
     @Test

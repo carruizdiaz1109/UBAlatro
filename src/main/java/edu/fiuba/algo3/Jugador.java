@@ -16,8 +16,8 @@ public class Jugador {
         this.mazo = new Mazo();
     }
 
-    public int getPuntaje(){
-        return puntaje;
+    public boolean esMismoPuntaje(int unPuntaje){
+        return this.puntaje == unPuntaje;
     }
 
     public String getNombre(){
