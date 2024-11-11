@@ -23,7 +23,7 @@ public class Puntaje {
 
     public Puntaje sumarPuntaje(Puntaje unPuntaje) {
         unPuntaje.incrementarPuntos(this.puntos);
-        unPuntaje.incrementarMultiplicador(this.multiplicador);
+        //unPuntaje.incrementarMultiplicador(this.multiplicador);
         return unPuntaje;
     }
 }

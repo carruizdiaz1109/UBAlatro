@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title El jugador le aplica un tarot a una carta y se le cambia el multiplicador
+
+actor ":TestCase" as user
+participant ":Jugador" as jugador
+participant "puntajeTarot1:Puntaje" as puntajeTarot1
+participant "cartaTarot1:Tarot" as tarot1
+participant "puntajeTarot2:Puntaje" as puntajeTarot2
+participant "cartaTarot2:Tarot" as tarot2
+participant "10Corazones:CartaPoker" as carta
+participant "puntajePoker:Puntaje" as puntajePoker
+
+
+user -> jugador**: Jugador(Lucia)
+user -> puntajeTarot1 **: Puntaje(10,1)
+user -> tarot1**: Tarot(puntajeTarot1)
+user -> jugador: añadirTarot(cartaTarot1)
+user -> puntajeTarot2 **: Puntaje(0,6)
+user -> tarot2**: Tarot(puntajeTarot2)
+user -> jugador: añadirTarot(cartaTarot2)
+user -> carta**: Carta(10, Corazones)
+carta -> puntajePoker**: Puntaje(10,1)
+
+user -> jugador: utilizarTarot(1, cartaPoker)
+jugador -> tarot2: modificarPuntaje(cartaPoker)
+tarot2 -> carta: modificarPuntaje(puntajeTarot2)
+carta -> puntajePoker: sumarPuntaje(puntajeTarot2)
+puntajePoker -> puntajeTarot2: incrementarPuntos(10)
+puntajePoker --> carta: puntajeModificado
+
+user -> carta: calcularPuntaje
+carta -> puntajePoker: calcularPuntaje
+puntajePoker -> carta: 60
+carta -> user: 60
+
+@enduml

@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title El jugador le aplica un tarot a una carta
+title El jugador le aplica un tarot a una carta y se le cambia el valor
 
 actor ":TestCase" as user
 participant ":Jugador" as jugador
