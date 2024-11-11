@@ -46,14 +46,19 @@ public class Mazo {
         return cartas;
     }
 
-    public List<CartaPoker> rellenar(int cantidad){
-        List<CartaPoker> cartasRellenadas = new ArrayList<>();
+    public ArrayList<CartaPoker> rellenar(int cantidad){
+        ArrayList<CartaPoker> cartasRellenadas = new ArrayList<>();
 
         for(int i = 0 ; i < cantidad && cantidadCartas != 0; i++){
             cartasRellenadas.add(darCarta());
         }
 
         return cartasRellenadas;
+    }
+
+    public ArrayList<CartaPoker> repartir(){
+        ArrayList<CartaPoker> cartasRepartidas = rellenar(8);
+        return cartasRepartidas;
     }
 
     public void guardarCarta(CartaPoker carta){
