@@ -8,12 +8,14 @@ public class Jugador {
     private int puntaje;
     private Mano manoActual;
     private Mazo mazo;
+    private ArrayList<Tarot> cartasTarot;
 
     public Jugador(String nombre){
         this.nombre = nombre;
         this.puntaje = 0;
         this.manoActual = new Mano(new ArrayList<>());
         this.mazo = new Mazo();
+        this.cartasTarot = new ArrayList<>();
     }
 
     public boolean esMismoPuntaje(int unPuntaje){
@@ -33,6 +35,15 @@ public class Jugador {
         return (new CartaAlta(cartas));                                         // acá hay que refactorizar después
     };
 
+    public void aniadirTarots(Tarot cartaTarot) {
+        if (this.cartasTarot.size() < 2) {
+            this.cartasTarot.add(cartaTarot);
+        }
+    }
+
+    public void utilizarTarot(int indiceTarot, CartaPoker cartaPoker) {
+        this.cartasTarot.get(indiceTarot).modificarPuntaje(cartaPoker);
+    }
 }
 
 
