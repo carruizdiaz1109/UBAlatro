@@ -24,8 +24,12 @@ public class Jugador {
         return nombre.equals(unNombre);
     }
 
+    public boolean esPosibleIniciarRonda(){
+        return mazo.esCantidadDeCartasSuficiente();
+    }
+
     public void iniciarRonda(){
-        if(!mazo.esCantidadDeCartasSuficiente()){
+        if(!esPosibleIniciarRonda()){
             throw new ErrorMazoVacio();
         }
         manoActual = mazo.repartir();
