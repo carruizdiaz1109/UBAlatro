@@ -44,12 +44,12 @@ class Puntaje {
 }
 
 class CartaPoker {
-    - valor
-    - palo
-    - puntosAdicionales
-    - multiplicadorAdicional
-    + CartaPoker(valor: int, palo: string)
+    - valor: int
+    - palo: Palo
+    - id: int
+    + CartaPoker(valor: int, palo: Palo)
     + comprar(): CartaPoker
+    + modificarPuntaje(incremento: int)
 }
 
 class Ronda {
@@ -69,6 +69,7 @@ abstract class Jugada {
     + {abstract}obtenerPuntaje(): Puntaje
 }
 
+CartaPoker o-- Puntaje
 Jugador o-- Mazo
 Mazo ..> Mano
 Mazo o-- "1..*" CartaPoker
