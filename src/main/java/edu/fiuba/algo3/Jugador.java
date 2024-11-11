@@ -1,5 +1,7 @@
 package edu.fiuba.algo3;
 
+import java.util.List;
+
 public class Jugador {
     private String nombre;
 
@@ -10,7 +12,8 @@ public class Jugador {
     public void iniciarRonda(){}
 
     public Jugada jugar(){
-        return (new Jugada());
+        List<CartaPoker> cartas = List.of(new CartaPoker(1, Palo.PICAS)); // esto está hardcodeado
+        return (new CartaAlta(cartas));                                         // acá hay que refactorizar después
     };
 
 }

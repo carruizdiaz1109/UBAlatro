@@ -36,4 +36,5 @@ public class CartaPoker {
         return (this.valor > otraCarta.valor);
     }
 
+    public int sumarValorCon(int otroValor) { return this.valor + otroValor; }
 }
