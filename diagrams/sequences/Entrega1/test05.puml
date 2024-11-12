@@ -1,34 +1,34 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title El jugador le aplica un tarot a una carta y se le cambia el valor
+title Se verifica que se respeta el orden en la puntuación de las cartas.
+
 
 actor ":TestCase" as user
-participant ":Jugador" as jugador
-participant "puntajeTarot:Puntaje" as puntajeTarot
-participant "cartaTarot:Tarot" as tarot
-participant "DosPicas:CartaPoker" as carta
-participant "puntajePoker:Puntaje" as puntajePoker
+participant "cartas: List<CartaPoker>" as cartas
+participant ":Jugada" as jugada
+participant "jugada: FullHouse" as fullHouse
 
+user -> cartas**: <<create>>
 
-user -> jugador**: Jugador(nombreJugador)
-user -> puntajeTarot**: Puntaje(10,0)
-user -> tarot**: Tarot(puntajeTarot)
-user -> jugador: añadirTarot(cartaTarot)
-user -> carta**: Carta(2, Picas)
-carta -> puntajePoker**: Puntaje(2,1)
+user -> jugada**: crearJugada(cartas)
 
-user -> jugador: utilizarTarot(0, cartaPoker)
-jugador -> tarot: modificarPuntaje(cartaPoker)
-tarot -> carta: modificarPuntaje(puntajeTarot)
-carta -> puntajePoker: sumarPuntaje(puntajeTarot)
-puntajePoker -> puntajeTarot: incrementarPuntos(2)
-puntajePoker -> puntajeTarot: incrementarMultiplicador(1)
-puntajePoker --> carta: puntajeModificado
+loop itera hasta que esJugada sea true
+    jugada -> jugada: esJugada(cartas)
+end
+note left
+    empezando en EscaleraReal y terminando en
+    CartaAlta, cada subclase de Jugada comprueba
+    si las cartas forman una mano de poker
+end note
 
-user -> carta: calcularPuntaje
-carta -> puntajePoker: calcularPuntaje
-puntajePoker -> carta: 12
-carta -> user: 12
+jugada -> fullHouse**: new(cartas)
+
+user -> fullHouse: isInstanceOf(Trio)
+fullHouse --> user: false
+user -> fullHouse: isInstanceOf(Par)
+fullHouse --> user: false
+user -> fullHouse: isInstanceOf(FullHouse)
+fullHouse --> user: true
 
 @enduml
