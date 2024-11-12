@@ -1,31 +1,24 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-actor Tester
 
-Tester -> Balatro : iniciarJuego()
+title Se verifica que se puede jugar una mano de un mazo
 
-loop hasta completar rondas o cumplir condiciones
- Balatro -> Ronda : crearRonda()
+actor ":TestCase" as user
+participant ":Jugador" as jugador
+participant ":Mazo" as mazo
+participant ":Mano" as mano
 
- Ronda -> Jugador : iniciarRonda()
-
- Jugador -> Mazo : repartir()
-
- Mazo -> Mano : crear Mano con 8 cartas
- return Mano
-
- Mazo --> Jugador : return Mano
-
- Jugador -> Jugada : jugar()
- Jugada --> Jugador : return jugada creada
-
- Jugador --> Ronda : return Jugada
-
- Ronda -> Ronda : calcular puntaje acumulado
- Ronda --> Balatro : return puntaje acumulado
-
- Balatro -> Balatro : verificarResultado()
-end
-
-Balatro --> Tester : return juegoFinalizado
+user -> jugador**: Jugador(Javier)
+user -> mazo**: Mazo()
+user -> mazo: repartir()
+    mazo -> mazo: rellenar(8)
+                loop hasta cantidad = 8
+                    mazo -> mazo: darCarta(): CartaPoker
+                end
+    mazo --> mazo: cartasRepartidas
+    mazo -> mano**: Mano(cartasRepartidas)
+mazo --> user: unaMano
+user -> jugador: setMano(unMano)
+user -> jugador: jugar()
+jugador --> user: unaJugada
 @enduml
