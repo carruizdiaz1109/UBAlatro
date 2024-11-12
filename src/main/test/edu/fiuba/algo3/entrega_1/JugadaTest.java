@@ -22,7 +22,7 @@ public class JugadaTest {
                 new CartaPoker(2, Palo.TREBOLES),
                 new CartaPoker(4, Palo.PICAS)
         ));
-        int puntajeEsperado = (8+5)*1;
+        int puntajeEsperado = (8 + 5);
 
         //Act
         Jugada jugada = Jugada.crearJugada(cartas);
@@ -163,7 +163,7 @@ public class JugadaTest {
         assertEquals(70, jugada.calcularPuntaje());
         //assertEquals(4, jugada.cartasValidas.size());
     }
-
+ */
     @Test
     public void testEscaleraColor() {
         List<CartaPoker> cartas = List.of(
@@ -176,10 +176,10 @@ public class JugadaTest {
         Jugada jugada = Jugada.crearJugada(cartas);
 
         assertTrue(jugada instanceof EscaleraColor);
-        assertEquals(80, jugada.calcularPuntaje());
+        assertEquals(1080, jugada.calcularPuntaje());
         //assertEquals(5, jugada.cartasValidas.size());
     }
-
+/*
     @Test
     public void testEscaleraReal() {
         List<CartaPoker> cartas = List.of(

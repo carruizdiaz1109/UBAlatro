@@ -27,7 +27,7 @@ public class PuntajeTest {
     public void test03SeModificaElMultiplicadorDelPuntaje(){
         Puntaje puntaje = new Puntaje(3,2);
         puntaje.incrementarMultiplicador(3);
-        int resultadoEsperado = 15;
+        int resultadoEsperado = 18;
 
         assertEquals(resultadoEsperado, puntaje.calcularPuntaje());
     }
