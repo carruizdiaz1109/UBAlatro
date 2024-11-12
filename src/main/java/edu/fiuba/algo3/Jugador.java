@@ -51,6 +51,10 @@ public class Jugador {
     public void utilizarTarot(int indiceTarot, CartaPoker cartaPoker) {
         this.cartasTarot.get(indiceTarot).modificarPuntaje(cartaPoker);
     }
+
+    public boolean esManoLlena(){
+        return manoActual.manoLlena();
+    }
 }
 
 
