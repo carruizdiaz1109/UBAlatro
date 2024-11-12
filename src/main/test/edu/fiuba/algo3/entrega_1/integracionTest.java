@@ -52,8 +52,8 @@ public class integracionTest {
         int puntajeEsperado = 7;
 
         assertEquals(puntajeEsperado, puntajeObtenido);
-    }*/
-
+    }
+    */
     @Test
     public void test05JugadorAplicaTarotAUnaCartaYSeLeModificaElValor(){
         Jugador jugador = new Jugador("Esteban");
