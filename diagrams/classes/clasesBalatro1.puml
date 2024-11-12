@@ -4,28 +4,31 @@ package Model {
 
 class Balatro {
     - rondas : int
-    - puntajeActual : int
     - rondaActual : int
-    + Juego(nombreJugador)
+    + Balatro(nombreJugador: string)
     + iniciarJuego()
-    + verificarPuntaje()
+    + verificarResultado(): boolean
     + mostrarTienda()
-    - iniciarRonda()
+    # crearRonda(): Ronda
 }
 
 class Jugador {
     - nombre: string
     - puntaje: int
     - manoActual: Mano
+    - mazo: Mazo
     - comodines: List<Comodin>
     - cartasTarot: List<Tarot>
     - cartasSeleccionadas: List<CartaPoker>
     + Jugador(nombre: string)
-    + repartir()
+    + iniciarRonda()
     + jugar(): Jugada
     + descartarCartas()
     + comprarCartas()
     + ordenarCartas()
+    + añadirTarots(cartaTarot: Tarot)
+    + utilizarTarot(indice: int, carta: CartaPoker)
+
 }
 
 class Tienda {
@@ -37,13 +40,13 @@ class Tienda {
 }
 
 class Ronda {
-    - PuntajeMinimo
-    - DescartesDisponibles
-    - JugadasDisponibles
-    - PuntajeAcumulado
-    + Ronda(puntajeMinimo)
+    - PuntajeMinimo: int
+    - DescartesDisponibles: int
+    - JugadasDisponibles: int
+    - PuntajeAcumulado: int
+    + Ronda(jugador: Jugador)
     + iniciarRonda()
-    + verificarPuntaje(): Puntaje
+    + verificarPuntaje(): boolean
 }
 
 class Panel {

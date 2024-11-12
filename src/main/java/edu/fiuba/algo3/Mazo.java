@@ -15,19 +15,19 @@ public class Mazo {
     }
 
     protected void inicializarMazo(){
-        cartas.clear();
+        this.cartas.clear();
         Palo[] palos = Palo.values();
         int[] valores = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
         for (Palo palo : palos) {
             for (int valor : valores) {
-                cartas.add(new CartaPoker(valor, palo));
-                cantidadCartas++;
+                this.cartas.add(new CartaPoker(valor, palo));
+                this.cantidadCartas++;
             }
         }
     }
 
-    public int getCantidadCartas() {
-        return cantidadCartas;
+    public boolean esCantidadDeCartasSuficiente() {
+        return cantidadCartas > 0;
     }
 
     protected void mezclar() {
@@ -35,8 +35,40 @@ public class Mazo {
     }
 
     public CartaPoker darCarta() {
-        CartaPoker carta = cartas.get(0);
-        cartas.remove(0);
-        return carta;
+        if (cantidadCartas == 0) {
+            throw new ErrorMazoVacio();
+        }
+        cantidadCartas--;
+        return cartas.remove(0);
     }
+
+    public List<CartaPoker> getCartas() {
+        return cartas;
+    }
+
+    public int getCantidadCartas() {
+        return cantidadCartas;
+    }
+
+    public ArrayList<CartaPoker> rellenar(int cantidad){
+        ArrayList<CartaPoker> cartasRellenadas = new ArrayList<>();
+
+        for(int i = 0 ; i < cantidad && cantidadCartas != 0; i++){
+            cartasRellenadas.add(darCarta());
+        }
+
+        return cartasRellenadas;
+    }
+
+    public Mano repartir(){
+        ArrayList<CartaPoker> cartasRepartidas = rellenar(8);
+        Mano mano = new Mano(cartasRepartidas);
+        return mano;
+    }
+
+    public void guardarCarta(CartaPoker carta) {
+        cartas.add(carta);
+        cantidadCartas++;
+    }
+
 }

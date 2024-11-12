@@ -3,6 +3,9 @@
 package Model {
 
 class Tienda {
+    - comodinesAComprar: Lista [Comodin]
+    - tarotAComprar: Lista [Tarot]
+    - cartasAComprar: List[CartaPoker]]
     + mostrarCartas(): cartasAComprar
     + venderCarta(): Comprable
 }
@@ -39,13 +42,14 @@ class Tarot {
     +modificarPuntajeCarta(unaCarta: CartaPoker)
 }
 
-class CartaPoker {
-    - valor: int
-    - palo: Palo
-    - id: int
-    + CartaPoker(valor: int, palo: Palo)
-    + comprar(): CartaPoker
-    + modificarPuntaje(incremento: int)
+class Puntaje {
+    - puntos: int
+    - multiplicador: int
+    + Puntaje(puntos:int, multiplicador:int)
+    + incrementarPuntos(incremento: int)
+    + incrementarMultiplicador(incremento: int)
+    + calcularPuntaje(): int
+    + sumarPuntaje(unPuntaje: Puntaje):Puntaje
 }
 
 
