@@ -56,4 +56,8 @@ public class Jugador {
     public boolean esManoLlena(){
         return manoActual.manoLlena();
     }
+
+    public void setMano(Mano unaMano){
+        this.manoActual = unaMano;
+    }
 }

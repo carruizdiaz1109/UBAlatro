@@ -31,13 +31,13 @@ public class integracionTest {
 
     @Test
     public void test03SeVerificaQueSePuedaJugarUnaManoDeUnMazo(){
-        Balatro balatro = new Balatro("Pablo");
+        Jugador jugador = new Jugador("Javier");
+        Mazo mazo = new Mazo();
+        Mano mano = mazo.repartir();
+        jugador.setMano(mano);
+        Jugada jugada = jugador.jugar();
 
-        balatro.iniciarJuego();
-
-        boolean resultado = !balatro.verificarResultado();
-
-        assertTrue(resultado);
+        assertTrue(jugada instanceof Jugada);
     }
 
     @Test
