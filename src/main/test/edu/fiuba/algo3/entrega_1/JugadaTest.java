@@ -109,7 +109,6 @@ public class JugadaTest {
 
         assertTrue(jugada instanceof Escalera);
         assertEquals(200, jugada.calcularPuntaje());
-        //assertEquals(5, jugada.cartasValidas.size());
     }
 
     @Test
@@ -143,7 +142,7 @@ public class JugadaTest {
         assertTrue(jugada instanceof FullHouse);
         assertEquals(valorEsperado, valorObtenido);
     }
-    /*
+
     @Test
     public void testPoker() {
         List<CartaPoker> cartas = List.of(
@@ -156,10 +155,10 @@ public class JugadaTest {
         Jugada jugada = Jugada.crearJugada(cartas);
 
         assertTrue(jugada instanceof Poker);
-        assertEquals(70, jugada.calcularPuntaje());
+        assertEquals(672, jugada.calcularPuntaje());
 
     }
- */
+
     @Test
     public void testEscaleraColor() {
         List<CartaPoker> cartas = List.of(
