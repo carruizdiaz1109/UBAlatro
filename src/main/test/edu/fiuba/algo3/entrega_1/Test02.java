@@ -16,12 +16,7 @@ public class Test02 {
                 new CartaPoker(5, Palo.DIAMANTES)
         );
         Jugada jugada = Jugada.crearJugada(cartas);
-
-        System.out.println("Tipo de jugada creada: " + jugada.getClass().getSimpleName());
-        System.out.println("Cartas utilizadas: " + cartas);
-        System.out.println("PUNTAJE¨" + jugada.getSumaValores());
         int puntajeObtenido = jugada.calcularPuntaje();
-        System.out.println("Puntaje calculado: " + puntajeObtenido);
         int puntajeEsperado = 7;
 
         assertEquals(puntajeEsperado, puntajeObtenido);
