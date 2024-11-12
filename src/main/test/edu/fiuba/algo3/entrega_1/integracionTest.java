@@ -17,6 +17,17 @@ public class integracionTest {
     }
 
     @Test
+    public void test02SeVerificaQueAUnJugadorSeLeReparten8CartasDeSuMazo(){
+        Jugador jugador = new Jugador("Roberto");
+        Ronda ronda = new Ronda(jugador);
+
+        ronda.iniciarRonda();
+        boolean esManoLlena = jugador.esManoLlena();
+
+        assertTrue(esManoLlena);
+    }
+
+    @Test
     public void test04VerificarQueAlJugarUnaManoSeApliqueElValorCorrespondiente(){
 
         List<CartaPoker> cartas = List.of(
