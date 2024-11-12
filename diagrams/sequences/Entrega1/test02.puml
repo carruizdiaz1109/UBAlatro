@@ -1,24 +1,30 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title Se verifica que el jugador posea cartas suficientes en su mazo
+title Se verifica que a un jugador se le reparten 8 cartas de su mazo
+
 actor ":TestCase" as user
-participant ":Juego" as juego
 participant ":Ronda" as ronda
 participant ":Jugador" as jugador
 participant ":Mazo" as mazo
+participant ":Mano" as mano
 
-user -> juego**: Juego(nombreJugador)
-juego -> jugador**: Jugador(nombreJugador)
-jugador --> mazo **: Mazo()
-mazo --> jugador: unMazo
-user -> juego: iniciarJuego()
+user -> jugador**: Jugador(Roberto)
+    jugador --> mazo **: Mazo()
 
-juego --> ronda**: Ronda(Jugador)
-juego -> ronda: iniciarRonda()
-ronda -> jugador: iniciarRonda()
-jugador -> mazo: cartasSuficientes()
-mazo --> jugador: true
+user --> ronda**: Ronda(Jugador)
 
-jugador --> user
+user -> ronda: iniciarRonda()
+    ronda -> jugador: iniciarRonda()
+        jugador -> mazo: repartir()
+            mazo -> mazo: rellenar(8)
+                loop hasta cantidad = 8
+                    mazo -> mazo: darCarta(): CartaPoker
+                end
+            mazo --> mazo: cartasRepartidas
+        mazo -> mano**: Mano(cartasRepartidas)
+user -> jugador: esManoLlena()
+    jugador -> mano: manoLlena()
+    mano --> jugador: true
+jugador --> user: true
 @enduml
