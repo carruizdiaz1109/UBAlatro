@@ -15,35 +15,31 @@ public class Escalera extends Jugada {
         super(cartas, new Puntaje(30, 4));
     }
 
-
     @Override
     public boolean esJugada(List<CartaPoker> cartas) {
         // Crea una copia mutable de la lista de cartas para poder ordenarla
         List<CartaPoker> cartasOrdenadas = new ArrayList<>(cartas);
-        // Ordena las cartas de menor a mayor según su valor
-        Collections.sort(cartasOrdenadas);
+        cartasOrdenadas.sort(Collections.reverseOrder());
 
         // Verifica que las cartas formen una secuencia consecutiva
         for (int i = 0; i < cartasOrdenadas.size() - 1; i++) {
-            // Si no son consecutivas, no es una escalera
             if (!cartasOrdenadas.get(i).esConsecutiva(cartasOrdenadas.get(i + 1))) {
                 return false;
             }
         }
 
         // Si todas las cartas forman una secuencia, es una Escalera
-        cartasValidas = new ArrayList<>(cartasOrdenadas); // Asigna las cartas válidas
+        cartasValidas = new ArrayList<>(cartas); // Asigna todas las cartas
         return true;
     }
 
     @Override
     protected List<CartaPoker> seleccionarCartasValidas(List<CartaPoker> cartas) {
-        // Crea una copia mutable de la lista de cartas para poder ordenarla
-        List<CartaPoker> cartasOrdenadas = new ArrayList<>(cartas);
-        // Ordena las cartas de menor a mayor
-        Collections.sort(cartasOrdenadas);
+        // Si `esJugada` fue verdadero, `cartasValidas` ya debe contener todas las cartas de Escalera
+        if (cartasValidas != null && cartasValidas.size() == 5) {
+            return cartasValidas;
+        }
 
-        // En una escalera, todas las cartas son válidas si forman una secuencia
-        return new ArrayList<>(cartasOrdenadas);
+        return List.of();  // Devuelve una lista vacía si no es Escalera
     }
 }
