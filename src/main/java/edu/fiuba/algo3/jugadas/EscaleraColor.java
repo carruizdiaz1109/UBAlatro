@@ -14,7 +14,7 @@ public class EscaleraColor extends Jugada {
 
     @Override
     public boolean esJugada(List<CartaPoker> cartas) {
-        return true;
+        return false;
     }
 
     @Override

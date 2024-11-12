@@ -21,7 +21,7 @@ public abstract class Jugada {
 
     protected abstract List<CartaPoker> seleccionarCartasValidas(List<CartaPoker> cartas);
 
-    public static Jugada crearJugada(List<CartaPoker> cartas) {
+    public static Jugada crearJugada(ArrayList<CartaPoker> cartas) {
         List<Jugada> posiblesJugadas = List.of(
             new EscaleraReal(cartas),
             new EscaleraColor(cartas),

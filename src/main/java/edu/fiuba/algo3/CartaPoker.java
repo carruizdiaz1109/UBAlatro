@@ -1,6 +1,6 @@
 package edu.fiuba.algo3;
 
-public class CartaPoker {
+public class CartaPoker implements Comparable<CartaPoker>{
 
     private static int contadorId = 1;
 
@@ -44,8 +44,6 @@ public class CartaPoker {
 
     public boolean esConsecutiva(CartaPoker otraCarta) { return Math.abs(this.valor - otraCarta.valor) == 1; }
 
-    /*
     @Override
     public int compareTo(CartaPoker otraCarta) { return Integer.compare(this.valor, otraCarta.valor); }
-     */
 }
