@@ -42,11 +42,11 @@ public class integracionTest {
     @Test
     public void test04VerificarQueAlJugarUnaManoSeApliqueElValorCorrespondiente(){
 
-        List<CartaPoker> cartas = List.of(
+        ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 new CartaPoker(3, Palo.PICAS),
                 new CartaPoker(7, Palo.CORAZONES),
                 new CartaPoker(5, Palo.DIAMANTES)
-        );
+        ));
         Jugada jugada = Jugada.crearJugada(cartas);
         int puntajeObtenido = jugada.calcularPuntaje();
         int puntajeEsperado = 7;
