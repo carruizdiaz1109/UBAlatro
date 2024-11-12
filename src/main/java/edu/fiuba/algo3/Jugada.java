@@ -31,7 +31,8 @@ public abstract class Jugada {
             new Escalera(cartas),
             new Trio(cartas),
             new DoblePar(cartas),
-            new Par(cartas)
+            new Par(cartas),
+            new CartaAlta(cartas)
         );
 
         for (Jugada jugada : posiblesJugadas) {
@@ -39,7 +40,6 @@ public abstract class Jugada {
                 return jugada;
             }
         }
-        // Por defecto se devuelve carta alta
         return new CartaAlta(cartas);
     }
 
