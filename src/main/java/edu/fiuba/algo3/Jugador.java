@@ -1,5 +1,7 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.jugadas.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +57,3 @@ public class Jugador {
         return manoActual.manoLlena();
     }
 }
-
-
-
