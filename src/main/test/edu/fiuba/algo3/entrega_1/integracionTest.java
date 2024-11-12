@@ -55,6 +55,11 @@ public class integracionTest {
     }
 
     @Test
+    public void testSeRespetaElOrdenDeLasManosDePoker(){
+
+    }
+
+    @Test
     public void test05JugadorAplicaTarotAUnaCartaYSeLeModificaElValor(){
         Jugador jugador = new Jugador("Esteban");
         CartaPoker cartaPoker = new CartaPoker(2, Palo.PICAS);
