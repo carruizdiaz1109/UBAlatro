@@ -51,7 +51,6 @@ public class JugadaTest {
         //Assert
         assertTrue(jugada instanceof Par);
         assertEquals(puntajeEsperado, jugada.calcularPuntaje());
-        //assertEquals(2, jugada.cartasValidas.size());
         //assertEquals(5, jugada.cartasValidas.get(0).getValor()); // Verifica el valor de la pareja
     }
 
@@ -112,7 +111,7 @@ public class JugadaTest {
         assertTrue(jugada instanceof Escalera);
         assertEquals(40, jugada.calcularPuntaje());
         //assertEquals(5, jugada.cartasValidas.size());
-    }
+    }*/
 
     @Test
     public void testColor() {
@@ -126,9 +125,8 @@ public class JugadaTest {
         Jugada jugada = Jugada.crearJugada(cartas);
 
         assertTrue(jugada instanceof Color);
-        assertEquals(50, jugada.calcularPuntaje());
-        //assertEquals(5, jugada.cartasValidas.size());
-    } */
+        assertEquals(296, jugada.calcularPuntaje());
+    }
 
     @Test
     public void testFullHouse() {
@@ -145,7 +143,6 @@ public class JugadaTest {
 
         assertTrue(jugada instanceof FullHouse);
         assertEquals(valorEsperado, valorObtenido);
-        //assertEquals(5, jugada.cartasValidas.size());
     }
     /*
     @Test
@@ -161,7 +158,7 @@ public class JugadaTest {
 
         assertTrue(jugada instanceof Poker);
         assertEquals(70, jugada.calcularPuntaje());
-        //assertEquals(4, jugada.cartasValidas.size());
+
     }
  */
     @Test
@@ -177,7 +174,7 @@ public class JugadaTest {
 
         assertTrue(jugada instanceof EscaleraColor);
         assertEquals(1080, jugada.calcularPuntaje());
-        //assertEquals(5, jugada.cartasValidas.size());
+
     }
 /*
     @Test
@@ -193,7 +190,7 @@ public class JugadaTest {
 
         assertTrue(jugada instanceof EscaleraReal);
         assertEquals(100, jugada.calcularPuntaje());
-        //assertEquals(5, jugada.cartasValidas.size());
+
     }
      */
 }
