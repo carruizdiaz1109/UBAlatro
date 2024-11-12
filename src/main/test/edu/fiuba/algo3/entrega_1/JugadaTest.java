@@ -22,14 +22,14 @@ public class JugadaTest {
                 new CartaPoker(2, Palo.TREBOLES),
                 new CartaPoker(4, Palo.PICAS)
         ));
+        int puntajeEsperado = (8+5)*1;
 
         //Act
         Jugada jugada = Jugada.crearJugada(cartas);
-        int puntajeEsperado = (8+5)*1;
 
         //Assert
         assertTrue(jugada instanceof CartaAlta);
-        assertEquals(puntajeEsperado, jugada.calcularPuntaje()); // Verifica puntaje base
+        assertEquals(puntajeEsperado, jugada.calcularPuntaje());
         //assertEquals(cartas.get(2), jugada.cartasValidas.get(0)); // La carta alta es 8
     }
 
@@ -43,10 +43,10 @@ public class JugadaTest {
                 new CartaPoker(2, Palo.CORAZONES),
                 new CartaPoker(3, Palo.PICAS)
         ));
+        int puntajeEsperado = ((5+5)+10)*2;
 
         //Act
         Jugada jugada = Jugada.crearJugada(cartas);
-        int puntajeEsperado = ((5+5)+10)*2;
 
         //Assert
         assertTrue(jugada instanceof Par);
@@ -57,6 +57,7 @@ public class JugadaTest {
 
     @Test
     public void testDoblePar() {
+        //Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 new CartaPoker(3, Palo.PICAS),
                 new CartaPoker(3, Palo.TREBOLES),
@@ -64,15 +65,20 @@ public class JugadaTest {
                 new CartaPoker(5, Palo.DIAMANTES),
                 new CartaPoker(2, Palo.PICAS)
         ));
+        int puntajeEsperado = ((3+3+5+5)+20)*2;
+
+        //Act
         Jugada jugada = Jugada.crearJugada(cartas);
 
+        //Assert
         assertTrue(jugada instanceof DoblePar);
-        assertEquals(20, jugada.calcularPuntaje());
+        assertEquals(puntajeEsperado, jugada.calcularPuntaje());
         //assertEquals(4, jugada.cartasValidas.size()); // Verifica que hay dos pares
     }
 
     @Test
     public void testTrio() {
+        //Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 new CartaPoker(7, Palo.PICAS),
                 new CartaPoker(7, Palo.TREBOLES),
@@ -80,10 +86,14 @@ public class JugadaTest {
                 new CartaPoker(2, Palo.DIAMANTES),
                 new CartaPoker(4, Palo.PICAS)
         ));
+        int puntajeEsperado = ((7+7+7)+30)*3;
+
+        //Act
         Jugada jugada = Jugada.crearJugada(cartas);
 
+        //Assert
         assertTrue(jugada instanceof Trio);
-        assertEquals(30, jugada.calcularPuntaje());
+        assertEquals(puntajeEsperado, jugada.calcularPuntaje());
         //assertEquals(3, jugada.cartasValidas.size());
         //assertEquals(7, jugada.cartasValidas.get(0).getValor()); // Verifica el valor del trío
     }
@@ -118,7 +128,7 @@ public class JugadaTest {
         assertTrue(jugada instanceof Color);
         assertEquals(50, jugada.calcularPuntaje());
         //assertEquals(5, jugada.cartasValidas.size());
-    }
+    } */
 
     @Test
     public void testFullHouse() {
@@ -130,12 +140,14 @@ public class JugadaTest {
                 new CartaPoker(5, Palo.PICAS)
         );
         Jugada jugada = Jugada.crearJugada(cartas);
+        int valorEsperado = ((10+10+10+5+5)+40)*4;
+        int valorObtenido = jugada.calcularPuntaje();
 
         assertTrue(jugada instanceof FullHouse);
-        assertEquals(60, jugada.calcularPuntaje());
+        assertEquals(valorEsperado, valorObtenido);
         //assertEquals(5, jugada.cartasValidas.size());
     }
-
+    /*
     @Test
     public void testPoker() {
         List<CartaPoker> cartas = List.of(
