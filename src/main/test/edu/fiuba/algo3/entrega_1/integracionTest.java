@@ -28,6 +28,18 @@ public class integracionTest {
     }
 
     @Test
+    public void test03SeVerificaQueSePuedaJugarUnaManoDeUnMazo(){
+        Balatro balatro = new Balatro("Pablo");
+
+        balatro.iniciarJuego();
+        Ronda ronda = new Ronda(jugador);
+
+        boolean resultado = !balatro.verificarResultado();
+
+        assertTrue(resultado);
+    }
+
+    @Test
     public void test04VerificarQueAlJugarUnaManoSeApliqueElValorCorrespondiente(){
 
         List<CartaPoker> cartas = List.of(
