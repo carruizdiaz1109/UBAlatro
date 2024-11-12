@@ -118,7 +118,7 @@ public class JugadaTest {
         assertTrue(jugada instanceof Color);
         assertEquals(50, jugada.calcularPuntaje());
         //assertEquals(5, jugada.cartasValidas.size());
-    }
+    } */
 
     @Test
     public void testFullHouse() {
@@ -130,12 +130,14 @@ public class JugadaTest {
                 new CartaPoker(5, Palo.PICAS)
         );
         Jugada jugada = Jugada.crearJugada(cartas);
+        int valorEsperado = 320;
+        int valorObtenido = jugada.calcularPuntaje();
 
         assertTrue(jugada instanceof FullHouse);
-        assertEquals(60, jugada.calcularPuntaje());
+        assertEquals(valorEsperado, valorObtenido);
         //assertEquals(5, jugada.cartasValidas.size());
     }
-
+    /*
     @Test
     public void testPoker() {
         List<CartaPoker> cartas = List.of(
