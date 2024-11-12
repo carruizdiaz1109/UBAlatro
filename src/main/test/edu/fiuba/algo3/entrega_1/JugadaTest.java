@@ -14,6 +14,7 @@ public class JugadaTest {
 
     @Test
     public void testCartaAlta() {
+        //Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 new CartaPoker(5, Palo.PICAS),
                 new CartaPoker(3, Palo.CORAZONES),
@@ -21,15 +22,20 @@ public class JugadaTest {
                 new CartaPoker(2, Palo.TREBOLES),
                 new CartaPoker(4, Palo.PICAS)
         ));
-        Jugada jugada = Jugada.crearJugada(cartas);
 
+        //Act
+        Jugada jugada = Jugada.crearJugada(cartas);
+        int puntajeEsperado = (8+5)*1;
+
+        //Assert
         assertTrue(jugada instanceof CartaAlta);
-        assertEquals(5, jugada.calcularPuntaje()); // Verifica puntaje base
+        assertEquals(puntajeEsperado, jugada.calcularPuntaje()); // Verifica puntaje base
         //assertEquals(cartas.get(2), jugada.cartasValidas.get(0)); // La carta alta es 8
     }
 
     @Test
     public void testPar() {
+        //Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 new CartaPoker(5, Palo.PICAS),
                 new CartaPoker(5, Palo.TREBOLES),
@@ -37,10 +43,14 @@ public class JugadaTest {
                 new CartaPoker(2, Palo.CORAZONES),
                 new CartaPoker(3, Palo.PICAS)
         ));
-        Jugada jugada = Jugada.crearJugada(cartas);
 
+        //Act
+        Jugada jugada = Jugada.crearJugada(cartas);
+        int puntajeEsperado = ((5+5)+10)*2;
+
+        //Assert
         assertTrue(jugada instanceof Par);
-        assertEquals(10, jugada.calcularPuntaje());
+        assertEquals(puntajeEsperado, jugada.calcularPuntaje());
         //assertEquals(2, jugada.cartasValidas.size());
         //assertEquals(5, jugada.cartasValidas.get(0).getValor()); // Verifica el valor de la pareja
     }
