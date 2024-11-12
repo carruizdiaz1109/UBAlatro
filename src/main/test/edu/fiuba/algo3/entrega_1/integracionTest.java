@@ -4,6 +4,7 @@ import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.jugadas.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +28,7 @@ public class integracionTest {
 
         assertTrue(esManoLlena);
     }
-    /*
+
     @Test
     public void test03SeVerificaQueSePuedaJugarUnaManoDeUnMazo(){
         Balatro balatro = new Balatro("Pablo");
@@ -49,11 +50,11 @@ public class integracionTest {
         ));
         Jugada jugada = Jugada.crearJugada(cartas);
         int puntajeObtenido = jugada.calcularPuntaje();
-        int puntajeEsperado = 7;
+        int puntajeEsperado = 12;
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
-   */
+
     @Test
     public void test05SeRespetaElOrdenDePrioridadDeLasManosDePoker(){
         List<CartaPoker> cartas = List.of(
