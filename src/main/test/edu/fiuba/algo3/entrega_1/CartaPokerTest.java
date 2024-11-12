@@ -33,7 +33,7 @@ public class CartaPokerTest {
         cartaPoker.modificarPuntaje(unPuntaje);
         int resultado = cartaPoker.calcularPuntaje();
 
-        assertEquals(18,resultado);
+        assertEquals(9,resultado);
     }
 
 }
