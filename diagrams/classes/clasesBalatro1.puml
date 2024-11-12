@@ -4,12 +4,11 @@ package Model {
 
 class Balatro {
     - rondas : int
-    - puntajeActual : int
     - rondaActual : int
     + Balatro(nombreJugador: string)
-    +verificarResultado(): boolean
+    + iniciarJuego()
+    + verificarResultado(): boolean
     + mostrarTienda()
-    - iniciarRonda()
     # crearRonda(): Ronda
 }
 
@@ -22,13 +21,14 @@ class Jugador {
     - cartasTarot: List<Tarot>
     - cartasSeleccionadas: List<CartaPoker>
     + Jugador(nombre: string)
-    + esMismoPuntaje(unPuntaje: int): boolean
-    + esMismoNombre(unNombre: String): boolean
     + iniciarRonda()
     + jugar(): Jugada
     + descartarCartas()
     + comprarCartas()
     + ordenarCartas()
+    + añadirTarots(cartaTarot: Tarot)
+    + utilizarTarot(indice: int, carta: CartaPoker)
+
 }
 
 class Tienda {
