@@ -32,7 +32,6 @@ public class integracionTest {
         Balatro balatro = new Balatro("Pablo");
 
         balatro.iniciarJuego();
-        Ronda ronda = new Ronda(jugador);
 
         boolean resultado = !balatro.verificarResultado();
 
