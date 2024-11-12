@@ -28,4 +28,8 @@ public class CartaAlta extends Jugada{
     public boolean esJugada(List<CartaPoker> cartas) {
         return true;
     }
+
+    public int calcularPuntaje() {
+        return cartaAlta.calcularPuntaje();
+    }
 }
