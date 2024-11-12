@@ -5,6 +5,7 @@ import edu.fiuba.algo3.jugadas.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,16 +28,16 @@ public class integracionTest {
 
         assertTrue(esManoLlena);
     }
-    /*
+
     @Test
     public void test03SeVerificaQueSePuedaJugarUnaManoDeUnMazo(){
-        Balatro balatro = new Balatro("Pablo");
+        Jugador jugador = new Jugador("Javier");
+        Mazo mazo = new Mazo();
+        Mano mano = mazo.repartir();
+        jugador.setMano(mano);
+        Jugada jugada = jugador.jugar();
 
-        balatro.iniciarJuego();
-
-        boolean resultado = !balatro.verificarResultado();
-
-        assertTrue(resultado);
+        assertTrue(jugada instanceof Jugada);
     }
 
     @Test
@@ -53,7 +54,7 @@ public class integracionTest {
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
-   */
+
     @Test
     public void test05SeRespetaElOrdenDePrioridadDeLasManosDePoker(){
         List<CartaPoker> cartas = List.of(
