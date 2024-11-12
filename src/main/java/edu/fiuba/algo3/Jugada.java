@@ -48,7 +48,7 @@ public abstract class Jugada {
         for (CartaPoker carta : cartasValidas) {
             System.out.println("Suma actual antes de agregar carta: " + sumaValores);
             System.out.println("Valor de la carta: " + carta.sumarValorCon(0));
-            sumaValores += carta.sumarValorCon(sumaValores);
+            sumaValores = carta.sumarValorCon(sumaValores);
             System.out.println("Suma acumulada después de agregar carta: " + sumaValores);
         }
 
