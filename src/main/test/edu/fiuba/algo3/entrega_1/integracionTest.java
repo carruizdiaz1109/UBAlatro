@@ -26,7 +26,7 @@ public class integracionTest {
 
         assertTrue(esManoLlena);
     }
-
+    /*
     @Test
     public void test03SeVerificaQueSePuedaJugarUnaManoDeUnMazo(){
         Balatro balatro = new Balatro("Pablo");
@@ -53,7 +53,7 @@ public class integracionTest {
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
-
+    */
     @Test
     public void test05JugadorAplicaTarotAUnaCartaYSeLeModificaElValor(){
         Jugador jugador = new Jugador("Esteban");

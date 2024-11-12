@@ -22,10 +22,10 @@ public class JugadaTest {
                 new CartaPoker(2, Palo.TREBOLES),
                 new CartaPoker(4, Palo.PICAS)
         ));
+        int puntajeEsperado = (8+5)*1;
 
         //Act
         Jugada jugada = Jugada.crearJugada(cartas);
-        int puntajeEsperado = (8+5)*1;
 
         //Assert
         assertTrue(jugada instanceof CartaAlta);
@@ -43,10 +43,10 @@ public class JugadaTest {
                 new CartaPoker(2, Palo.CORAZONES),
                 new CartaPoker(3, Palo.PICAS)
         ));
+        int puntajeEsperado = ((5+5)+10)*2;
 
         //Act
         Jugada jugada = Jugada.crearJugada(cartas);
-        int puntajeEsperado = ((5+5)+10)*2;
 
         //Assert
         assertTrue(jugada instanceof Par);
@@ -57,6 +57,7 @@ public class JugadaTest {
 
     @Test
     public void testDoblePar() {
+        //Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 new CartaPoker(3, Palo.PICAS),
                 new CartaPoker(3, Palo.TREBOLES),
@@ -64,15 +65,20 @@ public class JugadaTest {
                 new CartaPoker(5, Palo.DIAMANTES),
                 new CartaPoker(2, Palo.PICAS)
         ));
+        int puntajeEsperado = ((3+3+5+5)+20)*2;
+
+        //Act
         Jugada jugada = Jugada.crearJugada(cartas);
 
+        //Assert
         assertTrue(jugada instanceof DoblePar);
-        assertEquals(20, jugada.calcularPuntaje());
+        assertEquals(puntajeEsperado, jugada.calcularPuntaje());
         //assertEquals(4, jugada.cartasValidas.size()); // Verifica que hay dos pares
     }
 
     @Test
     public void testTrio() {
+        //Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 new CartaPoker(7, Palo.PICAS),
                 new CartaPoker(7, Palo.TREBOLES),
@@ -80,10 +86,14 @@ public class JugadaTest {
                 new CartaPoker(2, Palo.DIAMANTES),
                 new CartaPoker(4, Palo.PICAS)
         ));
+        int puntajeEsperado = ((7+7+7)+30)*3;
+
+        //Act
         Jugada jugada = Jugada.crearJugada(cartas);
 
+        //Assert
         assertTrue(jugada instanceof Trio);
-        assertEquals(30, jugada.calcularPuntaje());
+        assertEquals(puntajeEsperado, jugada.calcularPuntaje());
         //assertEquals(3, jugada.cartasValidas.size());
         //assertEquals(7, jugada.cartasValidas.get(0).getValor()); // Verifica el valor del trío
     }

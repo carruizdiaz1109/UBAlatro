@@ -46,13 +46,18 @@ public abstract class Jugada {
     public void sumarValores() {
         this.sumaValores = 0;
         for (CartaPoker carta : cartasValidas) {
+            System.out.println("Suma actual antes de agregar carta: " + sumaValores);
+            System.out.println("Valor de la carta: " + carta.sumarValorCon(0));
             sumaValores += carta.sumarValorCon(sumaValores);
+            System.out.println("Suma acumulada después de agregar carta: " + sumaValores);
         }
 
     }
     public int calcularPuntaje() {
         sumarValores();
+        System.out.println("Puntaje antes de incrementar: " + puntaje.calcularPuntaje());
         puntaje.incrementarPuntos(sumaValores);
+        System.out.println("Puntaje después de incrementar: " + puntaje.calcularPuntaje());
         return puntaje.calcularPuntaje();
     }
 }
