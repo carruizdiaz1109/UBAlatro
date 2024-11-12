@@ -1,11 +1,14 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.jugadas;
+
+import edu.fiuba.algo3.CartaPoker;
+import edu.fiuba.algo3.Jugada;
 
 import java.util.List;
 
-public class CartaAlta extends Jugada{
+public class DoblePar extends Jugada {
     private CartaPoker cartaAlta;
 
-    public CartaAlta(List<CartaPoker> cartas) {
+    public DoblePar(List<CartaPoker> cartas) {
         super(cartas);
         this.cartaAlta = encontrarCartaAlta(cartas);
     }

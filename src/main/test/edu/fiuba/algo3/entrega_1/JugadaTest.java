@@ -2,7 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.CartaPoker;
 import edu.fiuba.algo3.Jugada;
-import edu.fiuba.algo3.CartaAlta;
+import edu.fiuba.algo3.jugadas.*;
 import edu.fiuba.algo3.Palo;
 import org.junit.jupiter.api.Test;
 

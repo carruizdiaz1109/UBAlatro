@@ -1,5 +1,7 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.jugadas.*;
+
 import java.util.List;
 
 public class Jugador {
