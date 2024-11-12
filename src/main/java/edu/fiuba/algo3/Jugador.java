@@ -50,6 +50,10 @@ public class Jugador {
 
         }
     }
+
+    public boolean esManoLlena(){
+        return manoActual.manoLlena();
+    }
 }
 
 
