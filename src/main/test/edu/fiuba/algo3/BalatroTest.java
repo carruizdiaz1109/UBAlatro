@@ -19,17 +19,26 @@ public class BalatroTest {
                 return rondaMock;
             }
         };
+
         when(rondaMock.verificarPuntaje()).thenReturn(true);
 
         balatro.iniciarJuego();
 
         verify(rondaMock, times(8)).iniciarRonda();
     }
-    /*@Test
-    public void test02BalatroCreaAlJugador()
-    {
-        Balatro balatro = new Balatro("Pablo");
-    }*/
+
+    @Test
+    public void test02BalatroCrea8RondasMaximo() {
+        Ronda rondaMock = Mockito.mock(Ronda.class);
+        Balatro balatro = new Balatro("Pedro");
+        Balatro balatroMock = Mockito.spy(balatro);
+
+        doReturn(rondaMock).when(balatroMock).crearRonda();
+        when(rondaMock.verificarPuntaje()).thenReturn(true);
+
+        balatroMock.iniciarJuego();
+        verify(balatroMock, times(8)).crearRonda();
+    }
 }
 
 

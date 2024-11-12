@@ -5,36 +5,30 @@ import java.util.List;
 
 public class Jugador {
     private String nombre;
-    private int puntaje;
     private Mano manoActual;
     private Mazo mazo;
     private ArrayList<Tarot> cartasTarot;
 
     public Jugador(String nombre){
         this.nombre = nombre;
-        this.puntaje = 0;
         this.manoActual = new Mano(new ArrayList<>());
         this.mazo = new Mazo();
         this.cartasTarot = new ArrayList<>();
     }
 
-    public boolean esMismoPuntaje(int unPuntaje){
-        return this.puntaje == unPuntaje;
-    }
-
     public boolean esMismoNombre(String unNombre){
-        return nombre.equals(unNombre);
+        return this.nombre.equals(unNombre);
     }
 
     public boolean esPosibleIniciarRonda(){
-        return mazo.esCantidadDeCartasSuficiente();
+        return this.mazo.esCantidadDeCartasSuficiente();
     }
 
     public void iniciarRonda(){
         if(!esPosibleIniciarRonda()){
             throw new ErrorMazoVacio();
         }
-        manoActual = mazo.repartir();
+        this.manoActual = mazo.repartir();
     }
 
     public Jugada jugar(){
@@ -49,7 +43,12 @@ public class Jugador {
     }
 
     public void utilizarTarot(int indiceTarot, CartaPoker cartaPoker) {
-        this.cartasTarot.get(indiceTarot).modificarPuntaje(cartaPoker);
+        if (!this.cartasTarot.isEmpty()) {
+            this.cartasTarot.get(indiceTarot).modificarPuntaje(cartaPoker);
+        } else {
+            throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
+
+        }
     }
 }
 

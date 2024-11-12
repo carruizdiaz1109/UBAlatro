@@ -36,4 +36,15 @@ public class CartaPokerTest {
         assertEquals(9,resultado);
     }
 
+    @Test
+    public void test04SeSumaCartaConOtroValor(){
+        CartaPoker cartaPoker = new CartaPoker(5, Palo.CORAZONES);
+        int resultadoEsperado = 11;
+
+        int resultadoObtenido = cartaPoker.sumarValorCon(6);
+        assertEquals(resultadoEsperado, resultadoObtenido);
+
+    }
+
+
 }

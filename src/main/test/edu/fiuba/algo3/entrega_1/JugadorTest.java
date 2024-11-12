@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.CartaPoker;
 import edu.fiuba.algo3.Jugador;
+import edu.fiuba.algo3.Palo;
+import edu.fiuba.algo3.TarotsNoDisponiblesError;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,10 +19,10 @@ public class JugadorTest {
     }
 
     @Test
-    public void test02JugadorSeInicializaConPuntajeCorrecto() {
+    public void test02JugadorNoPuedeAplicarTarotSiNoTiene() {
         Jugador jugador = new Jugador("Juan");
-        int puntajeEsperado = 0;
-
-        assertTrue(jugador.esMismoPuntaje(puntajeEsperado));
+        CartaPoker carta = new CartaPoker(4, Palo.TREBOLES);
+        assertThrows(TarotsNoDisponiblesError.class, () -> jugador.utilizarTarot(0,carta));
     }
+
 }

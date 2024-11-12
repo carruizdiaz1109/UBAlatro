@@ -38,4 +38,13 @@ public class integracionTest {
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
+
+    @Test
+    public void test07(){
+        Jugador jugador = new Jugador("Lucia");
+        Ronda ronda = new Ronda(jugador);
+        ronda.iniciarRonda();
+        jugador.jugar();
+        ronda.verificarPuntaje();
+    }
 }

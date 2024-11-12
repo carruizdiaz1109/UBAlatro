@@ -13,14 +13,12 @@ public class Balatro {
 
     public void iniciarJuego() {
         int i = 0;
-        this.rondaActual = this.crearRonda();
-        while ( i < this.rondas && this.verificarResultado()){
+
+        do {
+            this.rondaActual = this.crearRonda();
             this.rondaActual.iniciarRonda();
-            if (this.verificarResultado()) {
-                this.rondaActual = this.crearRonda();
-            }
             i++;
-        }
+        } while (i < this.rondas && this.verificarResultado());
     }
 
     protected Ronda crearRonda() {
