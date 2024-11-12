@@ -96,7 +96,6 @@ public class JugadaTest {
         //assertEquals(3, jugada.cartasValidas.size());
         //assertEquals(7, jugada.cartasValidas.get(0).getValor()); // Verifica el valor del trío
     }
-    /*
     @Test
     public void testEscalera() {
         List<CartaPoker> cartas = List.of(
@@ -109,9 +108,9 @@ public class JugadaTest {
         Jugada jugada = Jugada.crearJugada(cartas);
 
         assertTrue(jugada instanceof Escalera);
-        assertEquals(40, jugada.calcularPuntaje());
+        assertEquals(200, jugada.calcularPuntaje());
         //assertEquals(5, jugada.cartasValidas.size());
-    }*/
+    }
 
     @Test
     public void testColor() {
