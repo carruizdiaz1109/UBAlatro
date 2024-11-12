@@ -9,6 +9,8 @@ public abstract class Jugada {
 
     public Jugada(List<CartaPoker> cartas) {
         this.cartas = cartas;
+        this.sumaValores = 0;
+        this.puntaje = new Puntaje(0, 1);
     }
 
     public abstract boolean esJugada(List<CartaPoker> cartas);
@@ -33,6 +35,7 @@ public abstract class Jugada {
         }
 
     }
+
     public int calcularPuntaje() {
         sumarValores();
         puntaje.incrementarPuntos(sumaValores);
