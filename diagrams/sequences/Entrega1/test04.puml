@@ -1,40 +1,35 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title Se verifica que el jugador puede jugar con la mano recibida
+title Se verifica que al jugar una mano, se aplique el valor correspondiente.
 
 actor ":TestCase" as user
-participant ":Juego" as juego
-participant ":Ronda" as ronda
-participant ":Jugador" as jugador
-participant ":Mazo" as mazo
-participant ":Mano" as mano
+participant ":Jugada" as jugada
+participant ":CartaPoker" as cartaPoker
+participant ":CartaAlta" as cartaAlta
 
-user -> juego**: Juego(nombreJugador)
-juego -> jugador**: Jugador(nombreJugador)
-jugador --> mazo **: Mazo()
-mazo --> jugador: unMazo
-user -> juego: iniciarJuego()
+user -> jugada: crearJugada(cartas)
+    loop iteracion hasta encontrar posible jugada
+        jugada -> jugada: esJugada(cartas)
+    end
+    note left
+        Si no encuentra ninguna jugada, se devuelve una instancia de CartaAlta.
+    end note
+    jugada -> cartaAlta**: CartaAlta(cartas)
+        cartaAlta -> cartaAlta: encontrarCartaAlta(cartas)
+            cartaAlta -> cartaPoker**: CartaPoker(cartaPoker)
+            loop iteracion hasta encontrar la carta de mayor valor
+                cartaAlta -> cartaPoker: esmayorA(carta)
+                cartaPoker --> cartaAlta: true
+            end
+cartaAlta --> user: cartaAlta
 
-juego --> ronda**: Ronda(Jugador)
-juego -> ronda: iniciarRonda()
-ronda -> jugador: iniciarRonda()
-jugador -> mazo: repartir()
-mazo -> mano **: Mano()
-mano -> mano: rellenar()
-mano --> mazo: unaMano
-mazo --> jugador: unaMano
-
-ronda -> jugador:Jugar()
-
-jugador -> mano: seleccionarCarta(CartaPoker)
-mano --> jugador: unaCarta
-jugador --> jugador: agregarACartaSeleccionadas
-jugador -> ":Jugada" as jugada **: Jugada(seleccionadas)
-jugada --> jugador: unaJugada
-jugador --> ronda: unaJugada
-
-ronda --> user
-
-
+user -> jugada: calcularPuntaje()
+    jugada -> cartaAlta: calcularPuntaje()
+        cartaAlta -> cartaPoker: calcularPuntaje()
+            cartaPoker -> puntaje: calcularPuntaje()
+            puntaje --> cartaPoker: unNumero
+        cartaPoker --> cartaAlta: unNumero
+    cartaAlta --> jugada: unNumero
+jugada --> user: unNumero
 @enduml
