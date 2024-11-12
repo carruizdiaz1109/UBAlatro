@@ -29,7 +29,7 @@ public class JugadaTest {
 
         //Assert
         assertTrue(jugada instanceof CartaAlta);
-        assertEquals(puntajeEsperado, jugada.calcularPuntaje()); // Verifica puntaje base
+        assertEquals(puntajeEsperado, jugada.calcularPuntaje());
         //assertEquals(cartas.get(2), jugada.cartasValidas.get(0)); // La carta alta es 8
     }
 
@@ -140,7 +140,7 @@ public class JugadaTest {
                 new CartaPoker(5, Palo.PICAS)
         );
         Jugada jugada = Jugada.crearJugada(cartas);
-        int valorEsperado = 320;
+        int valorEsperado = ((10+10+10+5+5)+40)*4;
         int valorObtenido = jugada.calcularPuntaje();
 
         assertTrue(jugada instanceof FullHouse);
