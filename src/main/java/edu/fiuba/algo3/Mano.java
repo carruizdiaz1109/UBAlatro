@@ -54,4 +54,22 @@ public class Mano extends ConjuntoCartas{
     public void descartar() {
         if(!seleccionadas.isEmpty()) seleccionadas.clear();
     }
+
+    public boolean compararManoCon(Mano otraMano) {
+        if (this.cartas.size() != otraMano.cartas.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < otraMano.cartas.size(); i++) {
+            CartaPoker carta1 = this.cartas.get(i);
+            CartaPoker carta2 = otraMano.cartas.get(i);
+
+            if (!carta1.compararCartaCon(carta2)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }
