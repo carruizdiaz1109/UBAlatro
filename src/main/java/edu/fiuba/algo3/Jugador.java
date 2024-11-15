@@ -38,7 +38,7 @@ public class Jugador {
     public Jugada jugar(){
         List<CartaPoker> cartas = List.of(new CartaPoker(1, Palo.PICAS)); // esto está hardcodeado
         return (new CartaAlta(cartas));                                         // acá hay que refactorizar después
-    };
+    }
 
     public void aniadirTarots(Tarot cartaTarot) {
         if (this.cartasTarot.size() < 2) {
