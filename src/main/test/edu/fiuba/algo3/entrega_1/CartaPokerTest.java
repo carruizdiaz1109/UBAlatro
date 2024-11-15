@@ -46,5 +46,34 @@ public class CartaPokerTest {
 
     }
 
+    @Test
+    public void test05CompararConCartasIguales(){
+        CartaPoker carta1 = new CartaPoker(5, Palo.CORAZONES);
+        CartaPoker carta2 = new CartaPoker(5, Palo.CORAZONES);
+
+
+        assertTrue(carta1.compararCartaCon(carta2));
+    }
+
+
+    @Test
+    public void test06CompararConDiferenteValor(){
+        CartaPoker carta1 = new CartaPoker(5, Palo.CORAZONES);
+        CartaPoker carta2 = new CartaPoker(10, Palo.CORAZONES);
+
+
+        assertFalse(carta1.compararCartaCon(carta2));
+    }
+
+
+    @Test
+    public void test07CompararConDiferentePalo(){
+        CartaPoker carta1 = new CartaPoker(5, Palo.CORAZONES);
+        CartaPoker carta2 = new CartaPoker(5, Palo.PICAS);
+
+
+        assertFalse(carta1.compararCartaCon(carta2));
+    }
+
 
 }

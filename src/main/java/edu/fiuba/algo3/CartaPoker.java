@@ -44,6 +44,11 @@ public class CartaPoker implements Comparable<CartaPoker>{
 
     public boolean esConsecutiva(CartaPoker otraCarta) { return Math.abs(this.valor - otraCarta.valor) == 1; }
 
+    public boolean compararCartaCon(CartaPoker otraCarta) {
+        return (this.valor == otraCarta.valor && this.palo.equals(otraCarta.palo));
+    }
+
+
     @Override
     public int compareTo(CartaPoker otraCarta) { return Integer.compare(this.valor, otraCarta.valor); }
 }
