@@ -32,5 +32,21 @@ public class PuntajeTest {
         assertEquals(resultadoEsperado, puntaje.calcularPuntaje());
     }
 
+    @Test
+    public void test04CompararDosPuntajesIguales(){
+        Puntaje puntaje1 = new Puntaje(3,2);
+        Puntaje puntaje2 = new Puntaje(3,2);
+
+        assertTrue(puntaje1.compararPuntajecon(puntaje2));
+    }
+
+    @Test
+    public void test05CompararDosPuntajesDistintos(){
+        Puntaje puntaje1 = new Puntaje(2,2);
+        Puntaje puntaje2 = new Puntaje(3,1);
+
+        assertFalse(puntaje1.compararPuntajecon(puntaje2));
+    }
+
 
 }
