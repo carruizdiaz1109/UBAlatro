@@ -17,6 +17,7 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class ManoTest {
 
@@ -51,18 +52,23 @@ class ManoTest {
     @Test
     void testDescartarYRellenarMano() {
 
-        while (!mano.manoLlena()) {
-            mano.agregarCarta(mazoMock.darCarta());
-        }
+        CartaPoker c1 = new CartaPoker(5, Palo.PICAS);
+        CartaPoker c2 = new CartaPoker(5, Palo.TREBOLES);
+        CartaPoker c3 = new CartaPoker(8, Palo.DIAMANTES);
+        CartaPoker c4 = new CartaPoker(2, Palo.CORAZONES);
+        CartaPoker c5 = new CartaPoker(3, Palo.PICAS);
 
-        mano.seleccionarCarta(0);
-        mano.seleccionarCarta(4);
-        mano.seleccionarCarta(7);
+        Mano mano = new Mano(new ArrayList<>(List.of(c1, c2, c3, c4, c5)));
+
+        mano.seleccionarCarta(c1);
+        mano.seleccionarCarta(c3);
+
         mano.descartar();
 
         while (!mano.manoLlena()) {
             mano.agregarCarta(mazoMock.darCarta());
         }
+
         Assertions.assertTrue(mano.manoLlena());
     }
 
