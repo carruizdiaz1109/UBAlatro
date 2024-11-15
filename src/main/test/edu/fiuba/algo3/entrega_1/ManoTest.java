@@ -17,6 +17,7 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class ManoTest {
 
@@ -66,10 +67,43 @@ class ManoTest {
         Assertions.assertTrue(mano.manoLlena());
     }
 
-    /*
     @Test
-    void testOrdenarCartas() {
+    public void test03CompararManosIguales(){
+        ArrayList<CartaPoker> cartas1 = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(3, Palo.PICAS),
+                new CartaPoker(7, Palo.CORAZONES),
+                new CartaPoker(5, Palo.DIAMANTES)
+        ));
+
+        ArrayList<CartaPoker> cartas2 = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(3, Palo.PICAS),
+                new CartaPoker(7, Palo.CORAZONES),
+                new CartaPoker(5, Palo.DIAMANTES)
+        ));
+
+        Mano mano1 = new Mano(cartas1);
+        Mano mano2 = new Mano(cartas2);
+
+        assert(mano1.compararManoCon(mano2));
     }
-    */
+
+    @Test
+    public void test04CompararManosDistintas(){
+        ArrayList<CartaPoker> cartas1 = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(3, Palo.PICAS),
+                new CartaPoker(7, Palo.CORAZONES),
+                new CartaPoker(4, Palo.DIAMANTES)
+        ));
+
+        ArrayList<CartaPoker> cartas2 = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(3, Palo.PICAS),
+                new CartaPoker(7, Palo.CORAZONES),
+                new CartaPoker(5, Palo.DIAMANTES)
+        ));
+
+        Mano mano1 = new Mano(cartas1);
+        Mano mano2 = new Mano(cartas2);
+
+        assertFalse(mano1.compararManoCon(mano2));}
 
 }
