@@ -5,13 +5,18 @@ import java.util.List;
 import java.util.Collections;
 
 public class Mazo {
-    private List<CartaPoker> cartas;
+    private ArrayList<CartaPoker> cartas;
     private int cantidadCartas;
 
     public Mazo(){
         cartas = new ArrayList<>();
         inicializarMazo();
         mezclar();
+    }
+
+    public Mazo(ArrayList<CartaPoker> cartas){
+        this.cartas = cartas;
+        cantidadCartas = cartas.size();
     }
 
     protected void inicializarMazo(){
@@ -70,5 +75,24 @@ public class Mazo {
         cartas.add(carta);
         cantidadCartas++;
     }
+
+    public boolean compararMazoCon(Mazo otroMazo) {
+        if (this.cartas.size() != otroMazo.cartas.size()) {
+            return false;
+        }
+
+
+        for (int i = 0; i < this.cartas.size(); i++) {
+            CartaPoker carta1 = this.cartas.get(i);
+            CartaPoker carta2 = otroMazo.cartas.get(i);
+
+
+            if (!carta1.compararCartaCon(carta2)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 }
