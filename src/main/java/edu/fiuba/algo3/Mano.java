@@ -28,7 +28,7 @@ public class Mano {
     }
 
     public void agregarCarta(CartaPoker carta) {
-        if (cantidadCartas < capacidad) {
+        if (!manoLlena()) {
             cartas.add(carta);
             cantidadCartas++;
         }
@@ -38,14 +38,7 @@ public class Mano {
         return cantidadCartas == capacidad;
     }
 
-    public void seleccionarCarta(int indice) {
-        if (indice >= 0 && indice < cartas.size()) {
-            CartaPoker carta = cartas.get(indice);
-            if (!seleccionadas.contains(carta)) {
-                seleccionadas.add(carta);
-            }
-        }
-    }
+    public void seleccionarCarta(CartaPoker carta) { seleccionadas.add(carta); }
 
     public void deseleccionarCarta(int indice) {
         if (indice >= 0 && indice < cartas.size()) {
