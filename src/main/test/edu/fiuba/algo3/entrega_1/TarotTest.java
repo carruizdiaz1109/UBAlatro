@@ -15,12 +15,16 @@ public class TarotTest {
 
     @Test
     public void test01SeModificaElValorDeUnaCarta() {
+        Puntaje puntajeEsperado = new Puntaje(7,1);
+
         CartaPoker cartaPoker = new CartaPoker(4, Palo.PICAS);
         Puntaje puntaje = new Puntaje(3,1);
         Tarot cartaTarot = new Tarot(puntaje);
 
         cartaTarot.modificarPuntaje(cartaPoker);
-        assertEquals(7, cartaPoker.calcularPuntaje());
+        Puntaje puntajeObtenido = cartaPoker.calcularPuntaje();
+
+        assert (puntajeObtenido.compararPuntajecon(puntajeEsperado));
     }
 
 }
