@@ -34,7 +34,6 @@ public abstract class Jugada {
             new Par(cartas),
             new CartaAlta(cartas)
         );
-
         for (Jugada jugada : posiblesJugadas) {
             if (jugada.esJugada(cartas)) {
                 return jugada;

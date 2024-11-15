@@ -23,20 +23,22 @@ public class Jugador {
     }
 
     public boolean esPosibleIniciarRonda(){
-        return this.mazo.esCantidadDeCartasSuficiente();
+        return this.mazo.tieneCartas();
     }
 
+    /*
     public void iniciarRonda(){
         if(!esPosibleIniciarRonda()){
             throw new ErrorMazoVacio();
         }
         this.manoActual = mazo.repartir();
     }
+    */
 
     public Jugada jugar(){
         List<CartaPoker> cartas = List.of(new CartaPoker(1, Palo.PICAS)); // esto está hardcodeado
         return (new CartaAlta(cartas));                                         // acá hay que refactorizar después
-    };
+    }
 
     public void aniadirTarots(Tarot cartaTarot) {
         if (this.cartasTarot.size() < 2) {
@@ -55,5 +57,9 @@ public class Jugador {
 
     public boolean esManoLlena(){
         return manoActual.manoLlena();
+    }
+
+    public void setMano(Mano unaMano){
+        this.manoActual = unaMano;
     }
 }

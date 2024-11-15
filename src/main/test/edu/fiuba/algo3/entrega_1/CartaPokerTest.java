@@ -18,22 +18,25 @@ public class CartaPokerTest {
 
     @Test
     public void test02SeCalculaElPuntajeDeLaCarta(){
+        Puntaje puntajeEsperado = new Puntaje(2, 1);
         CartaPoker cartaPoker = new CartaPoker(2, Palo.PICAS);
 
-        int resultado = cartaPoker.calcularPuntaje();
+        Puntaje resultado = cartaPoker.calcularPuntaje();
 
-        assertEquals(2, resultado);
+        assert(resultado.compararPuntajecon(puntajeEsperado));
     }
 
     @Test
     public void test03SeModificaElPuntajeDeLaCarta(){
+        Puntaje puntajeEsperado = new Puntaje(9, 1);
+
         CartaPoker cartaPoker = new CartaPoker(5, Palo.CORAZONES);
         Puntaje unPuntaje = new Puntaje(4,1);
 
         cartaPoker.modificarPuntaje(unPuntaje);
-        int resultado = cartaPoker.calcularPuntaje();
+        Puntaje resultado = cartaPoker.calcularPuntaje();
 
-        assertEquals(9,resultado);
+        assert(resultado.compararPuntajecon(puntajeEsperado));
     }
 
     @Test
@@ -42,8 +45,37 @@ public class CartaPokerTest {
         int resultadoEsperado = 11;
 
         int resultadoObtenido = cartaPoker.sumarValorCon(6);
-        assertEquals(resultadoEsperado, resultadoObtenido);
 
+        assertEquals(resultadoEsperado, resultadoObtenido);
+    }
+
+    @Test
+    public void test05CompararConCartasIguales(){
+        CartaPoker carta1 = new CartaPoker(5, Palo.CORAZONES);
+        CartaPoker carta2 = new CartaPoker(5, Palo.CORAZONES);
+
+
+        assertTrue(carta1.compararCartaCon(carta2));
+    }
+
+
+    @Test
+    public void test06CompararConDiferenteValor(){
+        CartaPoker carta1 = new CartaPoker(5, Palo.CORAZONES);
+        CartaPoker carta2 = new CartaPoker(10, Palo.CORAZONES);
+
+
+        assertFalse(carta1.compararCartaCon(carta2));
+    }
+
+
+    @Test
+    public void test07CompararConDiferentePalo(){
+        CartaPoker carta1 = new CartaPoker(5, Palo.CORAZONES);
+        CartaPoker carta2 = new CartaPoker(5, Palo.PICAS);
+
+
+        assertFalse(carta1.compararCartaCon(carta2));
     }
 
 
