@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
-public class Mazo {
-    private List<CartaPoker> cartas;
-    private int cantidadCartas;
+public class Mazo extends ConjuntoCartas {
 
     public Mazo(){
-        cartas = new ArrayList<>();
+        super();
         inicializarMazo();
         mezclar();
     }
@@ -21,13 +19,8 @@ public class Mazo {
         for (Palo palo : palos) {
             for (int valor : valores) {
                 this.cartas.add(new CartaPoker(valor, palo));
-                this.cantidadCartas++;
             }
         }
-    }
-
-    public boolean esCantidadDeCartasSuficiente() {
-        return cantidadCartas > 0;
     }
 
     protected void mezclar() {
@@ -35,40 +28,9 @@ public class Mazo {
     }
 
     public CartaPoker darCarta() {
-        if (cantidadCartas == 0) {
+        if (cartas.isEmpty()) {
             throw new ErrorMazoVacio();
         }
-        cantidadCartas--;
         return cartas.remove(0);
     }
-
-    public List<CartaPoker> getCartas() {
-        return cartas;
-    }
-
-    public int getCantidadCartas() {
-        return cantidadCartas;
-    }
-
-    public ArrayList<CartaPoker> rellenar(int cantidad){
-        ArrayList<CartaPoker> cartasRellenadas = new ArrayList<>();
-
-        for(int i = 0 ; i < cantidad && cantidadCartas != 0; i++){
-            cartasRellenadas.add(darCarta());
-        }
-
-        return cartasRellenadas;
-    }
-
-    public Mano repartir(){
-        ArrayList<CartaPoker> cartasRepartidas = rellenar(8);
-        Mano mano = new Mano(cartasRepartidas);
-        return mano;
-    }
-
-    public void guardarCarta(CartaPoker carta) {
-        cartas.add(carta);
-        cantidadCartas++;
-    }
-
 }

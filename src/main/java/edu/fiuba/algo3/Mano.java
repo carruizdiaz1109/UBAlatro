@@ -2,40 +2,31 @@ package edu.fiuba.algo3;
 
 import java.util.ArrayList;
 
-public class Mano {
+public class Mano extends ConjuntoCartas{
 
-    private ArrayList<CartaPoker> cartas;
     private ArrayList<CartaPoker> seleccionadas;
-    private int cantidadCartas;
     private int capacidad;
 
     public Mano() {
-        this.cartas = new ArrayList<CartaPoker>();
+        super();
         this.seleccionadas = new ArrayList<CartaPoker>();
-        this.cantidadCartas = 0;
         this.capacidad = 8;
     }
 
     public Mano(ArrayList<CartaPoker> cartas) {
-        this.cartas = cartas;
+        super();
         this.seleccionadas = new ArrayList<CartaPoker>();
-        this.cantidadCartas = cartas.size();
         this.capacidad = 8;
     }
 
-    public void eliminarCartas() {
-        cartas.clear();
-    }
-
-    public void agregarCarta(CartaPoker carta) {
-        if (cantidadCartas < capacidad) {
-            cartas.add(carta);
-            cantidadCartas++;
-        }
-    }
-
     public boolean manoLlena() {
-        return cantidadCartas == capacidad;
+        return cartas.size() == capacidad;
+    }
+
+    public void rellenarse(Mazo mazo) {
+        while (!manoLlena() && mazo.tieneCartas()) {
+            this.agregarCarta(mazo.darCarta());
+        }
     }
 
     public void seleccionarCarta(int indice) {
