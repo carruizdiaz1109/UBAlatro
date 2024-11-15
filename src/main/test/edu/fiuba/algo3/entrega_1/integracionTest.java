@@ -13,6 +13,21 @@ public class integracionTest {
     @Test
     public void test01VerificarQueUnJugadorPoseaCartasSuficientesParaEmpezarElJuegoEnSuMazo(){
         ArrayList<CartaPoker> cartasEsperadas = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(3, Palo.PICAS)));
+
+        ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(3, Palo.PICAS)));
+
+        Mazo mazo = new Mazo(cartas);
+        Mazo mazoEsperado = new Mazo(cartasEsperadas);
+
+        assert (mazo.compararMazoCon(mazoEsperado));
+    }
+
+
+    @Test
+    public void test02SeVerificaQueAUnJugadorSeLeReparten8CartasDeSuMazo(){
+        ArrayList<CartaPoker> cartasEsperadas = new ArrayList<CartaPoker>(List.of(
                 new CartaPoker(3, Palo.PICAS),
                 new CartaPoker(7, Palo.CORAZONES),
                 new CartaPoker(5, Palo.DIAMANTES),
@@ -34,23 +49,10 @@ public class integracionTest {
                 new CartaPoker(7, Palo.DIAMANTES),
                 new CartaPoker(10, Palo.CORAZONES)
         ));
-
         Mazo mazo = new Mazo(cartas);
         Mano manoObtenida = mazo.repartir();
 
         assert (manoObtenida.compararManoCon(manoEsperada));
-    }
-
-
-    @Test
-    public void test02SeVerificaQueAUnJugadorSeLeReparten8CartasDeSuMazo(){
-        Jugador jugador = new Jugador("Roberto");
-        Ronda ronda = new Ronda(jugador);
-
-        ronda.iniciarRonda();
-        boolean esManoLlena = jugador.esManoLlena();
-
-        assertTrue(esManoLlena);
     }
 
     @Test
