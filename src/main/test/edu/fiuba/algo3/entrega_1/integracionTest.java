@@ -12,11 +12,35 @@ import static org.junit.jupiter.api.Assertions.*;
 public class integracionTest {
     @Test
     public void test01VerificarQueUnJugadorPoseaCartasSuficientesParaEmpezarElJuegoEnSuMazo(){
-        Jugador jugador = new Jugador("Juan");
-        boolean esCantidadSuficienteDeCartas = jugador.esPosibleIniciarRonda();
+        ArrayList<CartaPoker> cartasEsperadas = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(3, Palo.PICAS),
+                new CartaPoker(7, Palo.CORAZONES),
+                new CartaPoker(5, Palo.DIAMANTES),
+                new CartaPoker(10, Palo.PICAS),
+                new CartaPoker(1, Palo.PICAS),
+                new CartaPoker(2, Palo.CORAZONES),
+                new CartaPoker(7, Palo.DIAMANTES),
+                new CartaPoker(10, Palo.CORAZONES)
+        ));
+        Mano manoEsperada = new Mano(cartasEsperadas);
 
-        assertTrue(esCantidadSuficienteDeCartas);
+        ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(3, Palo.PICAS),
+                new CartaPoker(7, Palo.CORAZONES),
+                new CartaPoker(5, Palo.DIAMANTES),
+                new CartaPoker(10, Palo.PICAS),
+                new CartaPoker(1, Palo.PICAS),
+                new CartaPoker(2, Palo.CORAZONES),
+                new CartaPoker(7, Palo.DIAMANTES),
+                new CartaPoker(10, Palo.CORAZONES)
+        ));
+
+        Mazo mazo = new Mazo(cartas);
+        Mano manoObtenida = mazo.repartir();
+
+        assert (manoObtenida.compararManoCon(manoEsperada));
     }
+
 
     @Test
     public void test02SeVerificaQueAUnJugadorSeLeReparten8CartasDeSuMazo(){
