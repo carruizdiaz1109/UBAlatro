@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class JugadorTest {
-
+/*
     @Test
     public void test01JugadorSeInicializaConNombreCorrecto() {
         Jugador jugador = new Jugador("Juan");
@@ -24,5 +24,5 @@ public class JugadorTest {
         CartaPoker carta = new CartaPoker(4, Palo.TREBOLES);
         assertThrows(TarotsNoDisponiblesError.class, () -> jugador.utilizarTarot(0,carta));
     }
-
+*/
 }

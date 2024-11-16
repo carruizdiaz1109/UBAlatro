@@ -1,6 +1,7 @@
 package edu.fiuba.algo3;
 
 public class Ronda {
+    /*
     private static int puntajeRonda = 300;
 
     private int puntajeMinimo;
@@ -18,7 +19,7 @@ public class Ronda {
     }
 
     public void iniciarRonda(){
-        //this.jugador.iniciarRonda();
+        this.jugador.iniciarRonda();
         Jugada unaJugada = this.jugador.jugar();
         this.puntajeAcumulado += unaJugada.calcularValor();
     }
@@ -26,6 +27,6 @@ public class Ronda {
      public boolean verificarPuntaje() {
         return (this.puntajeMinimo <= this.puntajeAcumulado);
     }
-
+*/
 
 }

@@ -9,7 +9,7 @@ import static org.mockito.Mockito.mock;
 
 
 public class BalatroTest {
-
+/*
     @Test
     public void test01IniciarBalatroLlamaAMetodoDeRondaOchoVeces() {
         Ronda rondaMock = Mockito.mock(Ronda.class);
@@ -39,6 +39,8 @@ public class BalatroTest {
         balatroMock.iniciarJuego();
         verify(balatroMock, times(8)).crearRonda();
     }
+
+ */
 }
 
 

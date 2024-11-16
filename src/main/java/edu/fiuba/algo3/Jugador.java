@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Jugador {
+   /*
     private String nombre;
     private Mano manoActual;
     private Mazo mazo;
@@ -33,7 +34,7 @@ public class Jugador {
         }
         this.manoActual = mazo.repartir();
     }
-    */
+
 
     public Jugada jugar(){
         List<CartaPoker> cartas = List.of(new CartaPoker(1, Palo.PICAS)); // esto está hardcodeado
@@ -62,4 +63,5 @@ public class Jugador {
     public void setMano(Mano unaMano){
         this.manoActual = unaMano;
     }
+    */
 }
