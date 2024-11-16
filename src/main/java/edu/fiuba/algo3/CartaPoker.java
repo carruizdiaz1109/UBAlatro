@@ -7,11 +7,13 @@ public class CartaPoker implements Comparable<CartaPoker>{
     private int valor;
     private Palo palo;
     private Puntaje puntaje;
+    private Tarot tarot;
 
     public CartaPoker(int valor, Palo palo){
         this.valor = valor;
         this.palo = palo;
         this.puntaje = new Puntaje( this.valor, 1);
+        this.tarot = new Tarot();
     }
 
     public CartaPoker comprar() {
@@ -42,6 +44,10 @@ public class CartaPoker implements Comparable<CartaPoker>{
         return (this.valor == otraCarta.valor && this.palo.equals(otraCarta.palo));
     }
 
+    public void activarTarot(Tarot tarot) {
+        this.puntaje = tarot.modificarPuntaje(puntaje);
+        this.tarot = tarot;
+    }
 
     @Override
     public int compareTo(CartaPoker otraCarta) { return Integer.compare(this.valor, otraCarta.valor); }
