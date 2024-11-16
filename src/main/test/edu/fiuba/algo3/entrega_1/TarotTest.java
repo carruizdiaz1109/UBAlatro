@@ -14,17 +14,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TarotTest {
 
     @Test
-    public void test01SeModificaElValorDeUnaCarta() {
-        Puntaje puntajeEsperado = new Puntaje(7,1);
+    public void test01SeModificaElValor() {
+        Puntaje puntajeEsperado = new Puntaje(3,1);
 
-        CartaPoker cartaPoker = new CartaPoker(4, Palo.PICAS);
+        Tarot tarot = new Tarot();
         Puntaje puntaje = new Puntaje(3,1);
-        Tarot cartaTarot = new Tarot(puntaje);
 
-        cartaTarot.modificarPuntaje(cartaPoker);
-        int puntajeObtenido = cartaPoker.calcularPuntaje();
+        Puntaje puntajeObtenido = tarot.modificarPuntaje(puntaje);
 
-        assert (puntajeEsperado.compararPuntajecon(puntajeObtenido));
+        assert (puntajeObtenido.compararPuntajecon(puntajeEsperado));
     }
 
 }
