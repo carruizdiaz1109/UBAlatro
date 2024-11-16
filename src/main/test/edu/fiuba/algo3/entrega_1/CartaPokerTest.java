@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.CartaPoker;
 import edu.fiuba.algo3.Puntaje;
 import edu.fiuba.algo3.Palo;
+import edu.fiuba.algo3.Tarot;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -76,6 +77,21 @@ public class CartaPokerTest {
 
 
         assertFalse(carta1.compararCartaCon(carta2));
+    }
+
+    @Test
+    public void test08SeAplicaTarotALaCarta(){
+        Puntaje puntajeEsperado = new Puntaje(7,1);
+
+        CartaPoker carta = new CartaPoker(4, Palo.CORAZONES);
+        Puntaje puntaje = new Puntaje(3,1);
+        Tarot cartaTarot = new Tarot(puntaje);
+
+        carta.activarTarot(cartaTarot);
+
+        int puntajeObtenido = carta.calcularPuntaje();
+
+        assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
 
 

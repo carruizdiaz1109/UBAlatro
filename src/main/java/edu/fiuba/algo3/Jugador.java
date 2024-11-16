@@ -48,7 +48,7 @@ public class Jugador {
 
     public void utilizarTarot(int indiceTarot, CartaPoker cartaPoker) {
         if (!this.cartasTarot.isEmpty()) {
-            this.cartasTarot.get(indiceTarot).modificarPuntaje(cartaPoker);
+           // this.cartasTarot.get(indiceTarot).modificarPuntaje(cartaPoker);
         } else {
             throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
 
