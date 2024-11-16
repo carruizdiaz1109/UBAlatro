@@ -19,9 +19,9 @@ public class Mazo extends ConjuntoCartas {
     protected void inicializarMazo(){
         this.cartas.clear();
         Palo[] palos = Palo.values();
-        int[] valores = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+        Valor[] valores = Valor.values();
         for (Palo palo : palos) {
-            for (int valor : valores) {
+            for (Valor valor : valores) {
                 this.cartas.add(new CartaPoker(valor, palo));
             }
         }
