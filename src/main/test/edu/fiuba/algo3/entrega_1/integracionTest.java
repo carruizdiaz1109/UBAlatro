@@ -140,25 +140,22 @@ public class integracionTest {
 
         assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
-/*
+
     @Test
     public void test07JugadorAplicaTarotAUnaCartaYSeLeModificaElMultiplicador(){
         Puntaje puntajeEsperado = new Puntaje(60, 1);
 
-        Jugador jugador = new Jugador("Lucia");
         CartaPoker cartaPoker = new CartaPoker(10, Palo.CORAZONES);
-        Puntaje puntaje1 = new Puntaje(0,6);
-       // Tarot cartaTarot1 = new Tarot(puntaje1);
-        Puntaje puntaje2 = new Puntaje(10,1);
-        Tarot cartaTarot2 = new Tarot(puntaje2);
-        jugador.aniadirTarots(cartaTarot2);
-        jugador.aniadirTarots(cartaTarot1);
 
-        jugador.utilizarTarot(1, cartaPoker);
+        Puntaje puntaje1 = new Puntaje(0,6);
+        Tarot cartaTarot1 = new Tarot(puntaje1);
+
+        cartaPoker.activarTarot(cartaTarot1);
+
         int puntajeObtenido = cartaPoker.calcularPuntaje();
 
         assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
 
- */
+
 }
