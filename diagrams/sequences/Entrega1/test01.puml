@@ -1,17 +1,30 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title Se verifica que un jugador posea cartas suficientes para empezar el juego en su mazo.
+title Se verifica que un jugador posea cartas suficientes para empezar el juego en su mazo
 
 actor ":TestCase" as user
-participant ":Jugador" as jugador
 participant ":Mazo" as mazo
+participant "mE :Mazo" as mazoE
+participant "cE :cartaPoker" as cartaE
+participant "c :cartaPoker" as carta
+participant "cartasE :ArrayList" as listaE
+participant "cartas :ArrayList" as lista
 
-user -> jugador**: Jugador(Juan)
-jugador -> mazo**: Mazo()
-user -> jugador: esPosibleIniciarRonda()
-jugador -> mazo: esCantidadDeCartasSuficiente()
-mazo --> jugador: true
-jugador --> user: true
+user -> cartaE**: CartaPoker(3, Palo.Picas)
+user -> listaE**: ArrayList(cE)
+user -> carta**: CartaPoker(3, Palo.Picas)
+user -> lista**: ArrayList(cartas)
 
+user -> mazo**: Mazo(cartas)
+user -> mazoE**: Mazo(cartasE)
+
+user -> mazo: compararCon(mE)
+loop por cada carta
+    mazo -> cartaActual1: get(i)
+    mazoE -> cartaActual2: get(i)
+    cartaActual1 -> cartaActual2: compararCartaCon(CartaPoker)
+    cartaActual2 -> cartaActual2: assert(resultado)
+end
+mazo --> user: assert(resultado)
 @enduml
