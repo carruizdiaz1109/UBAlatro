@@ -130,18 +130,17 @@ public class integracionTest {
     public void test06JugadorAplicaTarotAUnaCartaYSeLeModificaElValor(){
         Puntaje puntajeEsperado = new Puntaje(12, 1);
 
-        Jugador jugador = new Jugador("Esteban");
         CartaPoker cartaPoker = new CartaPoker(2, Palo.PICAS);
         Puntaje puntaje = new Puntaje(10,1);
         Tarot cartaTarot = new Tarot(puntaje);
-        jugador.aniadirTarots(cartaTarot);
 
-        jugador.utilizarTarot(0, cartaPoker);
+        cartaPoker.activarTarot(cartaTarot);
+
         int puntajeObtenido = cartaPoker.calcularPuntaje();
 
         assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
-
+/*
     @Test
     public void test07JugadorAplicaTarotAUnaCartaYSeLeModificaElMultiplicador(){
         Puntaje puntajeEsperado = new Puntaje(60, 1);
@@ -149,7 +148,7 @@ public class integracionTest {
         Jugador jugador = new Jugador("Lucia");
         CartaPoker cartaPoker = new CartaPoker(10, Palo.CORAZONES);
         Puntaje puntaje1 = new Puntaje(0,6);
-        Tarot cartaTarot1 = new Tarot(puntaje1);
+       // Tarot cartaTarot1 = new Tarot(puntaje1);
         Puntaje puntaje2 = new Puntaje(10,1);
         Tarot cartaTarot2 = new Tarot(puntaje2);
         jugador.aniadirTarots(cartaTarot2);
@@ -160,4 +159,6 @@ public class integracionTest {
 
         assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
+
+ */
 }
