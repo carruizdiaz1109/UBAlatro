@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.ErrorMazoVacio;
-import edu.fiuba.algo3.Mazo;
-import edu.fiuba.algo3.CartaPoker;
+import edu.fiuba.algo3.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ public class MazoTest {
         int cantidadCartasEsperadas = 52;
         int cantidadCartasObtenidas = 0;
 
-        cantidadCartasObtenidas = mazo.getCantidadCartas();
+        cantidadCartasObtenidas = mazo.getCartas().size();
 
         assertEquals(cantidadCartasEsperadas, cantidadCartasObtenidas);
     }
@@ -32,7 +30,7 @@ public class MazoTest {
 
         Mazo mazo = new Mazo();
         mazo.darCarta();
-        cantidadFinal = mazo.getCantidadCartas();
+        cantidadFinal = mazo.getCartas().size();
 
         assertEquals(cantidadFinal, cantidadEsperada);
     }
@@ -50,23 +48,10 @@ public class MazoTest {
     @Test
     public void test04DarCartaConMazoVacioTiraError(){
         Mazo mazo = new Mazo();
-        while (mazo.getCantidadCartas() > 0) {
+        while (mazo.getCartas().size() > 0) {
             mazo.darCarta();
         }
         assertThrows(ErrorMazoVacio.class, () -> mazo.darCarta());
-    }
-
-    @Test
-    public void test05Rellena5Cartas(){
-        Mazo mazo = new Mazo();
-        int cantidadEsperada = 5;
-        int cantidadObtenidas = 0;
-
-        List<CartaPoker> cartas = new ArrayList<>();
-        cartas = mazo.rellenar(5);
-        cantidadObtenidas = cartas.size();
-
-        assertEquals(cantidadEsperada, cantidadObtenidas);
     }
 
     @Test
@@ -79,9 +64,9 @@ public class MazoTest {
         mazo.darCarta();
         CartaPoker cartaObtenida = mazo.darCarta();
 
-        mazo.guardarCarta(cartaObtenida);
+        mazo.agregarCarta(cartaObtenida);
 
-        cantidadObtenida = mazo.getCantidadCartas();
+        cantidadObtenida = mazo.getCartas().size();
 
         assertEquals(cantidadEsperada, cantidadObtenida);
 
@@ -92,11 +77,82 @@ public class MazoTest {
         Mazo mazo = new Mazo();
 
         CartaPoker cartaObtenida = mazo.darCarta();
-        mazo.guardarCarta(cartaObtenida);
+        mazo.agregarCarta(cartaObtenida);
         List<CartaPoker> cartas = mazo.getCartas();
 
         CartaPoker ultimaCarta = cartas.get(cartas.size() - 1);
 
         assertEquals(ultimaCarta, cartaObtenida);
     }
+
+    @Test
+    public void test08CompararMazosIguales(){
+        ArrayList<CartaPoker> cartas1 = new ArrayList<>(List.of(
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
+                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+        ));
+
+
+        ArrayList<CartaPoker> cartas2 = new ArrayList<>(List.of(
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
+                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+        ));
+
+
+        Mazo mazo1 = new Mazo(cartas1);
+        Mazo mazo2 = new Mazo(cartas2);
+
+
+        assertTrue(mazo1.compararCon(mazo2));
+    }
+
+
+    @Test
+    public void test09CompararMazosDistintaCatidadCartas(){
+        ArrayList<CartaPoker> cartas1 = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
+                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+        ));
+
+
+        ArrayList<CartaPoker> cartas2 = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES)
+        ));
+
+
+        Mazo mazo1 = new Mazo(cartas1);
+        Mazo mazo2 = new Mazo(cartas2);
+
+
+        assertFalse(mazo1.compararCon(mazo2));
+    }
+
+
+    @Test
+    public void test010CompararMazosDistintos(){
+        ArrayList<CartaPoker> cartas1 = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
+                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+        ));
+
+
+        ArrayList<CartaPoker> cartas2 = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.DOS, Palo.CORAZONES),
+                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+        ));
+
+
+        Mazo mazo1 = new Mazo(cartas1);
+        Mazo mazo2 = new Mazo(cartas2);
+
+
+        assertFalse(mazo1.compararCon(mazo2));
+    }
+
 }

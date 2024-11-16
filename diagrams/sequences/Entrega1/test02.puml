@@ -4,27 +4,44 @@
 title Se verifica que a un jugador se le reparten 8 cartas de su mazo
 
 actor ":TestCase" as user
-participant ":Ronda" as ronda
-participant ":Jugador" as jugador
 participant ":Mazo" as mazo
 participant ":Mano" as mano
+participant "mE :Mano" as manoE
+participant "cE :cartaPoker" as cartaE
+participant "c :cartaPoker" as carta
+participant "cartasE :ArrayList" as listaE
+participant "cartas :ArrayList" as lista
 
-user -> jugador**: Jugador(Roberto)
-    jugador --> mazo **: Mazo()
+loop por 8 cartas
+    user -> cartaE**: CartaPoker(valor , palo)
+    user -> listaE**: ArrayList(cE)
+end
 
-user --> ronda**: Ronda(Jugador)
+user -> manoE**: Mano(cartasE)
 
-user -> ronda: iniciarRonda()
-    ronda -> jugador: iniciarRonda()
-        jugador -> mazo: repartir()
-            mazo -> mazo: rellenar(8)
-                loop hasta cantidad = 8
-                    mazo -> mazo: darCarta(): CartaPoker
-                end
-            mazo --> mazo: cartasRepartidas
-        mazo -> mano**: Mano(cartasRepartidas)
-user -> jugador: esManoLlena()
-    jugador -> mano: manoLlena()
-    mano --> jugador: true
-jugador --> user: true
+loop por 8 cartas
+    user -> carta**: CartaPoker(valor , palo)
+    user -> lista**: ArrayList(c)
+end
+
+user -> mazo**: Mazo(cartas)
+
+user -> mano**: Mano()
+user -> mano: rellenarse(mazo)
+
+loop !manoLlena() && mazo.tieneCartas()
+    mano -> mazo: darCarta()
+    mazo --> mano: unaCarta
+    mano -> mano: agregarCarta(unaCarta)
+end
+
+
+user -> mano: compararCon(mE)
+loop por cada carta
+    mano -> cartaActual1: get(i)
+    manoE -> cartaActual2: get(i)
+    cartaActual1 -> cartaActual2: compararCartaCon(CartaPoker)
+    cartaActual2 -> cartaActual2: assert(resultado)
+end
+mano --> user: assert(resultado)
 @enduml

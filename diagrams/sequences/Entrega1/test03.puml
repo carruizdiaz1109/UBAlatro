@@ -1,31 +1,50 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-actor Tester
 
-Tester -> Balatro : iniciarJuego()
+title Se verifica que se puede jugar una mano de un mazo
 
-loop hasta completar rondas o cumplir condiciones
- Balatro -> Ronda : crearRonda()
+actor ":TestCase" as user
+participant ":Mazo" as mazo
+participant ":Mano" as mano
+participant "cE :cartaPoker" as cartaE
+participant "c :cartaPoker" as carta
+participant "cartasE :ArrayList" as listaE
+participant "cartas :ArrayList" as lista
 
- Ronda -> Jugador : iniciarRonda()
-
- Jugador -> Mazo : repartir()
-
- Mazo -> Mano : crear Mano con 8 cartas
- return Mano
-
- Mazo --> Jugador : return Mano
-
- Jugador -> Jugada : jugar()
- Jugada --> Jugador : return jugada creada
-
- Jugador --> Ronda : return Jugada
-
- Ronda -> Ronda : calcular puntaje acumulado
- Ronda --> Balatro : return puntaje acumulado
-
- Balatro -> Balatro : verificarResultado()
+user -> listaE**: ArrayList(CartaPoker)
+loop por 4 cartas
+    user -> cartaE**: CartaPoker(valor , palo)
+    cartaE --> listaE: agregarCarta()
 end
 
-Balatro --> Tester : return juegoFinalizado
+
+loop por 8 cartas
+    user -> carta**: CartaPoker(valor , palo)
+    carta -> lista**:agregarCarta()
+end
+
+user -> mazo**: Mazo(cartas)
+
+user -> mano**: Mano()
+user -> mano: rellenarse(mazo)
+
+loop !manoLlena() && mazo.tieneCartas()
+    mano -> mazo: darCarta()
+    mazo --> mano: unaCarta
+    mano -> mano: agregarCarta(unaCarta)
+end
+
+loop por 4 cartas
+    user -> mano: seleccionarCarta(CartaPoker)
+    mano -> mano: seleccionadas.add(CartaPoker)
+end
+
+user -> mano: compararSeleccionadasCon(cartasE)
+loop por cada carta seleccionada
+    mano -> cartaSeleccionada: get(i)
+    mano -> cartaE: get(i)
+    mano  -> cartaE : compararCartaCon(cartaSeleccionada)
+    cartaE --> mano: resultado
+end
+mano --> user: assert(resultado)
 @enduml

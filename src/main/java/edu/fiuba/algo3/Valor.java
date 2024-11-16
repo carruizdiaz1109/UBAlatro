@@ -1,7 +1,7 @@
 package edu.fiuba.algo3;
 
 public enum Valor {
-    AS(1),
+    AS(11),
     DOS(2),
     TRES(3),
     CUATRO(4),
@@ -11,18 +11,21 @@ public enum Valor {
     OCHO(8),
     NUEVE(9),
     DIEZ(10),
-    J(11),
-    Q(12),
-    K(13),
-    AS2(14);
+    JOTA(10),
+    REINA(10),
+    REY(10);
 
-    private final int  valor;
+    private int valor;
 
     Valor(int valor) {
         this.valor = valor;
     }
 
-    public int getValor() {
-        return this.valor;
+    public int valor(){
+        return valor;
     }
+
 }
+
+
+

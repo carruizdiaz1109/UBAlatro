@@ -34,7 +34,6 @@ public abstract class Jugada {
             new Par(cartas),
             new CartaAlta(cartas)
         );
-
         for (Jugada jugada : posiblesJugadas) {
             if (jugada.esJugada(cartas)) {
                 return jugada;
@@ -51,7 +50,13 @@ public abstract class Jugada {
         this.sumaValores.incrementarPuntos(sumaPuntajes);
     }
 
-    public int calcularPuntaje() {
+    public int calcularValor() {
+        sumarValores();
+        this.puntaje = this.puntaje.sumarPuntaje(this.sumaValores);
+        return puntaje.calcularValor();
+    }
+
+    public Puntaje calcularPuntaje() {
         sumarValores();
         this.puntaje = this.puntaje.sumarPuntaje(this.sumaValores);
         return puntaje.calcularPuntaje();

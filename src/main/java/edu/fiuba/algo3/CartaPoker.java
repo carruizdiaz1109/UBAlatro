@@ -4,16 +4,16 @@ public class CartaPoker implements Comparable<CartaPoker>{
 
     private static int contadorId = 1;
 
-    private int valor;
+    private Valor valor;
     private Palo palo;
     private Puntaje puntaje;
-    private int id;
+    private Tarot tarot;
 
-    public CartaPoker(int valor, Palo palo){
+    public CartaPoker(Valor valor, Palo palo){
         this.valor = valor;
         this.palo = palo;
-        this.puntaje = new Puntaje( this.valor, 1);
-        this.id = contadorId++;
+        this.puntaje = new Puntaje( this.valor.valor(), 1);
+        this.tarot = new Tarot();
     }
 
     public CartaPoker comprar() {
@@ -25,25 +25,30 @@ public class CartaPoker implements Comparable<CartaPoker>{
     }
 
     public int calcularPuntaje() {
-        return this.puntaje.calcularPuntaje();
-    }
-
-    public boolean tieneId(int unId) {
-        return (this.id == unId);
+        return this.puntaje.calcularValor();
     }
 
     public boolean esMayorA(CartaPoker otraCarta) {
-        return (this.valor > otraCarta.valor);
+        return (this.valor.valor() > otraCarta.valor.valor());
     }
 
-    public int sumarValorCon(int otroValor) { return this.valor + otroValor; }
+    public int sumarValorCon(int otroValor) { return this.valor.valor() + otroValor; }
 
     public boolean esMismoValor(CartaPoker otraCarta) { return this.valor == otraCarta.valor; }
 
     public boolean esMismoPalo(CartaPoker otraCarta) { return this.palo.equals(otraCarta.palo); }
 
-    public boolean esConsecutiva(CartaPoker otraCarta) { return Math.abs(this.valor - otraCarta.valor) == 1; }
+    public boolean esConsecutiva(CartaPoker otraCarta) { return Math.abs(this.valor.valor() - otraCarta.valor.valor()) == 1; }
+
+    public boolean compararCartaCon(CartaPoker otraCarta) {
+        return (this.valor == otraCarta.valor && this.palo.equals(otraCarta.palo));
+    }
+
+    public void activarTarot(Tarot tarot) {
+        this.puntaje = tarot.modificarPuntaje(puntaje);
+        this.tarot = tarot;
+    }
 
     @Override
-    public int compareTo(CartaPoker otraCarta) { return Integer.compare(this.valor, otraCarta.valor); }
+    public int compareTo(CartaPoker otraCarta) { return Integer.compare(this.valor.valor(), otraCarta.valor.valor()); }
 }

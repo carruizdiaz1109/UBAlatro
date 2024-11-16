@@ -4,30 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
-public class Mazo {
-    private List<CartaPoker> cartas;
-    private int cantidadCartas;
+public class Mazo extends ConjuntoCartas {
 
     public Mazo(){
-        cartas = new ArrayList<>();
+        super();
         inicializarMazo();
         mezclar();
+    }
+
+    public Mazo(ArrayList<CartaPoker> cartas){
+        this.cartas = cartas;
     }
 
     protected void inicializarMazo(){
         this.cartas.clear();
         Palo[] palos = Palo.values();
-        int[] valores = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+        Valor[] valores = Valor.values();
         for (Palo palo : palos) {
-            for (int valor : valores) {
+            for (Valor valor : valores) {
                 this.cartas.add(new CartaPoker(valor, palo));
-                this.cantidadCartas++;
             }
         }
-    }
-
-    public boolean esCantidadDeCartasSuficiente() {
-        return cantidadCartas > 0;
     }
 
     protected void mezclar() {
@@ -35,40 +32,9 @@ public class Mazo {
     }
 
     public CartaPoker darCarta() {
-        if (cantidadCartas == 0) {
+        if (cartas.isEmpty()) {
             throw new ErrorMazoVacio();
         }
-        cantidadCartas--;
         return cartas.remove(0);
     }
-
-    public List<CartaPoker> getCartas() {
-        return cartas;
-    }
-
-    public int getCantidadCartas() {
-        return cantidadCartas;
-    }
-
-    public ArrayList<CartaPoker> rellenar(int cantidad){
-        ArrayList<CartaPoker> cartasRellenadas = new ArrayList<>();
-
-        for(int i = 0 ; i < cantidad && cantidadCartas != 0; i++){
-            cartasRellenadas.add(darCarta());
-        }
-
-        return cartasRellenadas;
-    }
-
-    public Mano repartir(){
-        ArrayList<CartaPoker> cartasRepartidas = rellenar(8);
-        Mano mano = new Mano(cartasRepartidas);
-        return mano;
-    }
-
-    public void guardarCarta(CartaPoker carta) {
-        cartas.add(carta);
-        cantidadCartas++;
-    }
-
 }

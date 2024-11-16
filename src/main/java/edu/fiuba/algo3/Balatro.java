@@ -1,6 +1,7 @@
 package edu.fiuba.algo3;
 
 public class Balatro {
+    /*
     private int rondas;
     private Ronda rondaActual;
     private Jugador jugador;
@@ -28,5 +29,5 @@ public class Balatro {
    public boolean verificarResultado(){
         return (this.rondaActual.verificarPuntaje());
     }
-
+    */
 }
