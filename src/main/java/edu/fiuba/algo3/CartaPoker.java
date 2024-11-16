@@ -1,11 +1,14 @@
 package edu.fiuba.algo3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CartaPoker implements Comparable<CartaPoker>{
 
-    private static int contadorId = 1;
+    private static final int contadorId = 1;
 
-    private Valor valor;
-    private Palo palo;
+    private final Valor valor;
+    private final Palo palo;
     private Puntaje puntaje;
     private Tarot tarot;
 
@@ -28,9 +31,9 @@ public class CartaPoker implements Comparable<CartaPoker>{
         return this.puntaje.calcularValor();
     }
 
-    public boolean esMayorA(CartaPoker otraCarta) {
+    /*public boolean esMayorA(CartaPoker otraCarta) {
         return (this.valor.valor() > otraCarta.valor.valor());
-    }
+    }*/
 
     public int sumarValorCon(int otroValor) { return this.valor.valor() + otroValor; }
 
@@ -51,4 +54,26 @@ public class CartaPoker implements Comparable<CartaPoker>{
 
     @Override
     public int compareTo(CartaPoker otraCarta) { return Integer.compare(this.valor.valor(), otraCarta.valor.valor()); }
+
+    public ConjuntoCartas obtenerEscalera() {
+        ConjuntoCartas escalera = new ConjuntoCartas();
+        escalera.agregarCarta(this);
+
+        Valor[] valores = Valor.values();
+        int indexActual = this.valor.ordinal(); // Posición actual del valor en el enum
+
+        for (int i = 1; i <= 4; i++) {
+            int nuevoIndex = indexActual + i;
+            if (nuevoIndex >= valores.length) {
+                break; // Si supera el rango de valores, se frena
+            }
+
+            Valor nuevoValor = valores[nuevoIndex];
+            CartaPoker nuevaCarta = new CartaPoker(nuevoValor, this.palo);
+            escalera.agregarCarta(nuevaCarta);
+        }
+
+        return escalera;
+    }
 }
+

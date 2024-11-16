@@ -3,6 +3,9 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CartaPokerTest {
@@ -91,5 +94,18 @@ public class CartaPokerTest {
         assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
 
+    @Test
+    public void test09SeLePideLaEscaleraRealALaCarta(){
+        CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
+        ConjuntoCartas escaleraEsperada = new ConjuntoCartas(List.of(
+                new CartaPoker(Valor.TRES, Palo.CORAZONES),
+                new CartaPoker(Valor.CUATRO, Palo.CORAZONES),
+                new CartaPoker(Valor.CINCO, Palo.CORAZONES),
+                new CartaPoker(Valor.SEIS, Palo.CORAZONES),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES)
+        ));
 
+       ConjuntoCartas escaleraObtenida = carta.obtenerEscalera();
+        assert(escaleraObtenida.compararCon(escaleraEsperada));
+    }
 }
