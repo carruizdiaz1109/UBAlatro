@@ -64,7 +64,6 @@ public class integracionTest {
                 new CartaPoker(Valor.SIETE, Palo.DIAMANTES),
                 new CartaPoker(Valor.DIEZ, Palo.CORAZONES)
         ));
-        Mano manoEsperada = new Mano(cartasEsperadas);
 
         ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
                 new CartaPoker(Valor.TRES, Palo.PICAS),
