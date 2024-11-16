@@ -18,9 +18,9 @@ public class Ronda {
     }
 
     public void iniciarRonda(){
-        this.jugador.iniciarRonda();
+        //this.jugador.iniciarRonda();
         Jugada unaJugada = this.jugador.jugar();
-        this.puntajeAcumulado += unaJugada.calcularPuntaje();
+        this.puntajeAcumulado += unaJugada.calcularValor();
     }
 
      public boolean verificarPuntaje() {

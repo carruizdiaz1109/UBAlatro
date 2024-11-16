@@ -21,7 +21,7 @@ public class MazoTest {
         int cantidadCartasEsperadas = 52;
         int cantidadCartasObtenidas = 0;
 
-        cantidadCartasObtenidas = mazo.getCantidadCartas();
+        cantidadCartasObtenidas = mazo.getCartas().size();
 
         assertEquals(cantidadCartasEsperadas, cantidadCartasObtenidas);
     }
@@ -33,7 +33,7 @@ public class MazoTest {
 
         Mazo mazo = new Mazo();
         mazo.darCarta();
-        cantidadFinal = mazo.getCantidadCartas();
+        cantidadFinal = mazo.getCartas().size();
 
         assertEquals(cantidadFinal, cantidadEsperada);
     }
@@ -51,23 +51,10 @@ public class MazoTest {
     @Test
     public void test04DarCartaConMazoVacioTiraError(){
         Mazo mazo = new Mazo();
-        while (mazo.getCantidadCartas() > 0) {
+        while (mazo.getCartas().size() > 0) {
             mazo.darCarta();
         }
         assertThrows(ErrorMazoVacio.class, () -> mazo.darCarta());
-    }
-
-    @Test
-    public void test05Rellena5Cartas(){
-        Mazo mazo = new Mazo();
-        int cantidadEsperada = 5;
-        int cantidadObtenidas = 0;
-
-        List<CartaPoker> cartas = new ArrayList<>();
-        cartas = mazo.rellenar(5);
-        cantidadObtenidas = cartas.size();
-
-        assertEquals(cantidadEsperada, cantidadObtenidas);
     }
 
     @Test
@@ -80,9 +67,9 @@ public class MazoTest {
         mazo.darCarta();
         CartaPoker cartaObtenida = mazo.darCarta();
 
-        mazo.guardarCarta(cartaObtenida);
+        mazo.agregarCarta(cartaObtenida);
 
-        cantidadObtenida = mazo.getCantidadCartas();
+        cantidadObtenida = mazo.getCartas().size();
 
         assertEquals(cantidadEsperada, cantidadObtenida);
 
@@ -93,7 +80,7 @@ public class MazoTest {
         Mazo mazo = new Mazo();
 
         CartaPoker cartaObtenida = mazo.darCarta();
-        mazo.guardarCarta(cartaObtenida);
+        mazo.agregarCarta(cartaObtenida);
         List<CartaPoker> cartas = mazo.getCartas();
 
         CartaPoker ultimaCarta = cartas.get(cartas.size() - 1);
@@ -121,7 +108,7 @@ public class MazoTest {
         Mazo mazo2 = new Mazo(cartas2);
 
 
-        assertTrue(mazo1.compararMazoCon(mazo2));
+        assertTrue(mazo1.compararCon(mazo2));
     }
 
 
@@ -144,7 +131,7 @@ public class MazoTest {
         Mazo mazo2 = new Mazo(cartas2);
 
 
-        assertFalse(mazo1.compararMazoCon(mazo2));
+        assertFalse(mazo1.compararCon(mazo2));
     }
 
 
@@ -168,7 +155,7 @@ public class MazoTest {
         Mazo mazo2 = new Mazo(cartas2);
 
 
-        assertFalse(mazo1.compararMazoCon(mazo2));
+        assertFalse(mazo1.compararCon(mazo2));
     }
 
 }

@@ -12,6 +12,10 @@ public class Mazo extends ConjuntoCartas {
         mezclar();
     }
 
+    public Mazo(ArrayList<CartaPoker> cartas){
+        this.cartas = cartas;
+    }
+
     protected void inicializarMazo(){
         this.cartas.clear();
         Palo[] palos = Palo.values();

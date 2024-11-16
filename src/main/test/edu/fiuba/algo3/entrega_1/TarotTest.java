@@ -22,9 +22,9 @@ public class TarotTest {
         Tarot cartaTarot = new Tarot(puntaje);
 
         cartaTarot.modificarPuntaje(cartaPoker);
-        Puntaje puntajeObtenido = cartaPoker.calcularPuntaje();
+        int puntajeObtenido = cartaPoker.calcularPuntaje();
 
-        assert (puntajeObtenido.compararPuntajecon(puntajeEsperado));
+        assert (puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
 
 }

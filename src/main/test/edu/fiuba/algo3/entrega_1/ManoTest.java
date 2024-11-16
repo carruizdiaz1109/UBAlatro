@@ -109,6 +109,27 @@ class ManoTest {
         Mano mano1 = new Mano(cartas1);
         Mano mano2 = new Mano(cartas2);
 
-        assertFalse(mano1.compararCon(mano2));}
+        assertFalse(mano1.compararCon(mano2));
+    }
+
+    @Test
+    public void test05CompararCartasSeleccionadas(){
+        ArrayList<CartaPoker> cartasSeleccionadas = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(3, Palo.PICAS)
+        ));
+
+        ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(3, Palo.PICAS),
+                new CartaPoker(7, Palo.CORAZONES),
+                new CartaPoker(4, Palo.DIAMANTES)
+        ));
+
+        Mano mano = new Mano(cartas);
+        CartaPoker cartaSeleccionada = mano.getCartas().get(0);
+
+        mano.seleccionarCarta(cartaSeleccionada);
+
+        assert(mano.compararSeleccionadasCon(cartasSeleccionadas));
+    }
 
 }

@@ -22,8 +22,8 @@ public class CartaPoker implements Comparable<CartaPoker>{
         this.puntaje = this.puntaje.sumarPuntaje(unPuntaje);
     }
 
-    public Puntaje calcularPuntaje() {
-        return this.puntaje.calcularPuntaje();
+    public int calcularPuntaje() {
+        return this.puntaje.calcularValor();
     }
 
     public boolean esMayorA(CartaPoker otraCarta) {

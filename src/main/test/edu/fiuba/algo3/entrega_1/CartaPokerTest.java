@@ -21,9 +21,9 @@ public class CartaPokerTest {
         Puntaje puntajeEsperado = new Puntaje(2, 1);
         CartaPoker cartaPoker = new CartaPoker(2, Palo.PICAS);
 
-        Puntaje resultado = cartaPoker.calcularPuntaje();
+        int puntajeObtenido = cartaPoker.calcularPuntaje();
 
-        assert(resultado.compararPuntajecon(puntajeEsperado));
+        assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
 
     @Test
@@ -34,9 +34,9 @@ public class CartaPokerTest {
         Puntaje unPuntaje = new Puntaje(4,1);
 
         cartaPoker.modificarPuntaje(unPuntaje);
-        Puntaje resultado = cartaPoker.calcularPuntaje();
+        int puntajeObtenido = cartaPoker.calcularPuntaje();
 
-        assert(resultado.compararPuntajecon(puntajeEsperado));
+        assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
 
     @Test

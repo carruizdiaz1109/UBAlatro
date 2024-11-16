@@ -21,9 +21,8 @@ public class integracionTest {
         Mazo mazo = new Mazo(cartas);
         Mazo mazoEsperado = new Mazo(cartasEsperadas);
 
-        assert (mazo.compararMazoCon(mazoEsperado));
+        assert (mazo.compararCon(mazoEsperado));
     }
-
 
     @Test
     public void test02SeVerificaQueAUnJugadorSeLeReparten8CartasDeSuMazo(){
@@ -50,19 +49,48 @@ public class integracionTest {
                 new CartaPoker(10, Palo.CORAZONES)
         ));
         Mazo mazo = new Mazo(cartas);
-        Mano manoObtenida = mazo.repartir();
-
-        assert (manoObtenida.compararManoCon(manoEsperada));
-    }
-
-    @Test
-    public void test03SeVerificaQueSePuedaJugarUnaManoDeUnMazo(){
-
-        Mazo mazo = new Mazo();
         Mano mano = new Mano();
         mano.rellenarse(mazo);
 
-        //assertTrue(jugada instanceof Jugada);
+        assert (mano.compararCon(manoEsperada));
+    }
+
+    @Test
+    public void test03SeVerificaQueSePuedaJugarUnaManoDeUnMazo() {
+
+        ArrayList<CartaPoker> cartasEsperadas = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(7, Palo.CORAZONES),
+                new CartaPoker(10, Palo.PICAS),
+                new CartaPoker(7, Palo.DIAMANTES),
+                new CartaPoker(10, Palo.CORAZONES)
+        ));
+        Mano manoEsperada = new Mano(cartasEsperadas);
+
+        ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(3, Palo.PICAS),
+                new CartaPoker(7, Palo.CORAZONES),
+                new CartaPoker(5, Palo.DIAMANTES),
+                new CartaPoker(10, Palo.PICAS),
+                new CartaPoker(1, Palo.PICAS),
+                new CartaPoker(2, Palo.CORAZONES),
+                new CartaPoker(7, Palo.DIAMANTES),
+                new CartaPoker(10, Palo.CORAZONES)
+        ));
+        Mazo mazo = new Mazo(cartas);
+        Mano mano = new Mano();
+        mano.rellenarse(mazo);
+
+        CartaPoker cartaSeleccionada1 = mano.getCartas().get(1);
+        CartaPoker cartaSeleccionada2 = mano.getCartas().get(3);
+        CartaPoker cartaSeleccionada3 = mano.getCartas().get(6);
+        CartaPoker cartaSeleccionada4 = mano.getCartas().get(7);
+
+        mano.seleccionarCarta(cartaSeleccionada1);
+        mano.seleccionarCarta(cartaSeleccionada2);
+        mano.seleccionarCarta(cartaSeleccionada3);
+        mano.seleccionarCarta(cartaSeleccionada4);
+
+        assert(mano.compararSeleccionadasCon(cartasEsperadas));
     }
 
     @Test
@@ -75,9 +103,10 @@ public class integracionTest {
                 new CartaPoker(5, Palo.DIAMANTES)
         ));
         Jugada jugada = Jugada.crearJugada(cartas);
+
         Puntaje puntajeObtenido = jugada.calcularPuntaje();
 
-        assert(puntajeObtenido.compararPuntajecon(puntajeEsperado));
+        assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
 
     @Test
@@ -108,9 +137,9 @@ public class integracionTest {
         jugador.aniadirTarots(cartaTarot);
 
         jugador.utilizarTarot(0, cartaPoker);
-        Puntaje puntajeObtenido = cartaPoker.calcularPuntaje();
+        int puntajeObtenido = cartaPoker.calcularPuntaje();
 
-        assert(puntajeObtenido.compararPuntajecon(puntajeEsperado));
+        assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
 
     @Test
@@ -127,8 +156,8 @@ public class integracionTest {
         jugador.aniadirTarots(cartaTarot1);
 
         jugador.utilizarTarot(1, cartaPoker);
-        Puntaje puntajeObtenido = cartaPoker.calcularPuntaje();
+        int puntajeObtenido = cartaPoker.calcularPuntaje();
 
-        assert(puntajeObtenido.compararPuntajecon(puntajeEsperado));
+        assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
 }
