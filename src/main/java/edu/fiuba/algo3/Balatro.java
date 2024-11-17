@@ -45,7 +45,7 @@ public class Balatro {
         }
     }
 
-    public void inicializarMazo(String rutaArchivo){
+    public void inicializarMazo(String rutaArchivo) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             // Cargar el archivo JSON y obtener el nodo 'mazo'
@@ -54,24 +54,24 @@ public class Balatro {
 
             // Iterar sobre las cartas del mazo y crear cada carta
             for (JsonNode cartaNode : mazoNode) {
-                // Obtener el nombre del palo y número
+                // Obtener el palo y número de la carta
                 String paloStr = cartaNode.path("palo").asText();
                 String numeroStr = cartaNode.path("numero").asText();
 
-                // Convertir el nombre del palo a un valor del enum Palo
+                // Convertir el nombre del palo al enum Palo
                 Palo palo = Palo.obtenerPaloDesdeString(paloStr);
 
-                // Convertir el número de la carta en el enum Valor
-                Valor valor = Valor.valueOf(numeroStr.toUpperCase()); // Asume que los valores están en mayúsculas en el enum
+                // Convertir el número de la carta al enum Valor usando el método personalizado
+                Valor valor = Valor.obtenerValorDesdeString(numeroStr);
 
                 // Crear la carta con el palo y número
                 CartaPoker carta = new CartaPoker(valor, palo);
 
                 // Agregar la carta al mazo
-                mazo.agregarCarta(carta);  // Asegúrate de tener la lista mazo definida previamente
+                mazo.agregarCarta(carta); // Asegúrate de que 'mazo' sea una colección ya inicializada
             }
         } catch (IOException e) {
-            System.err.println("Error al cargar las rondas desde el archivo JSON: " + e.getMessage());
+            System.err.println("Error al cargar el mazo desde el archivo JSON: " + e.getMessage());
             e.printStackTrace();
         }
     }

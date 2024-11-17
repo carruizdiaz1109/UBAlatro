@@ -10,7 +10,6 @@ public class Ronda {
     private final int descartesDisponibles;
     private final int jugadasDisponibles;
 
-    // Constructor normal sin anotaciones @JsonCreator y @JsonProperty
     public Ronda(int numero, int puntajeMinimo, int descartesDisponibles, int jugadasDisponibles) {
         this.numero = numero;
         this.puntajeMinimo = puntajeMinimo;

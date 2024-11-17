@@ -1,5 +1,7 @@
 package edu.fiuba.algo3;
 
+import java.util.Arrays;
+
 public enum Valor {
     AS(11),
     DOS(2),
@@ -50,7 +52,10 @@ public enum Valor {
                     throw new IllegalArgumentException("Valor no reconocido: " + numeroStr);
             }
         }
-        throw new IllegalArgumentException("Valor no reconocido: " + numeroStr);
+        throw new IllegalArgumentException(
+                "Valor no reconocido: " + numeroStr + ". Valores posibles: " +
+                        Arrays.toString(Valor.values())
+        );
     }
 
 }

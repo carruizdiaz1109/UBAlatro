@@ -9,7 +9,7 @@ public class Mazo extends ConjuntoCartas {
     public Mazo(){
         super();
         //inicializarMazo();
-        mezclar();
+        //mezclar();
     }
 
     public Mazo(ArrayList<CartaPoker> cartas){
