@@ -48,10 +48,10 @@ public class MazoTest {
     @Test
     public void test04DarCartaConMazoVacioTiraError(){
         Mazo mazo = new Mazo();
-        while (mazo.getCartas().size() > 0) {
+        while (!mazo.getCartas().isEmpty()) {
             mazo.darCarta();
         }
-        assertThrows(ErrorMazoVacio.class, () -> mazo.darCarta());
+        assertThrows(ErrorMazoVacio.class, mazo::darCarta);
     }
 
     @Test
