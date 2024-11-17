@@ -80,15 +80,10 @@ public class Balatro {
     }
 
     public void iniciarJuego() {
-        for (int i = 0; i < this.rondas.size(); i++) {
-            if (this.rondas.get(i).verificarPuntaje()) {
-                this.jugador.iniciarRonda(this.rondas.get(i));
+        for (Ronda ronda : this.rondas) {
+            if (ronda.verificarPuntaje()) {
+                this.jugador.iniciarRonda(ronda);
             }
         }
     }
-
-    protected Ronda crearRonda() {
-        return (new Ronda(this.jugador));
-    }
-
 }

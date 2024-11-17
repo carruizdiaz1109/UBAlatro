@@ -32,7 +32,6 @@ public class Jugador {
         this.manoActual.rellenarse();
     }
 
-
     public void jugar(){
         Jugada unaJugada = this.manoActual.jugar();
         this.rondaActual.agregarJugada(unaJugada);
