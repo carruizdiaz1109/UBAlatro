@@ -3,18 +3,24 @@ package edu.fiuba.algo3;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ronda {
 
     private final int numero;
     private final int puntajeMinimo;
     private final int descartesDisponibles;
-    private final int jugadasDisponibles;
+    private  int jugadasDisponibles;
+    private final List<Jugada> jugadas;
 
     public Ronda(int numero, int puntajeMinimo, int descartesDisponibles, int jugadasDisponibles) {
         this.numero = numero;
         this.puntajeMinimo = puntajeMinimo;
         this.descartesDisponibles = descartesDisponibles;
         this.jugadasDisponibles = jugadasDisponibles;
+        this.jugadas = new ArrayList<Jugada>();
+
     }
 
     /*
@@ -25,6 +31,17 @@ public class Ronda {
     }
 
      public boolean verificarPuntaje() {
-        return (this.puntajeMinimo <= this.puntajeAcumulado);
+        return (this.puntajeMinimo <= this.calcularValor);
     }*/
+
+    public void agregarJugada(Jugada unaJugada) {
+        if (jugadasDisponibles > 0) {
+            this.jugadas.add(unaJugada);
+            this.jugadasDisponibles--;
+        }
+    }
+
+    public bool estadoRonda() {
+        return (this.jugadasDisponibles <=  0);
+    }
 }

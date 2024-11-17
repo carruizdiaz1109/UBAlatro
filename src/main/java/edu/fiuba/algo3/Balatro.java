@@ -13,13 +13,15 @@ public class Balatro {
 
     private final List<Ronda> rondas;
     private final Mazo mazo;
+    private final Jugador jugador;
 
-    public Balatro() {
+    public Balatro(String nombreJugador) {
         this.rondas = new ArrayList<>();
         this.mazo = new Mazo();
         cargarRondasDesdeJSON("/home/carolina/Documentos/UBAlatro/recursos/Balatro.json");
         inicializarMazo("/home/carolina/Documentos/UBAlatro/recursos/Balatro.json");
         this.mazo.mezclar();
+        this.jugador = new Jugador(nombreJugador, this.mazo);
     }
 
     public void cargarRondasDesdeJSON(String rutaArchivo) {
@@ -77,23 +79,16 @@ public class Balatro {
         }
     }
 
-    /*
     public void iniciarJuego() {
-        int i = 0;
-
-        do {
-            this.rondaActual = this.crearRonda();
-            this.rondaActual.iniciarRonda();
-            i++;
-        } while (i < this.rondas && this.verificarResultado());
+        for (int i = 0; i < this.rondas.size(); i++) {
+            if (this.rondas.get(i).verificarPuntaje()) {
+                this.jugador.iniciarRonda(this.rondas.get(i));
+            }
+        }
     }
 
     protected Ronda crearRonda() {
         return (new Ronda(this.jugador));
     }
 
-   public boolean verificarResultado(){
-        return (this.rondaActual.verificarPuntaje());
-    }
-    */
 }
