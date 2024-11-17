@@ -10,14 +10,17 @@ import java.util.List;
 import java.util.Collections;
 
 public class Mazo extends ConjuntoCartas {
+    private final List<CartaPoker> mazoDescarte;
 
     public Mazo(){
         super();
         inicializarMazo("/home/carolina/Documentos/UBAlatro/recursos/Balatro.json");
+        this.mazoDescarte = new ArrayList<CartaPoker>();
     }
 
     public Mazo(ArrayList<CartaPoker> cartas){
         this.cartas = cartas;
+        this.mazoDescarte = new ArrayList<CartaPoker>();
     }
 
     protected void mezclar() {
@@ -28,6 +31,7 @@ public class Mazo extends ConjuntoCartas {
         if (cartas.isEmpty()) {
             throw new ErrorMazoVacio();
         }
+        this.mazoDescarte.add(this.cartas.get(0));
         return cartas.remove(0);
     }
 
@@ -61,4 +65,15 @@ public class Mazo extends ConjuntoCartas {
             e.printStackTrace();
         }
     }
+
+    public void recargarMazo() {
+        if (this.cartas.isEmpty() && !this.mazoDescarte.isEmpty()) {
+            this.cartas.addAll(this.mazoDescarte);
+            mazoDescarte.clear();
+            mezclar();
+        } else if (cartas.isEmpty()) {
+            throw new ErrorMazoVacio();
+        }
+    }
+
 }
