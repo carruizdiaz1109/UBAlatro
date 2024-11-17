@@ -41,7 +41,7 @@ public class Ronda {
         }
     }
 
-    public bool estadoRonda() {
+    public boolean estadoRonda() {
         return (this.jugadasDisponibles <=  0);
     }
 }
