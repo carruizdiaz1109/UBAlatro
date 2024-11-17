@@ -19,6 +19,7 @@ public class Balatro {
         this.mazo = new Mazo();
         cargarRondasDesdeJSON("/home/carolina/Documentos/UBAlatro/recursos/Balatro.json");
         inicializarMazo("/home/carolina/Documentos/UBAlatro/recursos/Balatro.json");
+        this.mazo.mezclar();
     }
 
     public void cargarRondasDesdeJSON(String rutaArchivo) {

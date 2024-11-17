@@ -9,20 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class JugadorTest {
-/*
-    @Test
-    public void test01JugadorSeInicializaConNombreCorrecto() {
-        Jugador jugador = new Jugador("Juan");
-        String nombreEsperado = "Juan";
 
-        assertTrue(jugador.esMismoNombre(nombreEsperado));
-    }
 
-    @Test
-    public void test02JugadorNoPuedeAplicarTarotSiNoTiene() {
-        Jugador jugador = new Jugador("Juan");
-        CartaPoker carta = new CartaPoker(4, Palo.TREBOLES);
-        assertThrows(TarotsNoDisponiblesError.class, () -> jugador.utilizarTarot(0,carta));
-    }
-*/
 }
