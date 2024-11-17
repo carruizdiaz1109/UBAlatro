@@ -1,23 +1,24 @@
 package edu.fiuba.algo3;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Ronda {
-    /*
-    private static int puntajeRonda = 300;
 
-    private int puntajeMinimo;
-    private int descartesDisponibles;
-    private int jugadasDisponibles;
-    private int puntajeAcumulado;
-    private Jugador jugador;
+    private final int numero;
+    private final int puntajeMinimo;
+    private final int descartesDisponibles;
+    private final int jugadasDisponibles;
 
-    public Ronda(Jugador unJugador) {
-        this.jugador = unJugador;
-        this.puntajeMinimo = (puntajeRonda + 100);
-        this.descartesDisponibles = 3;
-        this.jugadasDisponibles = 5;
-        this.puntajeAcumulado = 0;
+    // Constructor normal sin anotaciones @JsonCreator y @JsonProperty
+    public Ronda(int numero, int puntajeMinimo, int descartesDisponibles, int jugadasDisponibles) {
+        this.numero = numero;
+        this.puntajeMinimo = puntajeMinimo;
+        this.descartesDisponibles = descartesDisponibles;
+        this.jugadasDisponibles = jugadasDisponibles;
     }
 
+    /*
     public void iniciarRonda(){
         this.jugador.iniciarRonda();
         Jugada unaJugada = this.jugador.jugar();
@@ -26,7 +27,5 @@ public class Ronda {
 
      public boolean verificarPuntaje() {
         return (this.puntajeMinimo <= this.puntajeAcumulado);
-    }
-*/
-
+    }*/
 }

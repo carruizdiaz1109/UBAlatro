@@ -8,7 +8,7 @@ public class Mazo extends ConjuntoCartas {
 
     public Mazo(){
         super();
-        inicializarMazo();
+        //inicializarMazo();
         mezclar();
     }
 
@@ -16,6 +16,7 @@ public class Mazo extends ConjuntoCartas {
         this.cartas = cartas;
     }
 
+    /*
     protected void inicializarMazo(){
         this.cartas.clear();
         Palo[] palos = Palo.values();
@@ -25,7 +26,7 @@ public class Mazo extends ConjuntoCartas {
                 this.cartas.add(new CartaPoker(valor, palo));
             }
         }
-    }
+    }*/
 
     protected void mezclar() {
         Collections.shuffle(cartas);
