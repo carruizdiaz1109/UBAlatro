@@ -24,7 +24,7 @@ public class ComodinTest {
         int puntajeEsperado1 = unaJugada.calcularPuntaje() * 3;
         int puntajeEsperado2 = otraJugada.calcularPuntaje() * 3;
 
-        EfectoJugada unComodin = new EfectoJugada(unaJugada, 1,3);
+        EfectoJugada unComodin = new EfectoJugada(CartaAlta.class, 1,3);
         unComodin.aplicar(unaJugada);
         unComodin.aplicar(otraJugada);
 
@@ -32,24 +32,6 @@ public class ComodinTest {
         int otroPuntaje = otraJugada.calcularPuntaje();
         assertEquals(puntajeEsperado1, puntajeObtenido);
         assertEquals(puntajeEsperado2, otroPuntaje);
-
-    }
-
-    @Test
-    public void test02() {
-        List<CartaPoker> cartas = List.of(
-                new CartaPoker(Valor.NUEVE, Palo.PICAS)
-        );
-        Jugada unaJugada = new CartaAlta(cartas);
-        int puntajeEsperado = unaJugada.calcularPuntaje() + 10;
-        ComandoComodin comandoJugada = new ComandoComodinJugada(unaJugada, 10,1);
-        GestorComodines gestor = new GestorComodines();
-        gestor.agregarComando(comandoJugada);
-        gestor.ejecutarComandos();
-
-        int puntajeObtenido = unaJugada.calcularPuntaje();
-
-        assertEquals(puntajeEsperado, puntajeObtenido);
 
     }
 

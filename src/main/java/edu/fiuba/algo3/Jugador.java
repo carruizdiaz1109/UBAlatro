@@ -1,11 +1,6 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.comodines.ComandoComodin;
-import edu.fiuba.algo3.comodines.GestorComodines;
-import edu.fiuba.algo3.jugadas.*;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Jugador {
 
