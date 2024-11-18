@@ -2,7 +2,7 @@ package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.comodines.*;
-import edu.fiuba.algo3.jugadas.CartaAlta;
+import edu.fiuba.algo3.jugadas.Poker;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -16,15 +16,19 @@ public class ComodinTest {
     @Test
     public void test01SeAplicaUnComodinAJugada() {
         List<CartaPoker> cartas = List.of(
-                new CartaPoker(Valor.NUEVE, Palo.PICAS)
+                new CartaPoker(Valor.NUEVE, Palo.PICAS),
+                new CartaPoker(Valor.TRES, Palo.DIAMANTES),
+                new CartaPoker(Valor.TRES, Palo.DIAMANTES),
+                new CartaPoker(Valor.TRES, Palo.DIAMANTES),
+                new CartaPoker(Valor.TRES, Palo.DIAMANTES)
         );
-        Jugada unaJugada = new CartaAlta(cartas);
-        Jugada otraJugada = new CartaAlta(cartas);
+        Jugada unaJugada = Jugada.crearJugada(cartas);
+        Jugada otraJugada = Jugada.crearJugada(cartas);
 
         int puntajeEsperado1 = unaJugada.calcularPuntaje() * 3;
         int puntajeEsperado2 = otraJugada.calcularPuntaje() * 3;
 
-        EfectoJugada unComodin = new EfectoJugada(CartaAlta.class, 1,3);
+        EfectoJugada unComodin = new EfectoJugada(Poker.class, 1,3);
         unComodin.aplicar(unaJugada);
         unComodin.aplicar(otraJugada);
 

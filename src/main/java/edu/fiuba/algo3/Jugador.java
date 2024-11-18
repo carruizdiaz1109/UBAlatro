@@ -9,14 +9,12 @@ public class Jugador {
     private final Mazo mazo;
     private final ArrayList<Tarot> cartasTarot;
     private Ronda rondaActual;
-    private final GestorComodines gestorComodines;
 
     public Jugador(String nombre, Mazo mazo){
         this.nombre = nombre;
         this.mazo = mazo;
         this.manoActual = new Mano(this.mazo);
         this.cartasTarot = new ArrayList<Tarot>();
-        this.gestorComodines = new GestorComodines();
     }
 
     public boolean esPosibleIniciarRonda(){
@@ -33,11 +31,8 @@ public class Jugador {
 
     public void jugar(){
         Jugada unaJugada = this.manoActual.jugar();
-        this.gestorComodines.ejecutarComandos();
         this.rondaActual.agregarJugada(unaJugada);
     }
-
-    /*
 
     public void aniadirTarots(Tarot cartaTarot) {
         if (this.cartasTarot.size() < 2) {
@@ -45,13 +40,12 @@ public class Jugador {
         }
     }
 
-    public void utilizarTarot(int indiceTarot, CartaPoker cartaPoker) {
-        if (!this.cartasTarot.isEmpty()) {
-           // this.cartasTarot.get(indiceTarot).modificarPuntaje(cartaPoker);
+    public void utilizarTarot(Tarot tarotaAplicar, CartaPoker cartaPoker) {
+        if (!this.cartasTarot.isEmpty() && this.cartasTarot.contains(tarotaAplicar)) {
+            cartaPoker.activarTarot(tarotaAplicar);
         } else {
             throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
-
         }
-    }*/
+    }
 
 }

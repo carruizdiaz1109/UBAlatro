@@ -15,9 +15,9 @@ public class TarotTest {
 
     @Test
     public void test01SeModificaElValor() {
-        Puntaje puntajeEsperado = new Puntaje(3,1);
+        Puntaje puntajeEsperado = new Puntaje(5,1);
 
-        Tarot tarot = new Tarot();
+        Tarot tarot = new Tarot(2,1);
         Puntaje puntaje = new Puntaje(3,1);
 
         Puntaje puntajeObtenido = tarot.modificarPuntaje(puntaje);

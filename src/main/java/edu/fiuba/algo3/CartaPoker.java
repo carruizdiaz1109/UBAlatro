@@ -11,13 +11,13 @@ public class CartaPoker implements Comparable<CartaPoker>{
     private final Palo palo;
     private Puntaje puntaje;
     private final Puntaje puntajeComodin;
-    private Tarot tarot;
+    private Puntaje puntajeTarot;
 
     public CartaPoker(Valor valor, Palo palo){
         this.valor = valor;
         this.palo = palo;
         this.puntaje = new Puntaje( this.valor.valor(), 1);
-        this.tarot = new Tarot();
+        this.puntajeTarot = new Puntaje(0,1);
         this.puntajeComodin = new Puntaje(0,1);
     }
 
@@ -30,12 +30,9 @@ public class CartaPoker implements Comparable<CartaPoker>{
     }
 
     public int calcularPuntaje() {
+        modificarPuntaje(this.puntajeTarot);
         return this.puntaje.calcularPuntaje();
     }
-
-    /*public boolean esMayorA(CartaPoker otraCarta) {
-        return (this.valor.valor() > otraCarta.valor.valor());
-    }*/
 
     public int sumarValorCon(int otroValor) { return this.valor.valor() + otroValor; }
 
@@ -50,8 +47,7 @@ public class CartaPoker implements Comparable<CartaPoker>{
     }
 
     public void activarTarot(Tarot tarot) {
-        this.puntaje = tarot.modificarPuntaje(puntaje);
-        this.tarot = tarot;
+        this.puntajeTarot = tarot.modificarPuntaje(puntajeTarot);
     }
 
     @Override
