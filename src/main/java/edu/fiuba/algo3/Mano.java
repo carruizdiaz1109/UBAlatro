@@ -1,5 +1,7 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.jugadas.Descarte;
+
 import java.util.ArrayList;
 
 public class Mano extends ConjuntoCartas{
@@ -38,12 +40,14 @@ public class Mano extends ConjuntoCartas{
         this.seleccionadas.remove(carta);
     }
 
-    public ArrayList<CartaPoker> obtenerCartasSeleccionadas() {
-        return this.seleccionadas;
-    }
-
-    public void descartar() {
-        if(!seleccionadas.isEmpty()) seleccionadas.clear();
+    public Descarte descartar() {
+        Descarte unDescarte = null;
+        if(!this.seleccionadas.isEmpty()) {
+            unDescarte = new Descarte(this.seleccionadas);
+        }
+        this.cartas.removeAll(this.seleccionadas);
+        this.seleccionadas.clear();
+        return unDescarte;
     }
 
     public boolean compararSeleccionadasCon(ArrayList<CartaPoker> otrasSeleccionadas) {

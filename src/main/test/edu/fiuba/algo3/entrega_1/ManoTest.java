@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import edu.fiuba.algo3.*;
 
+import edu.fiuba.algo3.jugadas.Descarte;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -127,6 +128,20 @@ class ManoTest {
         mano.seleccionarCarta(cartaSeleccionada);
 
         assert(mano.compararSeleccionadasCon(cartasSeleccionadas));
+    }
+
+    @Test
+    public void test06SeDescartanCartas() {
+        ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
+                new CartaPoker(Valor.CUATRO, Palo.DIAMANTES)
+        ));
+
+        Mano mano = new Mano(cartas);
+        mano.seleccionarCarta(new CartaPoker(Valor.TRES, Palo.PICAS));
+        mano.seleccionarCarta(new CartaPoker(Valor.SIETE, Palo.CORAZONES));
+        assertNotNull(mano.descartar());
     }
 
 }
