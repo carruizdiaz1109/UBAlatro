@@ -12,7 +12,7 @@ import java.util.List;
 public class ComodinTest {
 
     @Test
-    public void comodinAfectaPuntosDePuntaje() {
+    public void test01ComodinAfectaPuntosDePuntaje() {
 
         // Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
@@ -29,9 +29,10 @@ public class ComodinTest {
         // Assert
         int puntajeEsperado = (10 + 2 + 2 + 10) * 2;
         assertEquals(puntajeEsperado, puntajeCalculado);
-
+    }
+    /*
     @Test
     public void comodinAfectaMultiplciadorDePuntaje() {
 
-    }
+        }*/
 }
