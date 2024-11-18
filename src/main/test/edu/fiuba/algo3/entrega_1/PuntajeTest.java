@@ -11,7 +11,7 @@ public class PuntajeTest {
     public void test01SeCreaUnPuntajeYSeCalculaElValor() {
         Puntaje puntajeEsperado = new Puntaje(18, 1);
         Puntaje puntaje = new Puntaje(3,6);
-        int puntajeObtenido = puntaje.calcularValor();
+        int puntajeObtenido = puntaje.calcularPuntaje();
 
         assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
@@ -22,7 +22,7 @@ public class PuntajeTest {
         Puntaje puntaje = new Puntaje(3,2);
         puntaje.incrementarPuntos(4);
 
-        int puntajeObtenido = puntaje.calcularValor();
+        int puntajeObtenido = puntaje.calcularPuntaje();
 
         assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
@@ -33,7 +33,7 @@ public class PuntajeTest {
         Puntaje puntaje = new Puntaje(3,2);
         puntaje.incrementarMultiplicador(3);
 
-        int puntajeObtenido = puntaje.calcularValor();
+        int puntajeObtenido = puntaje.calcularPuntaje();
 
         assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
     }
