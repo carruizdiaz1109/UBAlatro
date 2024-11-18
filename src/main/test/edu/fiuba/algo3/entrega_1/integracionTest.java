@@ -153,7 +153,7 @@ public class integracionTest {
 
     @Test
     public void test08InicializoJuego(){
-        Balatro balatro = new Balatro();
+        Balatro balatro = new Balatro("pepito");
         Puntaje puntaje = new Puntaje(8,9);
 
     }
