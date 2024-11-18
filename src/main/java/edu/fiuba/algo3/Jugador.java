@@ -1,8 +1,6 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.comodines.EfectoJugada;
-
-import javax.xml.catalog.CatalogResolver;
+import edu.fiuba.algo3.jugadas.Descarte;
 import java.util.ArrayList;
 
 public class Jugador {
@@ -66,6 +64,12 @@ public class Jugador {
         for (Comodin comodin : this.comodines) {
            comodin.aplicar(unaJugada);
         }
+    }
+
+    public void descartar() {
+        Descarte unDesarte = this.manoActual.descartar();
+        aplicarComodin(unDesarte);
+        this.rondaActual.agregarJugada(unDesarte);
     }
 
 }
