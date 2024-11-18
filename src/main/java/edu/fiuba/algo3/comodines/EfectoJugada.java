@@ -3,18 +3,18 @@ package edu.fiuba.algo3.comodines;
 import edu.fiuba.algo3.Puntaje;
 import edu.fiuba.algo3.Jugada;
 
-public class EfectoJugada{
+public class EfectoJugada {
 
-    private final Jugada jugadaAAplicar;
+    private final Class <? extends Jugada> jugadaAAplicar;
     private final Puntaje puntaje;
 
-    public EfectoJugada(Jugada unaJugadaAAplicar, int valor, int multiplicador) {
+    public EfectoJugada(Class <? extends Jugada> unaJugadaAAplicar, int valor, int multiplicador) {
         this.jugadaAAplicar = unaJugadaAAplicar;
         this.puntaje = new Puntaje(valor, multiplicador);
     }
 
     public void aplicar(Jugada unaJugada) {
-        if (unaJugada == this.jugadaAAplicar) {
+        if (this.jugadaAAplicar.isInstance(unaJugada)) {
             unaJugada.aplicarComodin(this.puntaje);
         }
     }

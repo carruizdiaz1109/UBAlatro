@@ -9,7 +9,7 @@ public abstract class Jugada {
     private Puntaje puntaje;
     protected List<CartaPoker> cartas;
     protected List<CartaPoker> cartasValidas;
-    private final Puntaje puntajeComodin;
+    private Puntaje puntajeComodin;
 
     public Jugada(List<CartaPoker> cartas, Puntaje puntaje) {
         this.cartas = cartas;
@@ -63,10 +63,10 @@ public abstract class Jugada {
         sumarValores();
         this.puntaje = this.puntaje.sumarPuntaje(this.sumaValores);
         this.puntaje = this.puntaje.sumarPuntaje(this.puntajeComodin);
-        return puntaje.calcularPuntaje();
+        return this.puntaje.calcularPuntaje();
     }
 
     public void aplicarComodin(Puntaje unPuntaje) {
-        this.puntajeComodin.sumarPuntaje(unPuntaje);
+        this.puntajeComodin = this.puntajeComodin.sumarPuntaje(unPuntaje);
     }
 }

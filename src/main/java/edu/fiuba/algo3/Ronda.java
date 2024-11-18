@@ -8,8 +8,9 @@ public class Ronda {
     private final int numero;
     private final int puntajeMinimo;
     private final int descartesDisponibles;
-    private  int jugadasDisponibles;
+    private int jugadasDisponibles;
     private final List<Jugada> jugadas;
+
 
     public Ronda(int numero, int puntajeMinimo, int descartesDisponibles, int jugadasDisponibles) {
         this.numero = numero;
@@ -32,13 +33,13 @@ public class Ronda {
     }
 
     public boolean estadoRonda() {
-        return (this.jugadasDisponibles <= 0);
+        return true; //(this.jugadasDisponibles <= 0);
     }
 
     public int calcularTotalRonda () {
         int acumulador = 0;
         for (Jugada jugada : this.jugadas) {
-            acumulador += jugada.calcularValor();
+            acumulador += jugada.calcularPuntaje();
         }
         return acumulador;
     }
