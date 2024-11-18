@@ -12,7 +12,7 @@ public abstract class Comodin {
     public Comodin(String nombre, String descripcion, int probabilidadRuptura) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        //this.probabilidadRuptura = probabilidadRuptura;
+        /*this.probabilidadRuptura = probabilidadRuptura;*/
     }
 
     public abstract void aplicar(Puntaje puntaje, Object contexto);

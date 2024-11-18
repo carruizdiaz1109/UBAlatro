@@ -13,7 +13,7 @@ public class EfectoPuntaje {
 
     public void aplicar(Puntaje puntaje) {
         puntaje.incrementarPuntos(this.puntos);
-        puntaje.incrementarMultiplicador(this.multiplicador);
+        puntaje.incrementarMultiplicador(this.multiplicador);//
     }
 
 }

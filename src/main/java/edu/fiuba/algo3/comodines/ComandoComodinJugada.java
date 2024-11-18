@@ -13,8 +13,8 @@ public class ComandoComodinJugada implements ComandoComodin {
         //this.jugada = jugada;
         this.puntaje = new Puntaje(0, 3);
         this.puntaje.sumarPuntaje(this.puntaje);
-        //this.jugada.aplicarComodin();
-        //this.puntaje.incrementarMultiplicador(multiplicador);
+        /*this.jugada.aplicarComodin();
+        this.puntaje.incrementarMultiplicador(multiplicador);*/
     }
 
     @Override

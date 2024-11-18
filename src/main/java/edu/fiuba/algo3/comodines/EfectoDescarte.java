@@ -16,7 +16,7 @@ public class EfectoDescarte {
         int incrementoMultiplicador = multiplicador * cantidadDescartes;
 
         puntaje.incrementarPuntos(incrementoPuntos);
-        puntaje.incrementarMultiplicador(incrementoMultiplicador);
+        puntaje.incrementarMultiplicador(incrementoMultiplicador); //
     }
 }
 
