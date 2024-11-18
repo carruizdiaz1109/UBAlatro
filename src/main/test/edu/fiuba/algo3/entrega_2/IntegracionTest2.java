@@ -1,11 +1,8 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.comodines.EfectoDescarte;
-import edu.fiuba.algo3.comodines.EfectoJugada;
-import edu.fiuba.algo3.comodines.EfectoPuntaje;
-import edu.fiuba.algo3.jugadas.Descarte;
-import edu.fiuba.algo3.jugadas.Escalera;
+import edu.fiuba.algo3.comodines.*;
+import edu.fiuba.algo3.jugadas.*;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
@@ -129,6 +126,47 @@ public class IntegracionTest2 {
 
         jugador.aniadirComodin(unComodin);
         jugador.descartar();
+
+        int puntajeObtenido = ronda.calcularTotalRonda();
+
+        assertEquals(puntajeEsperado, puntajeObtenido);
+    }
+
+    @Test
+    public void test04SeVerificaQueSeAplicaComodinAleatorioCorrectamente () {
+        Mazo mazoMock = mock(Mazo.class);
+        when(mazoMock.tieneCartas()).thenReturn(true);
+        Ronda ronda = new Ronda(1,10000,3,3);
+        CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
+        CartaPoker carta2 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
+        CartaPoker carta3 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
+        CartaPoker carta4 = new CartaPoker(Valor.DOS, Palo.CORAZONES);
+        CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
+        ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
+        Mano mano = new Mano(cartas);
+        Jugador jugador = new Jugador("Pepe", mazoMock) {
+            @Override
+            public void iniciarRonda(Ronda rondaActual){
+                this.rondaActual = ronda;
+                this.mazo = mazoMock;
+                this.manoActual = mano;
+            }
+        };
+        int puntajeEsperado = (2*4+60+10)*7;
+        Comodin unComodin = new EfectoAleatorio(1000, 10, 1) {
+            @Override
+            public boolean seAplica() {
+                return true;
+            }
+        };
+        jugador.iniciarRonda(ronda);
+        jugador.aniadirComodin(unComodin);
+        jugador.seleccionarCarta(carta1);
+        jugador.seleccionarCarta(carta2);
+        jugador.seleccionarCarta(carta3);
+        jugador.seleccionarCarta(carta4);
+        jugador.seleccionarCarta(carta5);
+        jugador.jugar();
 
         int puntajeObtenido = ronda.calcularTotalRonda();
 

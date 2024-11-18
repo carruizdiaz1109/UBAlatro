@@ -7,7 +7,6 @@ import edu.fiuba.algo3.jugadas.Escalera;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.List;
-import static org.junit.Assert.assertEquals;
 
 public class ComodinTest {
 
@@ -68,5 +67,28 @@ public class ComodinTest {
         Assertions.assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
+    @Test
+    public void test04SeAplicaUnComodinAleatorio() {
+        List<CartaPoker> cartas = List.of(
+                new CartaPoker(Valor.DOS, Palo.PICAS),
+                new CartaPoker(Valor.DOS, Palo.DIAMANTES),
+                new CartaPoker(Valor.DOS, Palo.DIAMANTES),
+                new CartaPoker(Valor.DOS, Palo.CORAZONES),
+                new CartaPoker(Valor.SEIS, Palo.PICAS)
+        );
+        Jugada unaJugada = Jugada.crearJugada(cartas);
+        int puntajeEsperado = (2*4+60+10)*7;
+        Comodin unComodin = new EfectoAleatorio(1000, 10, 1) {
+            @Override
+            public boolean seAplica() {
+                return true;
+            }
+        };
+        unComodin.aplicar(unaJugada);
+
+        int puntajeObtenido = unaJugada.calcularPuntaje();
+
+        Assertions.assertEquals(puntajeEsperado, puntajeObtenido);
+    }
 
 }

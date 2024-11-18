@@ -6,7 +6,6 @@ import edu.fiuba.algo3.Puntaje;
 import java.util.List;
 
 public class Descarte extends Jugada {
-    protected Puntaje unPuntaje;
     protected Puntaje puntajeComodin;
 
     public Descarte(List<CartaPoker> cartas) {
