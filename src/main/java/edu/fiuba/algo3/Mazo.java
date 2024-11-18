@@ -28,7 +28,7 @@ public class Mazo extends ConjuntoCartas {
     }
 
     public CartaPoker darCarta() {
-        if (tieneCartas()) {
+        if (!tieneCartas()) {
             throw new ErrorMazoVacio();
         }
         this.mazoDescarte.add(this.cartas.get(0));
