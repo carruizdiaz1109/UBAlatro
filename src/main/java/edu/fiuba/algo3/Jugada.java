@@ -50,6 +50,7 @@ public abstract class Jugada {
         this.sumaValores.incrementarPuntos(sumaPuntajes);
     }
 
+    /*
     public int calcularValor() {
         sumarValores();
         this.puntaje = this.puntaje.sumarPuntaje(this.sumaValores);
@@ -61,4 +62,5 @@ public abstract class Jugada {
         this.puntaje = this.puntaje.sumarPuntaje(this.sumaValores);
         return puntaje.calcularPuntaje();
     }
+    */
 }
