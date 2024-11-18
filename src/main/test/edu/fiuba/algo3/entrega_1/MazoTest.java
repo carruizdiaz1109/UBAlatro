@@ -168,7 +168,7 @@ public class MazoTest {
 
         mazo1.recargarMazo();
 
-        assert(mazo2.compararCon(mazo2));
+        assert(mazo2.compararCon(mazo1));
     }
 
 }
