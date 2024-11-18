@@ -1,5 +1,7 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.comodines.ComandoComodin;
+import edu.fiuba.algo3.comodines.GestorComodines;
 import edu.fiuba.algo3.jugadas.*;
 
 import java.util.ArrayList;
@@ -12,12 +14,14 @@ public class Jugador {
     private final Mazo mazo;
     private final ArrayList<Tarot> cartasTarot;
     private Ronda rondaActual;
+    private final GestorComodines gestorComodines;
 
     public Jugador(String nombre, Mazo mazo){
         this.nombre = nombre;
         this.mazo = mazo;
         this.manoActual = new Mano(this.mazo);
-        this.cartasTarot = new ArrayList<>();
+        this.cartasTarot = new ArrayList<Tarot>();
+        this.gestorComodines = new GestorComodines();
     }
 
     public boolean esPosibleIniciarRonda(){
@@ -34,10 +38,8 @@ public class Jugador {
 
     public void jugar(){
         Jugada unaJugada = this.manoActual.jugar();
+        this.gestorComodines.ejecutarComandos();
         this.rondaActual.agregarJugada(unaJugada);
-        /*
-        List<CartaPoker> cartas = List.of(new CartaPoker(1, Palo.PICAS)); // esto está hardcodeado
-        return (new CartaAlta(cartas));                                         // acá hay que refactorizar después*/
     }
 
     /*
