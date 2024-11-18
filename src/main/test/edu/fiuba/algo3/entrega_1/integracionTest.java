@@ -49,8 +49,8 @@ public class integracionTest {
                 new CartaPoker(Valor.REY, Palo.CORAZONES)
         ));
         Mazo mazo = new Mazo(cartas);
-        Mano mano = new Mano();
-        mano.rellenarse(mazo);
+        Mano mano = new Mano(mazo);
+        mano.rellenarse();
 
         assert (mano.compararCon(manoEsperada));
     }
@@ -76,8 +76,8 @@ public class integracionTest {
                 new CartaPoker(Valor.REY, Palo.CORAZONES)
         ));
         Mazo mazo = new Mazo(cartas);
-        Mano mano = new Mano();
-        mano.rellenarse(mazo);
+        Mano mano = new Mano(mazo);
+        mano.rellenarse();
 
         mano.seleccionarCarta(new CartaPoker(Valor.SIETE, Palo.CORAZONES));
         mano.seleccionarCarta(new CartaPoker(Valor.DIEZ, Palo.PICAS));
@@ -150,5 +150,13 @@ public class integracionTest {
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
+
+    @Test
+    public void test08InicializoJuego(){
+        Balatro balatro = new Balatro();
+        Puntaje puntaje = new Puntaje(8,9);
+
+    }
+
 
 }
