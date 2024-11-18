@@ -4,8 +4,6 @@ import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.comodines.*;
 import edu.fiuba.algo3.jugadas.Escalera;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 

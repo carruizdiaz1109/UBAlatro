@@ -4,11 +4,8 @@ import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.comodines.EfectoJugada;
 import edu.fiuba.algo3.jugadas.Escalera;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

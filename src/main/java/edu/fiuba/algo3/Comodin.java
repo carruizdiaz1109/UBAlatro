@@ -1,11 +1,12 @@
 package edu.fiuba.algo3;
 
-public class Comodin {
+public abstract class Comodin {
 
-    private Puntaje efecto;
+    protected Puntaje puntaje;
 
     public Comodin(int valor, int multiplicador) {
-        this.efecto = new Puntaje(valor, multiplicador);
+        this.puntaje = new Puntaje(valor, multiplicador);
     }
 
+    public abstract void aplicar(Jugada jugada);
 }
