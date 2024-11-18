@@ -1,23 +1,25 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.jugadas.*;
+import edu.fiuba.algo3.comodines.EfectoJugada;
 
+import javax.xml.catalog.CatalogResolver;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Jugador {
 
     private final String nombre;
-    private final Mano manoActual;
-    private final Mazo mazo;
+    protected Mano manoActual;
+    protected Mazo mazo;
     private final ArrayList<Tarot> cartasTarot;
-    private Ronda rondaActual;
+    private final ArrayList<EfectoJugada> comodines;
+    protected Ronda rondaActual;
 
     public Jugador(String nombre, Mazo mazo){
         this.nombre = nombre;
         this.mazo = mazo;
         this.manoActual = new Mano(this.mazo);
-        this.cartasTarot = new ArrayList<>();
+        this.cartasTarot = new ArrayList<Tarot>();
+        this.comodines = new ArrayList<EfectoJugada>();
     }
 
     public boolean esPosibleIniciarRonda(){
@@ -34,13 +36,13 @@ public class Jugador {
 
     public void jugar(){
         Jugada unaJugada = this.manoActual.jugar();
+        aplicarComodin(unaJugada);
         this.rondaActual.agregarJugada(unaJugada);
-        /*
-        List<CartaPoker> cartas = List.of(new CartaPoker(1, Palo.PICAS)); // esto está hardcodeado
-        return (new CartaAlta(cartas));                                         // acá hay que refactorizar después*/
     }
 
-    /*
+    public void seleccionarCarta(CartaPoker unaCarta) {
+        this.manoActual.seleccionarCarta(unaCarta);
+    }
 
     public void aniadirTarots(Tarot cartaTarot) {
         if (this.cartasTarot.size() < 2) {
@@ -48,14 +50,23 @@ public class Jugador {
         }
     }
 
-    public void utilizarTarot(int indiceTarot, CartaPoker cartaPoker) {
-        if (!this.cartasTarot.isEmpty()) {
-           // this.cartasTarot.get(indiceTarot).modificarPuntaje(cartaPoker);
+    public void utilizarTarot(Tarot tarotaAplicar, CartaPoker cartaPoker) {
+        if (!this.cartasTarot.isEmpty() && this.cartasTarot.contains(tarotaAplicar)) {
+            cartaPoker.activarTarot(tarotaAplicar);
         } else {
             throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
-
         }
-    }*/
+    }
+
+    public void aniadirComodin(EfectoJugada unComodin) {
+        this.comodines.add(unComodin);
+    }
+
+    public void aplicarComodin(Jugada unaJugada) {
+        for (EfectoJugada comodin : this.comodines) {
+           comodin.aplicar(unaJugada);
+        }
+    }
 
 
 }

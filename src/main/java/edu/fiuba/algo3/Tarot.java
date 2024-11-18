@@ -3,12 +3,8 @@ package edu.fiuba.algo3;
 public class Tarot {
     Puntaje puntaje;
 
-    public Tarot(){
-        this.puntaje = new Puntaje(0, 1);
-    }
-
-    public Tarot(Puntaje puntaje){
-        this.puntaje = puntaje;
+    public Tarot(int valor, int multiplicador){
+        this.puntaje = new Puntaje(valor, multiplicador);
     }
 
     public Puntaje modificarPuntaje(Puntaje unPuntaje) {

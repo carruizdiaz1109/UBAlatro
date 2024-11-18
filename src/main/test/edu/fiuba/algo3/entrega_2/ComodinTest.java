@@ -2,7 +2,7 @@ package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.comodines.*;
-import edu.fiuba.algo3.jugadas.CartaAlta;
+import edu.fiuba.algo3.jugadas.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -71,6 +71,52 @@ public class ComodinTest {
 
         assertEquals(puntajeEsperado, puntajeObtenido);
 
+    }
+    /*-----------------------------------------------------------------------------------------------*/
+    @Test
+    public void test01ComodinSumaMultiplicadorCorrecto() {
+        Puntaje puntaje = new Puntaje(10, 1);
+        EfectoPuntaje efecto = new EfectoPuntaje(0, 8);
+        efecto.aplicar(puntaje);
+
+        int puntajeEsperado = 10 * 8;
+        int puntajeObtenido = puntaje.calcularPuntaje();
+
+        assertEquals(puntajeEsperado, puntajeObtenido);
+    }
+
+    @Test
+    public void test02ComodinEscalera() {
+        List<CartaPoker> cartas = List.of(
+                new CartaPoker(Valor.CUATRO, Palo.TREBOLES),
+                new CartaPoker(Valor.CINCO, Palo.TREBOLES),
+                new CartaPoker(Valor.SEIS, Palo.TREBOLES),
+                new CartaPoker(Valor.SIETE, Palo.TREBOLES),
+                new CartaPoker(Valor.OCHO, Palo.TREBOLES)
+        );
+
+        Jugada escalera = new Escalera(cartas);
+        ComandoComodin comando = new ComandoComodinJugada(escalera, 1, 3);
+        GestorComodines gestor = new GestorComodines();
+        gestor.agregarComando(comando);
+        gestor.ejecutarComandos();
+
+        int puntajeEsperado = 30 * 12; // Base: 30 puntos con multiplicador 4
+        int puntajeObtenido = escalera.calcularPuntaje();//120
+        assertEquals(puntajeEsperado, puntajeObtenido);
+    }
+
+    @Test
+    public void test03ComodinDescartes() {
+        Puntaje puntaje = new Puntaje(0, 1);
+        EfectoDescarte efecto = new EfectoDescarte(10, 0);
+
+        efecto.aplicar(puntaje, 3); // Tres descartes
+
+        int puntajeEsperado = 30; // 10 puntos por cada descarte
+        int puntajeObtenido = puntaje.calcularPuntaje();
+
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
     /*
     @Test

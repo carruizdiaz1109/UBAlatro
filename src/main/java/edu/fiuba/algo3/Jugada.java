@@ -63,10 +63,10 @@ public abstract class Jugada {
         sumarValores();
         this.puntaje = this.puntaje.sumarPuntaje(this.sumaValores);
         this.puntaje = this.puntaje.sumarPuntaje(this.puntajeComodin);
-        return puntaje.calcularPuntaje();
+        return this.puntaje.calcularPuntaje();
     }
 
     public void aplicarComodin(Puntaje unPuntaje) {
-        this.puntajeComodin.sumarPuntaje(unPuntaje);
+        this.puntajeComodin = this.puntajeComodin.sumarPuntaje(unPuntaje);
     }
 }

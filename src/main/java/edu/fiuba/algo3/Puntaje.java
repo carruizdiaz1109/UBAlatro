@@ -22,9 +22,9 @@ public class Puntaje {
     }
 
     public Puntaje sumarPuntaje(Puntaje unPuntaje) {
-        unPuntaje.incrementarPuntos(this.puntos);
-        unPuntaje.incrementarMultiplicador(this.multiplicador);
-        return unPuntaje;
+        int nuevoPuntos = this.puntos + unPuntaje.puntos;
+        int nuevoMultiplicador = this.multiplicador * unPuntaje.multiplicador;
+        return new Puntaje(nuevoPuntos, nuevoMultiplicador);
     }
 
     public boolean compararPuntajecon(int otroPuntaje){

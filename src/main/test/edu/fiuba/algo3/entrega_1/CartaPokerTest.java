@@ -84,8 +84,7 @@ public class CartaPokerTest {
         Puntaje puntajeEsperado = new Puntaje(7,1);
 
         CartaPoker carta = new CartaPoker(Valor.CUATRO, Palo.CORAZONES);
-        Puntaje puntaje = new Puntaje(3,1);
-        Tarot cartaTarot = new Tarot(puntaje);
+        Tarot cartaTarot = new Tarot(3,1);
 
         carta.activarTarot(cartaTarot);
 
@@ -106,6 +105,7 @@ public class CartaPokerTest {
         ));
 
        ConjuntoCartas escaleraObtenida = carta.obtenerEscalera();
+       System.out.println(escaleraEsperada);
         assert(escaleraObtenida.compararCon(escaleraEsperada));
     }
 }
