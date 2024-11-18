@@ -60,8 +60,8 @@ public class JugadaTest {
         //Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.CINCO, Palo.TREBOLES),
-                new CartaPoker(Valor.OCHO, Palo.DIAMANTES),
+                    new CartaPoker(Valor.TRES, Palo.TREBOLES),
+                new CartaPoker(Valor.CINCO, Palo.DIAMANTES),
                 new CartaPoker(Valor.CINCO, Palo.DIAMANTES),
                 new CartaPoker(Valor.DOS, Palo.PICAS)
         ));
