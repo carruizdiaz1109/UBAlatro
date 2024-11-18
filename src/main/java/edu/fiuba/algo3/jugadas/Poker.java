@@ -48,6 +48,6 @@ public class Poker extends Jugada {
     @Override
     protected List<CartaPoker> seleccionarCartasValidas(List<CartaPoker> cartas) {
         // En Poker, todas las cartas que forman la jugada son válidas
-        return new ArrayList<>(cartas);
+        return cartas;
     }
 }

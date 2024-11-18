@@ -11,7 +11,7 @@ public class Jugador {
     protected Mano manoActual;
     protected Mazo mazo;
     private final ArrayList<Tarot> cartasTarot;
-    private final ArrayList<EfectoJugada> comodines;
+    private final ArrayList<Comodin> comodines;
     protected Ronda rondaActual;
 
     public Jugador(String nombre, Mazo mazo){
@@ -19,7 +19,7 @@ public class Jugador {
         this.mazo = mazo;
         this.manoActual = new Mano(this.mazo);
         this.cartasTarot = new ArrayList<Tarot>();
-        this.comodines = new ArrayList<EfectoJugada>();
+        this.comodines = new ArrayList<Comodin>();
     }
 
     public boolean esPosibleIniciarRonda(){
@@ -58,12 +58,12 @@ public class Jugador {
         }
     }
 
-    public void aniadirComodin(EfectoJugada unComodin) {
+    public void aniadirComodin(Comodin unComodin) {
         this.comodines.add(unComodin);
     }
 
     public void aplicarComodin(Jugada unaJugada) {
-        for (EfectoJugada comodin : this.comodines) {
+        for (Comodin comodin : this.comodines) {
            comodin.aplicar(unaJugada);
         }
     }
