@@ -10,6 +10,7 @@ public class CartaPoker implements Comparable<CartaPoker>{
     private final Valor valor;
     private final Palo palo;
     private Puntaje puntaje;
+    private final Puntaje puntajeComodin;
     private Tarot tarot;
 
     public CartaPoker(Valor valor, Palo palo){
@@ -17,6 +18,7 @@ public class CartaPoker implements Comparable<CartaPoker>{
         this.palo = palo;
         this.puntaje = new Puntaje( this.valor.valor(), 1);
         this.tarot = new Tarot();
+        this.puntajeComodin = new Puntaje(0,1);
     }
 
     public CartaPoker comprar() {
@@ -75,5 +77,10 @@ public class CartaPoker implements Comparable<CartaPoker>{
 
         return escalera;
     }
+
+    public void aplicarComodin(Puntaje unPuntaje) {
+        this.puntajeComodin.sumarPuntaje(unPuntaje);
+    }
+
 }
 

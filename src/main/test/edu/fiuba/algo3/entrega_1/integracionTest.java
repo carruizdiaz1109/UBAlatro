@@ -49,8 +49,8 @@ public class integracionTest {
                 new CartaPoker(Valor.REY, Palo.CORAZONES)
         ));
         Mazo mazo = new Mazo(cartas);
-        Mano mano = new Mano();
-        mano.rellenarse(mazo);
+        Mano mano = new Mano(mazo);
+        mano.rellenarse();
 
         assert (mano.compararCon(manoEsperada));
     }
@@ -76,8 +76,8 @@ public class integracionTest {
                 new CartaPoker(Valor.REY, Palo.CORAZONES)
         ));
         Mazo mazo = new Mazo(cartas);
-        Mano mano = new Mano();
-        mano.rellenarse(mazo);
+        Mano mano = new Mano(mazo);
+        mano.rellenarse();
 
         mano.seleccionarCarta(new CartaPoker(Valor.SIETE, Palo.CORAZONES));
         mano.seleccionarCarta(new CartaPoker(Valor.DIEZ, Palo.PICAS));
@@ -89,7 +89,7 @@ public class integracionTest {
 
     @Test
     public void test04VerificarQueAlJugarUnaManoSeApliqueElValorCorrespondiente(){
-        Puntaje puntajeEsperado = new Puntaje(12, 1);
+       int puntajeEsperado = 12;
 
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 new CartaPoker(Valor.TRES, Palo.PICAS),
@@ -98,9 +98,9 @@ public class integracionTest {
         ));
         Jugada jugada = Jugada.crearJugada(cartas);
 
-        Puntaje puntajeObtenido = jugada.calcularPuntaje();
+        int puntajeObtenido = jugada.calcularPuntaje();
 
-        assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test
@@ -122,7 +122,7 @@ public class integracionTest {
 
     @Test
     public void test06JugadorAplicaTarotAUnaCartaYSeLeModificaElValor(){
-        Puntaje puntajeEsperado = new Puntaje(12, 1);
+        int puntajeEsperado = 12;
 
         CartaPoker cartaPoker = new CartaPoker(Valor.DOS, Palo.PICAS);
         Puntaje puntaje = new Puntaje(10,1);
@@ -132,12 +132,12 @@ public class integracionTest {
 
         int puntajeObtenido = cartaPoker.calcularPuntaje();
 
-        assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test
     public void test07JugadorAplicaTarotAUnaCartaYSeLeModificaElMultiplicador(){
-        Puntaje puntajeEsperado = new Puntaje(60, 1);
+        int puntajeEsperado = 60;
 
         CartaPoker cartaPoker = new CartaPoker(Valor.DIEZ, Palo.CORAZONES);
 
@@ -148,7 +148,7 @@ public class integracionTest {
 
         int puntajeObtenido = cartaPoker.calcularPuntaje();
 
-        assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test

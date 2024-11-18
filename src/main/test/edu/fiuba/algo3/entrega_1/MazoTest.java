@@ -48,10 +48,10 @@ public class MazoTest {
     @Test
     public void test04DarCartaConMazoVacioTiraError(){
         Mazo mazo = new Mazo();
-        while (mazo.getCartas().size() > 0) {
+        while (!mazo.getCartas().isEmpty()) {
             mazo.darCarta();
         }
-        assertThrows(ErrorMazoVacio.class, () -> mazo.darCarta());
+        assertThrows(ErrorMazoVacio.class, mazo::darCarta);
     }
 
     @Test
@@ -133,7 +133,7 @@ public class MazoTest {
 
 
     @Test
-    public void test010CompararMazosDistintos(){
+    public void test10CompararMazosDistintos(){
         ArrayList<CartaPoker> cartas1 = new ArrayList<CartaPoker>(List.of(
                 new CartaPoker(Valor.TRES, Palo.PICAS),
                 new CartaPoker(Valor.SIETE, Palo.CORAZONES),
@@ -153,6 +153,22 @@ public class MazoTest {
 
 
         assertFalse(mazo1.compararCon(mazo2));
+    }
+
+    @Test
+    public void test11SeVerificaQueSentercambiaConElDeDescarteCorrectamente() {
+        ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES)
+        ));
+        Mazo mazo1 = new Mazo(cartas);
+        Mazo mazo2 = new Mazo(cartas);
+        CartaPoker carta1 = mazo1.darCarta();
+        CartaPoker carta2 = mazo1.darCarta();
+
+        mazo1.recargarMazo();
+
+        assert(mazo2.compararCon(mazo2));
     }
 
 }

@@ -21,11 +21,6 @@ public class Puntaje {
         return this.multiplicador * this.puntos;
     }
 
-    /*
-    public Puntaje calcularPuntaje() {
-        return (new Puntaje(calcularValor(), 1));
-    }
-    */
     public Puntaje sumarPuntaje(Puntaje unPuntaje) {
         unPuntaje.incrementarPuntos(this.puntos);
         unPuntaje.incrementarMultiplicador(this.multiplicador);

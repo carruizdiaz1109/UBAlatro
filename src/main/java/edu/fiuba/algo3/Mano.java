@@ -4,13 +4,15 @@ import java.util.ArrayList;
 
 public class Mano extends ConjuntoCartas{
 
-    private ArrayList<CartaPoker> seleccionadas;
-    private int capacidad;
+    private final ArrayList<CartaPoker> seleccionadas;
+    private final int capacidad;
+    private Mazo mazo;
 
-    public Mano() {
+    public Mano(Mazo unMazo) {
         super();
         this.seleccionadas = new ArrayList<CartaPoker>();
         this.capacidad = 8;
+        this.mazo = unMazo;
     }
 
     public Mano(ArrayList<CartaPoker> cartas) {
@@ -24,30 +26,21 @@ public class Mano extends ConjuntoCartas{
         return cartas.size() == capacidad;
     }
 
-    public void rellenarse(Mazo mazo) {
-        while (!manoLlena() && mazo.tieneCartas()) {
-            this.agregarCarta(mazo.darCarta());
+    public void rellenarse() {
+        while (!manoLlena() && this.mazo.tieneCartas()) {
+            this.agregarCarta(this.mazo.darCarta());
         }
     }
 
     public void seleccionarCarta(CartaPoker carta) { seleccionadas.add(carta); }
 
-    public void deseleccionarCarta(int indice) {
-        if (indice >= 0 && indice < cartas.size()) {
-            CartaPoker carta = cartas.get(indice);
-            seleccionadas.remove(carta);
-        }
+    public void deseleccionarCarta(CartaPoker carta) {
+        this.seleccionadas.remove(carta);
     }
 
     public ArrayList<CartaPoker> obtenerCartasSeleccionadas() {
         return this.seleccionadas;
     }
-
-    /*
-    public void ordenarCartas() {
-
-    }
-    */
 
     public void descartar() {
         if(!seleccionadas.isEmpty()) seleccionadas.clear();
@@ -65,5 +58,13 @@ public class Mano extends ConjuntoCartas{
             }
         }
         return true;
+    }
+
+    public Jugada jugar() {
+        Jugada jugadaNueva = Jugada.crearJugada(this.seleccionadas);
+        this.cartas.removeAll(this.seleccionadas);
+        this.seleccionadas.clear();
+        rellenarse();
+        return jugadaNueva;
     }
 }
