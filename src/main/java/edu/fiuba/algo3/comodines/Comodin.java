@@ -1,4 +1,6 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.comodines;
+
+import edu.fiuba.algo3.Puntaje;
 
 public abstract class Comodin {
     private String nombre;

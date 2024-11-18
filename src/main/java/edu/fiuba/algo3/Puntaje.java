@@ -17,14 +17,15 @@ public class Puntaje {
         this.multiplicador = this.multiplicador * incremento;
     }
 
-    public int calcularValor() {
+    public int calcularPuntaje() {
         return this.multiplicador * this.puntos;
     }
 
+    /*
     public Puntaje calcularPuntaje() {
         return (new Puntaje(calcularValor(), 1));
     }
-
+    */
     public Puntaje sumarPuntaje(Puntaje unPuntaje) {
         unPuntaje.incrementarPuntos(this.puntos);
         unPuntaje.incrementarMultiplicador(this.multiplicador);
@@ -32,7 +33,7 @@ public class Puntaje {
     }
 
     public boolean compararPuntajecon(int otroPuntaje){
-        return (calcularValor() == otroPuntaje);
+        return (calcularPuntaje() == otroPuntaje);
     }
 
     public boolean compararPuntajecon(Puntaje otroPuntaje){
