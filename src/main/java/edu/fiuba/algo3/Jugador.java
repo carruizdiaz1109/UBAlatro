@@ -1,20 +1,25 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.comodines.EfectoJugada;
+
+import javax.xml.catalog.CatalogResolver;
 import java.util.ArrayList;
 
 public class Jugador {
 
     private final String nombre;
-    private final Mano manoActual;
-    private final Mazo mazo;
+    protected Mano manoActual;
+    protected Mazo mazo;
     private final ArrayList<Tarot> cartasTarot;
-    private Ronda rondaActual;
+    private final ArrayList<EfectoJugada> comodines;
+    protected Ronda rondaActual;
 
     public Jugador(String nombre, Mazo mazo){
         this.nombre = nombre;
         this.mazo = mazo;
         this.manoActual = new Mano(this.mazo);
         this.cartasTarot = new ArrayList<Tarot>();
+        this.comodines = new ArrayList<EfectoJugada>();
     }
 
     public boolean esPosibleIniciarRonda(){
@@ -31,7 +36,12 @@ public class Jugador {
 
     public void jugar(){
         Jugada unaJugada = this.manoActual.jugar();
+        aplicarComodin(unaJugada);
         this.rondaActual.agregarJugada(unaJugada);
+    }
+
+    public void seleccionarCarta(CartaPoker unaCarta) {
+        this.manoActual.seleccionarCarta(unaCarta);
     }
 
     public void aniadirTarots(Tarot cartaTarot) {
@@ -45,6 +55,16 @@ public class Jugador {
             cartaPoker.activarTarot(tarotaAplicar);
         } else {
             throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
+        }
+    }
+
+    public void aniadirComodin(EfectoJugada unComodin) {
+        this.comodines.add(unComodin);
+    }
+
+    public void aplicarComodin(Jugada unaJugada) {
+        for (EfectoJugada comodin : this.comodines) {
+           comodin.aplicar(unaJugada);
         }
     }
 

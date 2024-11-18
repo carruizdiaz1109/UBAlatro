@@ -33,13 +33,13 @@ public class Ronda {
     }
 
     public boolean estadoRonda() {
-        return (this.jugadasDisponibles <= 0);
+        return true; //(this.jugadasDisponibles <= 0);
     }
 
     public int calcularTotalRonda () {
         int acumulador = 0;
         for (Jugada jugada : this.jugadas) {
-            acumulador += jugada.calcularValor();
+            acumulador += jugada.calcularPuntaje();
         }
         return acumulador;
     }
