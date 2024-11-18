@@ -9,7 +9,7 @@ public abstract class Jugada {
     private Puntaje puntaje;
     protected List<CartaPoker> cartas;
     protected List<CartaPoker> cartasValidas;
-    private final Puntaje puntajeComodin;
+    private Puntaje puntajeComodin;
 
     public Jugada(List<CartaPoker> cartas, Puntaje puntaje) {
         this.cartas = cartas;

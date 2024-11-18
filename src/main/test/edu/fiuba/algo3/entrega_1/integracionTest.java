@@ -150,13 +150,13 @@ public class integracionTest {
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
-
+    /*
     @Test
     public void test08InicializoJuego(){
         Balatro balatro = new Balatro();
         Puntaje puntaje = new Puntaje(8,9);
 
     }
-
+    */
 
 }

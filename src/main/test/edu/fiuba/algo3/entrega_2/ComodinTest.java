@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_2;
 import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.comodines.*;
 import edu.fiuba.algo3.jugadas.CartaAlta;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,6 +13,25 @@ import static org.junit.Assert.assertEquals;
 
 public class ComodinTest {
 
+    @Test
+    public void comodinAfectaPuntosDePuntaje() {
+
+        // Arrange
+        ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
+                new CartaPoker(Valor.DOS, Palo.PICAS),
+                new CartaPoker(Valor.DOS, Palo.TREBOLES)
+        ));
+        Jugada jugada = Jugada.crearJugada(cartas);
+        EfectoPuntaje comodin = new EfectoPuntaje(jugada, 10, 1);
+
+        // Act
+        comodin.aplicar(jugada);
+        int puntajeCalculado = jugada.calcularPuntaje();
+
+        // Assert
+        int puntajeEsperado = (10 + 2 + 2 + 10) * 2;
+        Assertions.assertEquals(puntajeEsperado, puntajeCalculado);
+    }
 
     @Test
     public void test01SeAplicaUnComodinAJugada() {
@@ -52,30 +72,10 @@ public class ComodinTest {
         assertEquals(puntajeEsperado, puntajeObtenido);
 
     }
-
-
     /*
-    @Test
-    public void comodinAfectaPuntosDePuntaje() {
-
-        // Arrange
-        ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
-            new CartaPoker(2, Palo.PICAS),
-            new CartaPoker(2, Palo.TREBOLES)
-        ));
-        Jugada jugada = Jugada.crearJugada(cartas);
-        Comodin comodin = new ComodinPuntaje(10, 1);
-
-        // Act
-        comodin.aplicar(jugada);
-        int puntajeCalculado = jugada.calcularPuntaje();
-
-        // Assert
-        int puntajeEsperado = (10 + 2 + 2 + 10) * 2;
-        assertEquals(puntajeEsperado, puntajeCalculado);
-
     @Test
     public void comodinAfectaMultiplciadorDePuntaje() {
 
     }
+    */
 }
