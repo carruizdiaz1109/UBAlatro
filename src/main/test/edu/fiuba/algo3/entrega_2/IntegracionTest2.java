@@ -27,7 +27,7 @@ public class IntegracionTest2 {
 
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
         Mano mano = new Mano(cartas);
-        EfectoJugada unComodin = new EfectoJugada(Escalera.class, 0,3, "" ,"");
+        EfectoJugada unComodin = new EfectoJugada(Escalera.class, 0,3, "Suben los puntos" ,"x3 de multiplicador si se juega escalera");
         Jugador jugador = new Jugador("Pepe", mazoMock) {
             @Override
             public void iniciarRonda(Ronda rondaActual){
@@ -64,7 +64,7 @@ public class IntegracionTest2 {
         CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
         Mano mano = new Mano(cartas);
-        Comodin unComodin = new EfectoPuntaje( 0,8, "" ,"");
+        Comodin unComodin = new EfectoPuntaje( 0,8, "Lluvia de puntos" ,"x8 de multiplicador");
         Jugador jugador = new Jugador("Pepe", mazoMock) {
             @Override
             public void iniciarRonda(Ronda rondaActual){
@@ -102,7 +102,7 @@ public class IntegracionTest2 {
         CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
         Mano mano = new Mano(cartas);
-        Comodin unComodin = new EfectoDescarte(Descarte.class, 10,1, "" ,"");
+        Comodin unComodin = new EfectoDescarte(Descarte.class, 10,1, "Descartar suma" ,"+10 si realiza un descarte");
         Jugador jugador = new Jugador("Pepe", mazoMock) {
             @Override
             public void iniciarRonda(Ronda rondaActual){
@@ -149,7 +149,7 @@ public class IntegracionTest2 {
             }
         };
         int puntajeEsperado = (2*4+60+10)*7;
-        Comodin unComodin = new EfectoAleatorio(1000, 10, 1, "" ,"") {
+        Comodin unComodin = new EfectoAleatorio(1000, 10, 1, "RayoMcqueen" ,"1 en 1000 de chances") {
             @Override
             public boolean seAplica() {
                 return true;
@@ -189,8 +189,8 @@ public class IntegracionTest2 {
                 return true;
             }
         };
-        Comodin comodin2 = new EfectoPuntaje( 0,3, "" ,"");
-        Comodin comodin3 = new EfectoJugada(Poker.class, 0,3, "" ,"");
+        Comodin comodin2 = new EfectoPuntaje( 0,3, "Triplete" ,"x3 a la jugada");
+        Comodin comodin3 = new EfectoJugada(Poker.class, 0,3, "Pokerface" ,"x3 multiplica si juego Poker");
         Comodin comodinCombinado = new EfectoCombinado(List.of(comodin1, comodin2, comodin3), "Combina3", "Tiene probabilidad 1 de cada 1000," +
                 "x3 al multiplicador y x3 si se juegaPoker");
         Jugador jugador = new Jugador("Pepe", mazoMock) {
