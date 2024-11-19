@@ -17,23 +17,31 @@ user -> jugador**: Jugador("Pepe", mazoMock);
 user -> jugador: iniciarRonda(ronda);
 
 user -> comodin **: EfectoJugada(Escalera.class, 0, 3);
+user -> jugador :aniadirComodin(unComodin);
 loop for each carta in Mano
     user -> jugador: seleccionarCarta(carta);
     jugador -> mano: seleccionarCarta(carta);
 end
 
 user -> user: puntajeEsperado1: (2+3+4+5+6+30)*12;
-user -> jugador :aniadirComodin(unComodin);
 user -> jugador:jugar();
 jugador -> mano: jugar();
-mano -> ":Escalera" as escalera: new Escalera(cartasSeleccionadas);
+mano -> ":Escalera" as escalera**: new Escalera(cartasSeleccionadas);
+escalera -> ":Puntaje" as puntaje**: (30,3)
 mano --> jugador: Escalera;
+jugador -> jugador: aplicarComodin(unaJugada)
+loop for each comodin
+   jugador -> comodin: aplicar(escalera);
+end
 jugador -> ronda: AgregarJugada(Escalera);
 user -> ronda: calcularTotalRonda();
 loop for echa jugada in jugadas
     ronda -> escalera: calcularPuntaje();
+    comodin -> escalera: aplicarComodin(puntaje)
+    escalera -> puntaje: sumarPuntaje(puntaje)
+    puntaje --> escalera: unPuntaje
 end
-
+ronda -> user: 600
 user -> user: assertEquals(puntajeEsperado1, puntajeObtenido);
 
 

@@ -4,97 +4,134 @@ package Model {
 
 class Jugador {
     - nombre: string
-    - puntaje: int
-    - manoActual: Mano
-    - mazo: Mazo
-    - comodines: List<Comodin>
-    - cartasTarot: List<Tarot>
-    - cartasSeleccionadas: List<CartaPoker>
-    + Jugador(nombre: string)
-    + esMismoPuntaje(unPuntaje: int): boolean
-    + esMismoNombre(unNombre: String): boolean
-    + iniciarRonda()
-    + jugar(): Jugada
-    + descartarCartas()
-    + comprarCartas()
-    + ordenarCartas()
+    - cartasTarot: ArrayList<Tarot>
+    - comodines: ArrayList<Comodin>
+
+    + Jugador(nombre: string, mazo: Mazo)
+    + esPosibleIniciarRonda(): boolean
+    + iniciarRonda(rondaActual: Ronda)
+    + jugar()
+    + seleccionarCarta(unaCarta: CartaPoker)
+    + aniadirTarots(cartaTarot: Tarot)
+    + utilizarTarot(tarotaAplicar: Tarot, carta: CartaPoker)
+    + aniadirComodin(unComodin: Comodin)
+    + aplicarComodin(unaJugada: Jugada)
+    + descartar()
 }
 
+class ConjuntoCartas{
+    - cartas: List<CartaPoker>
+
+    + ConjuntoCartas(cartas: List<CartaPoker>)
+    + tieneCartas(): boolean
+    + agregarCarta(carta: CartaPoker)
+    + eliminarCartas()
+    + compararCon(otroConjunto: ConjuntoCartas): boolean
+}
 
 class Mazo {
-    -cartas: List<CartaPoker>
-    - cantidadCartas: int
-    # inicializarMazo()
+    - mazoDescarte: List<CartaPoker>
+
+    + Mazo(cartas: ArrayList<CartaPoker>)
     # mezclar()
     + darCarta(): CartaPoker
-    + rellenar(cantidad: int): ArrayList<CartaPoker>
-    + repartir(): Mano
+    + inicializarMazo()
+    + recargarMazo()
 }
 
 class Mano {
-    - cartas: ArrayList<CartaPoker>
     - seleccionadas: ArrayList<CartaPoker>
-    - cantidadCartas: int
     - capacidad: int
+
+    + Mano(unMazo: Mazo)
     + Mano(cartas: ArrayList<CartaPoker>)
-    + eliminarCartas()
-    + agregarCarta(carta: CartaPoker)
-    + seleccionarCarta(indice: int): CartaPoker
-    + deseleccionarCarta(indice: int)
-    + ordenarCartas()
-    + descartar()
     + manoLlena():boolean
+    +rellenarse()
+    + seleccionarCarta(carta: CartaPoker)
+    + deseleccionarCarta(carta: CartaPoker)
+    + descartar(): Descarte
+    + compararSeleccionadasCon(otrasSeleccionadas: ArrayList<CartaPoker>): boolean
+    + jugar(): Jugada
 }
 
 class Puntaje {
     - puntos: int
     - multiplicador: int
+
     + Puntaje(puntos:int, multiplicador:int)
     + incrementarPuntos(incremento: int)
     + incrementarMultiplicador(incremento: int)
     + calcularPuntaje(): int
     + sumarPuntaje(unPuntaje: Puntaje):Puntaje
+    + compararPuntajecon(otroPuntaje: int): boolean
+    + compararPuntajecon(otroPuntaje: Puntaje): boolean
 }
 
 class CartaPoker {
-    - valor: int
+    - valor: Valor
     - palo: Palo
-    - id: int
-    + CartaPoker(valor: int, palo: Palo)
+    - puntajeComodin: Puntaje
+    - puntajeTarot: Puntaje
+
+    + CartaPoker(valor: Valor, palo: Palo)
     + comprar(): CartaPoker
     + modificarPuntaje(Puntaje: unPuntaje)
     + calcularPuntaje(): int
-    + tieneId(unId: int):boolean
+    + sumarValorCon(otroValor: int): int
+    + esMismoValor(otraCarta: CartaPoker): boolean
+    + esMismoPalo(otraCarta: CartaPoker): boolean
+    + esConsecutiva(otraCarta: CartaPoker): boolean
+    + compararCartaCon(otraCarta: CartaPoker): boolean
+    + activarTarot(tarot: Tarot)
+    + obtenerEscalera(): ConjuntoCartas
+    + aplicarComodin(unPuntaje: Puntaje)
 }
 
 class Ronda {
+    - Numero: int
     - PuntajeMinimo: int
     - DescartesDisponibles: int
     - JugadasDisponibles: int
-    - PuntajeAcumulado: int
-    + Ronda(jugador: Jugador)
-    + iniciarRonda()
+
+    + Ronda(numero: int, PuntajeMinimo: int, descartesDisponibles: int, jugadasDisponibles: int)
     + verificarPuntaje(): boolean
+    + agregarJugada(unaJugada: Jugada)
+    + estadoRonda(): boolean
+    + agregarDescarte(unDescarte: Descarte)
+    + calcularTotalRonda(): int
 }
 
 abstract class Jugada {
-    - sumaValores: int
-    - Puntaje: Puntaje
-    # cartas: List<CartaPoker>
-    + Jugada(Lista<CartaPoker>)
-    + crearJugada(List<CartaPoker>)
+    - sumaValores: Puntaje
+    - puntajeComodin: Puntaje
+    - cartasValidas: List<CartaPoker>
+
+    + Jugada(cartas: Lista<CartaPoker>, puntaje: Puntaje)
+    + crearJugada(List<CartaPoker>): Jugada
     + sumarValores()
     + calcularPuntaje(): int
-    + {abstract}esJugada(List<CartaPoker>): boolean
-    + {abstract}obtenerPuntaje(): Puntaje
+    + aplicarComodin(puntaje: Puntaje)
+    + {abstract}esJugada(cartas: List<CartaPoker>): boolean
+    # {abstract}seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
 }
 
-CartaPoker o-- Puntaje
-Jugador o-- Mazo
-Mazo ..> Mano
-Mazo o-- "1..*" CartaPoker
+Jugador o-- "1..3" Ronda
+Jugador o-- ConjuntoCartas
 Jugador ..> Jugada
+
+Mano -up--|> ConjuntoCartas
+Mazo -up--|> ConjuntoCartas
+
+ConjuntoCartas o-- "1..*" CartaPoker
+Mano o-- Mazo
+
+Jugada o-- "1..*" CartaPoker
+
+CartaPoker o-- Puntaje
+
+Ronda o-- "1..*" Jugada
+
 Jugada o-- Puntaje
-Ronda ..> Jugador
+
 }
 @enduml

@@ -12,7 +12,8 @@ participant ":Mano" as mano
 participant ":Jugador" as jugador
 participant "unComodin :EfectoPuntaje" as comodin
 participant "unaJugada: Poker" as jugada
-user -> mazo**: Mazo()
+
+user -> mazo**: MazoMock()
 user -> ronda**: Ronda(numero: 1, puntajeMinimo: 10000, descartesDisponibles: 3, jugadasDisponibles: 3)
 user -> lista**: ArrayList()
 
@@ -23,36 +24,32 @@ end
 
 user -> mano**: Mano(cartas)
 
-user -> jugador**: Jugador(Pepe, mazo)
+user -> jugador**: Jugador(Pepe, mazoMock)
 user -> jugador: iniciarRonda(ronda)
-    jugador -> mano: rellenarse()
-        loop !manoLlena() && mazo.tieneCartas()
-            mano -> mazo: darCarta()
-            mazo --> mano: unaCarta
-            mano -> mano: agregarCarta(unaCarta)
-        end
-
-user -> jugada**: crearJugada(cartas)
-jugada --> user: unaJugada
-
 user -> user: puntajeEsperado = (2*4+60)*7*8
 
 user -> comodin**: EfectoPuntaje(valor: 0, multiplicador: 8)
+user -> jugador: anadirComodin(unComodin)
 
 loop por 5 cartas
 user -> jugador: seleccionarCarta(carta)
 jugador -> mano: seleccionarCarta(carta)
 end
 
-user -> jugador: anadirComodin(unComodin)
 user -> jugador: jugar()
-    jugador -> mano: jugar()
-    mano --> jugador: unaJugada
-    jugador -> jugador: aplicarComodin(unaJugada)
-    jugador -> comodin: aplicar(unaJugada)
+jugador -> mano: jugar()
+mano -> jugada**: Poker(cartasSeleccionadas)
+jugada -> puntaje**
+mano --> jugador: Poker
+jugador -> jugador: aplicarComodin(poker)
+
+loop for each comodin in comodines
+    jugador -> comodin: aplicar(unDescarte)
     comodin -> jugada: aplicarComodin(puntaje)
     jugada -> puntaje: sumarPuntaje(puntaje)
     puntaje --> jugada: unPuntaje
+end
+
 user -> ronda: calcularTotalRonda()
 loop for each jugada in jugadas
     ronda -> jugada: calcularPuntaje()

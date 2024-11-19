@@ -69,7 +69,7 @@ public class Jugador {
     public void descartar() {
         Descarte unDesarte = this.manoActual.descartar();
         aplicarComodin(unDesarte);
-        this.rondaActual.agregarJugada(unDesarte);
+        this.rondaActual.agregarDescarte(unDesarte);
     }
 
 }
