@@ -1,0 +1,142 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+' Clases principales
+class "Balatro" {
+  - rondas : List<Ronda>
+  - mazo : Mazo
+  - jugador : Jugador
+  + Balatro(nombreJugador: String)
+  + cargarRondasDesdeJSON(rutaArchivo: String) : void
+  + iniciarJuego() : void
+}
+
+class "Jugador" {
+  - nombre : String
+  - manoActual : Mano
+  - mazo : Mazo
+  - cartasTarot : ArrayList<Tarot>
+  - comodines : ArrayList<Comodin>
+  - rondaActual : Ronda
+  + Jugador(nombre: String, mazo: Mazo)
+  + esPosibleIniciarRonda() : boolean
+  + iniciarRonda(rondaActual: Ronda) : void
+  + jugar() : void
+  + seleccionarCarta(unaCarta: CartaPoker) : void
+  + descartar() : void
+  + aniadirTarots(cartaTarot: Tarot) : void
+  + utilizarTarot(tarot: Tarot, cartaPoker: CartaPoker) : void
+  + aniadirComodin(unComodin: Comodin) : void
+  + aplicarComodin(unaJugada: Jugada) : void
+}
+
+class "Ronda" {
+  - numero : int
+  - puntajeMinimo : int
+  - descartesDisponibles : int
+  - jugadasDisponibles : int
+  - jugadas : List<Jugada>
+  + Ronda(numero: int, puntajeMinimo: int, descartesDisponibles: int, jugadasDisponibles: int)
+  + verificarPuntaje() : boolean
+  + agregarJugada(unaJugada: Jugada) : void
+  + calcularTotalRonda() : int
+}
+
+class "Mano" {
+  - seleccionadas : ArrayList<CartaPoker>
+  - capacidad : int
+  - mazo : Mazo
+  + Mano(unMazo: Mazo)
+  + Mano(cartas: ArrayList<CartaPoker>)
+  + manoLlena() : boolean
+  + rellenarse() : void
+  + seleccionarCarta(carta: CartaPoker) : void
+  + deseleccionarCarta(carta: CartaPoker) : void
+  + descartar() : Descarte
+  + jugar() : Jugada
+}
+
+class "Mazo" {
+  - mazoDescarte : List<CartaPoker>
+  + Mazo()
+  + inicializarMazo(rutaArchivo: String) : void
+  + mezclar() : void
+  + darCarta() : CartaPoker
+  + recargarMazo() : void
+}
+
+class "CartaPoker" implements Comparable {
+  - valor : Valor
+  - palo : Palo
+  - puntaje : Puntaje
+  - puntajeComodin : Puntaje
+  - puntajeTarot : Puntaje
+  + CartaPoker(valor: Valor, palo: Palo)
+  + calcularPuntaje() : int
+  + aplicarComodin(unPuntaje: Puntaje) : void
+  + activarTarot(tarot: Tarot) : void
+}
+
+class "Jugada" <<abstract>> {
+  - cartas : List<CartaPoker>
+  - cartasValidas : List<CartaPoker>
+  - sumaValores : Puntaje
+  - puntaje : Puntaje
+  - puntajeComodin : Puntaje
+  + Jugada(cartas: List<CartaPoker>, puntaje: Puntaje)
+  + esJugada(cartas: List<CartaPoker>) : boolean
+  + calcularPuntaje() : int
+  + aplicarComodin(unPuntaje: Puntaje) : void
+}
+
+class "Comodin" <<abstract>> {
+  - nombre : String
+  - descripcion : String
+  - puntaje : Puntaje
+  + Comodin(valor: int, multiplicador: int, nombre: String, descripcion: String)
+  + aplicar(jugada: Jugada) : void
+}
+
+class "Tarot" {
+  - puntaje : Puntaje
+  + Tarot(valor: int, multiplicador: int)
+  + modificarPuntaje(unPuntaje: Puntaje) : Puntaje
+}
+
+class "Puntaje" {
+  - multiplicador : int
+  - puntos : int
+  + Puntaje(unosPuntos: int, unMultiplicador: int)
+  + incrementarPuntos(incremento: int) : void
+  + incrementarMultiplicador(incremento: int) : void
+  + calcularPuntaje() : int
+  + sumarPuntaje(unPuntaje: Puntaje) : Puntaje
+}
+
+' Relaciones de herencia
+Jugada <|-- CartaAlta
+Jugada <|-- Escalera
+Jugada <|-- Poker
+Jugada <|-- Descarte
+
+Comodin <|-- EfectoPuntaje
+Comodin <|-- EfectoJugada
+Comodin <|-- EfectoAleatorio
+Comodin <|-- EfectoDescarte
+Comodin <|-- EfectoCombinado
+
+' Relaciones de asociación y agregación
+Balatro "1" *-- "1" Jugador
+Jugador "1" o-- "1" Mano
+Jugador "1" *-- "1" Ronda
+Jugador "1" *-- "1" Mazo
+Jugador "1" *-- "0..2" Tarot
+Jugador "1" *-- "0..*" Comodin
+Ronda "1" *-- "0..*" Jugada
+Mano "1" o-- "0..*" CartaPoker
+CartaPoker "1" *-- "1" Valor
+CartaPoker "1" *-- "1" Palo
+CartaPoker "1" *-- "1" Puntaje
+Puntaje "1" <-- Tarot
+@enduml
