@@ -32,6 +32,9 @@ mano --> jugador: Escalera;
 jugador -> jugador: aplicarComodin(unaJugada)
 loop for each comodin
    jugador -> comodin: aplicar(escalera);
+    comodin -> escalera: aplicarComodin(puntaje)
+    escalera -> puntaje: sumarPuntaje(puntaje)
+    puntaje --> escalera: unPuntaje
 end
 jugador -> ronda: AgregarJugada(Escalera);
 user -> ronda: calcularTotalRonda();
