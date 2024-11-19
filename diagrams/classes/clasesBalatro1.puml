@@ -3,50 +3,56 @@
 package Model {
 
 class Balatro {
-    - rondas : int
-    - rondaActual : int
-    + Balatro(nombreJugador: string)
+    - rondas : List<Ronda>
+    - mazo: Mazo
+    - jugador: Jugador
+
+    + Balatro(nombreJugador: string, jugador: Jugador)
+    +cargarRondasDesdeJSON(rutaArchivo: string)
     + iniciarJuego()
-    + verificarResultado(): boolean
-    + mostrarTienda()
-    # crearRonda(): Ronda
 }
 
 class Jugador {
     - nombre: string
-    - puntaje: int
     - manoActual: Mano
     - mazo: Mazo
-    - comodines: List<Comodin>
-    - cartasTarot: List<Tarot>
-    - cartasSeleccionadas: List<CartaPoker>
-    + Jugador(nombre: string)
-    + iniciarRonda()
-    + jugar(): Jugada
-    + descartarCartas()
-    + comprarCartas()
-    + ordenarCartas()
-    + añadirTarots(cartaTarot: Tarot)
-    + utilizarTarot(indice: int, carta: CartaPoker)
+    - cartasTarot: ArrayList<Tarot>
+    - comodines: ArrayList<Comodin>
+    - rondaActual: Ronda
 
+    + Jugador(nombre: string, mazo: Mazo)
+    + esPosibleIniciarRonda(): boolean
+    + iniciarRonda(rondaActual: Ronda)
+    + jugar()
+    + seleccionarCarta(unaCarta: CartaPoker)
+    + aniadirTarots(cartaTarot: Tarot)
+    + utilizarTarot(tarotaAplicar: Tarot, carta: CartaPoker)
+    + aniadirComodin(unComodin: Comodin)
+    + aplicarComodin(unaJugada: Jugada)
+    + descartar()
 }
 
 class Tienda {
-    - comodinesAComprar: Lista [Comodin]
-    - tarotAComprar: Lista [Tarot]
-    - cartasAComprar: List[CartaPoker]]
+    - comodinesAComprar: List<Comodin>
+    - tarotAComprar: List<Tarot>
+    - cartasAComprar: List<CartaPoker>
     + mostrarCartas(): cartasAComprar
     + venderCarta(): Comprable
 }
 
 class Ronda {
+    - Numero: int
     - PuntajeMinimo: int
     - DescartesDisponibles: int
     - JugadasDisponibles: int
-    - PuntajeAcumulado: int
-    + Ronda(jugador: Jugador)
-    + iniciarRonda()
+    - Jugadas: List<Jugada>
+
+    + Ronda(numero: int, PuntajeMinimo: int, descartesDisponibles: int, jugadasDisponibles: int)
     + verificarPuntaje(): boolean
+    + agregarJugada(unaJugada: Jugada)
+    + estadoRonda(): boolean
+    + agregarDescarte(unDescarte: Descarte)
+    + calcularTotalRonda(): int
 }
 
 class Panel {
@@ -54,11 +60,12 @@ class Panel {
 }
 
 Balatro *-- Jugador
+Jugador .up.> Ronda
+Panel .left.> Ronda
 Balatro *-- Tienda
 Balatro o-- "0..8" Ronda
 Balatro *-- Panel
-Ronda .up.> Jugador
-Panel .left.> Ronda
 Panel .right.> Tienda
+
 }
 @enduml
