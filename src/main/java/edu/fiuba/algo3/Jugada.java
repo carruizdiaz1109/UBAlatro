@@ -5,16 +5,18 @@ import java.util.List;
 import edu.fiuba.algo3.jugadas.*;
 
 public abstract class Jugada {
-    private Puntaje sumaValores;
+    private final Puntaje sumaValores;
     private Puntaje puntaje;
     protected List<CartaPoker> cartas;
     protected List<CartaPoker> cartasValidas;
+    private Puntaje puntajeComodin;
 
     public Jugada(List<CartaPoker> cartas, Puntaje puntaje) {
         this.cartas = cartas;
         this.sumaValores = new Puntaje (0,1);
         this.puntaje = puntaje;
         this.cartasValidas = new ArrayList<>();
+        this.puntajeComodin = new Puntaje(0,1);
     }
 
     public abstract boolean esJugada(List<CartaPoker> cartas);
@@ -50,9 +52,21 @@ public abstract class Jugada {
         this.sumaValores.incrementarPuntos(sumaPuntajes);
     }
 
-    public int calcularPuntaje() {
+
+    public int calcularValor() {
         sumarValores();
         this.puntaje = this.puntaje.sumarPuntaje(this.sumaValores);
         return puntaje.calcularPuntaje();
+    }
+
+    public int calcularPuntaje() {
+        sumarValores();
+        this.puntaje = this.puntaje.sumarPuntaje(this.sumaValores);
+        this.puntaje = this.puntaje.sumarPuntaje(this.puntajeComodin);
+        return this.puntaje.calcularPuntaje();
+    }
+
+    public void aplicarComodin(Puntaje unPuntaje) {
+        this.puntajeComodin = this.puntajeComodin.sumarPuntaje(unPuntaje);
     }
 }

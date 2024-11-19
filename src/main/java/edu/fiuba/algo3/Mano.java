@@ -1,20 +1,25 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.jugadas.Descarte;
+
 import java.util.ArrayList;
 
 public class Mano extends ConjuntoCartas{
 
-    private ArrayList<CartaPoker> seleccionadas;
-    private int capacidad;
+    private final ArrayList<CartaPoker> seleccionadas;
+    private final int capacidad;
+    private Mazo mazo;
 
-    public Mano() {
+    public Mano(Mazo unMazo) {
         super();
         this.seleccionadas = new ArrayList<CartaPoker>();
         this.capacidad = 8;
+        this.mazo = unMazo;
     }
 
     public Mano(ArrayList<CartaPoker> cartas) {
         super();
+        this.cartas = cartas;
         this.seleccionadas = new ArrayList<CartaPoker>();
         this.capacidad = 8;
     }
@@ -23,28 +28,47 @@ public class Mano extends ConjuntoCartas{
         return cartas.size() == capacidad;
     }
 
-    public void rellenarse(Mazo mazo) {
-        while (!manoLlena() && mazo.tieneCartas()) {
-            this.agregarCarta(mazo.darCarta());
+    public void rellenarse() {
+        while (!manoLlena() && this.mazo.tieneCartas()) {
+            this.agregarCarta(this.mazo.darCarta());
         }
     }
 
     public void seleccionarCarta(CartaPoker carta) { seleccionadas.add(carta); }
 
-    public void deseleccionarCarta(int indice) {
-        if (indice >= 0 && indice < cartas.size()) {
-            CartaPoker carta = cartas.get(indice);
-            seleccionadas.remove(carta);
+    public void deseleccionarCarta(CartaPoker carta) {
+        this.seleccionadas.remove(carta);
+    }
+
+    public Descarte descartar() {
+        Descarte unDescarte = null;
+        if(!this.seleccionadas.isEmpty()) {
+            unDescarte = new Descarte(this.seleccionadas);
         }
+        this.cartas.removeAll(this.seleccionadas);
+        this.seleccionadas.clear();
+        return unDescarte;
     }
 
-    /*
-    public void ordenarCartas() {
-
+    public boolean compararSeleccionadasCon(ArrayList<CartaPoker> otrasSeleccionadas) {
+        if (this.seleccionadas.size() != otrasSeleccionadas.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.seleccionadas.size(); i++) {
+            CartaPoker carta1 = this.seleccionadas.get(i);
+            CartaPoker carta2 = otrasSeleccionadas.get(i);
+            if (!carta1.compararCartaCon(carta2)) {
+                return false;
+            }
+        }
+        return true;
     }
-    */
 
-    public void descartar() {
-        if(!seleccionadas.isEmpty()) seleccionadas.clear();
+    public Jugada jugar() {
+        Jugada jugadaNueva = Jugada.crearJugada(this.seleccionadas);
+        this.cartas.removeAll(this.seleccionadas);
+        this.seleccionadas.clear();
+        //rellenarse();
+        return jugadaNueva;
     }
 }

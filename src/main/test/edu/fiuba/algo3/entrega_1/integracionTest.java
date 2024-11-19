@@ -13,81 +13,104 @@ public class integracionTest {
     @Test
     public void test01VerificarQueUnJugadorPoseaCartasSuficientesParaEmpezarElJuegoEnSuMazo(){
         ArrayList<CartaPoker> cartasEsperadas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(3, Palo.PICAS)));
+                new CartaPoker(Valor.TRES, Palo.PICAS)));
 
         ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(3, Palo.PICAS)));
+                new CartaPoker(Valor.TRES, Palo.PICAS)));
 
         Mazo mazo = new Mazo(cartas);
         Mazo mazoEsperado = new Mazo(cartasEsperadas);
 
-        assert (mazo.compararMazoCon(mazoEsperado));
+        assert (mazo.compararCon(mazoEsperado));
     }
-
 
     @Test
     public void test02SeVerificaQueAUnJugadorSeLeReparten8CartasDeSuMazo(){
         ArrayList<CartaPoker> cartasEsperadas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(3, Palo.PICAS),
-                new CartaPoker(7, Palo.CORAZONES),
-                new CartaPoker(5, Palo.DIAMANTES),
-                new CartaPoker(10, Palo.PICAS),
-                new CartaPoker(1, Palo.PICAS),
-                new CartaPoker(2, Palo.CORAZONES),
-                new CartaPoker(7, Palo.DIAMANTES),
-                new CartaPoker(10, Palo.CORAZONES)
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
+                new CartaPoker(Valor.CINCO, Palo.DIAMANTES),
+                new CartaPoker(Valor.REY, Palo.PICAS),
+                new CartaPoker(Valor.AS, Palo.PICAS),
+                new CartaPoker(Valor.DOS, Palo.CORAZONES),
+                new CartaPoker(Valor.SIETE, Palo.DIAMANTES),
+                new CartaPoker(Valor.REY, Palo.CORAZONES)
         ));
         Mano manoEsperada = new Mano(cartasEsperadas);
 
         ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(3, Palo.PICAS),
-                new CartaPoker(7, Palo.CORAZONES),
-                new CartaPoker(5, Palo.DIAMANTES),
-                new CartaPoker(10, Palo.PICAS),
-                new CartaPoker(1, Palo.PICAS),
-                new CartaPoker(2, Palo.CORAZONES),
-                new CartaPoker(7, Palo.DIAMANTES),
-                new CartaPoker(10, Palo.CORAZONES)
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
+                new CartaPoker(Valor.CINCO, Palo.DIAMANTES),
+                new CartaPoker(Valor.REY, Palo.PICAS),
+                new CartaPoker(Valor.AS, Palo.PICAS),
+                new CartaPoker(Valor.DOS, Palo.CORAZONES),
+                new CartaPoker(Valor.SIETE, Palo.DIAMANTES),
+                new CartaPoker(Valor.REY, Palo.CORAZONES)
         ));
         Mazo mazo = new Mazo(cartas);
-        Mano manoObtenida = mazo.repartir();
+        Mano mano = new Mano(mazo);
+        mano.rellenarse();
 
-        assert (manoObtenida.compararManoCon(manoEsperada));
+        assert (mano.compararCon(manoEsperada));
     }
 
     @Test
-    public void test03SeVerificaQueSePuedaJugarUnaManoDeUnMazo(){
+    public void test03SeVerificaQueSePuedaJugarUnaManoDeUnMazo() {
 
-        Mazo mazo = new Mazo();
-        Mano mano = new Mano();
-        mano.rellenarse(mazo);
+        ArrayList<CartaPoker> cartasEsperadas = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
+                new CartaPoker(Valor.DIEZ, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.DIAMANTES),
+                new CartaPoker(Valor.DIEZ, Palo.CORAZONES)
+        ));
 
-        //assertTrue(jugada instanceof Jugada);
+        ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
+                new CartaPoker(Valor.CINCO, Palo.DIAMANTES),
+                new CartaPoker(Valor.REY, Palo.PICAS),
+                new CartaPoker(Valor.AS, Palo.PICAS),
+                new CartaPoker(Valor.DOS, Palo.CORAZONES),
+                new CartaPoker(Valor.SIETE, Palo.DIAMANTES),
+                new CartaPoker(Valor.REY, Palo.CORAZONES)
+        ));
+        Mazo mazo = new Mazo(cartas);
+        Mano mano = new Mano(mazo);
+        mano.rellenarse();
+
+        mano.seleccionarCarta(new CartaPoker(Valor.SIETE, Palo.CORAZONES));
+        mano.seleccionarCarta(new CartaPoker(Valor.DIEZ, Palo.PICAS));
+        mano.seleccionarCarta(new CartaPoker(Valor.SIETE, Palo.DIAMANTES));
+        mano.seleccionarCarta(new CartaPoker(Valor.DIEZ, Palo.CORAZONES));
+
+        assert(mano.compararSeleccionadasCon(cartasEsperadas));
     }
 
     @Test
     public void test04VerificarQueAlJugarUnaManoSeApliqueElValorCorrespondiente(){
-        Puntaje puntajeEsperado = new Puntaje(12, 1);
+       int puntajeEsperado = 12;
 
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
-                new CartaPoker(3, Palo.PICAS),
-                new CartaPoker(7, Palo.CORAZONES),
-                new CartaPoker(5, Palo.DIAMANTES)
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
+                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
         ));
         Jugada jugada = Jugada.crearJugada(cartas);
-        Puntaje puntajeObtenido = jugada.calcularPuntaje();
 
-        assert(puntajeObtenido.compararPuntajecon(puntajeEsperado));
+        int puntajeObtenido = jugada.calcularPuntaje();
+
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test
     public void test05SeRespetaElOrdenDePrioridadDeLasManosDePoker(){
         List<CartaPoker> cartas = List.of(
-            new CartaPoker(10, Palo.PICAS),
-            new CartaPoker(10, Palo.TREBOLES),
-            new CartaPoker(10, Palo.CORAZONES),
-            new CartaPoker(5, Palo.DIAMANTES),
-            new CartaPoker(5, Palo.PICAS)
+            new CartaPoker(Valor.DIEZ, Palo.PICAS),
+            new CartaPoker(Valor.DIEZ, Palo.TREBOLES),
+            new CartaPoker(Valor.DIEZ, Palo.CORAZONES),
+            new CartaPoker(Valor.CINCO, Palo.DIAMANTES),
+            new CartaPoker(Valor.CINCO, Palo.PICAS)
         );
 
         Jugada jugada = Jugada.crearJugada(cartas);
@@ -99,36 +122,41 @@ public class integracionTest {
 
     @Test
     public void test06JugadorAplicaTarotAUnaCartaYSeLeModificaElValor(){
-        Puntaje puntajeEsperado = new Puntaje(12, 1);
+        int puntajeEsperado = 12;
 
-        Jugador jugador = new Jugador("Esteban");
-        CartaPoker cartaPoker = new CartaPoker(2, Palo.PICAS);
-        Puntaje puntaje = new Puntaje(10,1);
-        Tarot cartaTarot = new Tarot(puntaje);
-        jugador.aniadirTarots(cartaTarot);
+        CartaPoker cartaPoker = new CartaPoker(Valor.DOS, Palo.PICAS);
+        //Puntaje puntaje = new Puntaje(10,1);
+        Tarot cartaTarot = new Tarot(10,1);
 
-        jugador.utilizarTarot(0, cartaPoker);
-        Puntaje puntajeObtenido = cartaPoker.calcularPuntaje();
+        cartaPoker.activarTarot(cartaTarot);
 
-        assert(puntajeObtenido.compararPuntajecon(puntajeEsperado));
+        int puntajeObtenido = cartaPoker.calcularPuntaje();
+
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test
     public void test07JugadorAplicaTarotAUnaCartaYSeLeModificaElMultiplicador(){
-        Puntaje puntajeEsperado = new Puntaje(60, 1);
+        int puntajeEsperado = 60;
 
-        Jugador jugador = new Jugador("Lucia");
-        CartaPoker cartaPoker = new CartaPoker(10, Palo.CORAZONES);
-        Puntaje puntaje1 = new Puntaje(0,6);
-        Tarot cartaTarot1 = new Tarot(puntaje1);
-        Puntaje puntaje2 = new Puntaje(10,1);
-        Tarot cartaTarot2 = new Tarot(puntaje2);
-        jugador.aniadirTarots(cartaTarot2);
-        jugador.aniadirTarots(cartaTarot1);
+        CartaPoker cartaPoker = new CartaPoker(Valor.DIEZ, Palo.CORAZONES);
 
-        jugador.utilizarTarot(1, cartaPoker);
-        Puntaje puntajeObtenido = cartaPoker.calcularPuntaje();
+        //Puntaje puntaje1 = new Puntaje(0,6);
+        Tarot cartaTarot1 = new Tarot(0,6);
 
-        assert(puntajeObtenido.compararPuntajecon(puntajeEsperado));
+        cartaPoker.activarTarot(cartaTarot1);
+
+        int puntajeObtenido = cartaPoker.calcularPuntaje();
+
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
+    /*
+    @Test
+    public void test08InicializoJuego(){
+        Balatro balatro = new Balatro("pepito");
+        Puntaje puntaje = new Puntaje(8,9);
+
+    }
+    */
+
 }

@@ -3,11 +3,11 @@ package edu.fiuba.algo3;
 public class Tarot {
     Puntaje puntaje;
 
-    public Tarot(Puntaje unPuntaje){
-        this.puntaje = unPuntaje;
+    public Tarot(int valor, int multiplicador){
+        this.puntaje = new Puntaje(valor, multiplicador);
     }
 
-    public void modificarPuntaje(CartaPoker carta) {
-        carta.modificarPuntaje(this.puntaje);
+    public Puntaje modificarPuntaje(Puntaje unPuntaje) {
+        return puntaje.sumarPuntaje(unPuntaje);
     }
 }

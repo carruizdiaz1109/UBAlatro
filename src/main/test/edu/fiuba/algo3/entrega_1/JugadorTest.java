@@ -1,9 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.CartaPoker;
-import edu.fiuba.algo3.Jugador;
-import edu.fiuba.algo3.Palo;
-import edu.fiuba.algo3.TarotsNoDisponiblesError;
+import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.jugadas.CartaAlta;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,18 +9,25 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JugadorTest {
 
     @Test
-    public void test01JugadorSeInicializaConNombreCorrecto() {
-        Jugador jugador = new Jugador("Juan");
-        String nombreEsperado = "Juan";
-
-        assertTrue(jugador.esMismoNombre(nombreEsperado));
+    public void test01JugadorTieneUnTarotYLoAplicaACarta () {
+        Jugador jugador = new Jugador("Nombre", new Mazo());
+        CartaPoker carta = new CartaPoker(Valor.TRES, Palo.DIAMANTES);
+        Tarot unTarot = new Tarot(3,3);
+        int puntajeEsperado = (carta.calcularPuntaje() +3)*3;
+        jugador.aniadirTarots(unTarot);
+        jugador.utilizarTarot(unTarot, carta);
+        int puntajeObtenido = carta.calcularPuntaje();
+        assertEquals(puntajeEsperado,puntajeObtenido);
     }
 
     @Test
-    public void test02JugadorNoPuedeAplicarTarotSiNoTiene() {
-        Jugador jugador = new Jugador("Juan");
-        CartaPoker carta = new CartaPoker(4, Palo.TREBOLES);
-        assertThrows(TarotsNoDisponiblesError.class, () -> jugador.utilizarTarot(0,carta));
-    }
+    public void test02JugadorNoPuedeAplicarUnTarotQueNoTiene () {
+        Jugador jugador = new Jugador("Nombre", new Mazo());
+        CartaPoker carta = new CartaPoker(Valor.TRES, Palo.DIAMANTES);
+        Tarot unTarot = new Tarot(3,3);
+        int puntajeEsperado = carta.calcularPuntaje();
 
+        assertThrows(TarotsNoDisponiblesError.class,   () -> jugador.utilizarTarot(unTarot, carta) );
+
+    }
 }

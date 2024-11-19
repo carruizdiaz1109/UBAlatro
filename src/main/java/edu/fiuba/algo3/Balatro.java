@@ -1,32 +1,59 @@
 package edu.fiuba.algo3;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+
+
 public class Balatro {
-    private int rondas;
-    private Ronda rondaActual;
-    private Jugador jugador;
+
+    private final List<Ronda> rondas;
+    private final Mazo mazo;
+    private final Jugador jugador;
 
     public Balatro(String nombreJugador) {
-        this.rondas = 8;
-        this.jugador = new Jugador(nombreJugador);
-        this.rondaActual = null;
+        this.rondas = new ArrayList<>();
+        this.mazo = new Mazo();
+        cargarRondasDesdeJSON("src/main/recursos/Balatro.json");
+        mazo.inicializarMazo("src/main/recursos/Balatro.json");
+        this.mazo.mezclar();
+        this.jugador = new Jugador(nombreJugador, this.mazo);
     }
+
+    public void cargarRondasDesdeJSON(String rutaArchivo) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            // Cargar el archivo JSON y obtener las rondas
+            JsonNode rootNode = objectMapper.readTree(new File(rutaArchivo));
+            JsonNode rondasNode = rootNode.path("rondas");
+
+            // Iterar sobre las rondas y crear una por una
+            for (JsonNode rondaNode : rondasNode) {
+                int numero = rondaNode.path("nro").asInt();
+                int puntajeMinimo = rondaNode.path("puntajeASuperar").asInt();
+                int descartesDisponibles = rondaNode.path("descartes").asInt();
+                int jugadasDisponibles = rondaNode.path("manos").asInt();
+
+                // Crear la instancia de Ronda y agregarla a la lista
+                Ronda ronda = new Ronda(numero, puntajeMinimo, descartesDisponibles, jugadasDisponibles);
+                rondas.add(ronda);
+            }
+        } catch (IOException e) {
+            System.err.println("Error al cargar las rondas desde el archivo JSON: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 
     public void iniciarJuego() {
-        int i = 0;
-
-        do {
-            this.rondaActual = this.crearRonda();
-            this.rondaActual.iniciarRonda();
-            i++;
-        } while (i < this.rondas && this.verificarResultado());
+        for (Ronda ronda : this.rondas) {
+            if (ronda.verificarPuntaje()) {
+                this.jugador.iniciarRonda(ronda);
+            }
+        }
     }
-
-    protected Ronda crearRonda() {
-        return (new Ronda(this.jugador));
-    }
-
-   public boolean verificarResultado(){
-        return (this.rondaActual.verificarPuntaje());
-    }
-
 }

@@ -1,43 +1,45 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.jugadas.*;
-
+import edu.fiuba.algo3.jugadas.Descarte;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Jugador {
-    private String nombre;
-    private Mano manoActual;
-    private Mazo mazo;
-    private ArrayList<Tarot> cartasTarot;
 
-    public Jugador(String nombre){
+    private final String nombre;
+    protected Mano manoActual;
+    protected Mazo mazo;
+    private final ArrayList<Tarot> cartasTarot;
+    private final ArrayList<Comodin> comodines;
+    protected Ronda rondaActual;
+
+    public Jugador(String nombre, Mazo mazo){
         this.nombre = nombre;
-        this.manoActual = new Mano(new ArrayList<>());
-        this.mazo = new Mazo();
-        this.cartasTarot = new ArrayList<>();
-    }
-
-    public boolean esMismoNombre(String unNombre){
-        return this.nombre.equals(unNombre);
+        this.mazo = mazo;
+        this.manoActual = new Mano(this.mazo);
+        this.cartasTarot = new ArrayList<Tarot>();
+        this.comodines = new ArrayList<Comodin>();
     }
 
     public boolean esPosibleIniciarRonda(){
         return this.mazo.tieneCartas();
     }
 
-    /*
-    public void iniciarRonda(){
+    public void iniciarRonda(Ronda rondaActual){
         if(!esPosibleIniciarRonda()){
             throw new ErrorMazoVacio();
         }
-        this.manoActual = mazo.repartir();
+        this.rondaActual = rondaActual;
+        this.manoActual.rellenarse();
     }
-    */
 
-    public Jugada jugar(){
-        List<CartaPoker> cartas = List.of(new CartaPoker(1, Palo.PICAS)); // esto está hardcodeado
-        return (new CartaAlta(cartas));                                         // acá hay que refactorizar después
+    public void jugar(){
+        Jugada unaJugada = this.manoActual.jugar();
+        aplicarComodin(unaJugada);
+        this.rondaActual.agregarJugada(unaJugada);
+    }
+
+    public void seleccionarCarta(CartaPoker unaCarta) {
+        this.manoActual.seleccionarCarta(unaCarta);
     }
 
     public void aniadirTarots(Tarot cartaTarot) {
@@ -46,20 +48,28 @@ public class Jugador {
         }
     }
 
-    public void utilizarTarot(int indiceTarot, CartaPoker cartaPoker) {
-        if (!this.cartasTarot.isEmpty()) {
-            this.cartasTarot.get(indiceTarot).modificarPuntaje(cartaPoker);
+    public void utilizarTarot(Tarot tarotaAplicar, CartaPoker cartaPoker) {
+        if (!this.cartasTarot.isEmpty() && this.cartasTarot.contains(tarotaAplicar)) {
+            cartaPoker.activarTarot(tarotaAplicar);
         } else {
             throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
-
         }
     }
 
-    public boolean esManoLlena(){
-        return manoActual.manoLlena();
+    public void aniadirComodin(Comodin unComodin) {
+        this.comodines.add(unComodin);
     }
 
-    public void setMano(Mano unaMano){
-        this.manoActual = unaMano;
+    public void aplicarComodin(Jugada unaJugada) {
+        for (Comodin comodin : this.comodines) {
+           comodin.aplicar(unaJugada);
+        }
     }
+
+    public void descartar() {
+        Descarte unDesarte = this.manoActual.descartar();
+        aplicarComodin(unDesarte);
+        this.rondaActual.agregarJugada(unDesarte);
+    }
+
 }
