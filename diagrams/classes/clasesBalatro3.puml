@@ -14,53 +14,64 @@ interface Comprable {
     + comprar(): Comprable
 }
 
-interface Comodin {
-    + comprar()
-    + aplicarEfecto(unaJugada: Jugada)
+abstract class Comodin {
+    - nombre: string
+    - descripcion: string
+
+    + Comodin(valor: int, multiplicador: int, nombre: String, descripcion: String)
+    + {abstract}aplicar(unaJugada: Jugada)
 }
 
-class ComodinJugada {
-    + aplicarEfecto(unaJugada: Jugada)
+class EfectoJugada {
+    + aplicar(unaJugada: Jugada)
 }
-class ComodinDescarte {
-    + aplicarEfecto(unaJugada: Jugada)
+class EfectoDescarte {
+    + aplicar(unaJugada: Jugada)
 }
-class ComodinAleatorio{
-    + aplicarEfecto(unaJugada: Jugada)
+class EfectoAleatorio{
+    + EfectoAleatorio(probabilidad: int, valor: int, multiplicador: int, nombre: string, descripcion: string)
+    + aplicar(unaJugada: Jugada)
+    +seAplica(): boolean
 }
-class ComodinCombinacion{
-    + aplicarEfecto(unaJugada: Jugada)
+class EfectoCombinado{
+    + EfectoCombinado(lasCombinacines: List <Comodin>, nombre: string, descripcion: string)
+    + aplicar(unaJugada: Jugada)
 }
-class ComodinPuntaje{
+class EfectoPuntaje{
     + aplicarEfecto(unaJugada: Jugada)
 }
 
 class Tarot {
-    - incremento: int
-    + comprar()
-    + Tarot(incremento: int)
-    +modificarPuntajeCarta(unaCarta: CartaPoker)
+
+    + Tarot(valor: int, multiplicador: int)
+    + modificarPuntaje(unPuntaje: Puntaje): Puntaje
 }
 
 class Puntaje {
     - puntos: int
     - multiplicador: int
+
     + Puntaje(puntos:int, multiplicador:int)
     + incrementarPuntos(incremento: int)
     + incrementarMultiplicador(incremento: int)
     + calcularPuntaje(): int
     + sumarPuntaje(unPuntaje: Puntaje):Puntaje
+    + compararPuntajecon(otroPuntaje: int): boolean
+    + compararPuntajecon(otroPuntaje: Puntaje): boolean
 }
 
 
 Tienda o-- Comprable
 Comodin -up-|> Comprable
-CartaPoker -up-|> Comprable
 Tarot -up-|> Comprable
-ComodinJugada -up-|> Comodin
-ComodinDescarte -up-|> Comodin
-ComodinAleatorio -up-|> Comodin
-ComodinCombinacion -up-|> Comodin
-ComodinPuntaje -up-|> Comodin
+EfectoJugada -up-|> Comodin
+EfectoDescarte -up-|> Comodin
+EfectoAleatorio -up-|> Comodin
+EfectoCombinado -up-|> Comodin
+EfectoPuntaje -up-|> Comodin
+
+
+Comodin o-- Puntaje
+Tarot o-- Puntaje
 }
 @enduml
