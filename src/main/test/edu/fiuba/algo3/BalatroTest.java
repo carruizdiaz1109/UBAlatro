@@ -17,12 +17,8 @@ public class BalatroTest {
         // Arrange
         Jugador mockJugador = mock(Jugador.class);
         Balatro balatro = new Balatro("TestPlayer", mockJugador);
-
-        // Mock Ronda behavior
         Ronda mockRonda = mock(Ronda.class);
         when(mockRonda.verificarPuntaje()).thenReturn(true);
-
-        // Inject mock rondas
         Field rondasField = Balatro.class.getDeclaredField("rondas");
         rondasField.setAccessible(true);
         rondasField.set(balatro, List.of(mockRonda));
@@ -35,7 +31,7 @@ public class BalatroTest {
     }
 
     @Test
-    public void testRondasAreLoadedCorrectly() throws Exception {
+    public void testRondasSeCarganCorrectamente() throws Exception {
         // Arrange
         Jugador mockJugador = mock(Jugador.class);
         Balatro balatro = new Balatro("TestPlayer", mockJugador);
@@ -46,11 +42,11 @@ public class BalatroTest {
         List<Ronda> rondas = (List<Ronda>) rondasField.get(balatro);
 
         // Assert
-        assertEquals(8, rondas.size()); // Based on your JSON example
+        assertEquals(8, rondas.size());
     }
 
     @Test
-    public void testAllValidRondasPlayed() throws Exception {
+    public void testTodasLasRondasValidasSonJugadas() throws Exception {
         // Arrange
         Jugador mockJugador = mock(Jugador.class);
         Balatro balatro = new Balatro("TestPlayer", mockJugador);
