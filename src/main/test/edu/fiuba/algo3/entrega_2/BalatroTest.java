@@ -1,5 +1,8 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.entrega_2;
 
+import edu.fiuba.algo3.Balatro;
+import edu.fiuba.algo3.Jugador;
+import edu.fiuba.algo3.Ronda;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
@@ -16,7 +19,7 @@ public class BalatroTest {
     public void testIniciarJuego() throws Exception {
         // Arrange
         Jugador mockJugador = mock(Jugador.class);
-        Balatro balatro = new Balatro("TestPlayer", mockJugador);
+        Balatro balatro = new Balatro(mockJugador);
         Ronda mockRonda = mock(Ronda.class);
         when(mockRonda.verificarPuntaje()).thenReturn(true);
         Field rondasField = Balatro.class.getDeclaredField("rondas");
@@ -34,7 +37,7 @@ public class BalatroTest {
     public void testRondasSeCarganCorrectamente() throws Exception {
         // Arrange
         Jugador mockJugador = mock(Jugador.class);
-        Balatro balatro = new Balatro("TestPlayer", mockJugador);
+        Balatro balatro = new Balatro(mockJugador);
 
         // Act
         Field rondasField = Balatro.class.getDeclaredField("rondas");
@@ -49,7 +52,7 @@ public class BalatroTest {
     public void testTodasLasRondasValidasSonJugadas() throws Exception {
         // Arrange
         Jugador mockJugador = mock(Jugador.class);
-        Balatro balatro = new Balatro("TestPlayer", mockJugador);
+        Balatro balatro = new Balatro(mockJugador);
 
         Ronda mockRonda1 = mock(Ronda.class);
         when(mockRonda1.verificarPuntaje()).thenReturn(true);

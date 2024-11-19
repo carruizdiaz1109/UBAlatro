@@ -6,9 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
 import java.io.IOException;
-
 
 public class Balatro {
 
@@ -16,13 +14,13 @@ public class Balatro {
     private final Mazo mazo;
     private final Jugador jugador;
 
-    public Balatro(String nombreJugador, Jugador jugador) {
+    public Balatro(Jugador jugador) {
         this.rondas = new ArrayList<>();
         this.mazo = new Mazo();
         cargarRondasDesdeJSON("Balatro.json");
         mazo.inicializarMazo("Balatro.json");
         this.mazo.mezclar();
-        this.jugador = (jugador != null) ? jugador : new Jugador(nombreJugador, this.mazo);
+        this.jugador = jugador;
     }
 
     public void cargarRondasDesdeJSON(String rutaArchivo) {
