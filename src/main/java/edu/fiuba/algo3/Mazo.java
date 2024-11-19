@@ -14,7 +14,7 @@ public class Mazo extends ConjuntoCartas {
 
     public Mazo(){
         super();
-        inicializarMazo("C:/Users/Luis/Downloads/Balatro.json");
+        inicializarMazo("src/main/recursos/Balatro.json");
         this.mazoDescarte = new ArrayList<CartaPoker>();
     }
 

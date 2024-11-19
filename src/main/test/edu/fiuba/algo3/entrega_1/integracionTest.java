@@ -125,8 +125,8 @@ public class integracionTest {
         int puntajeEsperado = 12;
 
         CartaPoker cartaPoker = new CartaPoker(Valor.DOS, Palo.PICAS);
-        Puntaje puntaje = new Puntaje(10,1);
-        Tarot cartaTarot = new Tarot(puntaje);
+        //Puntaje puntaje = new Puntaje(10,1);
+        Tarot cartaTarot = new Tarot(10,1);
 
         cartaPoker.activarTarot(cartaTarot);
 
@@ -141,8 +141,8 @@ public class integracionTest {
 
         CartaPoker cartaPoker = new CartaPoker(Valor.DIEZ, Palo.CORAZONES);
 
-        Puntaje puntaje1 = new Puntaje(0,6);
-        Tarot cartaTarot1 = new Tarot(puntaje1);
+        //Puntaje puntaje1 = new Puntaje(0,6);
+        Tarot cartaTarot1 = new Tarot(0,6);
 
         cartaPoker.activarTarot(cartaTarot1);
 

@@ -7,8 +7,8 @@ public class EfectoJugada extends Comodin {
 
     private final Class <? extends Jugada> jugadaAAplicar;
 
-    public EfectoJugada(Class <? extends Jugada> unaJugadaAAplicar, int valor, int multiplicador) {
-        super(valor, multiplicador);
+    public EfectoJugada(Class <? extends Jugada> unaJugadaAAplicar, int valor, int multiplicador, String nombre, String descripcion) {
+        super(valor, multiplicador, nombre, descripcion);
         this.jugadaAAplicar = unaJugadaAAplicar;
     }
 
