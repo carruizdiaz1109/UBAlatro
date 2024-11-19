@@ -6,7 +6,6 @@ import edu.fiuba.algo3.comodines.*;
 import edu.fiuba.algo3.jugadas.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -35,6 +34,7 @@ public class ComodinTest {
 
     @Test
     public void test02SeAplicaUnComodinEscaleraAJugadaEscalera() {
+        //Arrange
         List<CartaPoker> cartas = List.of(
                 new CartaPoker(Valor.DOS, Palo.PICAS),
                 new CartaPoker(Valor.TRES, Palo.DIAMANTES),
@@ -44,17 +44,17 @@ public class ComodinTest {
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado1 = (2+3+4+5+6+30)*12;
-
         EfectoJugada unComodin = new EfectoJugada(Escalera.class, 0,3, "Escalinatas", "x3 en escalera");
+        //Act
         unComodin.aplicar(unaJugada);
-
         int puntajeObtenido = unaJugada.calcularPuntaje();
-
+        //Assert
         assertEquals(puntajeEsperado1, puntajeObtenido);
     }
 
     @Test
     public void test03NoSeAplicaUnComodinJugadaSiNoEsLaJugada() {
+        //Arrange
         List<CartaPoker> cartas = List.of(
                 new CartaPoker(Valor.DOS, Palo.PICAS),
                 new CartaPoker(Valor.TRES, Palo.DIAMANTES),
@@ -64,15 +64,16 @@ public class ComodinTest {
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
         Comodin unComodin = new EfectoJugada(CartaAlta.class, 0,3, "Alta carta" , "x3 si se juega cartaAlta");
+        //Act
         unComodin.aplicar(unaJugada);
-
         int puntajeObtenido = unaJugada.calcularPuntaje();
-
+        //Assert
         Assertions.assertEquals(200, puntajeObtenido);
     }
 
     @Test
     public void test04SeAplicaUnComodinAlPuntaje() {
+        //Arrange
         List<CartaPoker> cartas = List.of(
                 new CartaPoker(Valor.DOS, Palo.PICAS),
                 new CartaPoker(Valor.DOS, Palo.DIAMANTES),
@@ -83,15 +84,16 @@ public class ComodinTest {
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado = (2*4+60)*7*8;
         Comodin unComodin = new EfectoPuntaje( 0,8, "Pluton", "x8 de multiplicador a la jugada");
+        //Act
         unComodin.aplicar(unaJugada);
-
         int puntajeObtenido = unaJugada.calcularPuntaje();
-
+        //Assert
         Assertions.assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test
     public void test05SeAplicaUnComodinAleatorio() {
+        //Arrange
         List<CartaPoker> cartas = List.of(
                 new CartaPoker(Valor.DOS, Palo.PICAS),
                 new CartaPoker(Valor.DOS, Palo.DIAMANTES),
@@ -107,10 +109,10 @@ public class ComodinTest {
                 return true;
             }
         };
+        //Act
         unComodin.aplicar(unaJugada);
-
         int puntajeObtenido = unaJugada.calcularPuntaje();
-
+        //Assert
         Assertions.assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
