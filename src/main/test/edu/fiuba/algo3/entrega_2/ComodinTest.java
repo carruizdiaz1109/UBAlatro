@@ -63,7 +63,7 @@ public class ComodinTest {
                 new CartaPoker(Valor.SEIS, Palo.PICAS)
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
-        Comodin unComodin = new EfectoJugada(CartaAlta.class, 0,3, "" , "");
+        Comodin unComodin = new EfectoJugada(CartaAlta.class, 0,3, "Alta carta" , "x3 si se juega cartaAlta");
         unComodin.aplicar(unaJugada);
 
         int puntajeObtenido = unaJugada.calcularPuntaje();
@@ -82,7 +82,7 @@ public class ComodinTest {
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado = (2*4+60)*7*8;
-        Comodin unComodin = new EfectoPuntaje( 0,8, "", "");
+        Comodin unComodin = new EfectoPuntaje( 0,8, "Pluton", "x8 de multiplicador a la jugada");
         unComodin.aplicar(unaJugada);
 
         int puntajeObtenido = unaJugada.calcularPuntaje();
@@ -101,7 +101,7 @@ public class ComodinTest {
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado = (2*4+60+10)*7;
-        Comodin unComodin = new EfectoAleatorio(1000, 10, 1, "" , "") {
+        Comodin unComodin = new EfectoAleatorio(1000, 10, 1, "Panico" , "1 en 1000 de probabilidad") {
             @Override
             public boolean seAplica() {
                 return true;
@@ -112,6 +112,27 @@ public class ComodinTest {
         int puntajeObtenido = unaJugada.calcularPuntaje();
 
         Assertions.assertEquals(puntajeEsperado, puntajeObtenido);
+    }
+
+    @Test
+    public void test06SeAplicaUnComodinCombinado() {
+        //Arrange
+        Comodin comodin1 = new EfectoPuntaje( 0,2, "Doblete", "x2 de multiplicador");
+        Comodin comodin2 = new EfectoJugada(CartaAlta.class, 20,1, "Algoritmos", "+20 puntos");
+        List <Comodin> comodines = List.of(comodin1, comodin2);
+        Comodin comodinCombinado = new EfectoCombinado(comodines, "Maravilla", "x2 de multiplicador y +20 puntos");
+        List<CartaPoker> cartas = List.of(
+                new CartaPoker(Valor.DOS, Palo.PICAS)
+        );
+        Jugada jugada = new CartaAlta(cartas);
+        int puntajeEsperado = (5+20)*2;
+        //Act
+        comodinCombinado.aplicar(jugada);
+        int puntajeCalculado = jugada.calcularPuntaje();
+
+        //Assert
+        Assertions.assertEquals(puntajeEsperado, puntajeCalculado);
+
     }
 
 
