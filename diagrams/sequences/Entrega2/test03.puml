@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Se verifica que se aplica comodin descarte correctamente
+
+actor ":TestCase" as user
+participant ":Ronda" as ronda
+participant ":CartaPoker" as carta
+participant "cartas :ArrayList" as lista
+participant ":Mazo" as mazo
+participant ":Mano" as mano
+participant ":Jugador" as jugador
+participant "unComodin :EfectoDescarte" as comodin
+participant "unaJugada: Descarte" as jugada
+
+user -> mazo**: Mazo()
+user -> ronda**: Ronda(numero: 1, puntajeMinimo: 10000, descartesDisponibles: 3, jugadasDisponibles: 3)
+user -> lista**: ArrayList()
+
+loop por 5 cartas
+user -> carta**: CartaPoker(Valor, Palo)
+user -> lista: add(carta)
+end
+
+user -> mano**: Mano(cartas)
+
+user -> jugador**: Jugador(Pepe, mazo)
+user -> jugador: iniciarRonda(ronda)
+    jugador -> mano: rellenarse()
+        loop !manoLlena() && mazo.tieneCartas()
+            mano -> mazo: darCarta()
+            mazo --> mano: unaCarta
+            mano -> mano: agregarCarta(unaCarta)
+        end
+
+user -> user: puntajeEsperado = 10
+
+user -> comodin**: EfectoDescarte(Descarte, valor: 10, multiplicador: 1)
+
+loop por 5 cartas
+user -> jugador: seleccionarCarta(carta)
+jugador -> mano: seleccionarCarta(carta)
+end
+
+user -> jugador: anadirComodin(unComodin)
+
+user -> jugador: descartar()
+    jugador -> mano: descartar()
+        mano -> jugada**: Descarte(seleccionadas)
+    mano --> jugador: unDescarte
+    jugador -> jugador: aplicarComodin(unDescarte)
+        loop for each comodin in comodines
+        jugador -> comodin: aplicar(unDescarte)
+        comodin -> jugada: aplicarComodin(puntaje)
+        jugada -> puntaje: sumarPuntaje(puntaje)
+        puntaje --> jugada: unPuntaje
+        end
+    jugador -> ronda: agregarJugada(unDescarte)
+        ronda -> ronda: jugadas.add(unDescarte)
+        ronda -> ronda: jugadasDisponibles--
+
+user -> ronda: calcularTotalRonda()
+loop for each jugada in jugadas
+    ronda -> jugada: calcularPuntaje()
+        jugada -> puntaje: calcularPuntaje()
+        puntaje --> jugada: unPuntaje
+    jugada --> ronda: unPuntaje
+end
+ronda --> user: puntajeObtenido
+
+user -> user: assertEquals(puntajeEsperado, puntajeObtenido);
+
+@enduml
