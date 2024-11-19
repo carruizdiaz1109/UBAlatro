@@ -3,9 +3,7 @@
 package Model {
 
 class Balatro {
-    - rondas : List<Ronda>
     - mazo: Mazo
-    - jugador: Jugador
 
     + Balatro(nombreJugador: string, jugador: Jugador)
     +cargarRondasDesdeJSON(rutaArchivo: string)
@@ -18,7 +16,6 @@ class Jugador {
     - mazo: Mazo
     - cartasTarot: ArrayList<Tarot>
     - comodines: ArrayList<Comodin>
-    - rondaActual: Ronda
 
     + Jugador(nombre: string, mazo: Mazo)
     + esPosibleIniciarRonda(): boolean
@@ -59,8 +56,8 @@ class Panel {
     + mostrarInformacion(rondaActual: Ronda)
 }
 
-Balatro *-- Jugador
-Jugador .up.> Ronda
+Balatro o-- Jugador
+Jugador o-- Ronda
 Panel .left.> Ronda
 Balatro *-- Tienda
 Balatro o-- "0..8" Ronda
