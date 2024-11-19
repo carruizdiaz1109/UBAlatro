@@ -1,0 +1,69 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Se verifica que se aplica comodin aleatorio correctamente
+
+actor ":TestCase" as user
+participant ":Ronda" as ronda
+participant ":CartaPoker" as carta
+participant "cartas :ArrayList" as lista
+participant ":Mazo" as mazo
+participant ":Mano" as mano
+participant ":Jugador" as jugador
+participant "unComodin :EfectoAleatorio" as comodin
+participant "unaJugada: Poker" as jugada
+
+user -> mazo**: Mazo()
+user -> ronda**: Ronda(numero: 1, puntajeMinimo: 10000, descartesDisponibles: 3, jugadasDisponibles: 3)
+user -> lista**: ArrayList()
+
+loop por 5 cartas
+user -> carta**: CartaPoker(Valor, Palo)
+user -> lista: add(carta)
+end
+
+user -> mano**: Mano(cartas)
+
+user -> jugador**: Jugador(Pepe, mazo)
+
+user -> user: puntajeEsperado = (2*4+60+10)*7
+
+user -> comodin**: EfectoAleatorio(probabilidad: 1000, valor: 10, multiplicador: 1)
+
+user -> jugador: iniciarRonda(ronda)
+    jugador -> mano: rellenarse()
+        loop !manoLlena() && mazo.tieneCartas()
+            mano -> mazo: darCarta()
+            mazo --> mano: unaCarta
+            mano -> mano: agregarCarta(unaCarta)
+        end
+
+user -> jugador: anadirComodin(unComodin)
+
+loop por 5 cartas
+user -> jugador: seleccionarCarta(carta)
+jugador -> mano: seleccionarCarta(carta)
+end
+
+user -> jugador: jugar()
+    jugador -> mano: jugar()
+    mano -> jugada**: crearJugada(seleccionadas)
+    jugador -> jugador: aplicarComodin(unaJugada)
+    jugador -> comodin: aplicar(unaJugada)
+    comodin -> comodin: seAplica(): true
+    comodin -> jugada: aplicarComodin(puntaje)
+    jugada -> puntaje: sumarPuntaje(puntaje)
+    puntaje --> jugada: unPuntaje
+
+user -> ronda: calcularTotalRonda()
+loop for each jugada in jugadas
+    ronda -> jugada: calcularPuntaje()
+        jugada -> puntaje: calcularPuntaje()
+        puntaje --> jugada: unPuntaje
+    jugada --> ronda: unPuntaje
+end
+ronda --> user: puntajeObtenido
+
+user -> user: assertEquals(puntajeEsperado, puntajeObtenido);
+
+@enduml
