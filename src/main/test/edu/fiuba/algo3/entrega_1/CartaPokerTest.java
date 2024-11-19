@@ -105,6 +105,7 @@ public class CartaPokerTest {
         ));
 
        ConjuntoCartas escaleraObtenida = carta.obtenerEscalera();
+       System.out.println(escaleraEsperada);
         assert(escaleraObtenida.compararCon(escaleraEsperada));
     }
 }

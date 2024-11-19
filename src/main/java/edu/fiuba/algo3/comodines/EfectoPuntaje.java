@@ -5,8 +5,8 @@ import edu.fiuba.algo3.Jugada;
 
 public class EfectoPuntaje extends Comodin {
 
-    public EfectoPuntaje(int valor, int multiplicador) {
-        super(valor, multiplicador);
+    public EfectoPuntaje(int valor, int multiplicador,String nombre, String descripcion) {
+        super(valor, multiplicador,  nombre,  descripcion);
     }
 
     @Override

@@ -36,7 +36,7 @@ public class IntegracionTest2 {
         };
         jugador.iniciarRonda(ronda);
 
-        EfectoJugada unComodin = new EfectoJugada(Escalera.class, 0,3);
+        EfectoJugada unComodin = new EfectoJugada(Escalera.class, 0,3, "" ,"");
 
         jugador.seleccionarCarta(carta1);
         jugador.seleccionarCarta(carta2);
@@ -78,7 +78,7 @@ public class IntegracionTest2 {
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado = (2*4+60)*7*8;
 
-        Comodin unComodin = new EfectoPuntaje( 0,8);
+        Comodin unComodin = new EfectoPuntaje( 0,8, "" ,"");
         jugador.seleccionarCarta(carta1);
         jugador.seleccionarCarta(carta2);
         jugador.seleccionarCarta(carta3);
@@ -117,7 +117,7 @@ public class IntegracionTest2 {
         jugador.iniciarRonda(ronda);
         int puntajeEsperado = 10;
 
-        Comodin unComodin = new EfectoDescarte(Descarte.class, 10,1);
+        Comodin unComodin = new EfectoDescarte(Descarte.class, 10,1, "" ,"");
         jugador.seleccionarCarta(carta1);
         jugador.seleccionarCarta(carta2);
         jugador.seleccionarCarta(carta3);
@@ -153,7 +153,7 @@ public class IntegracionTest2 {
             }
         };
         int puntajeEsperado = (2*4+60+10)*7;
-        Comodin unComodin = new EfectoAleatorio(1000, 10, 1) {
+        Comodin unComodin = new EfectoAleatorio(1000, 10, 1, "" ,"") {
             @Override
             public boolean seAplica() {
                 return true;

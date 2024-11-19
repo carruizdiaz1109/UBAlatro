@@ -8,8 +8,8 @@ import java.util.Random;
 public class EfectoAleatorio extends Comodin {
     private final int probabilidadActivacion;
 
-    public EfectoAleatorio(int probabilidad, int valor, int multiplicador) {
-        super(valor, multiplicador);
+    public EfectoAleatorio(int probabilidad, int valor, int multiplicador, String nombre, String descripcion) {
+        super(valor, multiplicador, nombre, descripcion);
         this.probabilidadActivacion = probabilidad;
     }
 

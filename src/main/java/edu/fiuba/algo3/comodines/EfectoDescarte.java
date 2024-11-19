@@ -9,8 +9,8 @@ public class EfectoDescarte extends Comodin {
 
     private final Class<? extends Jugada> descarte;
 
-    public EfectoDescarte(Class<? extends Jugada> unDescarte, int valor, int multiplicador) {
-        super(valor, multiplicador);
+    public EfectoDescarte(Class<? extends Jugada> unDescarte, int valor, int multiplicador, String nombre, String descripcion) {
+        super(valor, multiplicador, nombre, descripcion);
         this.descarte = unDescarte;
     }
 
