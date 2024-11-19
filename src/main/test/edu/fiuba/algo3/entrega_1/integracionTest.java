@@ -125,7 +125,8 @@ public class integracionTest {
         int puntajeEsperado = 12;
 
         CartaPoker cartaPoker = new CartaPoker(Valor.DOS, Palo.PICAS);
-        Tarot cartaTarot = new Tarot(10,1);
+        Puntaje puntaje = new Puntaje(10,1);
+        Tarot cartaTarot = new Tarot(puntaje);
 
         cartaPoker.activarTarot(cartaTarot);
 
@@ -140,7 +141,8 @@ public class integracionTest {
 
         CartaPoker cartaPoker = new CartaPoker(Valor.DIEZ, Palo.CORAZONES);
 
-        Tarot cartaTarot1 = new Tarot(0,6);
+        Puntaje puntaje1 = new Puntaje(0,6);
+        Tarot cartaTarot1 = new Tarot(puntaje1);
 
         cartaPoker.activarTarot(cartaTarot1);
 
@@ -148,6 +150,13 @@ public class integracionTest {
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
+    /*
+    @Test
+    public void test08InicializoJuego(){
+        Balatro balatro = new Balatro("pepito");
+        Puntaje puntaje = new Puntaje(8,9);
 
+    }
+    */
 
 }
