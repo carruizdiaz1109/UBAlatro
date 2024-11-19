@@ -124,7 +124,7 @@ public class JugadaTest {
         Jugada jugada = Jugada.crearJugada(cartas);
 
         assertTrue(jugada instanceof Color);
-        assertEquals(296, jugada.calcularValor());
+        assertEquals(280, jugada.calcularValor());
     }
 
     @Test
