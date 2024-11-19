@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
@@ -14,7 +15,7 @@ public class Mazo extends ConjuntoCartas {
 
     public Mazo(){
         super();
-        inicializarMazo("src/main/recursos/Balatro.json");
+        inicializarMazo("Balatro.json");
         this.mazoDescarte = new ArrayList<CartaPoker>();
     }
 
@@ -37,28 +38,25 @@ public class Mazo extends ConjuntoCartas {
 
     public void inicializarMazo(String rutaArchivo) {
         ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            // Cargar el archivo JSON y obtener el nodo 'mazo'
-            JsonNode rootNode = objectMapper.readTree(new File(rutaArchivo));
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(rutaArchivo)) {
+            if (inputStream == null) {
+                throw new IOException("File not found in classpath: " + rutaArchivo);
+            }
+
+            // Load the JSON and parse the "mazo" node
+            JsonNode rootNode = objectMapper.readTree(inputStream);
             JsonNode mazoNode = rootNode.path("mazo");
 
-            // Iterar sobre las cartas del mazo y crear cada carta
+            // Iterate over the cards and create each one
             for (JsonNode cartaNode : mazoNode) {
-                // Obtener el palo y número de la carta
                 String paloStr = cartaNode.path("palo").asText();
                 String numeroStr = cartaNode.path("numero").asText();
 
-                // Convertir el nombre del palo al enum Palo
-                Palo palo = Palo.obtenerPaloDesdeString(paloStr);
+                Palo palo = Palo.obtenerPaloDesdeString(paloStr); // Convert string to enum
+                Valor valor = Valor.obtenerValorDesdeString(numeroStr); // Convert string to enum
 
-                // Convertir el número de la carta al enum Valor usando el método personalizado
-                Valor valor = Valor.obtenerValorDesdeString(numeroStr);
-
-                // Crear la carta con el palo y número
                 CartaPoker carta = new CartaPoker(valor, palo);
-
-                // Agregar la carta al mazo
-                this.agregarCarta(carta); // Asegúrate de que 'mazo' sea una colección ya inicializada
+                this.agregarCarta(carta); // Ensure 'mazo' is initialized as a collection
             }
         } catch (IOException e) {
             System.err.println("Error al cargar el mazo desde el archivo JSON: " + e.getMessage());

@@ -1,5 +1,7 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.jugadas.Descarte;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public class Ronda {
 
     private final int numero;
     private final int puntajeMinimo;
-    private final int descartesDisponibles;
+    private int descartesDisponibles;
     private int jugadasDisponibles;
     private final List<Jugada> jugadas;
 
@@ -33,7 +35,14 @@ public class Ronda {
     }
 
     public boolean estadoRonda() {
-        return true; //(this.jugadasDisponibles <= 0);
+        return (this.jugadasDisponibles > 0);
+    }
+
+    public void agregarDescarte(Descarte unDescarte) {
+        if (estadoRonda() && this.descartesDisponibles > 0) {
+            this.jugadas.add(unDescarte);
+            this.descartesDisponibles--;
+        }
     }
 
     public int calcularTotalRonda () {

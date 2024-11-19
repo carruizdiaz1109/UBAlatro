@@ -1,14 +1,16 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title Se verifica que se aplica comodin aleatorio correctamente
-
+title El jugador activa un comodín con una combinación de efectos  bonus de mano
 actor ":TestCase" as user
 participant ":Ronda" as ronda
 participant "c :CartaPoker" as carta
 participant ":Mano" as mano
 participant " :Jugador" as jugador
-participant "unComodin:EfectoAleatorio" as comodin
+participant "comodinCombinado:EfectoCombinado" as comodin
+participant "comodin1:EfectoAleatorio" as aleatorio
+participant "comodin2:EfectoPuntaje" as puntaje
+participant "comodin3:EfectoJugada" as jugada
 
 user -> ronda **: Ronda(1,10000,3,3);
 loop i=2, i<7, i++
@@ -18,22 +20,24 @@ user -> mano **: new Mano(cartas);
 user -> jugador **: Jugador("Pepe", mazoMock);
 user -> jugador: iniciarRonda(ronda);
 
-user -> comodin **: EfectoAleatorio(1000, 10, 1, "", "");
+user -> comodin **: EfectoCombinado(List.of(aleatorio, puntaje, jugada), "Combina3", "");
 loop for each carta in Mano
     user -> jugador: seleccionarCarta(carta);
     jugador -> mano: seleccionarCarta(carta);
 end
 
-user -> jugador :aniadirComodin(unComodin);
+user -> jugador :aniadirComodin(comodinCombinado);
 user -> jugador: jugar();
 jugador -> mano: jugar();
 mano -> ":Poker" as poker: new Poker(cartasSeleccionadas);
 mano --> jugador: Poker;
 jugador -> comodin: aplicar(Poker);
-comodin -> comodin: seAplica();
-alt se aplica
-    comodin -> Poker: aplicarComodin();
-end
+comodin -> aleatorio: aplicar(Poker);
+aleatorio -> Poker: aplicarComodin();
+comodin -> puntaje: aplicar(Poker);
+puntaje -> Poker: aplicarComodin();
+comodin -> jugada: aplicar(Poker);
+jugada -> Poker: aplicarComodin();
 jugador -> ronda: agregarJugada(Poker);
 user -> ronda: calcularTotalRonda();
 loop for each jugada in jugadas
@@ -41,5 +45,4 @@ loop for each jugada in jugadas
 end
 
 user -> user: assertEquals(puntajeEsperado, puntajeObtenido);
-
 @enduml
