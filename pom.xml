@@ -1,30 +1,28 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.fiuba.algo3</groupId>
   <artifactId>tp2</artifactId>
   <version>0.0.1</version>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <junit.jupiter.version>5.4.0</junit.jupiter.version>
-    <mockito-mockito-core-version>3.3.0</mockito-mockito-core-version>
-    <maven-surefire-version>3.0.0-M3</maven-surefire-version>
-    <archunit-version>0.21.0</archunit-version>
-    <!--
-    Therefore, we are very proud to announce the availability of JavaFX 17-ea+8 for MacOS AArch64, also known as the Apple M1. You can now download the JavaFX SDK for this platform from our JavaFX Download Page. Ref.: https://gluonhq.com/javafx-for-apple-m1/
-
-    Replace the line below by: <javafx-version>18.0.2</javafx-version>
-    -->
-    <javafx-version>17.0.2</javafx-version>
+    <mockito.version>3.3.0</mockito.version>
+    <javafx.version>17.0.2</javafx.version>
+    <archunit.version>0.21.0</archunit.version>
     <main-class>edu.fiuba.algo3.Main</main-class>
   </properties>
+
   <dependencies>
+    <!-- Dependencias principales -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.15.0</version> <!-- Usa la versión más reciente que necesites -->
+      <version>2.15.0</version>
     </dependency>
     <dependency>
       <groupId>com.googlecode.json-simple</groupId>
@@ -34,8 +32,10 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>${javafx-version}</version>
+      <version>${javafx.version}</version>
     </dependency>
+
+    <!-- Dependencias para pruebas -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -45,49 +45,20 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>${mockito-mockito-core-version}</version>
+      <version>${mockito.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.tngtech.archunit</groupId>
       <artifactId>archunit</artifactId>
-      <version>${archunit-version}</version>
+      <version>${archunit.version}</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>1.7.30</version>
-    </dependency>
   </dependencies>
-  <profiles>
-    <profile>
-      <id>package</id>
-      <dependencies>
-        <dependency>
-          <groupId>org.openjfx</groupId>
-          <artifactId>javafx-graphics</artifactId>
-          <version>${javafx-version}</version>
-          <classifier>linux</classifier>
-        </dependency>
-        <dependency>
-          <groupId>org.openjfx</groupId>
-          <artifactId>javafx-graphics</artifactId>
-          <version>${javafx-version}</version>
-          <classifier>mac</classifier>
-        </dependency>
-        <dependency>
-          <groupId>org.openjfx</groupId>
-          <artifactId>javafx-graphics</artifactId>
-          <version>${javafx-version}</version>
-          <classifier>win</classifier>
-        </dependency>
-      </dependencies>
-    </profile>
-  </profiles>
+
   <build>
-    <testSourceDirectory>src/main/test</testSourceDirectory>
     <plugins>
+      <!-- Configuración del compilador -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -96,14 +67,18 @@
           <release>11</release>
         </configuration>
       </plugin>
+
+      <!-- Plugin para JavaFX -->
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
-        <version>0.0.6</version>
+        <version>0.0.8</version>
         <configuration>
-          <mainClass>edu.fiuba.algo3/${main-class}</mainClass>
+          <mainClass>${main-class}</mainClass>
         </configuration>
       </plugin>
+
+      <!-- Plugin para empaquetado (shade) -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -124,33 +99,60 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven-surefire-version}</version>
-        <configuration>
-          <argLine>${argLine} -XX:MaxPermSize=256m</argLine>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.2</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <phase>test</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <!-- Perfiles multiplataforma para JavaFX -->
+    <profile>
+      <id>javafx-windows</id>
+      <activation>
+        <os>
+          <family>Windows</family>
+        </os>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.openjfx</groupId>
+          <artifactId>javafx-graphics</artifactId>
+          <version>${javafx.version}</version>
+          <classifier>win</classifier>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>javafx-linux</id>
+      <activation>
+        <os>
+          <family>Linux</family>
+        </os>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.openjfx</groupId>
+          <artifactId>javafx-graphics</artifactId>
+          <version>${javafx.version}</version>
+          <classifier>linux</classifier>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>javafx-macos</id>
+      <activation>
+        <os>
+          <family>Mac</family>
+        </os>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.openjfx</groupId>
+          <artifactId>javafx-graphics</artifactId>
+          <version>${javafx.version}</version>
+          <classifier>mac</classifier>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>
