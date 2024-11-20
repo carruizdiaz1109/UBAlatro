@@ -4,10 +4,10 @@
 title Se verifica que se aplica comodin puntaje correctamente
 
 actor ":TestCase" as user
+participant ":Mazo" as mazo
 participant ":Ronda" as ronda
 participant ":CartaPoker" as carta
 participant "cartas :ArrayList" as lista
-participant ":Mazo" as mazo
 participant ":Mano" as mano
 participant ":Jugador" as jugador
 participant "unComodin :EfectoPuntaje" as comodin
@@ -39,7 +39,7 @@ end
 user -> jugador: jugar()
 jugador -> mano: jugar()
 mano -> jugada**: Poker(cartasSeleccionadas)
-jugada -> puntaje**
+jugada -> ":puntaje" as puntaje**
 mano --> jugador: Poker
 jugador -> jugador: aplicarComodin(poker)
 
