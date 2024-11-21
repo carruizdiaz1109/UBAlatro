@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Jugada
+interface evaluable
+class Escalera
+class Poker
+class Par
+class Trio
+class DoblePar
+class FullHouse
+class EscaleraReal
+class EscaleraColor
+class Color
+class CartaAlta
+class Descarte
+
+interface evaluable {
+     + esJugada(List<CartaPoker> cartas)
+}
+
+abstract class Jugada {
+    - puntaje: Puntaje
+    - sumaValores: Puntaje
+    - puntajeComodin: Puntaje
+    # cartasValidas: List<CartaPoker>
+    # siguienteJugada: Jugada
+    # cartas: List<CartaPoker>
+
+    + Jugada(cartas: Lista<CartaPoker>, puntaje: Puntaje)
+    + crearJugada(List<CartaPoker>): Jugada
+    + sumarValores()
+    + calcularPuntaje(): int
+    + aplicarComodin(puntaje: Puntaje)
+    # {abstract}seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
+    - setSiguiente(unaJugada: Jugada)
+}
+
+
+
+Jugada .left.> evaluable
+Jugada <|-down- Escalera
+Jugada <|-down- EscaleraReal
+Jugada <|-down- EscaleraColor
+Jugada <|-down- Color
+Jugada <|-down- Poker
+Jugada <|-down- Trio
+Jugada <|-down- Par
+Jugada <|-down- DoblePar
+Jugada <|-down- FullHouse
+Jugada <|-down- Descarte
+Jugada <|-down- CartaAlta
+
+@enduml

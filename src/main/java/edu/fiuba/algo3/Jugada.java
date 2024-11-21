@@ -22,7 +22,7 @@ public abstract class Jugada  implements Evaluable{
 
     protected abstract List<CartaPoker> seleccionarCartasValidas(List<CartaPoker> cartas);
 
-    public static Jugada crearJugada(List<CartaPoker> cartas) {
+    private static Jugada configurarCadena(List<CartaPoker> cartas) {
         Jugada escaleraReal = new EscaleraReal(cartas);
         Jugada escaleraColor = new EscaleraColor(cartas);
         Jugada poker = new Poker(cartas);
@@ -45,38 +45,34 @@ public abstract class Jugada  implements Evaluable{
         doblePar.setSiguiente(par);
         par.setSiguiente(cartaAlta);
 
-        // Evaluar cartas desde el primer eslabón de la cadena
-        return escaleraReal.evaluar(cartas);
+        return escaleraReal;
     }
 
-    public void setSiguiente(Jugada siguiente) {
+    public static Jugada crearJugada(List<CartaPoker> cartas) {
+        // Configurar la cadena y evaluar
+        Jugada inicioCadena = configurarCadena(cartas);
+        return inicioCadena.evaluar(cartas);
+    }
+
+    private void setSiguiente(Jugada siguiente) {
         this.siguiente = siguiente;
     }
 
     public Jugada evaluar(List<CartaPoker> cartas) {
-        if (esJugada(cartas)) {
+        if (esJugada(this.cartas)) {
             return this;
-        } else if (siguiente != null) {
-            return siguiente.evaluar(cartas);
+        } else if (this.siguiente != null) {
+            return this.siguiente.evaluar(cartas);
         }
         return null; // Por seguridad
     }
 
-
     public void sumarValores() {
-        int sumaPuntajes = 0;
         for (CartaPoker carta : cartasValidas) {
-            sumaPuntajes += carta.calcularPuntaje();
+            this.puntaje.incrementarPuntos(carta.calcularPuntaje());
         }
-        this.sumaValores.incrementarPuntos(sumaPuntajes);
-    }
-
-
-    public int calcularValor() {
-        sumarValores();
-        this.puntaje = this.puntaje.sumarPuntaje(this.sumaValores);
-        return puntaje.calcularPuntaje();
-    }
+        //this.sumaValores.incrementarPuntos(sumaPuntajes);
+    } //Sumo los puntajes de cada carta en puntaje suma valores!
 
     public int calcularPuntaje() {
         sumarValores();
