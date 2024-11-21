@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import edu.fiuba.algo3.jugadas.*;
 
-public abstract class Jugada {
+public abstract class Jugada  implements Evaluable{
     private final Puntaje sumaValores;
     private Puntaje puntaje;
     protected List<CartaPoker> cartas;
@@ -19,8 +19,6 @@ public abstract class Jugada {
         this.cartasValidas = new ArrayList<>();
         this.puntajeComodin = new Puntaje(0,1);
     }
-
-    public abstract boolean esJugada(List<CartaPoker> cartas);
 
     protected abstract List<CartaPoker> seleccionarCartasValidas(List<CartaPoker> cartas);
 
