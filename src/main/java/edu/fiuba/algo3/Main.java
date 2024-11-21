@@ -31,14 +31,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        /*
-
-        VBox layout = new VBox(10);
-        layout.getChildren().addAll(button1, button2);
-        Group root = new Group();
-        Scene scene = new Scene(root, Color.CORNFLOWERBLUE);
-
-        */
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Main.fxml")));
 
         Scene scene = new Scene(root);
