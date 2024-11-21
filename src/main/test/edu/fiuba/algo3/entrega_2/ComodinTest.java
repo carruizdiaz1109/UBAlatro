@@ -21,7 +21,8 @@ public class ComodinTest {
                 new CartaPoker(Valor.DOS, Palo.TREBOLES)
         ));
         Jugada jugada = Jugada.crearJugada(cartas);
-        EfectoPuntaje comodin = new EfectoPuntaje(10, 1, "Estrella Fugaz", "+10 fichines");
+        Puntaje puntaje = new Puntaje(10, 1);
+        EfectoPuntaje comodin = new EfectoPuntaje(puntaje, "Estrella Fugaz", "+10 fichines");
 
         // Act
         comodin.aplicar(jugada);
@@ -44,7 +45,8 @@ public class ComodinTest {
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado1 = (2+3+4+5+6+30)*12;
-        EfectoJugada unComodin = new EfectoJugada(Escalera.class, 0,3, "Escalinatas", "x3 en escalera");
+        Puntaje puntaje = new Puntaje(0, 3);
+        EfectoJugada unComodin = new EfectoJugada(Escalera.class, puntaje, "Escalinatas", "x3 en escalera");
         //Act
         unComodin.aplicar(unaJugada);
         int puntajeObtenido = unaJugada.calcularPuntaje();
@@ -63,7 +65,8 @@ public class ComodinTest {
                 new CartaPoker(Valor.SEIS, Palo.PICAS)
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
-        Comodin unComodin = new EfectoJugada(CartaAlta.class, 0,3, "Alta carta" , "x3 si se juega cartaAlta");
+        Puntaje puntaje = new Puntaje(0, 3);
+        Comodin unComodin = new EfectoJugada(CartaAlta.class, puntaje, "Alta carta" , "x3 si se juega cartaAlta");
         //Act
         unComodin.aplicar(unaJugada);
         int puntajeObtenido = unaJugada.calcularPuntaje();
@@ -83,7 +86,8 @@ public class ComodinTest {
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado = (2*4+60)*7*8;
-        Comodin unComodin = new EfectoPuntaje( 0,8, "Pluton", "x8 de multiplicador a la jugada");
+        Puntaje puntaje = new Puntaje(0, 8);
+        Comodin unComodin = new EfectoPuntaje( puntaje, "Pluton", "x8 de multiplicador a la jugada");
         //Act
         unComodin.aplicar(unaJugada);
         int puntajeObtenido = unaJugada.calcularPuntaje();
@@ -103,7 +107,8 @@ public class ComodinTest {
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado = (2*4+60+10)*7;
-        Comodin unComodin = new EfectoAleatorio(1000, 10, 1, "Panico" , "1 en 1000 de probabilidad") {
+        Puntaje puntaje = new Puntaje(10, 1);
+        Comodin unComodin = new EfectoAleatorio(1000, puntaje, "Panico" , "1 en 1000 de probabilidad") {
             @Override
             public boolean seAplica() {
                 return true;
@@ -119,8 +124,10 @@ public class ComodinTest {
     @Test
     public void test06SeAplicaUnComodinCombinado() {
         //Arrange
-        Comodin comodin1 = new EfectoPuntaje( 0,2, "Doblete", "x2 de multiplicador");
-        Comodin comodin2 = new EfectoJugada(CartaAlta.class, 20,1, "Algoritmos", "+20 puntos");
+        Puntaje puntaje1 = new Puntaje(0, 2);
+        Comodin comodin1 = new EfectoPuntaje( puntaje1, "Doblete", "x2 de multiplicador");
+        Puntaje puntaje2 = new Puntaje(20, 1);
+        Comodin comodin2 = new EfectoJugada(CartaAlta.class, puntaje2, "Algoritmos", "+20 puntos");
         List <Comodin> comodines = List.of(comodin1, comodin2);
         Comodin comodinCombinado = new EfectoCombinado(comodines, "Maravilla", "x2 de multiplicador y +20 puntos");
         List<CartaPoker> cartas = List.of(

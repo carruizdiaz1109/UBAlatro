@@ -6,8 +6,8 @@ public abstract class Comodin {
     protected String descripcion;
     protected Puntaje puntaje;
 
-    public Comodin(int valor, int multiplicador, String nombre, String descripcion) {
-        this.puntaje = new Puntaje(valor, multiplicador);
+    public Comodin(Puntaje puntaje, String nombre, String descripcion) {
+        this.puntaje = puntaje;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }

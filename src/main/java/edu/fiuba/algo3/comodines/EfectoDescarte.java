@@ -3,14 +3,15 @@ package edu.fiuba.algo3.comodines;
 
 import edu.fiuba.algo3.Comodin;
 import edu.fiuba.algo3.Jugada;
+import edu.fiuba.algo3.Puntaje;
 
 
 public class EfectoDescarte extends Comodin {
 
     private final Class<? extends Jugada> descarte;
 
-    public EfectoDescarte(Class<? extends Jugada> unDescarte, int valor, int multiplicador, String nombre, String descripcion) {
-        super(valor, multiplicador, nombre, descripcion);
+    public EfectoDescarte(Class<? extends Jugada> unDescarte, Puntaje puntaje, String nombre, String descripcion) {
+        super(puntaje, nombre, descripcion);
         this.descarte = unDescarte;
     }
 
