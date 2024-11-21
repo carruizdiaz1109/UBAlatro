@@ -197,8 +197,11 @@ public class IntegracionTest2 {
         Puntaje puntaje2 = new Puntaje(0, 3);
         Comodin comodin2 = new EfectoPuntaje( puntaje2, "Triplete" ,"x3 a la jugada");
         Comodin comodin3 = new EfectoJugada(Poker.class, puntaje2, "Pokerface" ,"x3 multiplica si juego Poker");
-        Comodin comodinCombinado = new EfectoCombinado(List.of(comodin1, comodin2, comodin3), "Combina3", "Tiene probabilidad 1 de cada 1000," +
+        EfectoCombinado comodinCombinado = new EfectoCombinado("Combina3", "Tiene probabilidad 1 de cada 1000," +
                 "x3 al multiplicador y x3 si se juegaPoker");
+        comodinCombinado.agregar(comodin1);
+        comodinCombinado.agregar(comodin2);
+        comodinCombinado.agregar(comodin3);
         Jugador jugador = new Jugador("Pepe", mazoMock) {
             @Override
             public void iniciarRonda(Ronda rondaActual){

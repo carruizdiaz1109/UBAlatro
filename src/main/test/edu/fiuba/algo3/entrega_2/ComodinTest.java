@@ -128,8 +128,10 @@ public class ComodinTest {
         Comodin comodin1 = new EfectoPuntaje( puntaje1, "Doblete", "x2 de multiplicador");
         Puntaje puntaje2 = new Puntaje(20, 1);
         Comodin comodin2 = new EfectoJugada(CartaAlta.class, puntaje2, "Algoritmos", "+20 puntos");
-        List <Comodin> comodines = List.of(comodin1, comodin2);
-        Comodin comodinCombinado = new EfectoCombinado(comodines, "Maravilla", "x2 de multiplicador y +20 puntos");
+        EfectoCombinado comodinCombinado = new EfectoCombinado("Maravilla", "x2 de multiplicador y +20 puntos");
+        comodinCombinado.agregar(comodin1);
+        comodinCombinado.agregar(comodin2);
+
         List<CartaPoker> cartas = List.of(
                 new CartaPoker(Valor.DOS, Palo.PICAS)
         );

@@ -4,16 +4,24 @@ import edu.fiuba.algo3.Comodin;
 import edu.fiuba.algo3.Jugada;
 import edu.fiuba.algo3.Puntaje;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EfectoCombinado extends Comodin {
     private final List<Comodin> combinaciones;
 
-    public EfectoCombinado(List <Comodin> lasCombinacines, String nombre, String descripcion) {
+    public EfectoCombinado(String nombre, String descripcion) {
         super (new Puntaje(0, 1),  nombre, descripcion);
-        this.combinaciones = lasCombinacines;
+        this.combinaciones = new ArrayList<>();
     }
 
+    public void agregar (Comodin comodin) {
+        this.combinaciones.add(comodin);
+    }
+
+    public void eliminar (Comodin comodin) {
+        this.combinaciones.remove(comodin);
+    }
 
     public void aplicar(Jugada unaJugada) {
         for (Comodin comodin : this.combinaciones) {
