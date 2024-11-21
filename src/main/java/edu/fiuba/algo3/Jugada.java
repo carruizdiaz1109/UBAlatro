@@ -10,6 +10,7 @@ public abstract class Jugada {
     protected List<CartaPoker> cartas;
     protected List<CartaPoker> cartasValidas;
     private Puntaje puntajeComodin;
+    protected Jugada siguiente;
 
     public Jugada(List<CartaPoker> cartas, Puntaje puntaje) {
         this.cartas = cartas;
@@ -24,25 +25,45 @@ public abstract class Jugada {
     protected abstract List<CartaPoker> seleccionarCartasValidas(List<CartaPoker> cartas);
 
     public static Jugada crearJugada(List<CartaPoker> cartas) {
-        List<Jugada> posiblesJugadas = List.of(
-            new EscaleraReal(cartas),
-            new EscaleraColor(cartas),
-            new Poker(cartas),
-            new FullHouse(cartas),
-            new Color(cartas),
-            new Escalera(cartas),
-            new Trio(cartas),
-            new DoblePar(cartas),
-            new Par(cartas),
-            new CartaAlta(cartas)
-        );
-        for (Jugada jugada : posiblesJugadas) {
-            if (jugada.esJugada(cartas)) {
-                return jugada;
-            }
-        }
-        return new CartaAlta(cartas);
+        Jugada escaleraReal = new EscaleraReal(cartas);
+        Jugada escaleraColor = new EscaleraColor(cartas);
+        Jugada poker = new Poker(cartas);
+        Jugada fullHouse = new FullHouse(cartas);
+        Jugada color = new Color(cartas);
+        Jugada escalera = new Escalera(cartas);
+        Jugada trio = new Trio(cartas);
+        Jugada doblePar = new DoblePar(cartas);
+        Jugada par = new Par(cartas);
+        Jugada cartaAlta = new CartaAlta(cartas);
+
+        // Configurar la cadena
+        escaleraReal.setSiguiente(escaleraColor);
+        escaleraColor.setSiguiente(poker);
+        poker.setSiguiente(fullHouse);
+        fullHouse.setSiguiente(color);
+        color.setSiguiente(escalera);
+        escalera.setSiguiente(trio);
+        trio.setSiguiente(doblePar);
+        doblePar.setSiguiente(par);
+        par.setSiguiente(cartaAlta);
+
+        // Evaluar cartas desde el primer eslabón de la cadena
+        return escaleraReal.evaluar(cartas);
     }
+
+    public void setSiguiente(Jugada siguiente) {
+        this.siguiente = siguiente;
+    }
+
+    public Jugada evaluar(List<CartaPoker> cartas) {
+        if (esJugada(cartas)) {
+            return this;
+        } else if (siguiente != null) {
+            return siguiente.evaluar(cartas);
+        }
+        return null; // Por seguridad
+    }
+
 
     public void sumarValores() {
         int sumaPuntajes = 0;
