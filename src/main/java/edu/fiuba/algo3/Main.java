@@ -12,16 +12,19 @@ import java.util.Objects;
 
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
+import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {
 
     public static void main(String[] args) {
+        System.out.println(Main.class.getResource("/resources/background.png"));
         launch(args);
     }
 
@@ -29,22 +32,22 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         /*
-        // Layout
-        VBox layout = new VBox(10); // Espaciado de 10px
-        layout.getChildren().addAll(button1, button2);
-        */
-        // Escena y ventana
-        Group root = new Group();
-        Scene scene = new Scene(root, Color.BLACK);
 
-        Image icon = new Image(Objects.requireNonNull(getClass().getResource("/icon.png")).toString());
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(button1, button2);
+        Group root = new Group();
+        Scene scene = new Scene(root, Color.CORNFLOWERBLUE);
+
+        */
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Main.fxml")));
+
+        Scene scene = new Scene(root);
+        Image icon = new Image("/icon.png");
         stage.getIcons().add(icon);
         stage.setFullScreen(true);
-        stage.setFullScreenExitHint("perdiste");
         stage.setTitle("UBAlatro");
+
         stage.setScene(scene);
         stage.show();
     }
-
-
 }
