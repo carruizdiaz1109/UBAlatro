@@ -71,12 +71,10 @@ public abstract class Jugada  implements Evaluable{
         for (CartaPoker carta : cartasValidas) {
             this.puntaje.incrementarPuntos(carta.calcularPuntaje());
         }
-        //this.sumaValores.incrementarPuntos(sumaPuntajes);
-    } //Sumo los puntajes de cada carta en puntaje suma valores!
+    }
 
     public int calcularPuntaje() {
         sumarValores();
-        this.puntaje = this.puntaje.sumarPuntaje(this.sumaValores);
         this.puntaje = this.puntaje.sumarPuntaje(this.puntajeComodin);
         return this.puntaje.calcularPuntaje();
     }
