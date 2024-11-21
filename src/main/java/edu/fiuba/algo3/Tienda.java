@@ -67,6 +67,22 @@ public class Tienda {
                 }
             }
 
+            JsonNode alDescarteNode = rootNode.get("Bonus por Descarte");
+            JsonNode comodinesDescarteNode = alDescarteNode.get("comodines");
+
+            for (JsonNode comodinDescarte : comodinesDescarteNode) {
+                String nombre = comodinDescarte.get("nombre").asText();
+                String descripcion =  comodinDescarte.get("descripcion").asText();
+                JsonNode efectoNode = comodinDescarte.get("efecto");
+                int multiplicador = efectoNode.get("multiplicador").asInt();
+                int valor = efectoNode.get("puntos").asInt();
+                Puntaje puntaje = new Puntaje(valor, multiplicador);
+                EfectoDescarte efectoDescarte = new EfectoDescarte(Descarte.class, puntaje, nombre, descripcion);
+                this.comodinesAComprar.add(efectoDescarte);
+            }
+
+
+
         } catch (IOException e) {
             e.printStackTrace(); // Manejo
         }
