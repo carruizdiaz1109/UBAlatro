@@ -31,7 +31,6 @@ public class JugadaTest {
         //Assert
         assertTrue(jugada instanceof CartaAlta);
         assertEquals(puntajeEsperado, jugada.calcularValor());
-        //assertEquals(cartas.get(2), jugada.cartasValidas.get(0)); // La carta alta es 8
     }
 
     @Test
@@ -52,7 +51,6 @@ public class JugadaTest {
         //Assert
         assertTrue(jugada instanceof Par);
         assertEquals(puntajeEsperado, jugada.calcularValor());
-        //assertEquals(5, jugada.cartasValidas.get(0).getValor()); // Verifica el valor de la pareja
     }
 
     @Test
@@ -73,7 +71,6 @@ public class JugadaTest {
         //Assert
         assertTrue(jugada instanceof DoblePar);
         assertEquals(puntajeEsperado, jugada.calcularValor());
-        //assertEquals(4, jugada.cartasValidas.size()); // Verifica que hay dos pares
     }
 
     @Test
@@ -94,8 +91,6 @@ public class JugadaTest {
         //Assert
         assertTrue(jugada instanceof Trio);
         assertEquals(puntajeEsperado, jugada.calcularValor());
-        //assertEquals(3, jugada.cartasValidas.size());
-        //assertEquals(7, jugada.cartasValidas.get(0).getValor()); // Verifica el valor del trío
     }
     @Test
     public void testEscalera() {
