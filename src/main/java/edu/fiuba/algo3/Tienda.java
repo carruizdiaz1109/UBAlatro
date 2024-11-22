@@ -80,9 +80,24 @@ public class Tienda {
                 EfectoDescarte efectoDescarte = new EfectoDescarte(Descarte.class, puntaje, nombre, descripcion);
                 this.comodinesAComprar.add(efectoDescarte);
             }
+/*
+            JsonNode chanceNode = rootNode.get("Chance de activarse aleatoriamente");
+            JsonNode comodinesNode = chanceNode.get("comodines");
 
+            for (JsonNode comodinNode : comodinesNode) {
+                String nombre = comodinNode.get("nombre").asText();
+                String descripcion = comodinNode.get("descripcion").asText();
+                int probabilidad = comodinNode.get("activacion").get("1 en").asInt();
+                JsonNode efectoNode = comodinNode.get("efecto");
+                int puntos = efectoNode.get("puntos").asInt();
+                int multiplicador = efectoNode.get("multiplicador").asInt();
 
+                Puntaje puntaje = new Puntaje(puntos, multiplicador);
 
+                EfectoAleatorio comodin = new EfectoAleatorio(probabilidad, puntaje, nombre, descripcion);
+                this.comodinesAComprar.add(comodin);
+            }
+*/
         } catch (IOException e) {
             e.printStackTrace(); // Manejo
         }
