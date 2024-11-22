@@ -1,6 +1,6 @@
 # /bin/bash
 set -e
 
-docker-compose -f docker/docker-compose.yaml up -d --build
-docker-compose -f docker/docker-compose.yaml exec app bash
-docker-compose -f docker/docker-compose.yaml down
+docker compose -f docker/docker-compose.yaml up -d --build
+docker compose -f docker/docker-compose.yaml exec app bash
+docker compose -f docker/docker-compose.yaml down
