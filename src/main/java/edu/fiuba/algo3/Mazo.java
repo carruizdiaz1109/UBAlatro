@@ -3,7 +3,6 @@ package edu.fiuba.algo3;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class Mazo extends ConjuntoCartas {
 
     public Mazo(){
         super();
-        inicializarMazo("Balatro.json");
+        inicializarMazo("json/Balatro.json");
         this.mazoDescarte = new ArrayList<CartaPoker>();
     }
 

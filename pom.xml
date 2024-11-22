@@ -10,7 +10,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
-    <javafx.version>17.0.2</javafx.version>
+    <javafx.version>23.0.1</javafx.version>
     <main-class>edu.fiuba.algo3.Main</main-class>
   </properties>
 

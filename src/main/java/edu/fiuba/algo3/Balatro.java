@@ -17,8 +17,8 @@ public class Balatro {
     public Balatro(Jugador jugador) {
         this.rondas = new ArrayList<>();
         this.mazo = new Mazo();
-        cargarRondasDesdeJSON("Balatro.json");
-        mazo.inicializarMazo("Balatro.json");
+        cargarRondasDesdeJSON("json/Balatro.json");
+        mazo.inicializarMazo("json/Balatro.json");
         this.mazo.mezclar();
         this.jugador = jugador;
     }

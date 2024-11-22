@@ -1,23 +1,11 @@
 package edu.fiuba.algo3;
 
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.util.List;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.IOException;
 import java.util.Objects;
-
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.fxml.FXMLLoader;
 
@@ -32,10 +20,24 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Main.fxml")));
 
-        Scene scene = new Scene(root);
-        Image icon = new Image("/icon.png");
+        Image cartaImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/imagenes/cartas/AP.png")));
+        javafx.scene.image.ImageView cartaView = new javafx.scene.image.ImageView(cartaImage);
+
+        cartaView.setFitWidth(150);
+        cartaView.setFitHeight(225);
+        cartaView.setPreserveRatio(true);
+
+        StackPane cartaPane = new StackPane(cartaView);
+        cartaPane.setPickOnBounds(false);
+        cartaPane.setStyle("-fx-background-color: transparent;");
+        cartaPane.setMouseTransparent(false);
+        cartaPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        StackPane.setAlignment(cartaView, javafx.geometry.Pos.CENTER);
+        StackPane rootPane = new StackPane(root, cartaPane);
+
+        Scene scene = new Scene(rootPane);
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/icon.png")));
         stage.getIcons().add(icon);
-        stage.setFullScreen(true);
         stage.setResizable(false);
         stage.setTitle("UBAlatro");
 
