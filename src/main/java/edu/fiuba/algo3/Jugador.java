@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.comodines.Comodin;
 import edu.fiuba.algo3.jugadas.Descarte;
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.Comodin;
+import edu.fiuba.algo3.comodines.Comodin;
 import edu.fiuba.algo3.comodines.*;
 import edu.fiuba.algo3.jugadas.*;
 import org.junit.jupiter.api.Assertions;
@@ -22,7 +22,8 @@ public class ComodinTest {
         ));
         Jugada jugada = Jugada.crearJugada(cartas);
         Puntaje puntaje = new Puntaje(10, 1);
-        EfectoPuntaje comodin = new EfectoPuntaje(puntaje, "Estrella Fugaz", "+10 fichines");
+        NoAleatorio noAleatorio = new NoAleatorio();
+        EfectoPuntaje comodin = new EfectoPuntaje(puntaje, "Estrella Fugaz", "+10 fichines", noAleatorio);
 
         // Act
         comodin.aplicar(jugada);
@@ -46,7 +47,8 @@ public class ComodinTest {
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado1 = (2+3+4+5+6+30)*12;
         Puntaje puntaje = new Puntaje(0, 3);
-        EfectoJugada unComodin = new EfectoJugada(Escalera.class, puntaje, "Escalinatas", "x3 en escalera");
+        NoAleatorio noAleatorio = new NoAleatorio();
+        EfectoJugada unComodin = new EfectoJugada(Escalera.class, puntaje, "Escalinatas", "x3 en escalera", noAleatorio);
         //Act
         unComodin.aplicar(unaJugada);
         int puntajeObtenido = unaJugada.calcularPuntaje();
@@ -66,7 +68,8 @@ public class ComodinTest {
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
         Puntaje puntaje = new Puntaje(0, 3);
-        Comodin unComodin = new EfectoJugada(CartaAlta.class, puntaje, "Alta carta" , "x3 si se juega cartaAlta");
+        NoAleatorio noAleatorio = new NoAleatorio();
+        Comodin unComodin = new EfectoJugada(CartaAlta.class, puntaje, "Alta carta" , "x3 si se juega cartaAlta", noAleatorio);
         //Act
         unComodin.aplicar(unaJugada);
         int puntajeObtenido = unaJugada.calcularPuntaje();
@@ -87,7 +90,8 @@ public class ComodinTest {
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado = (2*4+60)*7*8;
         Puntaje puntaje = new Puntaje(0, 8);
-        Comodin unComodin = new EfectoPuntaje( puntaje, "Pluton", "x8 de multiplicador a la jugada");
+        NoAleatorio noAleatorio = new NoAleatorio();
+        Comodin unComodin = new EfectoPuntaje( puntaje, "Pluton", "x8 de multiplicador a la jugada", noAleatorio);
         //Act
         unComodin.aplicar(unaJugada);
         int puntajeObtenido = unaJugada.calcularPuntaje();
@@ -108,7 +112,8 @@ public class ComodinTest {
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado = (2*4+60+10)*7;
         Puntaje puntaje = new Puntaje(10, 1);
-        Comodin unComodin = new EfectoAleatorio(1000, puntaje, "Panico" , "1 en 1000 de probabilidad") {
+        Aleatorio esAleatorio = new Aleatorio(1000);
+        Comodin unComodin = new EfectoPuntaje(puntaje, "Panico" , "1 en 1000 de probabilidad", esAleatorio) {
             @Override
             public boolean seAplica() {
                 return true;
@@ -125,10 +130,11 @@ public class ComodinTest {
     public void test06SeAplicaUnComodinCombinado() {
         //Arrange
         Puntaje puntaje1 = new Puntaje(0, 2);
-        Comodin comodin1 = new EfectoPuntaje( puntaje1, "Doblete", "x2 de multiplicador");
+        NoAleatorio noEsAleatorio = new NoAleatorio();
+        Comodin comodin1 = new EfectoPuntaje( puntaje1, "Doblete", "x2 de multiplicador", noEsAleatorio);
         Puntaje puntaje2 = new Puntaje(20, 1);
-        Comodin comodin2 = new EfectoJugada(CartaAlta.class, puntaje2, "Algoritmos", "+20 puntos");
-        EfectoCombinado comodinCombinado = new EfectoCombinado("Maravilla", "x2 de multiplicador y +20 puntos");
+        Comodin comodin2 = new EfectoJugada(CartaAlta.class, puntaje2, "Algoritmos", "+20 puntos", noEsAleatorio);
+        EfectoCombinado comodinCombinado = new EfectoCombinado("Maravilla", "x2 de multiplicador y +20 puntos", noEsAleatorio);
         comodinCombinado.agregar(comodin1);
         comodinCombinado.agregar(comodin2);
 

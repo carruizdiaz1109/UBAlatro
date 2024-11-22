@@ -24,7 +24,7 @@ public class Tienda {
         inicializarComodines("Comodines.json");
     }
 
-    public void inicializarComodines(String rutaArchivo) {
+    private void inicializarComodines(String rutaArchivo) {
         ObjectMapper objectMapper = new ObjectMapper();
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(rutaArchivo)) {
             JsonNode rootNode = objectMapper.readTree(inputStream);
@@ -32,37 +32,18 @@ public class Tienda {
             JsonNode comodinesPuntajeNode = alPuntajeNode.get("comodines");
 
             for (JsonNode comodinPuntajeNode : comodinesPuntajeNode) {
-                String nombre = comodinPuntajeNode.get("nombre").asText();
-                String descripcion =  comodinPuntajeNode.get("descripcion").asText();
-                JsonNode efectoNode = comodinPuntajeNode.get("efecto");
-                int multiplicador = efectoNode.get("multiplicador").asInt();
-                int valor = efectoNode.get("puntos").asInt();
-                Puntaje puntaje = new Puntaje(valor, multiplicador);
-                EfectoPuntaje efectoPuntaje = new EfectoPuntaje(puntaje, nombre, descripcion);
-                this.comodinesAComprar.add(efectoPuntaje);
+                Comodin efectoPuntaje = inicializarComodin(comodinPuntajeNode, EfectoPuntaje.class);
+                if (efectoPuntaje != null) {
+                    this.comodinesAComprar.add(efectoPuntaje);
+                }
             }
 
             JsonNode aJugadaNode = rootNode.get("Bonus por Mano Jugada");
             JsonNode comodinesaJugadaNode = aJugadaNode.get("comodines");
 
             for (JsonNode comodinJugadaNode : comodinesaJugadaNode) {
-                String nombre = comodinJugadaNode.get("nombre").asText();
-                String descripcion =  comodinJugadaNode.get("descripcion").asText();
-                JsonNode efectoNode = comodinJugadaNode.get("efecto");
-                int multiplicador = efectoNode.get("multiplicador").asInt();
-                int valor = efectoNode.get("puntos").asInt();
-                Puntaje puntaje = new Puntaje(valor, multiplicador);
-                JsonNode activacionNode = comodinJugadaNode.get("activacion");
-
-                if (activacionNode != null && activacionNode.has("Mano Jugada")) {
-                    // Obtenemos el valor dentro de "Mano Jugada"
-                    String tipoJugada = activacionNode.get("Mano Jugada").asText();
-
-                    // Usamos el tipo de jugada para obtener la clase correspondiente
-                    Class<? extends Jugada> claseJugada = obtenerClaseJugada(tipoJugada);
-
-                    // Crear el efecto de jugada, pasando el tipo de jugada
-                    EfectoJugada efectoJugada = new EfectoJugada(claseJugada, puntaje, nombre, descripcion);
+                Comodin efectoJugada = inicializarComodin(comodinJugadaNode, EfectoJugada.class);
+                if (efectoJugada != null) {
                     this.comodinesAComprar.add(efectoJugada);
                 }
             }
@@ -71,36 +52,72 @@ public class Tienda {
             JsonNode comodinesDescarteNode = alDescarteNode.get("comodines");
 
             for (JsonNode comodinDescarte : comodinesDescarteNode) {
-                String nombre = comodinDescarte.get("nombre").asText();
-                String descripcion =  comodinDescarte.get("descripcion").asText();
-                JsonNode efectoNode = comodinDescarte.get("efecto");
-                int multiplicador = efectoNode.get("multiplicador").asInt();
-                int valor = efectoNode.get("puntos").asInt();
-                Puntaje puntaje = new Puntaje(valor, multiplicador);
-                EfectoDescarte efectoDescarte = new EfectoDescarte(Descarte.class, puntaje, nombre, descripcion);
-                this.comodinesAComprar.add(efectoDescarte);
+                Comodin efectoDescarte = inicializarComodin(comodinDescarte, EfectoJugada.class);
+                if (efectoDescarte != null) {
+                    this.comodinesAComprar.add(efectoDescarte);
+                }
             }
-/*
+
             JsonNode chanceNode = rootNode.get("Chance de activarse aleatoriamente");
-            JsonNode comodinesNode = chanceNode.get("comodines");
+            JsonNode comodinesAleatoriosNode = chanceNode.get("comodines");
 
-            for (JsonNode comodinNode : comodinesNode) {
-                String nombre = comodinNode.get("nombre").asText();
-                String descripcion = comodinNode.get("descripcion").asText();
-                int probabilidad = comodinNode.get("activacion").get("1 en").asInt();
-                JsonNode efectoNode = comodinNode.get("efecto");
-                int puntos = efectoNode.get("puntos").asInt();
-                int multiplicador = efectoNode.get("multiplicador").asInt();
-
-                Puntaje puntaje = new Puntaje(puntos, multiplicador);
-
-                EfectoAleatorio comodin = new EfectoAleatorio(probabilidad, puntaje, nombre, descripcion);
-                this.comodinesAComprar.add(comodin);
+            for (JsonNode comodinAleatorioNode : comodinesAleatoriosNode) {
+                Comodin efectoPuntaje = inicializarComodin(comodinAleatorioNode, EfectoPuntaje.class);
+                if (efectoPuntaje != null) {
+                    this.comodinesAComprar.add(efectoPuntaje);
+                }
             }
-*/
+
+            JsonNode combinacionNode = rootNode.get("Combinación");
+            JsonNode comodinesCombinacionNode = combinacionNode.get("comodines");
+            for (JsonNode comodinCombinacionNode : comodinesCombinacionNode) {
+                String nombreCombinacion = comodinCombinacionNode.get("nombre").asText();
+                String descripcionCombinacion = comodinCombinacionNode.get("descripcion").asText();
+                EfectoCombinado comodinCombinado = new EfectoCombinado(nombreCombinacion, descripcionCombinacion, new NoAleatorio());
+                JsonNode comodinesSubNode = comodinCombinacionNode.get("comodines");
+
+                // Procesar subcomodines dentro de la combinación
+                for (JsonNode subComodinNode : comodinesSubNode) {
+                    Comodin subComodin = inicializarComodin(subComodinNode, EfectoPuntaje.class); // O tipo adecuado
+                    if (subComodin != null) {
+                        comodinCombinado.agregar(subComodin);
+                    }
+                }
+                this.comodinesAComprar.add(comodinCombinado);
+            }
         } catch (IOException e) {
             e.printStackTrace(); // Manejo
         }
+    }
+
+    private Comodin inicializarComodin(JsonNode comodinNode, Class<? extends Comodin> tipoEfecto) {
+        String nombre = comodinNode.get("nombre").asText();
+        String descripcion = comodinNode.get("descripcion").asText();
+        JsonNode efectoNode = comodinNode.get("efecto");
+        int multiplicador = efectoNode.get("multiplicador").asInt();
+        int valor = efectoNode.get("puntos").asInt();
+        Puntaje puntaje = new Puntaje(valor, multiplicador);
+
+        if (tipoEfecto.equals(EfectoPuntaje.class)) {
+            JsonNode activacionNode = comodinNode.get("activacion");
+            if (activacionNode != null && activacionNode.has("1 en")){
+                int chance = activacionNode.get("1 en").asInt();
+                return new EfectoPuntaje(puntaje, nombre, descripcion, new Aleatorio(chance));
+            }
+            return new EfectoPuntaje(puntaje, nombre, descripcion, new NoAleatorio());
+
+        } else if (tipoEfecto.equals(EfectoJugada.class)) {
+            JsonNode activacionNode = comodinNode.get("activacion");
+            if (activacionNode != null && activacionNode.has("Mano Jugada")) {
+                String tipoJugada = activacionNode.get("Mano Jugada").asText();
+                Class<? extends Jugada> claseJugada = obtenerClaseJugada(tipoJugada);
+                return new EfectoJugada(claseJugada, puntaje, nombre, descripcion, new NoAleatorio());
+            } else {
+                // Caso para "Bonus por Descarte"
+                return new EfectoJugada(Descarte.class, puntaje, nombre, descripcion, new NoAleatorio());
+            }
+        }
+        return null;
     }
 
     private Class<? extends Jugada> obtenerClaseJugada(String tipoJugada) {

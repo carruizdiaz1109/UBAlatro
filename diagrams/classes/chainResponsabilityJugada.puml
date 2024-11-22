@@ -3,17 +3,39 @@
 
 abstract class Jugada
 interface evaluable
-class Escalera
-class Poker
-class Par
-class Trio
-class DoblePar
-class FullHouse
-class EscaleraReal
-class EscaleraColor
-class Color
-class CartaAlta
-class Descarte
+class Escalera {
+     + esJugada(List<CartaPoker> cartas)
+}
+class Poker{
+     + esJugada(List<CartaPoker> cartas)
+}
+class Par{
+              + esJugada(List<CartaPoker> cartas)
+         }
+class Trio{
+               + esJugada(List<CartaPoker> cartas)
+          }
+class DoblePar{
+                   + esJugada(List<CartaPoker> cartas)
+              }
+class FullHouse{
+                    + esJugada(List<CartaPoker> cartas)
+               }
+class EscaleraReal{
+                       + esJugada(List<CartaPoker> cartas)
+                  }
+class EscaleraColor{
+                        + esJugada(List<CartaPoker> cartas)
+                   }
+class Color{
+                + esJugada(List<CartaPoker> cartas)
+           }
+class CartaAlta{
+                    + esJugada(List<CartaPoker> cartas)
+               }
+class Descarte {
+                   + esJugada(List<CartaPoker> cartas)
+              }
 
 interface evaluable {
      + esJugada(List<CartaPoker> cartas)
