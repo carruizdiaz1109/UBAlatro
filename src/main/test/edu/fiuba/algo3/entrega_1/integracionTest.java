@@ -2,7 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.jugadas.*;
-import edu.fiuba.algo3.tarots.SobreCarta;
+import edu.fiuba.algo3.tarots.EfectoCarta;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -127,7 +127,7 @@ public class integracionTest {
 
         CartaPoker cartaPoker = new CartaPoker(Valor.DOS, Palo.PICAS);
 
-        Tarot tarot = new SobreCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(10, 1));
+        Tarot tarot = new EfectoCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(10, 1));
         tarot.aplicar(cartaPoker);
 
         int puntajeObtenido = cartaPoker.calcularPuntaje();
@@ -141,7 +141,7 @@ public class integracionTest {
 
         CartaPoker cartaPoker = new CartaPoker(Valor.DIEZ, Palo.CORAZONES);
 
-        Tarot tarot = new SobreCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(10, 6));
+        Tarot tarot = new EfectoCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(10, 6));
         tarot.aplicar(cartaPoker);
 
         int puntajeObtenido = cartaPoker.calcularPuntaje();

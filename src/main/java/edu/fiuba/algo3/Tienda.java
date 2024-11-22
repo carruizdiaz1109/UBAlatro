@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fiuba.algo3.jugadas.*;
 import edu.fiuba.algo3.comodines.*;
 import edu.fiuba.algo3.tarots.*;
+import edu.fiuba.algo3.tarots.EfectoJugada;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class Tienda {
             JsonNode comodinesaJugadaNode = aJugadaNode.get("comodines");
 
             for (JsonNode comodinJugadaNode : comodinesaJugadaNode) {
-                Comodin efectoJugada = inicializarComodin(comodinJugadaNode, EfectoJugada.class);
+                Comodin efectoJugada = inicializarComodin(comodinJugadaNode, edu.fiuba.algo3.comodines.EfectoJugada.class);
                 if (efectoJugada != null) {
                     this.comodinesAComprar.add(efectoJugada);
                 }
@@ -54,7 +54,7 @@ public class Tienda {
             JsonNode comodinesDescarteNode = alDescarteNode.get("comodines");
 
             for (JsonNode comodinDescarte : comodinesDescarteNode) {
-                Comodin efectoDescarte = inicializarComodin(comodinDescarte, EfectoJugada.class);
+                Comodin efectoDescarte = inicializarComodin(comodinDescarte, edu.fiuba.algo3.comodines.EfectoJugada.class);
                 if (efectoDescarte != null) {
                     this.comodinesAComprar.add(efectoDescarte);
                 }
@@ -108,15 +108,15 @@ public class Tienda {
             }
             return new EfectoPuntaje(puntaje, nombre, descripcion, new NoAleatorio());
 
-        } else if (tipoEfecto.equals(EfectoJugada.class)) {
+        } else if (tipoEfecto.equals(edu.fiuba.algo3.comodines.EfectoJugada.class)) {
             JsonNode activacionNode = comodinNode.get("activacion");
             if (activacionNode != null && activacionNode.has("Mano Jugada")) {
                 String tipoJugada = activacionNode.get("Mano Jugada").asText();
                 Class<? extends Jugada> claseJugada = obtenerClaseJugada(tipoJugada);
-                return new EfectoJugada(claseJugada, puntaje, nombre, descripcion, new NoAleatorio());
+                return new edu.fiuba.algo3.comodines.EfectoJugada(claseJugada, puntaje, nombre, descripcion, new NoAleatorio());
             } else {
                 // Caso para "Bonus por Descarte"
-                return new EfectoJugada(Descarte.class, puntaje, nombre, descripcion, new NoAleatorio());
+                return new edu.fiuba.algo3.comodines.EfectoJugada(Descarte.class, puntaje, nombre, descripcion, new NoAleatorio());
             }
         }
         return null;
@@ -151,9 +151,9 @@ public class Tienda {
         String ejemplar = tarotNode.get("ejemplar").asText();
 
         if (sobre.equalsIgnoreCase("carta")) {
-            return new SobreCarta(nombre, descripcion, puntaje);
+            return new EfectoCarta(nombre, descripcion, puntaje);
         } else if (sobre.equalsIgnoreCase("mano")) {
-            return new SobreMano(nombre, descripcion, puntaje, ejemplar);
+            return new EfectoJugada(nombre, descripcion, puntaje, ejemplar);
         }
         return null;
     }

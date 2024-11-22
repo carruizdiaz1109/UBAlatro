@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.tarots.SobreCarta;
+import edu.fiuba.algo3.tarots.EfectoCarta;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -85,7 +84,7 @@ public class CartaPokerTest {
         Puntaje puntajeEsperado = new Puntaje(3,1);
 
         CartaPoker carta = new CartaPoker(Valor.CUATRO, Palo.CORAZONES);
-        Tarot unTarot = new SobreCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(3, 1));
+        Tarot unTarot = new EfectoCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(3, 1));
 
         unTarot.aplicar(carta);
 
