@@ -11,5 +11,6 @@ public class TiendaTest {
         Tienda tienda = new Tienda();
         int cantidad = tienda.obtenerComodines().size();
         assertEquals(20,cantidad);
+        //assertEquals(28,cantidad);
     }
 }
