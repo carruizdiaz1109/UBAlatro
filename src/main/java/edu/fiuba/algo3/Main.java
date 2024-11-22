@@ -20,7 +20,7 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Main.fxml")));
 
-        Image cartaImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/imagenes/cartas/AP.png")));
+        Image cartaImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/imagenes/cartas/14P.png")));
         javafx.scene.image.ImageView cartaView = new javafx.scene.image.ImageView(cartaImage);
 
         cartaView.setFitWidth(150);
