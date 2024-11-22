@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.comodines;
 
-import edu.fiuba.algo3.Comodin;
 import edu.fiuba.algo3.Jugada;
 import edu.fiuba.algo3.Puntaje;
 
@@ -8,8 +7,8 @@ public class EfectoJugada extends Comodin {
 
     private final Class <? extends Jugada> jugadaAAplicar;
 
-    public EfectoJugada(Class <? extends Jugada> unaJugadaAAplicar, Puntaje puntaje, String nombre, String descripcion) {
-        super(puntaje, nombre, descripcion);
+    public EfectoJugada(Class <? extends Jugada> unaJugadaAAplicar, Puntaje puntaje, String nombre, String descripcion, Aleatoreidad unaAleatoreidad) {
+        super(puntaje, nombre, descripcion, unaAleatoreidad);
         this.jugadaAAplicar = unaJugadaAAplicar;
     }
 

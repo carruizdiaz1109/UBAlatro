@@ -1,5 +1,7 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.comodines.Comodin;
+
 import java.util.ArrayList;
 import java.util.List;
 
