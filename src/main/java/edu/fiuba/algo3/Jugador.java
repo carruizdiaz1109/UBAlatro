@@ -50,7 +50,7 @@ public class Jugador {
 
     public void utilizarTarot(Tarot tarotaAplicar, CartaPoker cartaPoker) {
         if (!this.cartasTarot.isEmpty() && this.cartasTarot.contains(tarotaAplicar)) {
-            cartaPoker.activarTarot(tarotaAplicar);
+            tarotaAplicar.aplicar(cartaPoker);
         } else {
             throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
         }

@@ -82,4 +82,8 @@ public abstract class Jugada  implements Evaluable{
     public void aplicarComodin(Puntaje unPuntaje) {
         this.puntajeComodin = this.puntajeComodin.sumarPuntaje(unPuntaje);
     }
+
+    public void aplicarTarot(Puntaje unPuntaje){
+        this.puntaje = unPuntaje;
+    }
 }
