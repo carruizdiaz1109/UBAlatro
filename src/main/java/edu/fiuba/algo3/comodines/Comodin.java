@@ -21,5 +21,9 @@ public abstract class Comodin implements Aleatoreidad {
         return this.aleatoreidad.seAplica();
     }
 
+    public void setAleatoreidad(Aleatoreidad nuevaAleatoreidad) {
+        this.aleatoreidad = nuevaAleatoreidad;
+    }
+
     public abstract void aplicar(Jugada jugada);
 }
