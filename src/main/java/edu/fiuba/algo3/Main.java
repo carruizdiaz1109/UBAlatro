@@ -1,6 +1,8 @@
 package edu.fiuba.algo3;
 
 import java.util.Objects;
+
+import edu.fiuba.algo3.vistas.CartaVisual;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,20 +21,23 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Main.fxml")));
+        // todo esto esta medio de prueba
+        CartaVisual carta1 = new CartaVisual("/imagenes/cartas/14P.png", 150, 225);
+        CartaVisual carta2 = new CartaVisual("/imagenes/cartas/7C.png", 150, 225);
+        CartaVisual carta3 = new CartaVisual("/imagenes/cartas/13D.png", 150, 225);
 
-        Image cartaImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/imagenes/cartas/14P.png")));
-        javafx.scene.image.ImageView cartaView = new javafx.scene.image.ImageView(cartaImage);
+        carta1.setLayoutX(400);
+        carta1.setLayoutY(300);
 
-        cartaView.setFitWidth(150);
-        cartaView.setFitHeight(225);
-        cartaView.setPreserveRatio(true);
+        carta2.setLayoutX(600);
+        carta2.setLayoutY(300);
 
-        StackPane cartaPane = new StackPane(cartaView);
-        cartaPane.setPickOnBounds(false);
+        carta3.setLayoutX(800);
+        carta3.setLayoutY(300);
+
+        javafx.scene.layout.Pane cartaPane = new javafx.scene.layout.Pane(carta1, carta2, carta3);
         cartaPane.setStyle("-fx-background-color: transparent;");
-        cartaPane.setMouseTransparent(false);
-        cartaPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        StackPane.setAlignment(cartaView, javafx.geometry.Pos.CENTER);
+
         StackPane rootPane = new StackPane(root, cartaPane);
 
         Scene scene = new Scene(rootPane);

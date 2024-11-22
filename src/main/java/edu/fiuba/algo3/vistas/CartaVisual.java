@@ -1,40 +1,39 @@
 package edu.fiuba.algo3.vistas;
 
-import edu.fiuba.algo3.CartaPoker;
-import edu.fiuba.algo3.Palo;
-import edu.fiuba.algo3.Valor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-public class CartaVisual extends CartaPoker {
+import java.util.Objects;
 
-    private final ImageView imageView;
+public class CartaVisual extends ImageView {
 
-    public CartaVisual(String rutaImagen, double ancho, double alto) {
-        super(Valor.AS, Palo.PICAS);
-        this.imageView = new ImageView(new Image(rutaImagen));
-        this.imageView.setFitWidth(ancho);
-        this.imageView.setFitHeight(alto);
-        hacerArrastrable();
-    }
+    public CartaVisual(String imagePath, double width, double height) {
+        super(new Image(Objects.requireNonNull(CartaVisual.class.getResourceAsStream(imagePath))));
+        this.setFitWidth(width);
+        this.setFitHeight(height);
+        this.setPreserveRatio(true);
 
-    public ImageView getImageView() {
-        return imageView;
+        this.hacerArrastrable();
     }
 
     private void hacerArrastrable() {
+
         final double[] offsetX = {0};
         final double[] offsetY = {0};
 
-        imageView.setOnMousePressed((MouseEvent e) -> {
-            offsetX[0] = e.getSceneX() - imageView.getLayoutX();
-            offsetY[0] = e.getSceneY() - imageView.getLayoutY();
+        this.setOnMousePressed(event -> {
+            offsetX[0] = event.getSceneX() - this.getLayoutX();
+            offsetY[0] = event.getSceneY() - this.getLayoutY();
         });
 
-        imageView.setOnMouseDragged((MouseEvent e) -> {
-            imageView.setLayoutX(e.getSceneX() - offsetX[0]);
-            imageView.setLayoutY(e.getSceneY() - offsetY[0]);
+        this.setOnMouseDragged(event -> {
+            this.setLayoutX(event.getSceneX() - offsetX[0]);
+            this.setLayoutY(event.getSceneY() - offsetY[0]);
+        });
+
+        this.setOnMouseReleased(event -> {
+            System.out.println("Carta soltada en: " + this.getLayoutX() + ", " + this.getLayoutY());
         });
     }
 }
