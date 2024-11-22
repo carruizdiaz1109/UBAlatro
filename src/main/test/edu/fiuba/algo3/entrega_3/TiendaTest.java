@@ -12,4 +12,11 @@ public class TiendaTest {
         int cantidad = tienda.obtenerComodines().size();
         assertEquals(33,cantidad);
     }
+
+    @Test
+    public void test02SeInicializanCorrectamenteTarots() {
+        Tienda tienda = new Tienda();
+        int cantidad = tienda.obtenerTarots().size();
+        assertEquals(15,cantidad);
+    }
 }

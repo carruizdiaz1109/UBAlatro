@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fiuba.algo3.jugadas.*;
 import edu.fiuba.algo3.comodines.*;
+import edu.fiuba.algo3.tarots.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class Tienda {
         this.tarotsAComprar = new ArrayList<Tarot>();
         this.comodinesAComprar = new ArrayList<Comodin>();
         inicializarComodines("Comodines.json");
+        inicializarTarots("Tarot.json");
     }
 
     private void inicializarComodines(String rutaArchivo) {
@@ -120,6 +122,42 @@ public class Tienda {
         return null;
     }
 
+    private void inicializarTarots(String rutaArchivo) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(rutaArchivo)) {
+            JsonNode rootNode = objectMapper.readTree(inputStream);
+            JsonNode tarotsNode = rootNode.get("tarots");
+
+            for (JsonNode tarotNode : tarotsNode) {
+                Tarot tarot = inicializarTarot(tarotNode);
+                if (tarot != null) {
+                    this.tarotsAComprar.add(tarot);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Tarot inicializarTarot(JsonNode tarotNode) {
+        String nombre = tarotNode.get("nombre").asText();
+        String descripcion = tarotNode.get("descripcion").asText();
+        JsonNode efectoNode = tarotNode.get("efecto");
+        int puntos = efectoNode.get("puntos").asInt();
+        int multiplicador = efectoNode.get("multiplicador").asInt();
+        Puntaje puntaje = new Puntaje(puntos, multiplicador);
+
+        String sobre = tarotNode.get("sobre").asText();
+        String ejemplar = tarotNode.get("ejemplar").asText();
+
+        if (sobre.equalsIgnoreCase("carta")) {
+            return new SobreCarta(nombre, descripcion, puntaje);
+        } else if (sobre.equalsIgnoreCase("mano")) {
+            return new SobreMano(nombre, descripcion, puntaje, ejemplar);
+        }
+        return null;
+    }
+
     private Class<? extends Jugada> obtenerClaseJugada(String tipoJugada) {
         switch (tipoJugada) {
             case "par":
@@ -145,5 +183,9 @@ public class Tienda {
 
     public List<Comodin> obtenerComodines() {
         return this.comodinesAComprar;
+    }
+
+    public List<Tarot> obtenerTarots() {
+        return this.tarotsAComprar;
     }
 }
