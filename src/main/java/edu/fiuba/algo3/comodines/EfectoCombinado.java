@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.comodines;
 
-import edu.fiuba.algo3.Comodin;
 import edu.fiuba.algo3.Jugada;
 import edu.fiuba.algo3.Puntaje;
 
@@ -10,8 +9,8 @@ import java.util.List;
 public class EfectoCombinado extends Comodin {
     private final List<Comodin> combinaciones;
 
-    public EfectoCombinado(String nombre, String descripcion) {
-        super (new Puntaje(0, 1),  nombre, descripcion);
+    public EfectoCombinado(String nombre, String descripcion, Aleatoreidad unaAleatoreidad) {
+        super (new Puntaje(0, 1),  nombre, descripcion,unaAleatoreidad);
         this.combinaciones = new ArrayList<>();
     }
 
