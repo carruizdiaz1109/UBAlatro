@@ -36,6 +36,7 @@ public class Main extends Application {
         Image icon = new Image("/icon.png");
         stage.getIcons().add(icon);
         stage.setFullScreen(true);
+        stage.setResizable(false);
         stage.setTitle("UBAlatro");
 
         stage.setScene(scene);
