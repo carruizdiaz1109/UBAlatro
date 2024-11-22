@@ -25,14 +25,7 @@ abstract class Comodin {
 class EfectoJugada {
     + aplicar(unaJugada: Jugada)
 }
-class EfectoDescarte {
-    + aplicar(unaJugada: Jugada)
-}
-class EfectoAleatorio{
-    + EfectoAleatorio(probabilidad: int, valor: int, multiplicador: int, nombre: string, descripcion: string)
-    + aplicar(unaJugada: Jugada)
-    +seAplica(): boolean
-}
+
 class EfectoCombinado{
     + EfectoCombinado(lasCombinacines: List <Comodin>, nombre: string, descripcion: string)
     + aplicar(unaJugada: Jugada)
@@ -64,14 +57,11 @@ class Puntaje {
 Tienda o-- Comprable
 Comodin -up-|> Comprable
 Tarot -up-|> Comprable
-EfectoJugada -up-|> Comodin
-EfectoDescarte -up-|> Comodin
-EfectoAleatorio -up-|> Comodin
-EfectoCombinado -up-|> Comodin
 EfectoPuntaje -up-|> Comodin
-
-
-Comodin o-- Puntaje
-Tarot o-- Puntaje
+EfectoJugada -up-|> Comodin
+EfectoCombinado -up-|> Comodin
+EfectoCombinado o-- Comodin
+Comodin o-right-- Puntaje
+Tarot o-left-- Puntaje
 }
 @enduml

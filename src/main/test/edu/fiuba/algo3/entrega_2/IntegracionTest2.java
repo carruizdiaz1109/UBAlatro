@@ -105,7 +105,7 @@ public class IntegracionTest2 {
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
         Mano mano = new Mano(cartas);
         Puntaje puntaje = new Puntaje(10, 1);
-        Comodin unComodin = new EfectoDescarte(Descarte.class, puntaje, "Descartar suma" ,"+10 si realiza un descarte");
+        Comodin unComodin = new EfectoJugada(Descarte.class, puntaje, "Descartar suma" ,"+10 si realiza un descarte");
         Jugador jugador = new Jugador("Pepe", mazoMock) {
             @Override
             public void iniciarRonda(Ronda rondaActual){
