@@ -24,7 +24,6 @@ import javafx.fxml.FXMLLoader;
 public class Main extends Application {
 
     public static void main(String[] args) {
-        System.out.println(Main.class.getResource("/resources/background.png"));
         launch(args);
     }
 
