@@ -8,7 +8,7 @@ public abstract class Comodin implements Aleatoreidad {
     protected String nombre;
     protected String descripcion;
     protected Puntaje puntaje;
-    private final Aleatoreidad aleatoreidad;
+    private Aleatoreidad aleatoreidad;
 
     public Comodin(Puntaje puntaje, String nombre, String descripcion, Aleatoreidad unaAleatoreidad) {
         this.puntaje = puntaje;
