@@ -17,8 +17,9 @@ public class IntegracionTest2 {
         //Arrange
         Mazo mazoMock = mock(Mazo.class);
         when(mazoMock.tieneCartas()).thenReturn(true);
+        Tienda tienda = new Tienda();
         
-        Ronda ronda = new Ronda(1,10000,3,3);
+        Ronda ronda = new Ronda(1,10000,3,3, tienda);
         CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
         CartaPoker carta2 = new CartaPoker(Valor.TRES, Palo.DIAMANTES);
         CartaPoker carta3 = new CartaPoker(Valor.CUATRO, Palo.DIAMANTES);
@@ -57,7 +58,8 @@ public class IntegracionTest2 {
         //Arrange
         Mazo mazoMock = mock(Mazo.class);
         when(mazoMock.tieneCartas()).thenReturn(true);
-        Ronda ronda = new Ronda(1,10000,3,3);
+        Tienda tiendaMock = mock(Tienda.class);
+        Ronda ronda = new Ronda(1,10000,3,3, tiendaMock);
         CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
         CartaPoker carta2 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
         CartaPoker carta3 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
@@ -96,7 +98,8 @@ public class IntegracionTest2 {
         //Arrange
         Mazo mazoMock = mock(Mazo.class);
         when(mazoMock.tieneCartas()).thenReturn(true);
-        Ronda ronda = new Ronda(1,10000,3,3);
+        Tienda tiendaMock = mock(Tienda.class);
+        Ronda ronda = new Ronda(1,10000,3,3, tiendaMock);
         CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
         CartaPoker carta2 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
         CartaPoker carta3 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
@@ -135,7 +138,8 @@ public class IntegracionTest2 {
         //Arrange
         Mazo mazoMock = mock(Mazo.class);
         when(mazoMock.tieneCartas()).thenReturn(true);
-        Ronda ronda = new Ronda(1,10000,3,3);
+        Tienda tiendaMock = mock(Tienda.class);
+        Ronda ronda = new Ronda(1,10000,3,3, tiendaMock);
         CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
         CartaPoker carta2 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
         CartaPoker carta3 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
@@ -179,7 +183,8 @@ public class IntegracionTest2 {
         //Arrange
         Mazo mazoMock = mock(Mazo.class);
         when(mazoMock.tieneCartas()).thenReturn(true);
-        Ronda ronda = new Ronda(1,10000,3,3);
+        Tienda tiendaMock = mock(Tienda.class);
+        Ronda ronda = new Ronda(1,10000,3,3, tiendaMock);
         CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
         CartaPoker carta2 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
         CartaPoker carta3 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
