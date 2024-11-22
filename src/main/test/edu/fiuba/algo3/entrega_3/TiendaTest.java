@@ -10,7 +10,6 @@ public class TiendaTest {
     public void test01SeInicializanCorrectamenteComodines() {
         Tienda tienda = new Tienda();
         int cantidad = tienda.obtenerComodines().size();
-        assertEquals(20,cantidad);
-        //assertEquals(28,cantidad);
+        assertEquals(33,cantidad);
     }
 }
