@@ -3,6 +3,7 @@ package edu.fiuba.algo3;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -14,8 +15,9 @@ public class Mazo extends ConjuntoCartas {
 
     public Mazo(){
         super();
-        inicializarMazo("json/Balatro.json");
+        inicializarMazo();
         this.mazoDescarte = new ArrayList<CartaPoker>();
+        mezclar();
     }
 
     public Mazo(ArrayList<CartaPoker> cartas){
@@ -35,11 +37,11 @@ public class Mazo extends ConjuntoCartas {
         return cartas.remove(0);
     }
 
-    public void inicializarMazo(String rutaArchivo) {
+    public void inicializarMazo( ) {
         ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(rutaArchivo)) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("Balatro.json")) {
             if (inputStream == null) {
-                throw new IOException("File not found in classpath: " + rutaArchivo);
+                throw new IOException("File not found" );
             }
 
             // Load the JSON and parse the "mazo" node

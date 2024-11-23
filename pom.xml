@@ -60,6 +60,7 @@
   </dependencies>
 
   <build>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
     <plugins>
       <!-- Configuración del compilador -->
       <plugin>
