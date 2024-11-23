@@ -1,28 +1,69 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.CartaPoker;
-import edu.fiuba.algo3.Tarot;
-import edu.fiuba.algo3.Palo;
-import edu.fiuba.algo3.Puntaje;
 
+import edu.fiuba.algo3.*;
 
-import static org.mockito.Mockito.*;
-
+import edu.fiuba.algo3.tarots.EfectoCarta;
+import edu.fiuba.algo3.tarots.EfectoJugada;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TarotTest {
+    @Test
+    public void test01TarotModificaValorCarta() {
+
+        // Arrange
+        CartaPoker carta = new CartaPoker(Valor.DOS, Palo.PICAS);
+
+        Puntaje puntaje = new Puntaje(10, 2);
+        Tarot tarot = new EfectoCarta("El Tonto", "Mejora la mano carta mas alta", puntaje);
+
+        // Act
+        tarot.aplicar(carta);
+        int puntajeCalculado = carta.calcularPuntaje();
+
+        // Assert
+        int puntajeEsperado = (10 * 2);
+        Assert.assertEquals(puntajeEsperado, puntajeCalculado);
+    }
+
 
     @Test
-    public void test01SeModificaElValor() {
-        Puntaje puntajeEsperado = new Puntaje(5,1);
+    public void test02TarotModificaValorJugada() {
 
-        Tarot tarot = new Tarot(2,1);
-        Puntaje puntaje = new Puntaje(3,1);
+        // Arrange
+        ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
+                new CartaPoker(Valor.DOS, Palo.PICAS),
+                new CartaPoker(Valor.DOS, Palo.TREBOLES)
+        ));
+        Jugada jugada = Jugada.crearJugada(cartas);
+        Tarot tarot = new EfectoJugada("El Tonto", "Mejora la mano carta mas alta", new Puntaje(15, 2), "par");
+        // Act
+        tarot.aplicar(jugada);
+        int puntajeCalculado = jugada.calcularPuntaje();
+        // Assert
+        int puntajeEsperado = (2 + 2 + 15) * 2;
+        Assert.assertEquals(puntajeEsperado, puntajeCalculado);
+    }
 
-        Puntaje puntajeObtenido = tarot.modificarPuntaje(puntaje);
+    @Test
+    public void test03AplicarTarotDeDistintoEjemplarTiraError() {
 
-        assert (puntajeObtenido.compararPuntajecon(puntajeEsperado));
+        // Arrange
+        ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
+                new CartaPoker(Valor.DOS, Palo.PICAS),
+                new CartaPoker(Valor.DOS, Palo.TREBOLES)
+        ));
+        Jugada jugadaIncompatible = Jugada.crearJugada(cartas);
+        Tarot tarot = new EfectoJugada("Fuerza", "Mejora la mano poker", new Puntaje(30, 3), "poker");
+
+        // Assert
+        assertThrows(ErrorTarotDistintaJugada.class, () -> tarot.aplicar(jugadaIncompatible));
     }
 
 }

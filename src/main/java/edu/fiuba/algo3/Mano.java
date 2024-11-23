@@ -34,10 +34,20 @@ public class Mano extends ConjuntoCartas{
         }
     }
 
-    public void seleccionarCarta(CartaPoker carta) { seleccionadas.add(carta); }
+    public void seleccionarCartas(ArrayList<CartaPoker> cartasASeleccionar) {
+        for (CartaPoker carta : cartasASeleccionar) {
+            if (this.seleccionadas.size() < this.capacidad) {
+                this.seleccionadas.add(carta);
+            }else{
+                throw new ErrorCapacidadLlena();
+            }
+        }
+    }
 
-    public void deseleccionarCarta(CartaPoker carta) {
-        this.seleccionadas.remove(carta);
+    public void deseleccionarCarta(ArrayList<CartaPoker> cartasADeseleccionar) {
+        for (CartaPoker carta : cartasADeseleccionar){
+            this.seleccionadas.remove(carta);
+        }
     }
 
     public Descarte descartar() {

@@ -5,7 +5,6 @@ import static org.mockito.Mockito.*;
 
 import edu.fiuba.algo3.*;
 
-import edu.fiuba.algo3.jugadas.Descarte;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,7 +39,7 @@ class ManoTest {
     }
 
     @Test
-    void testLlenarManoHastaCompleta() {
+    void test01LlenarManoHastaCompleta() {
         while (!mano.manoLlena()) {
             mano.agregarCarta(mazoMock.darCarta());
         }
@@ -48,7 +47,7 @@ class ManoTest {
     }
 
     @Test
-    void testDescartarYRellenarMano() {
+    void test02DescartarYRellenarMano() {
 
         CartaPoker c1 = new CartaPoker(Valor.CINCO, Palo.PICAS);
         CartaPoker c2 = new CartaPoker(Valor.CINCO, Palo.TREBOLES);
@@ -58,9 +57,7 @@ class ManoTest {
 
         Mano mano = new Mano(new ArrayList<>(List.of(c1, c2, c3, c4, c5)));
 
-        mano.seleccionarCarta(c1);
-        mano.seleccionarCarta(c3);
-
+        mano.seleccionarCartas(new ArrayList<>(List.of(c1, c3)));
         mano.descartar();
 
         while (!mano.manoLlena()) {
@@ -123,11 +120,9 @@ class ManoTest {
         ));
 
         Mano mano = new Mano(cartas);
-        CartaPoker cartaSeleccionada = mano.getCartas().get(0);
+        mano.seleccionarCartas(new ArrayList<>(List.of(cartas.get(0))));
 
-        mano.seleccionarCarta(cartaSeleccionada);
-
-        assert(mano.compararSeleccionadasCon(cartasSeleccionadas));
+        assertTrue(mano.compararSeleccionadasCon(cartasSeleccionadas));
     }
 
     @Test
@@ -139,8 +134,10 @@ class ManoTest {
         ));
 
         Mano mano = new Mano(cartas);
-        mano.seleccionarCarta(new CartaPoker(Valor.TRES, Palo.PICAS));
-        mano.seleccionarCarta(new CartaPoker(Valor.SIETE, Palo.CORAZONES));
+        mano.seleccionarCartas(new ArrayList<>(List.of(
+                new CartaPoker(Valor.TRES, Palo.PICAS),
+                new CartaPoker(Valor.SIETE, Palo.CORAZONES)
+        )));
         assertNotNull(mano.descartar());
     }
 

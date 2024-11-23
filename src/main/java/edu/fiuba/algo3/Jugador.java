@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.comodines.Comodin;
 import edu.fiuba.algo3.jugadas.Descarte;
 import java.util.ArrayList;
 
@@ -38,8 +39,8 @@ public class Jugador {
         this.rondaActual.agregarJugada(unaJugada);
     }
 
-    public void seleccionarCarta(CartaPoker unaCarta) {
-        this.manoActual.seleccionarCarta(unaCarta);
+    public void seleccionarCarta(ArrayList<CartaPoker> cartasASeleccionar) {
+        this.manoActual.seleccionarCartas(cartasASeleccionar);
     }
 
     public void aniadirTarots(Tarot cartaTarot) {
@@ -50,7 +51,7 @@ public class Jugador {
 
     public void utilizarTarot(Tarot tarotaAplicar, CartaPoker cartaPoker) {
         if (!this.cartasTarot.isEmpty() && this.cartasTarot.contains(tarotaAplicar)) {
-            cartaPoker.activarTarot(tarotaAplicar);
+            tarotaAplicar.aplicar(cartaPoker);
         } else {
             throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
         }
