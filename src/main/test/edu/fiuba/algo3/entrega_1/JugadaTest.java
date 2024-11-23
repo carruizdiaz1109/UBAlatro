@@ -173,7 +173,7 @@ public class JugadaTest {
         assertEquals(1080, jugada.calcularPuntaje());
 
     }
-/*
+
     @Test
     public void testEscaleraReal() {
         List<CartaPoker> cartas = List.of(
@@ -184,10 +184,11 @@ public class JugadaTest {
                 new CartaPoker(Valor.AS, Palo.PICAS) // As como 14
         );
         Jugada jugada = Jugada.crearJugada(cartas);
+        int valorEsperado = ((10+10+10+10+11)+100)*8;
 
         assertTrue(jugada instanceof EscaleraReal);
-        assertEquals(1280, jugada.calcularPuntaje());
+        assertEquals(valorEsperado, jugada.calcularPuntaje());
 
-    }*/
+    }
 }
 
