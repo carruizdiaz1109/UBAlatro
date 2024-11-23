@@ -8,4 +8,5 @@ module edu.fiuba.algo3 {
     requires javafx.graphics;
 
     opens edu.fiuba.algo3 to javafx.fxml;
+    opens edu.fiuba.algo3.controllers to javafx.fxml;
 }
