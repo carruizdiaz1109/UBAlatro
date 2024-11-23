@@ -2,7 +2,6 @@ package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.Balatro;
 import edu.fiuba.algo3.Jugador;
-import edu.fiuba.algo3.Mazo;
 import edu.fiuba.algo3.Ronda;
 import org.junit.jupiter.api.Test;
 
