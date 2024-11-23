@@ -118,8 +118,11 @@ public class JugadaTest {
         );
         Jugada jugada = Jugada.crearJugada(cartas);
 
+        int puntajeEsperado = ((2+5+8+10+10)+35)*4;
+        int puntajeObtenido = jugada.calcularPuntaje();
+
         assertTrue(jugada instanceof Color);
-        assertEquals(280, jugada.calcularPuntaje());
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test
