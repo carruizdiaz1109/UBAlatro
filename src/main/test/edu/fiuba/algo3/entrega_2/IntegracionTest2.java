@@ -41,11 +41,8 @@ public class IntegracionTest2 {
         int puntajeEsperado1 = (2+3+4+5+6+30)*12;
         jugador.aniadirComodin(unComodin);
         jugador.iniciarRonda(ronda);
-        jugador.seleccionarCarta(carta1);
-        jugador.seleccionarCarta(carta2);
-        jugador.seleccionarCarta(carta3);
-        jugador.seleccionarCarta(carta4);
-        jugador.seleccionarCarta(carta5);        
+        jugador.seleccionarCarta(new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5)));
+
         //Act
         jugador.jugar();
         int puntajeObtenido = ronda.calcularTotalRonda();
@@ -80,11 +77,7 @@ public class IntegracionTest2 {
         jugador.iniciarRonda(ronda);
         int puntajeEsperado = (2*4+60)*7*8;
 
-        jugador.seleccionarCarta(carta1);
-        jugador.seleccionarCarta(carta2);
-        jugador.seleccionarCarta(carta3);
-        jugador.seleccionarCarta(carta4);
-        jugador.seleccionarCarta(carta5);
+        jugador.seleccionarCarta(new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5)));
         jugador.aniadirComodin(unComodin);
         //Act
         jugador.jugar();
@@ -121,11 +114,7 @@ public class IntegracionTest2 {
         jugador.iniciarRonda(ronda);
         int puntajeEsperado = 10;
 
-        jugador.seleccionarCarta(carta1);
-        jugador.seleccionarCarta(carta2);
-        jugador.seleccionarCarta(carta3);
-        jugador.seleccionarCarta(carta4);
-        jugador.seleccionarCarta(carta5);
+        jugador.seleccionarCarta(new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5)));
         //Act
         jugador.descartar();
         int puntajeObtenido = ronda.calcularTotalRonda();
@@ -165,11 +154,7 @@ public class IntegracionTest2 {
         };
         jugador.iniciarRonda(ronda);
         jugador.aniadirComodin(unComodin);
-        jugador.seleccionarCarta(carta1);
-        jugador.seleccionarCarta(carta2);
-        jugador.seleccionarCarta(carta3);
-        jugador.seleccionarCarta(carta4);
-        jugador.seleccionarCarta(carta5);
+        jugador.seleccionarCarta(new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5)));
 
         //Act
         jugador.jugar();
@@ -219,11 +204,7 @@ public class IntegracionTest2 {
 
         jugador.iniciarRonda(ronda);
         jugador.aniadirComodin(comodinCombinado);
-        jugador.seleccionarCarta(carta1);
-        jugador.seleccionarCarta(carta2);
-        jugador.seleccionarCarta(carta3);
-        jugador.seleccionarCarta(carta4);
-        jugador.seleccionarCarta(carta5);
+        jugador.seleccionarCarta(new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5)));
 
         //Act
         jugador.jugar();

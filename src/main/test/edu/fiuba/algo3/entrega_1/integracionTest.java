@@ -66,24 +66,13 @@ public class integracionTest {
                 new CartaPoker(Valor.DIEZ, Palo.CORAZONES)
         ));
 
-        ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CINCO, Palo.DIAMANTES),
-                new CartaPoker(Valor.REY, Palo.PICAS),
-                new CartaPoker(Valor.AS, Palo.PICAS),
-                new CartaPoker(Valor.DOS, Palo.CORAZONES),
-                new CartaPoker(Valor.SIETE, Palo.DIAMANTES),
-                new CartaPoker(Valor.REY, Palo.CORAZONES)
-        ));
+        ArrayList<CartaPoker> cartas = new ArrayList<>(cartasEsperadas);
+
         Mazo mazo = new Mazo(cartas);
         Mano mano = new Mano(mazo);
         mano.rellenarse();
 
-        mano.seleccionarCarta(new CartaPoker(Valor.SIETE, Palo.CORAZONES));
-        mano.seleccionarCarta(new CartaPoker(Valor.DIEZ, Palo.PICAS));
-        mano.seleccionarCarta(new CartaPoker(Valor.SIETE, Palo.DIAMANTES));
-        mano.seleccionarCarta(new CartaPoker(Valor.DIEZ, Palo.CORAZONES));
+        mano.seleccionarCartas(cartasEsperadas);
 
         assert(mano.compararSeleccionadasCon(cartasEsperadas));
     }

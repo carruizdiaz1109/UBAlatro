@@ -39,8 +39,8 @@ public class Jugador {
         this.rondaActual.agregarJugada(unaJugada);
     }
 
-    public void seleccionarCarta(CartaPoker unaCarta) {
-        this.manoActual.seleccionarCarta(unaCarta);
+    public void seleccionarCarta(ArrayList<CartaPoker> cartasASeleccionar) {
+        this.manoActual.seleccionarCartas(cartasASeleccionar);
     }
 
     public void aniadirTarots(Tarot cartaTarot) {
