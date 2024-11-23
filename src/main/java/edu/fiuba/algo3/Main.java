@@ -43,7 +43,7 @@ public class Main extends Application {
         Scene scene = new Scene(rootPane);
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/icon.png")));
         stage.getIcons().add(icon);
-        stage.setResizable(false);
+        //stage.setResizable(false);
         stage.setTitle("UBAlatro");
 
         stage.setScene(scene);
