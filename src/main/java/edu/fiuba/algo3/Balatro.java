@@ -19,17 +19,15 @@ public class Balatro {
         this.rondas = new ArrayList<>();
         this.mazo = new Mazo();
         this.tienda = new Tienda();
-        cargarRondasDesdeJSON("Balatro.json");
-        mazo.inicializarMazo("Balatro.json");
-        this.mazo.mezclar();
+        cargarRondasDesdeJSON();
         this.jugador = jugador;
     }
 
-    public void cargarRondasDesdeJSON(String rutaArchivo) {
+    public void cargarRondasDesdeJSON() {
         ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(rutaArchivo)) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("Balatro.json")) {
             if (inputStream == null) {
-                throw new IOException("File not found in classpath: " + rutaArchivo);
+                throw new IOException("File not found ");
             }
             JsonNode rootNode = objectMapper.readTree(inputStream);
             JsonNode rondasNode = rootNode.path("rondas");
