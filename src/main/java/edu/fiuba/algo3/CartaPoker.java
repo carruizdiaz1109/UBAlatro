@@ -73,5 +73,28 @@ public class CartaPoker implements Comparable<CartaPoker>{
 
     public void aplicarTarot(Puntaje unPuntaje) {this.puntaje = unPuntaje;}
 
+    public String getNombreArchivo() {
+        String valorTexto = String.valueOf(valor.valor()); // Por ejemplo, "7" para un 7
+        String paloTexto;
+
+        switch (palo) {
+            case CORAZONES:
+                paloTexto = "C";
+                break;
+            case DIAMANTES:
+                paloTexto = "D";
+                break;
+            case PICAS:
+                paloTexto = "P";
+                break;
+            case TREBOLES:
+                paloTexto = "T";
+                break;
+            default:
+                throw new IllegalArgumentException("Palo desconocido: " + palo);
+        }
+
+        return valorTexto + paloTexto + ".png"; // Ejemplo: "7H.png"
+    }
 }
 

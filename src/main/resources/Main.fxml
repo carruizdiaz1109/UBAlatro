@@ -287,7 +287,8 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                      <children>
-                        <Label fx:id="lblMano" text="lblMano" />
+                        <HBox fx:id="lblMano" alignment="CENTER" spacing="10">
+                        </HBox>
                      </children>
                   </HBox>
                   <HBox alignment="TOP_CENTER" opacity="0.5" prefHeight="260.0" prefWidth="218.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;" />
