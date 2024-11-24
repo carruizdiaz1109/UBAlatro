@@ -4,6 +4,7 @@ module edu.fiuba.algo3 {
     exports edu.fiuba.algo3;
     exports edu.fiuba.algo3.jugadas;
     exports edu.fiuba.algo3.comodines;
+    exports edu.fiuba.algo3.tarots;
     requires com.fasterxml.jackson.databind;
     requires java.desktop;
     requires javafx.fxml;

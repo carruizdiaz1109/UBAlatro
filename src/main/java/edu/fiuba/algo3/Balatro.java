@@ -25,7 +25,7 @@ public class Balatro {
 
     public void cargarRondasDesdeJSON() {
         ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/Balatro.json")) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/json/Balatro.json")) {
             if (inputStream == null) {
                 throw new IOException("File not found ");
             }
