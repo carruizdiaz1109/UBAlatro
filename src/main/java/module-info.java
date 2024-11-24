@@ -9,6 +9,9 @@ module edu.fiuba.algo3 {
     requires java.desktop;
     requires javafx.fxml;
     requires javafx.graphics;
+    exports edu.fiuba.algo3.controllers;
 
     opens edu.fiuba.algo3 to javafx.fxml, org.junit.jupiter, to .org.mockito;
+    opens edu.fiuba.algo3.controllers to javafx.fxml;
+
 }
