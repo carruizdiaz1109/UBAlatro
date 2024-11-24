@@ -22,13 +22,18 @@ public class Tienda {
         this.cartasAComprar = new ArrayList<CartaPoker>();
         this.tarotsAComprar = new ArrayList<Tarot>();
         this.comodinesAComprar = new ArrayList<Comodin>();
-        inicializarComodines("Comodines.json");
-        inicializarTarots("Tarot.json");
+        inicializarComodines();
+        inicializarTarots();
     }
 
-    private void inicializarComodines(String rutaArchivo) {
+    private void inicializarComodines() {
         ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(rutaArchivo)) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/json/Comodines.json")) {
+            if (inputStream == null) {
+                System.out.println("Recurso no encontrado: json/Comodines.json");
+            } else {
+                System.out.println("Recurso encontrado correctamente.");
+            }
             JsonNode rootNode = objectMapper.readTree(inputStream);
             JsonNode alPuntajeNode = rootNode.get("Al Puntaje");
             JsonNode comodinesPuntajeNode = alPuntajeNode.get("comodines");
@@ -122,9 +127,9 @@ public class Tienda {
         return null;
     }
 
-    private void inicializarTarots(String rutaArchivo) {
+    private void inicializarTarots() {
         ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(rutaArchivo)) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/json/Tarot.json")) {
             JsonNode rootNode = objectMapper.readTree(inputStream);
             JsonNode tarotsNode = rootNode.get("tarots");
 

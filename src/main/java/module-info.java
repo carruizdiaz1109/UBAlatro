@@ -9,5 +9,5 @@ module edu.fiuba.algo3 {
     requires javafx.fxml;
     requires javafx.graphics;
 
-    opens edu.fiuba.algo3 to javafx.fxml;
+    opens edu.fiuba.algo3 to javafx.fxml, org.junit.jupiter;
 }

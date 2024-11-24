@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
@@ -39,11 +40,10 @@ public class Mazo extends ConjuntoCartas {
 
     public void inicializarMazo( ) {
         ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("Balatro.json")) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/json/Balatro.json")) {
             if (inputStream == null) {
                 throw new IOException("File not found" );
             }
-
             // Load the JSON and parse the "mazo" node
             JsonNode rootNode = objectMapper.readTree(inputStream);
             JsonNode mazoNode = rootNode.path("mazo");

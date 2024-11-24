@@ -16,7 +16,7 @@ public class Balatro {
     private final Tienda tienda;
 
     public Balatro(Jugador jugador) {
-        this.rondas = new ArrayList<>();
+        this.rondas = new ArrayList<Ronda>();
         this.mazo = new Mazo();
         this.tienda = new Tienda();
         cargarRondasDesdeJSON();
@@ -25,7 +25,7 @@ public class Balatro {
 
     public void cargarRondasDesdeJSON() {
         ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("Balatro.json")) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/Balatro.json")) {
             if (inputStream == null) {
                 throw new IOException("File not found ");
             }
