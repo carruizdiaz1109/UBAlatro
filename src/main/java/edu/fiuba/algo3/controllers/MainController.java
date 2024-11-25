@@ -6,11 +6,14 @@ import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainController {
     @FXML
@@ -66,7 +69,7 @@ public class MainController {
 
     // Método para manejar la selección de una carta
     private void seleccionarCarta(CartaVisual cartaVisual) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(300), cartaVisual);
+        TranslateTransition transition = new TranslateTransition(Duration.millis(150), cartaVisual);
 
         if (cartasSeleccionadas.contains(cartaVisual.getCarta())) {
             cartasSeleccionadas.remove(cartaVisual.getCarta());
@@ -74,7 +77,7 @@ public class MainController {
             cartaVisual.getStyleClass().remove("seleccionada");
         } else {
             cartasSeleccionadas.add(cartaVisual.getCarta());
-            transition.setToY(-20); // Eleva la carta 20px hacia arriba
+            transition.setToY(-30); // Eleva la carta 20px hacia arriba
             cartaVisual.getStyleClass().add("seleccionada");
         }
 
@@ -84,22 +87,70 @@ public class MainController {
         System.out.println("Cartas seleccionadas: " + cartasSeleccionadas.size());
     }
 
+    private void animarCartaHaciaAbajo(CartaVisual cartaVisual, Runnable onFinished) {
+        TranslateTransition transition = new TranslateTransition(Duration.millis(200), cartaVisual);
+        transition.setToY(500); // 500px hacia abajo, ajusta según la altura de tu ventana
+
+        // Llama al callback cuando la animación termina
+        transition.setOnFinished(event -> {
+            lblMano.getChildren().remove(cartaVisual); // Quita la carta del HBox
+            if (onFinished != null) {
+                onFinished.run();
+            }
+        });
+
+        transition.play();
+    }
+
+    private void animarCartasSeleccionadas(Runnable onComplete) {
+        List<CartaVisual> cartasParaAnimar = lblMano.getChildren().stream()
+                .filter(node -> node instanceof CartaVisual)
+                .map(node -> (CartaVisual) node)
+                .filter(cartaVisual -> cartasSeleccionadas.contains(cartaVisual.getCarta()))
+                .collect(Collectors.toList());
+
+        if (cartasParaAnimar.isEmpty()) {
+            if (onComplete != null) onComplete.run();
+            return;
+        }
+
+        animarCartaUnaPorUna(cartasParaAnimar, 0, onComplete);
+    }
+
+    private void animarCartaUnaPorUna(List<CartaVisual> cartasParaAnimar, int index, Runnable onComplete) {
+        if (index >= cartasParaAnimar.size()) {
+            if (onComplete != null) {
+                onComplete.run();
+            }
+            return;
+        }
+        CartaVisual cartaVisual = cartasParaAnimar.get(index);
+        animarCartaHaciaAbajo(cartaVisual, () -> animarCartaUnaPorUna(cartasParaAnimar, index + 1, onComplete));
+    }
 
     @FXML
     public void clickJugar() {
-        jugador.seleccionarCarta(this.cartasSeleccionadas);
-        jugador.jugar();
-       actualizarMano();
-       this.cartasSeleccionadas.removeAll(this.cartasSeleccionadas);
-       rondaVisual.actualizarVista();
-    }
-    @FXML
-    public void clickDescartar() {
-        jugador.seleccionarCarta(this.cartasSeleccionadas);
-        jugador.descartar();
-        actualizarMano();
-        this.cartasSeleccionadas.removeAll(this.cartasSeleccionadas);
-        rondaVisual.actualizarVista();
+        manejarAccionCartaSeleccionada(() -> jugador.jugar());
     }
 
+    @FXML
+    public void clickDescartar() {
+        manejarAccionCartaSeleccionada(() -> jugador.descartar());
+    }
+
+    private void manejarAccionCartaSeleccionada(Runnable accionEspecifica) {
+        if (cartasSeleccionadas.isEmpty()) {
+            return;
+        }
+
+        Runnable onComplete = () -> {
+            jugador.seleccionarCarta(cartasSeleccionadas);
+            accionEspecifica.run();
+            actualizarMano();
+            cartasSeleccionadas.clear();
+            rondaVisual.actualizarVista();
+        };
+
+        animarCartasSeleccionadas(onComplete);
+    }
 }
