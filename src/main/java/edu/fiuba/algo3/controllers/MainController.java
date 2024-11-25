@@ -28,6 +28,9 @@ public class MainController {
     @FXML
     private Label lblDescartesDisponibles;
 
+    @FXML
+    private HBox lblTarot;
+
     private Jugador jugador;
     private final ArrayList<CartaPoker> cartasSeleccionadas;
     private final Ronda rondaActual;
@@ -38,16 +41,46 @@ public class MainController {
         this.rondaActual = new Ronda(1, 2000, 4,5,new Tienda());
     }
 
-    // Método para inicializar al jugador desde el controlador principal
+    // Metodo para inicializar al jugador desde el controlador principal
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
         actualizarMano();
+
+        cargarCartasTarot();
     }
 
     public void iniciarRonda() {
         this.jugador.iniciarRonda(this.rondaActual);
         this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles);
+
         actualizarMano();
+    }
+
+    public void mostrarCartasTarot(List<String> nombresCartasTarot) {
+        lblTarot.getChildren().clear();
+
+        for (String nombreArchivo : nombresCartasTarot) {
+            javafx.scene.image.Image imagenCarta = new javafx.scene.image.Image(
+                    getClass().getResource("/imagenes/tarot/" + nombreArchivo).toExternalForm()
+            );
+
+            javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
+            vistaCarta.setFitWidth(100); // Ancho de la carta
+            vistaCarta.setFitHeight(150); // Alto de la carta
+            vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
+
+            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
+
+            lblTarot.getChildren().add(vistaCarta);
+        }
+    }
+    public void cargarCartasTarot() {
+        List<String> nombresCartasTarot = List.of(
+                "ahorcado.png",
+                "amantes.png"
+        );
+
+        mostrarCartasTarot(nombresCartasTarot);
     }
 
     public void actualizarMano() {
