@@ -311,7 +311,7 @@
                   </HBox>
                   <HBox prefHeight="76.0" prefWidth="332.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="302.0" prefWidth="676.0" style="-fx-background-color: #FFA694; -fx-border-radius: 20; -fx-background-radius: 20;" text="descartar" textFill="#383582">
+                        <Button mnemonicParsing="false" prefHeight="302.0" prefWidth="676.0" style="-fx-background-color: #FFA694; -fx-border-radius: 20; -fx-background-radius: 20;" text="descartar" textFill="#383582" onAction="#clickDescartar">
                            <font>
                               <Font name="Consolas Bold" size="24.0" />
                            </font>

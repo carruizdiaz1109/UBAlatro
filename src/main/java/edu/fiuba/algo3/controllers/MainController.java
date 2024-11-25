@@ -20,9 +20,11 @@ public class MainController {
 
     private Jugador jugador; // La mano de cartas
     private final ArrayList<CartaPoker> cartasSeleccionadas;
+    private final Ronda rondaActual;
 
     public MainController() {
         this.cartasSeleccionadas = new ArrayList<>();
+        this.rondaActual = new Ronda(1, 2000, 4,5,new Tienda());
     }
 
     // Método para inicializar al jugador desde el controlador principal
@@ -32,7 +34,7 @@ public class MainController {
     }
 
     public void iniciarRonda() {
-        this.jugador.iniciarRonda(new Ronda(1, 10000,3,5, new Tienda()));
+        this.jugador.iniciarRonda(this.rondaActual);
         actualizarMano();
     }
 
@@ -80,7 +82,14 @@ public class MainController {
         jugador.seleccionarCarta(this.cartasSeleccionadas);
         jugador.jugar();
        actualizarMano();
+       this.cartasSeleccionadas.removeAll(this.cartasSeleccionadas);
     }
-
+    @FXML
+    public void clickDescartar() {
+        jugador.seleccionarCarta(this.cartasSeleccionadas);
+        jugador.descartar();
+        actualizarMano();
+        this.cartasSeleccionadas.removeAll(this.cartasSeleccionadas);
+    }
 
 }
