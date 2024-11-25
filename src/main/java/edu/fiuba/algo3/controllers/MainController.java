@@ -2,11 +2,13 @@ package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.vistas.CartaVisual;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -49,28 +51,41 @@ public class MainController {
 
     // Método para manejar la selección de una carta
     private void seleccionarCarta(CartaVisual cartaVisual) {
+        TranslateTransition transition = new TranslateTransition(Duration.millis(300), cartaVisual);
+
         if (cartasSeleccionadas.contains(cartaVisual)) {
-            // Si ya está seleccionada, quítala de la lista y vuelve a su posición original
             cartasSeleccionadas.remove(cartaVisual);
+            transition.setToY(0); // Baja la carta a la posición original
             cartaVisual.getStyleClass().remove("seleccionada");
-
-            // Vuelve la carta a su posición original
-            cartaVisual.setLayoutY(0);
         } else {
-            // Si no está seleccionada, agrégala a la lista y cambia su estilo
             cartasSeleccionadas.add(cartaVisual);
+            transition.setToY(-20); // Eleva la carta 20px hacia arriba
             cartaVisual.getStyleClass().add("seleccionada");
-
-            // Mueve la carta hacia arriba
-            cartaVisual.setLayoutY(-50); // Ajusta esta distancia según lo que necesites
         }
 
-        // Opcional: Imprimir las seleccionadas en consola para verificar
+        transition.play(); // Inicia la animación
+
+        // Opcional: Imprimir en consola para verificar
         System.out.println("Cartas seleccionadas: " + cartasSeleccionadas.size());
     }
 
+
     @FXML
-    public void click(ActionEvent event) {
-        System.out.println("Jugar");
+    public void clickJugar() {
+        this.mano.rellenarse();
+        for (CartaPoker cartaPoker : mano.getCartas()) {
+            CartaVisual cartaVisual = new CartaVisual(cartaPoker,
+                    "/imagenes/cartas/" + cartaPoker.getNombreArchivo(),
+                    100,
+                    150);
+
+            // Agrega un manejador de clic a la carta visual
+            cartaVisual.setOnMouseClicked(event -> {
+                seleccionarCarta(cartaVisual);
+            });
+
+            lblMano.getChildren().add(cartaVisual);
+        }
+        //System.out.println("El botón ha sido presionado.");
     }
 }
