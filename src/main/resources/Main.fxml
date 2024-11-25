@@ -268,7 +268,7 @@
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1500.0">
                <children>
-                  <HBox alignment="TOP_CENTER" opacity="0.5" prefHeight="260.0" prefWidth="1044.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
+                  <HBox fx:id="lblComodin" alignment="TOP_CENTER" opacity="0.5" prefHeight="260.0" prefWidth="1044.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>

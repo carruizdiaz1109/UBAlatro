@@ -30,6 +30,8 @@ public class MainController {
 
     @FXML
     private HBox lblTarot;
+    @FXML
+    private HBox lblComodin;
 
     private Jugador jugador;
     private final ArrayList<CartaPoker> cartasSeleccionadas;
@@ -47,6 +49,7 @@ public class MainController {
         actualizarMano();
 
         cargarCartasTarot();
+        cargarCartasComodin();
     }
 
     public void iniciarRonda() {
@@ -83,6 +86,35 @@ public class MainController {
         mostrarCartasTarot(nombresCartasTarot);
     }
 
+    public void mostrarCartasComodin(List<String> nombresCartasComodin) {
+        lblComodin.getChildren().clear();
+
+        for (String nombreArchivo : nombresCartasComodin) {
+            javafx.scene.image.Image imagenCarta = new javafx.scene.image.Image(
+                    getClass().getResource("/imagenes/comodines/" + nombreArchivo).toExternalForm()
+            );
+
+            javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
+            vistaCarta.setFitWidth(100); // Ancho de la carta
+            vistaCarta.setFitHeight(150); // Alto de la carta
+            vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
+
+            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
+
+            lblComodin.getChildren().add(vistaCarta);
+        }
+    }
+    public void cargarCartasComodin() {
+        List<String> nombresCartasComodin = List.of(
+                "abundante.png",
+                "arriesgado.png",
+                "astuto.png",
+                "bandera.png"
+        );
+
+        mostrarCartasComodin(nombresCartasComodin);
+    }
+
     public void actualizarMano() {
         lblMano.getChildren().clear();
         Mano mano = this.jugador.getManoActual();
@@ -101,7 +133,7 @@ public class MainController {
         }
     }
 
-    // Método para manejar la selección de una carta
+    // Metodo para manejar la selección de una carta
     private void seleccionarCarta(CartaVisual cartaVisual) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(150), cartaVisual);
 
