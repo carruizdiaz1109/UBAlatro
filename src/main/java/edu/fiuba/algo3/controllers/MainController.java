@@ -65,7 +65,6 @@ public class MainController {
         }
     }
 
-    // Método para manejar la selección de una carta
     private void seleccionarCarta(CartaVisual cartaVisual) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(300), cartaVisual);
 
@@ -73,7 +72,7 @@ public class MainController {
             cartasSeleccionadas.remove(cartaVisual.getCarta());
             transition.setToY(0); // Baja la carta a la posición original
             cartaVisual.getStyleClass().remove("seleccionada");
-        } else {
+        } else if(cartasSeleccionadas.size() < 5) {
             cartasSeleccionadas.add(cartaVisual.getCarta());
             transition.setToY(-20); // Eleva la carta 20px hacia arriba
             cartaVisual.getStyleClass().add("seleccionada");
