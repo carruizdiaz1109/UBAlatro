@@ -118,18 +118,39 @@ public class MainController {
     public void actualizarMano() {
         lblMano.getChildren().clear();
         Mano mano = this.jugador.getManoActual();
+
         for (CartaPoker cartaPoker : mano.getCartas()) {
             CartaVisual cartaVisual = new CartaVisual(cartaPoker,
                     "/imagenes/cartas/" + cartaPoker.getNombreArchivo(),
                     100,
                     150);
 
-            // Agrega un manejador de clic a la carta visual
-            cartaVisual.setOnMouseClicked(event -> {
-                seleccionarCarta(cartaVisual);
-            });
+            cartaVisual.setOnMouseClicked(event -> seleccionarCarta(cartaVisual));
+            agregarCarta(cartaVisual);
+        }
+    }
 
-            lblMano.getChildren().add(cartaVisual);
+    private void agregarCarta(CartaVisual cartaVisual) {
+        cartaVisual.setTranslateY(-500);
+        lblMano.getChildren().add(cartaVisual);
+
+        TranslateTransition transition = new TranslateTransition(Duration.millis(300), cartaVisual);
+        transition.setToY(0);
+        transition.setOnFinished(event -> animarDisposicionCartas());
+        transition.play();
+    }
+
+    private void animarDisposicionCartas() {
+        double espaciado = 10;
+        double posicionInicialX = (lblMano.getWidth() - lblMano.getChildren().size() * (100 + espaciado)) / 2;
+
+        for (int i = 0; i < lblMano.getChildren().size(); i++) {
+            Node carta = lblMano.getChildren().get(i);
+            double nuevaPosicionX = posicionInicialX + i * (100 + espaciado);
+
+            TranslateTransition transition = new TranslateTransition(Duration.millis(300), carta);
+            transition.setToX(nuevaPosicionX - carta.getLayoutX());
+            transition.play();
         }
     }
 
@@ -155,11 +176,11 @@ public class MainController {
 
     private void animarCartaHaciaAbajo(CartaVisual cartaVisual, Runnable onFinished) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(200), cartaVisual);
-        transition.setToY(500); // 500px hacia abajo, ajusta según la altura de tu ventana
+        transition.setToY(500);
 
-        // Llama al callback cuando la animación termina
         transition.setOnFinished(event -> {
-            lblMano.getChildren().remove(cartaVisual); // Quita la carta del HBox
+            lblMano.getChildren().remove(cartaVisual);
+            animarDisposicionCartas();
             if (onFinished != null) {
                 onFinished.run();
             }
@@ -167,6 +188,7 @@ public class MainController {
 
         transition.play();
     }
+
 
     private void animarCartasSeleccionadas(Runnable onComplete) {
         List<CartaVisual> cartasParaAnimar = lblMano.getChildren().stream()
