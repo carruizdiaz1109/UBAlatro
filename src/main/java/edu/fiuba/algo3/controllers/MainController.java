@@ -6,6 +6,7 @@ import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -84,14 +85,15 @@ public class MainController {
         System.out.println("Cartas seleccionadas: " + cartasSeleccionadas.size());
     }
 
-
     @FXML
     public void clickJugar() {
-        jugador.seleccionarCarta(this.cartasSeleccionadas);
-        jugador.jugar();
-       actualizarMano();
-       this.cartasSeleccionadas.removeAll(this.cartasSeleccionadas);
-       rondaVisual.actualizarVista();
+        if (this.rondaActual.estadoRonda()) {
+            jugador.seleccionarCarta(this.cartasSeleccionadas);
+            jugador.jugar();
+            actualizarMano();
+            this.cartasSeleccionadas.removeAll(this.cartasSeleccionadas);
+            rondaVisual.actualizarVista();
+        }
     }
     @FXML
     public void clickDescartar() {
@@ -101,5 +103,4 @@ public class MainController {
         this.cartasSeleccionadas.removeAll(this.cartasSeleccionadas);
         rondaVisual.actualizarVista();
     }
-
 }

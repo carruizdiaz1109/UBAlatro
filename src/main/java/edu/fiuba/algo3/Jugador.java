@@ -35,7 +35,9 @@ public class Jugador {
 
     public void jugar(){
         Jugada unaJugada = this.manoActual.jugar();
-        aplicarComodin(unaJugada);
+        if (this.comodines.size()>0) {
+            aplicarComodin(unaJugada);
+        }
         this.rondaActual.agregarJugada(unaJugada);
         this.manoActual.rellenarse();
     }

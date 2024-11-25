@@ -26,7 +26,6 @@ public class RondaVisual {
     }
 
     public void actualizarVista() {
-        // Actualiza las etiquetas con los valores de la ronda
         lblPuntajeAcumulado.setText(String.valueOf(ronda.getPuntajeAcumulado()));
         lblManosDisponibles.setText(String.valueOf(ronda.getManosDisponibles()));
         lblPuntajeObjetivo.setText(String.valueOf(ronda.getPuntajeObjetivo()));
