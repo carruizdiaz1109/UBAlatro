@@ -19,7 +19,7 @@ public class MainController {
     private HBox lblMano;
 
     private Jugador jugador; // La mano de cartas
-    private final List<CartaVisual> cartasSeleccionadas;
+    private final ArrayList<CartaPoker> cartasSeleccionadas;
 
     public MainController() {
         this.cartasSeleccionadas = new ArrayList<>();
@@ -58,12 +58,12 @@ public class MainController {
     private void seleccionarCarta(CartaVisual cartaVisual) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(300), cartaVisual);
 
-        if (cartasSeleccionadas.contains(cartaVisual)) {
-            cartasSeleccionadas.remove(cartaVisual);
+        if (cartasSeleccionadas.contains(cartaVisual.getCarta())) {
+            cartasSeleccionadas.remove(cartaVisual.getCarta());
             transition.setToY(0); // Baja la carta a la posición original
             cartaVisual.getStyleClass().remove("seleccionada");
         } else {
-            cartasSeleccionadas.add(cartaVisual);
+            cartasSeleccionadas.add(cartaVisual.getCarta());
             transition.setToY(-20); // Eleva la carta 20px hacia arriba
             cartaVisual.getStyleClass().add("seleccionada");
         }
@@ -77,12 +77,10 @@ public class MainController {
 
     @FXML
     public void clickJugar() {
-        ArrayList <CartaPoker> cartasAJugar = new ArrayList<CartaPoker>();
-        for (CartaVisual carta : this.cartasSeleccionadas) {
-            cartasAJugar.add(carta.getCarta());
-        }
-        jugador.seleccionarCarta(cartasAJugar);
+        jugador.seleccionarCarta(this.cartasSeleccionadas);
         jugador.jugar();
        actualizarMano();
     }
+
+
 }
