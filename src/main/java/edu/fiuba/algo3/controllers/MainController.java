@@ -2,6 +2,7 @@ package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.vistas.CartaVisual;
+import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,18 +10,24 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
-import javafx.scene.layout.Pane;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainController {
     @FXML
     private HBox lblMano;
+    @FXML
+    private Label lblPuntajeAcumulado;
+    @FXML
+    private Label lblJugadasDisponibles;
+    @FXML
+    private Label lblObjetivo;
+    @FXML
+    private Label lblDescartesDisponibles;
 
-    private Jugador jugador; // La mano de cartas
+    private Jugador jugador;
     private final ArrayList<CartaPoker> cartasSeleccionadas;
     private final Ronda rondaActual;
+    private RondaVisual rondaVisual;
 
     public MainController() {
         this.cartasSeleccionadas = new ArrayList<>();
@@ -35,6 +42,7 @@ public class MainController {
 
     public void iniciarRonda() {
         this.jugador.iniciarRonda(this.rondaActual);
+        this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles);
         actualizarMano();
     }
 
@@ -83,6 +91,7 @@ public class MainController {
         jugador.jugar();
        actualizarMano();
        this.cartasSeleccionadas.removeAll(this.cartasSeleccionadas);
+       rondaVisual.actualizarVista();
     }
     @FXML
     public void clickDescartar() {
@@ -90,6 +99,7 @@ public class MainController {
         jugador.descartar();
         actualizarMano();
         this.cartasSeleccionadas.removeAll(this.cartasSeleccionadas);
+        rondaVisual.actualizarVista();
     }
 
 }

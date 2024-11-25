@@ -9,6 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1700.0" style="-fx-background-image: url('background.png'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fiuba.algo3.controllers.MainController" stylesheets="styles.css">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="1000.0" prefWidth="342.0" style="-fx-background-image: url('panel.png'); -fx-border-color: transparent #3CAC5A transparent #3CAC5A; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, #3CAC5A, 40, 0.8, 0, 0);">
@@ -34,14 +35,14 @@
                      </children></VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="375.0">
                      <children>
-                        <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="3500" textAlignment="CENTER" wrappingWidth="221.97657775878906">
+                        <Label fx:id="lblObjetivo" text="puntajeObjetivo" textAlignment="CENTER" >
                            <font>
                               <Font name="Consolas Bold" size="24.0" />
                            </font>
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
-                        </Text>
+                        </Label>
                      </children></VBox>
                </children>
             </VBox>
@@ -66,14 +67,14 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="65.0" prefWidth="402.0">
                            <children>
-                              <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="221.97657775878906">
+                              <Label fx:id="lblPuntajeAcumulado" text="puntajeAcumulado" textAlignment="CENTER" >
                                  <font>
                                     <Font name="Consolas Bold" size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
-                              </Text>
+                              </Label>
                            </children>
                         </VBox>
                      </children>
@@ -110,7 +111,7 @@
                                     <Insets bottom="10.0" left="10.0" top="10.0" />
                                  </HBox.margin>
                                  <children>
-                                    <Text fill="#392b79" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="87.98307228088379" HBox.hgrow="ALWAYS">
+                                    <Text fx:id="lblValorAJugar" fill="#392b79" strokeType="OUTSIDE" strokeWidth="0.0" text="valorAJugar" textAlignment="CENTER" wrappingWidth="87.98307228088379" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font name="Consolas" size="29.0" />
                                        </font>
@@ -134,7 +135,7 @@
                               </HBox>
                               <HBox alignment="TOP_CENTER" prefHeight="43.0" prefWidth="150.0" style="-fx-background-color: #FFA6A7; -fx-border-radius: 10; -fx-background-radius: 10;">
                                  <children>
-                                    <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="87.98307228088379">
+                                    <Text fx:id="lblMultiplicadorAJugar" fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="multiplicadorAJugar" textAlignment="CENTER" wrappingWidth="87.98307228088379">
                                        <font>
                                           <Font name="Consolas" size="29.0" />
                                        </font>
@@ -162,7 +163,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="jugadas" textAlignment="CENTER" wrappingWidth="221.97657775878906" VBox.vgrow="ALWAYS">
+                              <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="jugadas restantes" textAlignment="CENTER" wrappingWidth="221.97657775878906" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font name="Consolas Bold" size="24.0" />
                                  </font>
@@ -174,14 +175,14 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="5/5" textAlignment="CENTER" wrappingWidth="221.97657775878906">
+                              <Label fx:id="lblJugadasDisponibles" text="jugadasDisponibles" textAlignment="CENTER" >
                                  <font>
                                     <Font name="Consolas Bold" size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
-                              </Text>
+                              </Label>
                            </children>
                         </VBox>
                      </children>
@@ -197,7 +198,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="descartes" textAlignment="CENTER" wrappingWidth="221.97657775878906" VBox.vgrow="ALWAYS">
+                              <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="descartes restantes" textAlignment="CENTER" wrappingWidth="221.97657775878906" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font name="Consolas Bold" size="24.0" />
                                  </font>
@@ -209,14 +210,14 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="5/5" textAlignment="CENTER" wrappingWidth="221.97657775878906">
+                              <Label  fx:id="lblDescartesDisponibles" text="descartesDisponibles" textAlignment="CENTER" >
                                  <font>
                                     <Font name="Consolas Bold" size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
-                              </Text>
+                              </Label>
                            </children>
                         </VBox>
                      </children>
