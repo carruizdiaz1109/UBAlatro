@@ -4,11 +4,13 @@ import edu.fiuba.algo3.CartaPoker;
 import edu.fiuba.algo3.Mano;
 import edu.fiuba.algo3.Mazo;
 import edu.fiuba.algo3.vistas.CartaVisual;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,17 +47,21 @@ public class MainController {
 
     // Método para manejar la selección de una carta
     private void seleccionarCarta(CartaVisual cartaVisual) {
+        TranslateTransition transition = new TranslateTransition(Duration.millis(300), cartaVisual);
+
         if (cartasSeleccionadas.contains(cartaVisual)) {
-            // Si ya está seleccionada, quítala de la lista y cambia su estilo
             cartasSeleccionadas.remove(cartaVisual);
+            transition.setToY(0); // Baja la carta a la posición original
             cartaVisual.getStyleClass().remove("seleccionada");
         } else {
-            // Si no está seleccionada, agrégala a la lista y cambia su estilo
             cartasSeleccionadas.add(cartaVisual);
+            transition.setToY(-20); // Eleva la carta 20px hacia arriba
             cartaVisual.getStyleClass().add("seleccionada");
         }
 
-        // Opcional: Imprimir las seleccionadas en consola para verificar
+        transition.play(); // Inicia la animación
+
+        // Opcional: Imprimir en consola para verificar
         System.out.println("Cartas seleccionadas: " + cartasSeleccionadas.size());
     }
 

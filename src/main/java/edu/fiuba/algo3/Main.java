@@ -29,11 +29,13 @@ public class Main extends Application {
         controlador.actualizarMano();
 
         Scene scene = new Scene(root);
+
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/icon.png")));
         stage.getIcons().add(icon);
         //stage.setResizable(false);
         stage.setTitle("UBAlatro");
 
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
 
