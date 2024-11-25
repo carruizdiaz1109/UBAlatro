@@ -15,12 +15,12 @@ public class Balatro {
     private final Jugador jugador;
     private final Tienda tienda;
 
-    public Balatro(Jugador jugador) {
+    public Balatro(String nombreJugador) {
         this.rondas = new ArrayList<Ronda>();
         this.mazo = new Mazo();
         this.tienda = new Tienda();
         cargarRondasDesdeJSON();
-        this.jugador = jugador;
+        this.jugador = new Jugador(nombreJugador, this.mazo);
     }
 
     public void cargarRondasDesdeJSON() {

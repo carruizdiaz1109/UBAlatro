@@ -31,8 +31,13 @@ public class MainController {
         actualizarMano();
     }
 
-    public void actualizarMano() {
+    public void iniciarRonda() {
         this.jugador.iniciarRonda(new Ronda(1, 10000,3,5, new Tienda()));
+        actualizarMano();
+    }
+
+    public void actualizarMano() {
+        lblMano.getChildren().clear();
         Mano mano = this.jugador.getManoActual();
         for (CartaPoker cartaPoker : mano.getCartas()) {
             CartaVisual cartaVisual = new CartaVisual(cartaPoker,
@@ -72,20 +77,12 @@ public class MainController {
 
     @FXML
     public void clickJugar() {
-        this.mano.rellenarse();
-        for (CartaPoker cartaPoker : mano.getCartas()) {
-            CartaVisual cartaVisual = new CartaVisual(cartaPoker,
-                    "/imagenes/cartas/" + cartaPoker.getNombreArchivo(),
-                    100,
-                    150);
-
-            // Agrega un manejador de clic a la carta visual
-            cartaVisual.setOnMouseClicked(event -> {
-                seleccionarCarta(cartaVisual);
-            });
-
-            lblMano.getChildren().add(cartaVisual);
+        ArrayList <CartaPoker> cartasAJugar = new ArrayList<CartaPoker>();
+        for (CartaVisual carta : this.cartasSeleccionadas) {
+            cartasAJugar.add(carta.getCarta());
         }
-        //System.out.println("El botón ha sido presionado.");
+        jugador.seleccionarCarta(cartasAJugar);
+        jugador.jugar();
+       actualizarMano();
     }
 }

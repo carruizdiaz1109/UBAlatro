@@ -27,6 +27,7 @@ public class Main extends Application {
         // Obtener el controlador desde el FXML cargado
         MainController controlador = loader.getController();
         controlador.setJugador(new Jugador("Enzo", new Mazo()));
+        controlador.iniciarRonda();
         // Actualiza la mano para mostrar las cartas en el HBox
         //controlador.actualizarMano();
 

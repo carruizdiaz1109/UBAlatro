@@ -37,6 +37,7 @@ public class Jugador {
         Jugada unaJugada = this.manoActual.jugar();
         aplicarComodin(unaJugada);
         this.rondaActual.agregarJugada(unaJugada);
+        this.manoActual.rellenarse();
     }
 
     public void seleccionarCarta(ArrayList<CartaPoker> cartasASeleccionar) {

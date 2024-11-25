@@ -39,5 +39,8 @@ public class CartaVisual extends ImageView {
         });
     }
 
+    public CartaPoker getCarta() {
+        return this.cartaReferencia;
+    }
 
 }
