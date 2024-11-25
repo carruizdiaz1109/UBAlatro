@@ -26,7 +26,7 @@ public class MainController {
         this.cartasSeleccionadas = new ArrayList<>();
     }
 
-    public void actualizarMano() {
+    /*public void actualizarMano() {
         this.mano.rellenarse();
         for (CartaPoker cartaPoker : mano.getCartas()) {
             CartaVisual cartaVisual = new CartaVisual(cartaPoker,
@@ -41,9 +41,9 @@ public class MainController {
 
             lblMano.getChildren().add(cartaVisual);
         }
-    }
+    }*/
 
-    // Método para manejar la selección de una carta
+    //Metodo para manejar la selección de una carta
     private void seleccionarCarta(CartaVisual cartaVisual) {
         if (cartasSeleccionadas.contains(cartaVisual)) {
             // Si ya está seleccionada, quítala de la lista y cambia su estilo
@@ -59,8 +59,23 @@ public class MainController {
         System.out.println("Cartas seleccionadas: " + cartasSeleccionadas.size());
     }
 
+    //Cuando se hace click al boton de Jugar aparecen las 8 cartas que son la mano del jugador
     @FXML
-    public void click(ActionEvent event) {
-        System.out.println("El botón ha sido presionado.");
+    public void clickJugar() {
+        this.mano.rellenarse();
+        for (CartaPoker cartaPoker : mano.getCartas()) {
+            CartaVisual cartaVisual = new CartaVisual(cartaPoker,
+                    "/imagenes/cartas/" + cartaPoker.getNombreArchivo(),
+                    100,
+                    150);
+
+            // Agrega un manejador de clic a la carta visual
+            cartaVisual.setOnMouseClicked(event -> {
+                seleccionarCarta(cartaVisual);
+            });
+
+            lblMano.getChildren().add(cartaVisual);
+        }
+        //System.out.println("El botón ha sido presionado.");
     }
 }
