@@ -38,4 +38,6 @@ public class CartaVisual extends ImageView {
             System.out.println("Carta soltada en: " + this.getLayoutX() + ", " + this.getLayoutY());
         });
     }
+
+
 }

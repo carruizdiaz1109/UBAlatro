@@ -73,4 +73,8 @@ public class Jugador {
         this.rondaActual.agregarDescarte(unDesarte);
     }
 
+    public Mano getManoActual() {
+        return this.manoActual;
+    }
+
 }

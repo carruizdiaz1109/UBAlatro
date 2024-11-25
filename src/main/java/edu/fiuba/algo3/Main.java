@@ -24,9 +24,9 @@ public class Main extends Application {
 
         // Obtener el controlador desde el FXML cargado
         MainController controlador = loader.getController();
-
+        controlador.setJugador(new Jugador("Enzo", new Mazo()));
         // Actualiza la mano para mostrar las cartas en el HBox
-        controlador.actualizarMano();
+        //controlador.actualizarMano();
 
         Scene scene = new Scene(root);
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/icon.png")));
@@ -37,11 +37,5 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
 
-        //Si agrego estas 4 lineas ya no me muestra las cartas pero si añade funcionalidad al boton jugar, una ves iniciado jugar deberia repartir la mano, crear el mazo
-        // y la tienda, el controlador se deberia encargar de eso.
-        /*HBox load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(Paths.MAIN)));
-        Scene sceneJugar = new Scene(load);
-        stage.setScene(sceneJugar);
-        stage.show();*/
     }
 }
