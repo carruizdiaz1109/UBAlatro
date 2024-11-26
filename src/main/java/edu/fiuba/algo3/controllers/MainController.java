@@ -59,24 +59,7 @@ public class MainController {
         actualizarMano();
     }
 
-    public void mostrarCartasTarot(List<String> nombresCartasTarot) {
-        lblTarot.getChildren().clear();
 
-        for (String nombreArchivo : nombresCartasTarot) {
-            javafx.scene.image.Image imagenCarta = new javafx.scene.image.Image(
-                    getClass().getResource("/imagenes/tarot/" + nombreArchivo).toExternalForm()
-            );
-
-            javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
-            vistaCarta.setFitWidth(100); // Ancho de la carta
-            vistaCarta.setFitHeight(150); // Alto de la carta
-            vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
-
-            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
-
-            lblTarot.getChildren().add(vistaCarta);
-        }
-    }
     public void cargarCartasTarot() {
         List<String> nombresCartasTarot = List.of(
                 "ahorcado.png",
@@ -86,24 +69,25 @@ public class MainController {
         mostrarCartasTarot(nombresCartasTarot);
     }
 
-    public void mostrarCartasComodin(List<String> nombresCartasComodin) {
-        lblComodin.getChildren().clear();
+    public void mostrarCartasTarot(List<String> nombresCartasTarot) {
+        lblTarot.getChildren().clear();
 
-        for (String nombreArchivo : nombresCartasComodin) {
+        for (String nombreArchivo : nombresCartasTarot) {
             javafx.scene.image.Image imagenCarta = new javafx.scene.image.Image(
-                    getClass().getResource("/imagenes/comodines/" + nombreArchivo).toExternalForm()
+                    getClass().getResource("/imagenes/tarot/" + nombreArchivo).toExternalForm()
             );
 
             javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
-            vistaCarta.setFitWidth(100); // Ancho de la carta
-            vistaCarta.setFitHeight(150); // Alto de la carta
+            vistaCarta.setFitWidth(120); // Ancho de la carta
+            vistaCarta.setFitHeight(180); // Alto de la carta
             vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
 
             HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
 
-            lblComodin.getChildren().add(vistaCarta);
+            lblTarot.getChildren().add(vistaCarta);
         }
     }
+
     public void cargarCartasComodin() {
         List<String> nombresCartasComodin = List.of(
                 "abundante.png",
@@ -115,74 +99,125 @@ public class MainController {
         mostrarCartasComodin(nombresCartasComodin);
     }
 
+    public void mostrarCartasComodin(List<String> nombresCartasComodin) {
+        lblComodin.getChildren().clear();
+
+        for (String nombreArchivo : nombresCartasComodin) {
+            javafx.scene.image.Image imagenCarta = new javafx.scene.image.Image(
+                    getClass().getResource("/imagenes/comodines/" + nombreArchivo).toExternalForm()
+            );
+
+            javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
+            vistaCarta.setFitWidth(120); // Ancho de la carta
+            vistaCarta.setFitHeight(180); // Alto de la carta
+            vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
+
+            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
+
+            lblComodin.getChildren().add(vistaCarta);
+        }
+    }
+
     public void actualizarMano() {
-        lblMano.getChildren().clear();
         Mano mano = this.jugador.getManoActual();
+        List<CartaPoker> cartasActuales = mano.getCartas();
 
-        for (CartaPoker cartaPoker : mano.getCartas()) {
-            CartaVisual cartaVisual = new CartaVisual(cartaPoker,
-                    "/imagenes/cartas/" + cartaPoker.getNombreArchivo(),
-                    100,
-                    150);
+        lblMano.getChildren().removeIf(node -> {
+            if (node instanceof CartaVisual) {
+                CartaVisual cartaVisual = (CartaVisual) node;
+                return !cartasActuales.contains(cartaVisual.getCarta());
+            }
+            return false;
+        });
 
-            // Agrega un manejador de clic a la carta visual
-            cartaVisual.setOnMouseClicked(event -> seleccionarCarta(cartaVisual));
-            agregarCarta(cartaVisual);
+        for (CartaPoker cartaPoker : cartasActuales) {
+            boolean yaEstaEnMano = lblMano.getChildren().stream()
+                    .filter(node -> node instanceof CartaVisual)
+                    .anyMatch(node -> ((CartaVisual) node).getCarta().equals(cartaPoker));
+
+            if (!yaEstaEnMano) {
+                CartaVisual cartaVisual = new CartaVisual(
+                        cartaPoker,
+                        "/imagenes/cartas/" + cartaPoker.getNombreArchivo(),
+                        120,
+                        180
+                );
+                cartaVisual.setOnMouseClicked(event -> seleccionarCarta(cartaVisual));
+                agregarCarta(cartaVisual);
             }
         }
+        reacomodarCartas();
+    }
 
     private void agregarCarta(CartaVisual cartaVisual) {
-        cartaVisual.setTranslateY(-500);
+        // Posiciona la carta fuera del área visible (extremo derecho)
+        cartaVisual.setTranslateX(lblMano.getWidth());
+        cartaVisual.setTranslateY(0);
+
+        // Agrega la carta al HBox
         lblMano.getChildren().add(cartaVisual);
 
-    private void seleccionarCarta(CartaVisual cartaVisual) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(300), cartaVisual);
-        transition.setToY(0);
-        transition.setOnFinished(event -> animarDisposicionCartas());
+        // Anima la carta desde el borde derecho hacia su posición final
+        TranslateTransition transition = new TranslateTransition(Duration.millis(500), cartaVisual);
+        transition.setToX(0);
+        transition.setOnFinished(event -> reacomodarCartas());
         transition.play();
     }
 
-    private void animarDisposicionCartas() {
-        double espaciado = 10;
-        double posicionInicialX = (lblMano.getWidth() - lblMano.getChildren().size() * (100 + espaciado)) / 2;
+    private void reacomodarCartas() {
+        reacomodarCartas(null);
+    }
 
-        for (int i = 0; i < lblMano.getChildren().size(); i++) {
-            Node carta = lblMano.getChildren().get(i);
+    private void reacomodarCartas(Runnable onComplete) {
+        double espaciado = 30; // Espaciado entre cartas
+        double anchoTotalCartas = lblMano.getChildren().size() * (100 + espaciado) - espaciado;
+        double posicionInicialX = Math.max((lblMano.getWidth() - anchoTotalCartas) / 2, 0);
+
+        List<Node> cartas = new ArrayList<>(lblMano.getChildren());
+        for (int i = 0; i < cartas.size(); i++) {
+            Node carta = cartas.get(i);
             double nuevaPosicionX = posicionInicialX + i * (100 + espaciado);
 
             TranslateTransition transition = new TranslateTransition(Duration.millis(300), carta);
             transition.setToX(nuevaPosicionX - carta.getLayoutX());
+
+            // Si es la última carta, ejecuta el callback al finalizar la animación
+            if (i == cartas.size() - 1 && onComplete != null) {
+                transition.setOnFinished(event -> onComplete.run());
+            }
             transition.play();
+        }
+
+        // Si no hay animación porque no hay cartas, ejecuta el callback de inmediato
+        if (cartas.isEmpty() && onComplete != null) {
+            onComplete.run();
         }
     }
 
-    // Metodo para manejar la selección de una carta
     private void seleccionarCarta(CartaVisual cartaVisual) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(150), cartaVisual);
 
         if (cartasSeleccionadas.contains(cartaVisual.getCarta())) {
             cartasSeleccionadas.remove(cartaVisual.getCarta());
-            transition.setToY(0); // Baja la carta a la posición original
+            transition.setToY(0);
             cartaVisual.getStyleClass().remove("seleccionada");
         } else if(cartasSeleccionadas.size() < 5) {
             cartasSeleccionadas.add(cartaVisual.getCarta());
-            transition.setToY(-30); // Eleva la carta 20px hacia arriba
+            transition.setToY(-30);
             cartaVisual.getStyleClass().add("seleccionada");
         }
 
-        transition.play(); // Inicia la animación
-
-        // Opcional: Imprimir en consola para verificar
+        transition.play();
         System.out.println("Cartas seleccionadas: " + cartasSeleccionadas.size());
     }
 
     private void animarCartaHaciaAbajo(CartaVisual cartaVisual, Runnable onFinished) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(200), cartaVisual);
+        TranslateTransition transition = new TranslateTransition(Duration.millis(100), cartaVisual);
         transition.setToY(500);
 
         transition.setOnFinished(event -> {
             lblMano.getChildren().remove(cartaVisual);
-            animarDisposicionCartas();
+            reacomodarCartas();
             if (onFinished != null) {
                 onFinished.run();
             }
@@ -236,11 +271,49 @@ public class MainController {
         Runnable onComplete = () -> {
             jugador.seleccionarCarta(cartasSeleccionadas);
             accionEspecifica.run();
-            actualizarMano();
             cartasSeleccionadas.clear();
             rondaVisual.actualizarVista();
+
+            rellenarMano();
         };
 
         animarCartasSeleccionadas(onComplete);
     }
+
+    private void rellenarMano() {
+        Mano mano = jugador.getManoActual();
+        List<CartaPoker> cartasFaltantes = mano.getCartas().stream()
+                .filter(carta -> lblMano.getChildren().stream()
+                        .noneMatch(node -> node instanceof CartaVisual && ((CartaVisual) node).getCarta().equals(carta)))
+                .collect(Collectors.toList());
+
+        agregarCartasSecuencialmente(cartasFaltantes, 0);
+    }
+
+    private void agregarCartasSecuencialmente(List<CartaPoker> cartas, int index) {
+        if (index >= cartas.size()) {
+            reacomodarCartas();
+            return;
+        }
+
+        CartaPoker cartaPoker = cartas.get(index);
+        CartaVisual cartaVisual = new CartaVisual(
+                cartaPoker,
+                "/imagenes/cartas/" + cartaPoker.getNombreArchivo(),
+                120,
+                180
+        );
+
+        cartaVisual.setTranslateX(lblMano.getWidth());
+        cartaVisual.setTranslateY(0);
+
+        cartaVisual.setOnMouseClicked(event -> seleccionarCarta(cartaVisual));
+        lblMano.getChildren().add(cartaVisual);
+
+        TranslateTransition transition = new TranslateTransition(Duration.millis(100), cartaVisual);
+        transition.setToX(0);
+        transition.setOnFinished(event -> agregarCartasSecuencialmente(cartas, index + 1));
+        transition.play();
+    }
+
 }

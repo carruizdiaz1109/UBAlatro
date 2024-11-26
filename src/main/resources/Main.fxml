@@ -268,24 +268,50 @@
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1500.0">
                <children>
-                  <HBox fx:id="lblComodin" alignment="TOP_CENTER" opacity="0.5" prefHeight="260.0" prefWidth="1044.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </HBox>
-                  <HBox fx:id="lblTarot" alignment="TOP_CENTER" opacity="0.5" prefHeight="260.0" prefWidth="425.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </HBox>
+                  <StackPane alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1044.0">
+                     <HBox opacity="0.5" prefHeight="260.0" prefWidth="1044.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
+                        <HBox.margin>
+                           <Insets right="15.0" />
+                        </HBox.margin>
+                        <StackPane.margin>
+                           <Insets right="15.0" />
+                        </StackPane.margin>
+                     </HBox>
+                     <HBox fx:id="lblComodin" alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1044.0">
+                        <HBox.margin>
+                           <Insets right="15.0" />
+                        </HBox.margin>
+                        <StackPane.margin>
+                           <Insets right="15.0" />
+                        </StackPane.margin>
+                     </HBox>
+                  </StackPane>
+                  <StackPane alignment="TOP_CENTER" prefHeight="260.0" prefWidth="425.0">
+                     <HBox opacity="0.5" prefHeight="260.0" prefWidth="425.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
+                        <HBox.margin>
+                           <Insets />
+                        </HBox.margin>
+                     </HBox>
+                     <HBox fx:id="lblTarot" alignment="TOP_CENTER" prefHeight="260.0" prefWidth="425.0">
+                        <HBox.margin>
+                           <Insets />
+                        </HBox.margin>
+                     </HBox>
+                  </StackPane>
                </children>
             </HBox>
-            <VBox alignment="TOP_CENTER" prefHeight="339.0" prefWidth="1407.0" />
+            <VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="1306.0" />
             <HBox alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1500.0">
                <children>
-                  <StackPane alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1197.0">
-                     <HBox opacity="0.5" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;" />
-                     <HBox fx:id="lblMano" alignment="CENTER" spacing="10" />
+                  <StackPane alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1187.0">
+                     <HBox opacity="0.5" prefHeight="260.0" prefWidth="1009.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
+                        <StackPane.margin>
+                           <Insets right="15.0" />
+                        </StackPane.margin></HBox>
+                     <HBox fx:id="lblMano" alignment="CENTER" prefHeight="260.0" prefWidth="1004.0" spacing="10">
+                        <StackPane.margin>
+                           <Insets right="15.0" />
+                        </StackPane.margin></HBox>
                   </StackPane>
                   <HBox alignment="TOP_CENTER" opacity="0.5" prefHeight="260.0" prefWidth="218.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;" />
                </children>
