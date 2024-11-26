@@ -6,6 +6,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.fiuba.algo3.errores.ErrorAlCargarArchivo;
+import edu.fiuba.algo3.errores.ErrorArchivoNoEncontrado;
+
 import java.io.IOException;
 
 public class Balatro {
@@ -27,7 +30,7 @@ public class Balatro {
         ObjectMapper objectMapper = new ObjectMapper();
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("Balatro.json")) {
             if (inputStream == null) {
-                throw new IOException("File not found ");
+                throw new ErrorArchivoNoEncontrado();
             }
             JsonNode rootNode = objectMapper.readTree(inputStream);
             JsonNode rondasNode = rootNode.path("rondas");
@@ -42,8 +45,7 @@ public class Balatro {
                 rondas.add(ronda);
             }
         } catch (IOException e) {
-            System.err.println("Error al cargar las rondas desde el archivo JSON: " + e.getMessage());
-            e.printStackTrace();
+            throw new ErrorAlCargarArchivo(e);
         }
     }
 
