@@ -11,7 +11,7 @@ public class Ronda {
     private final int puntajeMinimo; //puntajeASuperar
     private int descartesDisponibles; //descartes
     private int jugadasDisponibles; //manos
-    private Tienda tienda;
+    private final Tienda tienda;
     private final List<Jugada> jugadas;
 
 
@@ -56,5 +56,21 @@ public class Ronda {
             acumulador += jugada.calcularPuntaje();
         }
         return acumulador;
+    }
+
+    public int getPuntajeAcumulado() {
+        return this.calcularTotalRonda();
+    }
+
+    public int getManosDisponibles() {
+        return this.jugadasDisponibles;
+    }
+
+    public int getPuntajeObjetivo() {
+        return this.puntajeMinimo;
+    }
+
+    public int getCantidadDescartes() {
+        return this.descartesDisponibles;
     }
 }
