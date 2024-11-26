@@ -16,9 +16,10 @@ public class EscaleraReal extends Jugada {
 
     @Override
     public boolean esJugada(List<CartaPoker> cartas) {
-        // Crea una copia mutable de la lista de cartas para poder ordenarla
-        List<CartaPoker> cartasOrdenadas = new ArrayList<>(cartas);
-        cartasOrdenadas.sort(Collections.reverseOrder());
+        if (cartas.size() < 6) {
+            // Crea una copia mutable de la lista de cartas para poder ordenarla
+            List<CartaPoker> cartasOrdenadas = new ArrayList<>(cartas);
+            cartasOrdenadas.sort(Collections.reverseOrder());
 
         // Verifica que las cartas sean del mismo palo y consecutivas
         for (int i = 0; i < cartasOrdenadas.size() - 1; i++) {
