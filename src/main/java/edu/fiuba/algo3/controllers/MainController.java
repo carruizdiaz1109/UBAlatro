@@ -197,18 +197,18 @@ public class MainController {
     private void seleccionarCarta(CartaVisual cartaVisual) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(150), cartaVisual);
 
-        if (cartasSeleccionadas.contains(cartaVisual.getCarta())) {
-            cartasSeleccionadas.remove(cartaVisual.getCarta());
+        if (this.cartasSeleccionadas.contains(cartaVisual.getCarta())) {
+            this.cartasSeleccionadas.remove(cartaVisual.getCarta());
             transition.setToY(0);
             cartaVisual.getStyleClass().remove("seleccionada");
-        } else if(cartasSeleccionadas.size() < 5) {
-            cartasSeleccionadas.add(cartaVisual.getCarta());
+        } else if(this.cartasSeleccionadas.size() < 5) {
+            this.cartasSeleccionadas.add(cartaVisual.getCarta());
             transition.setToY(-30);
             cartaVisual.getStyleClass().add("seleccionada");
         }
 
         transition.play();
-        System.out.println("Cartas seleccionadas: " + cartasSeleccionadas.size());
+        System.out.println("Cartas seleccionadas: " + this.cartasSeleccionadas.size());
     }
 
     private void animarCartaHaciaAbajo(CartaVisual cartaVisual, Runnable onFinished) {
@@ -257,6 +257,7 @@ public class MainController {
     public void clickJugar() {
         if (rondaActual.estadoRonda()) {
             manejarAccionCartaSeleccionada(() -> jugador.jugar());
+            //this.cartasSeleccionadas.clear();
         }
     }
 
@@ -271,10 +272,10 @@ public class MainController {
         }
 
         Runnable onComplete = () -> {
+            System.out.println("Cartas a jugar:" + this.cartasSeleccionadas.size());
             jugador.seleccionarCarta(cartasSeleccionadas);
             accionEspecifica.run();
-            cartasSeleccionadas.clear();
-            rondaVisual.actualizarVista();
+            this.cartasSeleccionadas.clear();
 
             rellenarMano();
         };
