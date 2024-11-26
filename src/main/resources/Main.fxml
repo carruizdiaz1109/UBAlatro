@@ -111,7 +111,7 @@
                                     <Insets bottom="10.0" left="10.0" top="10.0" />
                                  </HBox.margin>
                                  <children>
-                                    <Text fx:id="lblValorAJugar" fill="#392b79" strokeType="OUTSIDE" strokeWidth="0.0" text="valorAJugar" textAlignment="CENTER" wrappingWidth="87.98307228088379" HBox.hgrow="ALWAYS">
+                                    <Text fx:id="lblValorAJugar" fill="#392b79" strokeType="OUTSIDE" strokeWidth="0.0" text="v" textAlignment="CENTER" wrappingWidth="87.98307228088379" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font name="Consolas" size="29.0" />
                                        </font>
@@ -135,7 +135,7 @@
                               </HBox>
                               <HBox alignment="TOP_CENTER" prefHeight="43.0" prefWidth="150.0" style="-fx-background-color: #FFA6A7; -fx-border-radius: 10; -fx-background-radius: 10;">
                                  <children>
-                                    <Text fx:id="lblMultiplicadorAJugar" fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="multiplicadorAJugar" textAlignment="CENTER" wrappingWidth="87.98307228088379">
+                                    <Text fx:id="lblMultiplicadorAJugar" fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="m" textAlignment="CENTER" wrappingWidth="87.98307228088379">
                                        <font>
                                           <Font name="Consolas" size="29.0" />
                                        </font>
@@ -163,7 +163,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="jugadas restantes" textAlignment="CENTER" wrappingWidth="221.97657775878906" VBox.vgrow="ALWAYS">
+                              <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="jugadas" textAlignment="CENTER" wrappingWidth="221.97657775878906" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font name="Consolas Bold" size="24.0" />
                                  </font>
@@ -198,7 +198,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="descartes restantes" textAlignment="CENTER" wrappingWidth="221.97657775878906" VBox.vgrow="ALWAYS">
+                              <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="descartes" textAlignment="CENTER" wrappingWidth="221.97657775878906" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font name="Consolas Bold" size="24.0" />
                                  </font>
