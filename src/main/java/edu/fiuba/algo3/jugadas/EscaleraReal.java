@@ -21,30 +21,30 @@ public class EscaleraReal extends Jugada {
             List<CartaPoker> cartasOrdenadas = new ArrayList<>(cartas);
             cartasOrdenadas.sort(Collections.reverseOrder());
 
-        // Verifica que las cartas sean del mismo palo y consecutivas
-        for (int i = 0; i < cartasOrdenadas.size() - 1; i++) {
-            if(!cartasOrdenadas.get(i).esMismoPalo(cartasOrdenadas.get(i + 1)) && (!cartasOrdenadas.get(0).esMismoValor(new CartaPoker(Valor.AS, Palo.PICAS)))){
-                return false;
-            }else{
-                if(cartasOrdenadas.get(i+1).esMismoValor(new CartaPoker(Valor.DIEZ, Palo.PICAS))){
-                    cartasValidas = new ArrayList<>(cartas); // Asigna todas las cartas
-                    return true;
+            // Verifica que las cartas sean del mismo palo y consecutivas
+            for (int i = 0; i < cartasOrdenadas.size() - 1; i++) {
+                if (!cartasOrdenadas.get(i).esMismoPalo(cartasOrdenadas.get(i + 1)) && (!cartasOrdenadas.get(0).esMismoValor(new CartaPoker(Valor.AS, Palo.PICAS)))) {
+                    return false;
+                } else {
+                    if (cartasOrdenadas.get(i + 1).esMismoValor(new CartaPoker(Valor.DIEZ, Palo.PICAS))) {
+                        cartasValidas = new ArrayList<>(cartas); // Asigna todas las cartas
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
-        }
 
-        // Si todas las cartas forman una secuencia, es una Escalera
-        return false;
+        }
+        return  false;
     }
 
-    @Override
-    protected List<CartaPoker> seleccionarCartasValidas(List<CartaPoker> cartas) {
-        // Si `esJugada` fue verdadero, `cartasValidas` ya debe contener todas las cartas de Escalera Real
-        if (cartasValidas != null && cartasValidas.size() == 5) {
-            return cartasValidas;
-        }
+        @Override
+        protected List<CartaPoker> seleccionarCartasValidas (List < CartaPoker > cartas) {
+            // Si `esJugada` fue verdadero, `cartasValidas` ya debe contener todas las cartas de Escalera Real
+            if (cartasValidas != null && cartasValidas.size() == 5) {
+                return cartasValidas;
+            }
 
-        return List.of();  // Devuelve una lista vacía si no es Escalera Real
-    }
+            return List.of();  // Devuelve una lista vacía si no es Escalera Real
+        }
 }
