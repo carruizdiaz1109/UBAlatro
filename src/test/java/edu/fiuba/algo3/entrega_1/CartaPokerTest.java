@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.errores.ErrorCartaNula;
+import edu.fiuba.algo3.errores.ErrorPuntajeNulo;
 import edu.fiuba.algo3.tarots.EfectoCarta;
 import org.junit.jupiter.api.Test;
 
@@ -107,5 +109,54 @@ public class CartaPokerTest {
        ConjuntoCartas escaleraObtenida = carta.obtenerEscalera();
        System.out.println(escaleraEsperada);
         assert(escaleraObtenida.compararCon(escaleraEsperada));
+    }
+
+    @Test
+    public void test10ModificarPuntajeNuloTiraExcepcion(){
+        CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
+
+        assertThrows(ErrorPuntajeNulo.class, () -> carta.modificarPuntaje(null));
+    }
+
+    @Test
+    public void test11CompararValorConCartaNulaTiraExcepcion(){
+        CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
+
+        assertThrows(ErrorCartaNula.class, () -> carta.esMismoValor(null));
+    }
+
+    @Test
+    public void test12CompararPaloConCartaNulaTiraExcepcion(){
+        CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
+
+        assertThrows(ErrorCartaNula.class, () -> carta.esMismoPalo(null));
+    }
+
+    @Test
+    public void test13ConsecutivaConCartaNulaTiraExcepcion(){
+        CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
+
+        assertThrows(ErrorCartaNula.class, () -> carta.esConsecutiva(null));
+    }
+
+    @Test
+    public void test14CompararCartaConCartaNulaTiraExcepcion(){
+        CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
+
+        assertThrows(ErrorCartaNula.class, () -> carta.compararCartaCon(null));
+    }
+
+    @Test
+    public void test15AplicarComodinConPuntajeNuloTiraExcepcion(){
+        CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
+
+        assertThrows(ErrorPuntajeNulo.class, () -> carta.aplicarComodin(null));
+    }
+
+    @Test
+    public void test16AplicarTarotConPuntajeNuloTiraExcepcion(){
+        CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
+
+        assertThrows(ErrorPuntajeNulo.class, () -> carta.aplicarTarot(null));
     }
 }
