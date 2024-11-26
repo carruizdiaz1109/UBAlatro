@@ -255,7 +255,9 @@ public class MainController {
 
     @FXML
     public void clickJugar() {
-        manejarAccionCartaSeleccionada(() -> jugador.jugar());
+        if (rondaActual.estadoRonda()) {
+            manejarAccionCartaSeleccionada(() -> jugador.jugar());
+        }
     }
 
     @FXML
