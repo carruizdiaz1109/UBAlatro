@@ -6,11 +6,9 @@ import edu.fiuba.algo3.controllers.MainController;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.fxml.FXMLLoader;
-import utilities.Paths;
 
 public class Main extends Application {
 
@@ -21,12 +19,12 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Inicio.fxml"));
         Parent root = loader.load();
 
-        MainController controlador = loader.getController();
-        controlador.setJugador(new Jugador("Enzo", new Mazo()));
-        controlador.iniciarRonda();
+//        MainController controlador = loader.getController();
+//        controlador.setJugador(new Jugador("Enzo", new Mazo()));
+//        controlador.iniciarRonda();
 
         Scene scene = new Scene(root);
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/icon.png")));
