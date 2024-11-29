@@ -116,14 +116,13 @@ abstract class Jugada {
 }
 
 Jugador o-- "1..3" Ronda
-Jugador o-- Mano
-Jugador o-- Mazo
+Jugador o-- ConjuntoCartas
 Jugador ..> Jugada
 
 Mano -up--|> ConjuntoCartas
 Mazo -up--|> ConjuntoCartas
 
-Mazo o-- "1..*" CartaPoker
+ConjuntoCartas o-- "1..*" CartaPoker
 Mano o-- Mazo
 
 Jugada o-- "1..*" CartaPoker

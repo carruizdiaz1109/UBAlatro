@@ -18,13 +18,14 @@ user -> mano **: new Mano(cartas);
 user -> jugador **: Jugador("Pepe", mazoMock);
 user -> jugador: iniciarRonda(ronda);
 
-user -> comodin **: EfectoAleatorio(1000, 10, 1, "", "");
+user -> comodin **: EfectoAleatorio(1000, 10, 1, "RayoMcqueen", "1 en 1000 chances");
+user -> jugador :aniadirComodin(unComodin);
+
 loop for each carta in Mano
     user -> jugador: seleccionarCarta(carta);
     jugador -> mano: seleccionarCarta(carta);
 end
 
-user -> jugador :aniadirComodin(unComodin);
 user -> jugador: jugar();
 jugador -> mano: jugar();
 mano -> ":Poker" as poker: new Poker(cartasSeleccionadas);

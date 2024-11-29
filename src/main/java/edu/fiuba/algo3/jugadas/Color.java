@@ -26,15 +26,16 @@ public class Color extends Jugada {
         }
 
         // Si todas las cartas son del mismo palo, es un Color
-        cartasValidas = new ArrayList<>(cartas); // Asigna todas las cartas
+        cartasValidas = seleccionarCartasValidas(cartas); // Asigna todas las cartas
+
         return true;
     }
 
     @Override
     protected List<CartaPoker> seleccionarCartasValidas(List<CartaPoker> cartas) {
         // Si `esJugada` fue verdadero, `cartasValidas` ya debe contener todas las cartas de Color
-        if (cartasValidas != null && cartasValidas.size() == 5) {
-            return cartasValidas;
+        if (cartas != null && cartas.size() == 5) {
+            return cartas;
         }
 
         return List.of();  // Devuelve una lista vacía si no es Color

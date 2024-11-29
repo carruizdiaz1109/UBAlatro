@@ -26,6 +26,12 @@
       <artifactId>json-simple</artifactId>
       <version>1.1.1</version>
     </dependency>
+    <dependency>
+      <groupId>com.tngtech.archunit</groupId>
+      <artifactId>archunit</artifactId>
+      <version>0.21.0</version> <!-- O la versión que prefieras -->
+      <scope>test</scope>
+    </dependency>
 
     <!-- JavaFX módulos necesarios -->
     <dependency>
@@ -60,6 +66,16 @@
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+    </resources>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
     <plugins>
       <!-- Configuración del compilador -->
       <plugin>
@@ -68,6 +84,8 @@
         <version>3.8.0</version>
         <configuration>
           <release>11</release>
+            <source>16</source>
+            <target>16</target>
         </configuration>
       </plugin>
 

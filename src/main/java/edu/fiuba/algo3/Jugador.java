@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.comodines.Comodin;
 import edu.fiuba.algo3.jugadas.Descarte;
 import java.util.ArrayList;
 
@@ -34,12 +35,15 @@ public class Jugador {
 
     public void jugar(){
         Jugada unaJugada = this.manoActual.jugar();
-        aplicarComodin(unaJugada);
+        if (this.comodines.size()>0) {
+            aplicarComodin(unaJugada);
+        }
         this.rondaActual.agregarJugada(unaJugada);
+        this.manoActual.rellenarse();
     }
 
-    public void seleccionarCarta(CartaPoker unaCarta) {
-        this.manoActual.seleccionarCarta(unaCarta);
+    public void seleccionarCarta(ArrayList<CartaPoker> cartasASeleccionar) {
+        this.manoActual.seleccionarCartas(cartasASeleccionar);
     }
 
     public void aniadirTarots(Tarot cartaTarot) {
@@ -50,7 +54,7 @@ public class Jugador {
 
     public void utilizarTarot(Tarot tarotaAplicar, CartaPoker cartaPoker) {
         if (!this.cartasTarot.isEmpty() && this.cartasTarot.contains(tarotaAplicar)) {
-            cartaPoker.activarTarot(tarotaAplicar);
+            tarotaAplicar.aplicar(cartaPoker);
         } else {
             throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
         }
@@ -70,6 +74,11 @@ public class Jugador {
         Descarte unDesarte = this.manoActual.descartar();
         aplicarComodin(unDesarte);
         this.rondaActual.agregarDescarte(unDesarte);
+        this.manoActual.rellenarse();
+    }
+
+    public Mano getManoActual() {
+        return this.manoActual;
     }
 
 }

@@ -4,16 +4,17 @@
 title Se verifica que se aplica comodin descarte correctamente
 
 actor ":TestCase" as user
+participant "mazoMock:Mazo" as mazo
 participant ":Ronda" as ronda
 participant ":CartaPoker" as carta
 participant "cartas :ArrayList" as lista
-participant ":Mazo" as mazo
+
 participant ":Mano" as mano
 participant ":Jugador" as jugador
 participant "unComodin :EfectoDescarte" as comodin
-participant "unaJugada: Descarte" as jugada
+participant "unDescarte: Descarte" as jugada
 
-user -> mazo**: Mazo()
+user -> mazo**: MazoMock()
 user -> ronda**: Ronda(numero: 1, puntajeMinimo: 10000, descartesDisponibles: 3, jugadasDisponibles: 3)
 user -> lista**: ArrayList()
 
@@ -24,15 +25,10 @@ end
 
 user -> mano**: Mano(cartas)
 
-user -> jugador**: Jugador(Pepe, mazo)
-user -> jugador: iniciarRonda(ronda)
-    jugador -> mano: rellenarse()
-        loop !manoLlena() && mazo.tieneCartas()
-            mano -> mazo: darCarta()
-            mazo --> mano: unaCarta
-            mano -> mano: agregarCarta(unaCarta)
-        end
+user -> jugador**: Jugador(Pepe, mazoMock)
+user -> jugador: anadirComodin(unComodin)
 
+user -> jugador: iniciarRonda(ronda)
 user -> user: puntajeEsperado = 10
 
 user -> comodin**: EfectoDescarte(Descarte, valor: 10, multiplicador: 1)
@@ -42,11 +38,10 @@ user -> jugador: seleccionarCarta(carta)
 jugador -> mano: seleccionarCarta(carta)
 end
 
-user -> jugador: anadirComodin(unComodin)
-
 user -> jugador: descartar()
     jugador -> mano: descartar()
         mano -> jugada**: Descarte(seleccionadas)
+        jugada -> puntaje**: (0,1)
     mano --> jugador: unDescarte
     jugador -> jugador: aplicarComodin(unDescarte)
         loop for each comodin in comodines
@@ -56,8 +51,6 @@ user -> jugador: descartar()
         puntaje --> jugada: unPuntaje
         end
     jugador -> ronda: agregarJugada(unDescarte)
-        ronda -> ronda: jugadas.add(unDescarte)
-        ronda -> ronda: jugadasDisponibles--
 
 user -> ronda: calcularTotalRonda()
 loop for each jugada in jugadas

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vistas;
 
+import edu.fiuba.algo3.CartaPoker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -7,13 +8,14 @@ import javafx.scene.input.MouseEvent;
 import java.util.Objects;
 
 public class CartaVisual extends ImageView {
+    private final CartaPoker cartaReferencia;
 
-    public CartaVisual(String imagePath, double width, double height) {
+    public CartaVisual(CartaPoker carta, String imagePath, double width, double height) {
         super(new Image(Objects.requireNonNull(CartaVisual.class.getResourceAsStream(imagePath))));
         this.setFitWidth(width);
         this.setFitHeight(height);
         this.setPreserveRatio(true);
-
+        this.cartaReferencia = carta;
         this.hacerArrastrable();
     }
 
@@ -36,4 +38,9 @@ public class CartaVisual extends ImageView {
             System.out.println("Carta soltada en: " + this.getLayoutX() + ", " + this.getLayoutY());
         });
     }
+
+    public CartaPoker getCarta() {
+        return this.cartaReferencia;
+    }
+
 }

@@ -8,5 +8,3 @@ Clases:
 
 
 - tal vez podemos cambiar la flecha de comprable a carta, comodin etc por implementacion de la interfaz, en vez de herencia. (Caro pregunta)
-
-- crear un mazo de descarte a dodne van las cartas cada vez que se juegan/descartan, y después de cada ronda, se vueve a rellenar el mazo inicial

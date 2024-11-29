@@ -106,7 +106,7 @@ package Model {
     }
 
     Jugada *-up- "1..5"CartaPoker
-    Jugada o-- Puntaje
+    Jugada o-right- Puntaje
     CartaPoker o-- Puntaje
 
     CartaAlta -up--|> Jugada
