@@ -139,7 +139,7 @@ public class MainController {
                         lblComodin.getChildren().add(indexDestino, cartaArrastrada);
                     } else {
                         lblComodin.getChildren().remove(cartaArrastrada);
-                        lblComodin.getChildren().add(indexDestino + 1, cartaArrastrada);
+                        lblComodin.getChildren().add(indexDestino, cartaArrastrada);
                     }
                 }
             }
