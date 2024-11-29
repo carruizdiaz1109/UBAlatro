@@ -82,7 +82,7 @@ public class MainController {
             vistaCarta.setFitHeight(180); // Alto de la carta
             vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
 
-            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
+            //HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
 
             lblTarot.getChildren().add(vistaCarta);
         }
@@ -112,7 +112,7 @@ public class MainController {
             vistaCarta.setFitHeight(180); // Alto de la carta
             vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
 
-            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
+            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(30, 0, 0, 0));
 
             lblComodin.getChildren().add(vistaCarta);
         }
