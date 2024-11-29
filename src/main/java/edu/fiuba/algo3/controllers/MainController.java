@@ -16,6 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.MouseEvent;
+
 public class MainController {
     @FXML
     private HBox lblMano;
@@ -99,6 +105,67 @@ public class MainController {
         mostrarCartasComodin(nombresCartasComodin);
     }
 
+    private void iniciarArrastre(javafx.scene.image.ImageView carta, MouseEvent event) {
+        Dragboard dragboard = carta.startDragAndDrop(TransferMode.MOVE);
+        ClipboardContent content = new ClipboardContent();
+        content.putString(carta.getImage().getUrl()); // Guardamos la URL de la imagen de la carta como el contenido
+
+        dragboard.setContent(content);
+        event.consume();
+    }
+
+    private void manejarDragOver(DragEvent event) {
+        if (event.getGestureSource() != event.getTarget() && event.getDragboard().hasString()) {
+            event.acceptTransferModes(TransferMode.MOVE);
+        }
+        event.consume();
+    }
+
+    private void manejarDragDrop(javafx.scene.image.ImageView cartaDestino, DragEvent event) {
+        Dragboard dragboard = event.getDragboard();
+        if (dragboard.hasString()) {
+            String url = dragboard.getString();
+
+            // Reorganizamos las cartas de comodín
+            javafx.scene.image.ImageView cartaArrastrada = encontrarCartaPorURL(url);
+            if (cartaArrastrada != null) {
+                // Reorganizamos las cartas en lblComodin
+                int indexDestino = lblComodin.getChildren().indexOf(cartaDestino);
+                int indexArrastrada = lblComodin.getChildren().indexOf(cartaArrastrada);
+
+                if (indexDestino != -1 && indexArrastrada != -1) {
+                    if (indexDestino < indexArrastrada) {
+                        lblComodin.getChildren().remove(cartaArrastrada);
+                        lblComodin.getChildren().add(indexDestino, cartaArrastrada);
+                    } else {
+                        lblComodin.getChildren().remove(cartaArrastrada);
+                        lblComodin.getChildren().add(indexDestino + 1, cartaArrastrada);
+                    }
+                }
+            }
+        }
+        event.setDropCompleted(true);
+        event.consume();
+    }
+
+    private javafx.scene.image.ImageView encontrarCartaPorURL(String url) {
+        for (Node node : lblComodin.getChildren()) {
+            if (node instanceof javafx.scene.image.ImageView) {
+                javafx.scene.image.ImageView carta = (javafx.scene.image.ImageView) node;
+                if (carta.getImage().getUrl().equals(url)) {
+                    return carta;
+                }
+            }
+        }
+        return null;
+    }
+
+    private void arrastrar(javafx.scene.image.ImageView vistaCarta) {
+        vistaCarta.setOnDragDetected(event -> iniciarArrastre(vistaCarta, event));
+        vistaCarta.setOnDragOver(event -> manejarDragOver(event));
+        vistaCarta.setOnDragDropped(event -> manejarDragDrop(vistaCarta, event));
+    }
+
     public void mostrarCartasComodin(List<String> nombresCartasComodin) {
         lblComodin.getChildren().clear();
 
@@ -111,6 +178,8 @@ public class MainController {
             vistaCarta.setFitWidth(120); // Ancho de la carta
             vistaCarta.setFitHeight(180); // Alto de la carta
             vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
+
+            arrastrar(vistaCarta);
 
             HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
 
