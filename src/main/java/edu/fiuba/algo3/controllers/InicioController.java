@@ -47,7 +47,7 @@ public class InicioController {
     private void iniciarJuego() {
         String nombreJugador = nombreTextField.getText();
         if (nombreJugador == null || nombreJugador.trim().isEmpty()) {
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            Alert alerta = new Alert(Alert.AlertType.WARNING);                //el cartelito esta medio feaso pero después lo cambiamos
             alerta.setTitle("Nombre inválido");
             alerta.setHeaderText("Debe ingresar un nombre para jugar.");
             alerta.showAndWait();
