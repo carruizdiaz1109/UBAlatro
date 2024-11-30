@@ -75,7 +75,6 @@ public class Ronda {
             System.out.println("Tipo de jugada: " + tipoJugada + ", Puntaje: " + puntaje); // Log para depurar
             acumulador += puntaje;
         }
-        this.puntajeAcumulado.set(acumulador);
         return acumulador;
     }
 

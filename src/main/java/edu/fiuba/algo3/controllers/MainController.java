@@ -77,13 +77,13 @@ public class MainController {
     // Método para inicializar al jugador desde el controlador principal
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
-        Puntaje puntajeComodin = new Puntaje(20,3);
-        Comodin unComodin = new EfectoPuntaje(puntajeComodin,"Gros Michel", "Se suma 20 al puntaje y multiplciador 3", new NoAleatorio());
-        this.jugador.aniadirComodin(unComodin);
-
-        Puntaje puntajeTarot = new Puntaje(100,1);
-        Tarot unTarot = new TarotCarta("El Tonto","+100 de puntaje", puntajeTarot);
-        this.jugador.aniadirTarots(unTarot);
+//        Puntaje puntajeComodin = new Puntaje(20,3);
+//        Comodin unComodin = new EfectoPuntaje(puntajeComodin,"Gros Michel", "Se suma 20 al puntaje y multiplciador 3", new NoAleatorio());
+//        this.jugador.aniadirComodin(unComodin);
+//
+//        Puntaje puntajeTarot = new Puntaje(100,1);
+//        Tarot unTarot = new TarotCarta("El Tonto","+100 de puntaje", puntajeTarot);
+//        this.jugador.aniadirTarots(unTarot);
 
         actualizarMano();
 
