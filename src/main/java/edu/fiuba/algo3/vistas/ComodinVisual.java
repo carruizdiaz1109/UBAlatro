@@ -1,21 +1,21 @@
 package edu.fiuba.algo3.vistas;
 
-import edu.fiuba.algo3.modelo.entidades.Tarot;
+import edu.fiuba.algo3.modelo.entidades.comodines.Comodin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.util.Objects;
 
-public class TarotVisual extends ImageView{
-    private final Tarot cartaTarotReferencia;
+public class ComodinVisual  extends ImageView {
+    private final Comodin comodinReferencia;
 
-    public TarotVisual(Tarot cartaTarot, String imagePath, double width, double height) {
-        super(new Image(Objects.requireNonNull(TarotVisual.class.getResourceAsStream(imagePath))));
+    public ComodinVisual(Comodin comodin, String imagePath, double width, double height) {
+        super(new Image(Objects.requireNonNull(ComodinVisual.class.getResourceAsStream(imagePath))));
         this.setFitWidth(width);
         this.setFitHeight(height);
         this.setPreserveRatio(true);
-        this.cartaTarotReferencia = cartaTarot;
+        this.comodinReferencia = comodin;
         this.hacerArrastrable();
     }
 
@@ -34,11 +34,11 @@ public class TarotVisual extends ImageView{
         });
 
         this.setOnMouseReleased(event -> {
-            System.out.println("Carta de Tarot soltada en: " + this.getLayoutX() + ", " + this.getLayoutY());
+            System.out.println("Comodín soltado en: " + this.getLayoutX() + ", " + this.getLayoutY());
         });
     }
 
-    public Tarot getCartaTarot() {
-        return this.cartaTarotReferencia;
+    public Comodin getComodin() {
+        return this.comodinReferencia;
     }
 }

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fiuba.algo3.modelo.entidades.*;
 import edu.fiuba.algo3.modelo.entidades.comodines.*;
-import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
+import edu.fiuba.algo3.modelo.entidades.tarots.*;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -24,7 +25,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 public class MainController {
     @FXML
@@ -37,10 +37,11 @@ public class MainController {
     private Label lblObjetivo;
     @FXML
     private Label lblDescartesDisponibles;
-    @FXML
-    private HBox lblComodin;
+
     @FXML
     private HBox lblTarot;
+    @FXML
+    private HBox lblComodin;
     @FXML
     private Label lblResultado;
 
@@ -82,24 +83,23 @@ public class MainController {
         this.rondaActual = new Ronda(1, 2000, 4, 5, tienda);
     }
 
-    // Metodo para inicializar al jugador desde el controlador principal
+    // Método para inicializar al jugador desde el controlador principal
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
-//        Puntaje puntajeComodin = new Puntaje(20,3);
-//        Comodin unComodin = new EfectoPuntaje(puntajeComodin,"Gros Michel", "Se suma 20 al puntaje y multiplciador 3", new NoAleatorio());
-//        this.jugador.aniadirComodin(unComodin);
-//
-//        Puntaje puntajeTarot = new Puntaje(100,1);
-//        Tarot unTarot = new TarotCarta("El Tonto","+100 de puntaje", puntajeTarot);
-//        this.jugador.aniadirTarots(unTarot);
+        Puntaje puntajeComodin = new Puntaje(20,3);
+        Comodin unComodin = new EfectoPuntaje(puntajeComodin,"Gros Michel", "Se suma 20 al puntaje y multiplciador 3", new NoAleatorio());
+        this.jugador.aniadirComodin(unComodin);
+
+        Puntaje puntajeTarot = new Puntaje(100,1);
+        Tarot unTarot = new TarotCarta("El Tonto","+100 de puntaje", puntajeTarot);
+        this.jugador.aniadirTarots(unTarot);
 
         actualizarMano();
-
         ComodinController comodinController = new ComodinController(this.jugador, lblComodin);
-        comodinController.cargarCartasComodin();
+        comodinController.visualizarComodines();
 
         TarotController tarotController = new TarotController(this.jugador, lblTarot);
-        tarotController.cargarCartasTarot();
+        tarotController.visualizarTarots();
     }
 
     public void iniciarRonda() {
@@ -272,7 +272,8 @@ public class MainController {
             System.out.println("Cartas a jugar:" + this.cartasSeleccionadas.size());
             jugador.seleccionarCarta(cartasSeleccionadas);
             accionEspecifica.run();
-            this.cartasSeleccionadas.clear(); //las cartas no se deberían borrar
+            this.cartasSeleccionadas.clear();
+
             rellenarMano();
         };
         animarCartasSeleccionadas(onComplete);
