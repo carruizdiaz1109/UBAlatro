@@ -11,18 +11,19 @@ import java.util.List;
 
 
 public class Tienda {
-    private final List<CartaPoker> cartasAComprar;
+    private final List<CartaPoker> cartasALaVenta;
     private final List<Tarot> tarotsALaVenta;
     private final List<Comodin> comodinesALaVenta;
 
 
     public Tienda (JsonNode tiendaNode) {
-        this.cartasAComprar = new ArrayList<CartaPoker>();
+        this.cartasALaVenta = new ArrayList<CartaPoker>();
         this.tarotsALaVenta = new ArrayList<Tarot>();
         this.comodinesALaVenta = new ArrayList<Comodin>();
 
         inicializarComodines(tiendaNode);
         inicializarTarots(tiendaNode);
+        inicializarCartas(tiendaNode);
     }
 
     private void inicializarComodines(JsonNode tiendaNode) {
@@ -61,14 +62,14 @@ public class Tienda {
         JsonNode tarotsNode = tiendaNode.path("tarots");
 
         for (JsonNode tarotNode : tarotsNode) {
-            Tarot tarot = inicializarTarot(tarotNode);
+            Tarot tarot = crearTarot(tarotNode);
             if (tarot != null) {
                 this.tarotsALaVenta.add(tarot);
             }
         }
     }
 
-    private Tarot inicializarTarot(JsonNode tarotNode) {
+    private Tarot crearTarot(JsonNode tarotNode) {
         String nombre = tarotNode.get("nombre").asText();
         String descripcion = tarotNode.get("descripcion").asText();
         JsonNode efectoNode = tarotNode.get("efecto");
@@ -116,5 +117,19 @@ public class Tienda {
 
     public List<Tarot> obtenerTarots() {
         return this.tarotsALaVenta;
+    }
+
+    public List<CartaPoker> obtenerCartas() {
+        return this.cartasALaVenta;
+    }
+    private void inicializarCartas(JsonNode tiendaNode) {
+        JsonNode cartaNode = tiendaNode.path("carta");
+        String paloStr = cartaNode.get("palo").asText();
+        String numeroStr = cartaNode.get("numero").asText();
+
+        Palo palo = Palo.obtenerPaloDesdeString(paloStr);
+        Valor valor = Valor.obtenerValorDesdeString(numeroStr);
+
+        this.cartasALaVenta.add(new CartaPoker(valor, palo));
     }
 }
