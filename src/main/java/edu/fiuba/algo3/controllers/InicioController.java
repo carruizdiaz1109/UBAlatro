@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.Jugador;
-import edu.fiuba.algo3.Mazo;
+import edu.fiuba.algo3.modelo.entidades.Jugador;
+import edu.fiuba.algo3.modelo.entidades.Mazo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 public class InicioController {
@@ -36,11 +35,11 @@ public class InicioController {
     @FXML
     public void initialize() {
         String videoPath = Objects.requireNonNull(getClass().getResource("/videos/background.mp4")).toExternalForm();
-        Media media = new Media(videoPath);
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.setAutoPlay(true);
-        backgroundMediaView.setMediaPlayer(mediaPlayer);
+//        Media media = new Media(videoPath);
+//        MediaPlayer mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//        mediaPlayer.setAutoPlay(true);
+//        backgroundMediaView.setMediaPlayer(mediaPlayer);
         jugarButton.setOnAction(event -> iniciarJuego());
     }
 
@@ -48,7 +47,7 @@ public class InicioController {
     private void iniciarJuego() {
         String nombreJugador = nombreTextField.getText();
         if (nombreJugador == null || nombreJugador.trim().isEmpty()) {
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            Alert alerta = new Alert(Alert.AlertType.WARNING);                //el cartelito esta medio feaso pero después lo cambiamos
             alerta.setTitle("Nombre inválido");
             alerta.setHeaderText("Debe ingresar un nombre para jugar.");
             alerta.showAndWait();
@@ -56,7 +55,7 @@ public class InicioController {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ronda.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ronda.fxml"));
             Parent root = loader.load();
             MainController rondaController = loader.getController();
             rondaController.setJugador(new Jugador(nombreJugador, new Mazo()));

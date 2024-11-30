@@ -1,6 +1,11 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.comodines.*;
+import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
 import edu.fiuba.algo3.comodines.Comodin;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
@@ -46,24 +51,58 @@ public class MainController {
     private final ArrayList<CartaPoker> cartasSeleccionadas;
     private final Ronda rondaActual;
     private RondaVisual rondaVisual;
-    //private ComodinController comodinController;//Luis ahora
-    private TarotController tarotController; //Luis ahora
-    private Pane mainPane; //Luis ahora
-
-
+    private Tienda tienda;
+    private Pane mainPane;
     public MainController() {
         this.cartasSeleccionadas = new ArrayList<>();
-        this.rondaActual = new Ronda(1, 2000, 4,5,new Tienda());
+        try {
+            String json = "{" +
+                    "\"comodines\": [" +
+                    "{ \"nombre\": \"Comodin Astuto\", \"descripcion\": \"+50 fichas si la mano jugada contiene un par\", \"activacion\": { \"Mano Jugada\": \"par\" }, \"efecto\": { \"puntos\": 50, \"multiplicador\": 1 } }, " +
+                    "{ \"nombre\": \"Cumbre Mistica\", \"descripcion\": \"x15 multiplicación por cada descarte\", \"activacion\": \"Descarte\", \"efecto\": { \"puntos\": 1, \"multiplicador\": 15 } } " +
+                    "], " +
+                    "\"tarots\": [" +
+                    "{ \"nombre\": \"El Mago\", \"descripcion\": \"Mejora la mano par\", \"efecto\": { \"puntos\": 15, \"multiplicador\": 2 }, \"sobre\": \"mano\", \"ejemplar\": \"par\" }, " +
+                    "{ \"nombre\": \"El Carro\", \"descripcion\": \"Mejora 1 carta seleccionada y la convierte en una carta de acero.\", \"efecto\": { \"puntos\": 1, \"multiplicador\": 1.5 }, \"sobre\": \"carta\", \"ejemplar\": \"cualquiera\" }" +
+                    "], " +
+                    "\"carta\": {" +
+                    "\"nombre\": \"10 de Corazones\", " +
+                    "\"palo\": \"Corazones\", " +
+                    "\"numero\": \"10\", " +
+                    "\"puntos\": 10, " +
+                    "\"multiplicador\": \"1\"" +
+                    "}" + "}";
 
+            // Convertir el JSON a JsonNode usando ObjectMapper
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode tiendaNode = objectMapper.readTree(json);
+
+            // Crear la tienda con el JSON
+            tienda = new Tienda(tiendaNode);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        this.rondaActual = new Ronda(1, 2000, 4, 5, tienda);
     }
 
-    // Metodo para inicializar al jugador desde el controlador principal
+    // Método para inicializar al jugador desde el controlador principal
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
+        Puntaje puntajeComodin = new Puntaje(20,3);
+        Comodin unComodin = new EfectoPuntaje(puntajeComodin,"Gros Michel", "Se suma 20 al puntaje y multiplciador 3", new NoAleatorio());
+        this.jugador.aniadirComodin(unComodin);
+
+        Puntaje puntajeTarot = new Puntaje(100,1);
+        Tarot unTarot = new TarotCarta("El Tonto","+100 de puntaje", puntajeTarot);
+        this.jugador.aniadirTarots(unTarot);
+
         actualizarMano();
 
-        cargarCartasTarot();
-        cargarCartasComodin();
+        ComodinController comodinController = new ComodinController(this.jugador, lblComodin);
+        comodinController.cargarCartasComodin();
+
+        TarotController tarotController = new TarotController(this.jugador, lblTarot);
+        tarotController.cargarCartasTarot();
     }
 
     public void iniciarRonda() {
@@ -273,18 +312,18 @@ public class MainController {
     private void seleccionarCarta(CartaVisual cartaVisual) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(150), cartaVisual);
 
-        if (cartasSeleccionadas.contains(cartaVisual.getCarta())) {
-            cartasSeleccionadas.remove(cartaVisual.getCarta());
+        if (this.cartasSeleccionadas.contains(cartaVisual.getCarta())) {
+            this.cartasSeleccionadas.remove(cartaVisual.getCarta());
             transition.setToY(0);
             cartaVisual.getStyleClass().remove("seleccionada");
-        } else if(cartasSeleccionadas.size() < 5) {
-            cartasSeleccionadas.add(cartaVisual.getCarta());
+        } else if(this.cartasSeleccionadas.size() < 5) {
+            this.cartasSeleccionadas.add(cartaVisual.getCarta());
             transition.setToY(-30);
             cartaVisual.getStyleClass().add("seleccionada");
         }
 
         transition.play();
-        System.out.println("Cartas seleccionadas: " + cartasSeleccionadas.size());
+        System.out.println("Cartas seleccionadas: " + this.cartasSeleccionadas.size());
     }
 
     private void animarCartaHaciaAbajo(CartaVisual cartaVisual, Runnable onFinished) {
@@ -301,7 +340,6 @@ public class MainController {
 
         transition.play();
     }
-
 
     private void animarCartasSeleccionadas(Runnable onComplete) {
         List<CartaVisual> cartasParaAnimar = lblMano.getChildren().stream()
@@ -331,8 +369,10 @@ public class MainController {
 
     @FXML
     public void clickJugar() {
-        if (rondaActual.estadoRonda()) {
+        if (rondaActual.sePuedeSeguirJugando()) {
             manejarAccionCartaSeleccionada(() -> jugador.jugar());
+            System.out.println(cartasSeleccionadas.size());
+            System.out.println(this.rondaActual.calcularTotalRonda());
         }
     }
 
@@ -347,10 +387,10 @@ public class MainController {
         }
 
         Runnable onComplete = () -> {
+            System.out.println("Cartas a jugar:" + this.cartasSeleccionadas.size());
             jugador.seleccionarCarta(cartasSeleccionadas);
             accionEspecifica.run();
-            cartasSeleccionadas.clear();
-            rondaVisual.actualizarVista();
+            this.cartasSeleccionadas.clear();
 
             rellenarMano();
         };
