@@ -5,10 +5,8 @@ import edu.fiuba.algo3.comodines.Comodin;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
@@ -22,7 +20,6 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.MouseEvent;
 
 public class MainController {
     @FXML
@@ -196,7 +193,7 @@ public class MainController {
             } catch (NullPointerException | IllegalArgumentException e) {
                 imagenCarta = new javafx.scene.image.Image(
                         getClass()
-                                .getResource("/imagenes/comodines/astuto.png")
+                                .getResource("/imagenes/comodines/Comodin Astuto.png")
                                 .toExternalForm()
                 );
             }
