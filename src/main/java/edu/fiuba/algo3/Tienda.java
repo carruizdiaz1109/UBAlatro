@@ -11,17 +11,27 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class Tienda {
     private final List<CartaPoker> cartasAComprar;
     private final List<Tarot> tarotsAComprar;
     private final List<Comodin> comodinesAComprar;
+    private final List<Tarot> tarotsALaVenta;
+    private final List<Comodin> comodinesALaVenta;
+    private int capacidadComodin;
+    private int capacidadTarots;
 
     public Tienda () {
         this.cartasAComprar = new ArrayList<CartaPoker>();
+        this.tarotsALaVenta = new ArrayList<Tarot>();
+        this.comodinesALaVenta = new ArrayList<Comodin>();
         this.tarotsAComprar = new ArrayList<Tarot>();
         this.comodinesAComprar = new ArrayList<Comodin>();
+        this.capacidadComodin = 5;
+        this.capacidadTarots = 2;
+
         inicializarComodines();
         inicializarTarots();
     }
@@ -184,6 +194,39 @@ public class Tienda {
             default:
                 throw new IllegalArgumentException("Tipo de jugada desconocido: " + tipoJugada);
         }
+    }
+
+    private boolean comodinLLeno(){
+        return (comodinesALaVenta.size() == capacidadComodin);
+    }
+
+    private boolean tarotLLeno(){
+        return (tarotsALaVenta.size() == capacidadTarots);
+    }
+
+    public List<Comodin> actualizarComodines(){
+        Random random = new Random();
+
+        while (!comodinLLeno() && !comodinesAComprar.isEmpty()) {
+            int indiceAleatorio = random.nextInt(comodinesAComprar.size());
+            Comodin comodin = comodinesAComprar.remove(indiceAleatorio);
+            comodinesALaVenta.add(comodin);
+        }
+        return new ArrayList<>(comodinesALaVenta);
+
+    }
+
+    public List<Tarot> actualizarTarots(){
+        Random random = new Random();
+
+        while (!tarotLLeno() && !tarotsAComprar.isEmpty()) {
+            int indiceAleatorio = random.nextInt(tarotsAComprar.size());
+
+            Tarot tarot = tarotsAComprar.remove(indiceAleatorio);
+            tarotsALaVenta.add(tarot);
+        }
+        return new ArrayList<>(tarotsALaVenta);
+
     }
 
     public List<Comodin> obtenerComodines() {

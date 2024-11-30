@@ -31,10 +31,11 @@ public class Main extends Application {
         inicioController.setStage(stage); // Pasar la referencia del Stage al controlador
 
         Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("UBAlatro");
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/icon.png")));
         stage.getIcons().add(icon);
+        stage.setTitle("UBAlatro");
+
+        stage.setScene(scene);
         stage.show();
     }
 
