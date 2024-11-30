@@ -11,13 +11,11 @@ public class CartaPoker implements Comparable<CartaPoker>{
     private final Palo palo;
     private Puntaje puntaje;
     private final Puntaje puntajeComodin;
-    private Puntaje puntajeTarot;
 
     public CartaPoker(Valor valor, Palo palo){
         this.valor = valor;
         this.palo = palo;
         this.puntaje = new Puntaje( this.valor.valor(), 1);
-        this.puntajeTarot = new Puntaje(0,1);
         this.puntajeComodin = new Puntaje(0,1);
     }
 
@@ -30,7 +28,6 @@ public class CartaPoker implements Comparable<CartaPoker>{
     }
 
     public int calcularPuntaje() {
-        modificarPuntaje(this.puntajeTarot);
         return this.puntaje.calcularPuntaje();
     }
 
@@ -44,10 +41,6 @@ public class CartaPoker implements Comparable<CartaPoker>{
 
     public boolean compararCartaCon(CartaPoker otraCarta) {
         return (this.valor == otraCarta.valor && this.palo.equals(otraCarta.palo));
-    }
-
-    public void activarTarot(Tarot tarot) {
-        this.puntajeTarot = tarot.modificarPuntaje(puntajeTarot);
     }
 
     @Override
@@ -78,5 +71,30 @@ public class CartaPoker implements Comparable<CartaPoker>{
         this.puntajeComodin.sumarPuntaje(unPuntaje);
     }
 
+    public void aplicarTarot(Puntaje unPuntaje) {this.puntaje = unPuntaje;}
+
+    public String getNombreArchivo() {
+        String valorTexto = String.valueOf(valor.valor()); // Por ejemplo, "7" para un 7
+        String paloTexto;
+
+        switch (palo) {
+            case CORAZONES:
+                paloTexto = "C";
+                break;
+            case DIAMANTES:
+                paloTexto = "D";
+                break;
+            case PICAS:
+                paloTexto = "P";
+                break;
+            case TREBOLES:
+                paloTexto = "T";
+                break;
+            default:
+                throw new IllegalArgumentException("Palo desconocido: " + palo);
+        }
+
+        return valorTexto + paloTexto + ".png"; // Ejemplo: "7H.png"
+    }
 }
 

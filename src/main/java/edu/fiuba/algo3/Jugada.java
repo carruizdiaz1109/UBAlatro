@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import edu.fiuba.algo3.jugadas.*;
 
-public abstract class Jugada {
+public abstract class Jugada  implements Evaluable{
     private final Puntaje sumaValores;
     private Puntaje puntaje;
     protected List<CartaPoker> cartas;
     protected List<CartaPoker> cartasValidas;
     private Puntaje puntajeComodin;
+    protected Jugada siguiente;
 
     public Jugada(List<CartaPoker> cartas, Puntaje puntaje) {
         this.cartas = cartas;
@@ -19,54 +20,70 @@ public abstract class Jugada {
         this.puntajeComodin = new Puntaje(0,1);
     }
 
-    public abstract boolean esJugada(List<CartaPoker> cartas);
-
     protected abstract List<CartaPoker> seleccionarCartasValidas(List<CartaPoker> cartas);
 
+    private static Jugada configurarCadena(List<CartaPoker> cartas) {
+        Jugada escaleraReal = new EscaleraReal(cartas);
+        Jugada escaleraColor = new EscaleraColor(cartas);
+        Jugada poker = new Poker(cartas);
+        Jugada fullHouse = new FullHouse(cartas);
+        Jugada color = new Color(cartas);
+        Jugada escalera = new Escalera(cartas);
+        Jugada trio = new Trio(cartas);
+        Jugada doblePar = new DoblePar(cartas);
+        Jugada par = new Par(cartas);
+        Jugada cartaAlta = new CartaAlta(cartas);
+
+        // Configurar la cadena
+        escaleraReal.setSiguiente(escaleraColor);
+        escaleraColor.setSiguiente(poker);
+        poker.setSiguiente(fullHouse);
+        fullHouse.setSiguiente(color);
+        color.setSiguiente(escalera);
+        escalera.setSiguiente(trio);
+        trio.setSiguiente(doblePar);
+        doblePar.setSiguiente(par);
+        par.setSiguiente(cartaAlta);
+
+        return escaleraReal;
+    }
+
     public static Jugada crearJugada(List<CartaPoker> cartas) {
-        List<Jugada> posiblesJugadas = List.of(
-            new EscaleraReal(cartas),
-            new EscaleraColor(cartas),
-            new Poker(cartas),
-            new FullHouse(cartas),
-            new Color(cartas),
-            new Escalera(cartas),
-            new Trio(cartas),
-            new DoblePar(cartas),
-            new Par(cartas),
-            new CartaAlta(cartas)
-        );
-        for (Jugada jugada : posiblesJugadas) {
-            if (jugada.esJugada(cartas)) {
-                return jugada;
-            }
+        // Configurar la cadena y evaluar
+        Jugada inicioCadena = configurarCadena(cartas);
+        return inicioCadena.evaluar(cartas);
+    }
+
+    private void setSiguiente(Jugada siguiente) {
+        this.siguiente = siguiente;
+    }
+
+    public Jugada evaluar(List<CartaPoker> cartas) {
+        if (esJugada(this.cartas)) {
+            return this;
+        } else if (this.siguiente != null) {
+            return this.siguiente.evaluar(cartas);
         }
-        return new CartaAlta(cartas);
+        return null; // Por seguridad
     }
 
     public void sumarValores() {
-        int sumaPuntajes = 0;
         for (CartaPoker carta : cartasValidas) {
-            sumaPuntajes += carta.calcularPuntaje();
+            this.puntaje.incrementarPuntos(carta.calcularPuntaje());
         }
-        this.sumaValores.incrementarPuntos(sumaPuntajes);
-    }
-
-
-    public int calcularValor() {
-        sumarValores();
-        this.puntaje = this.puntaje.sumarPuntaje(this.sumaValores);
-        return puntaje.calcularPuntaje();
     }
 
     public int calcularPuntaje() {
         sumarValores();
-        this.puntaje = this.puntaje.sumarPuntaje(this.sumaValores);
         this.puntaje = this.puntaje.sumarPuntaje(this.puntajeComodin);
         return this.puntaje.calcularPuntaje();
     }
 
     public void aplicarComodin(Puntaje unPuntaje) {
         this.puntajeComodin = this.puntajeComodin.sumarPuntaje(unPuntaje);
+    }
+
+    public void aplicarTarot(Puntaje unPuntaje){
+        this.puntaje = unPuntaje;
     }
 }

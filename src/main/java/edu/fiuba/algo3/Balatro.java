@@ -13,21 +13,21 @@ public class Balatro {
     private final List<Ronda> rondas;
     private final Mazo mazo;
     private final Jugador jugador;
+    private final Tienda tienda;
 
-    public Balatro(Jugador jugador) {
-        this.rondas = new ArrayList<>();
+    public Balatro(String nombreJugador) {
+        this.rondas = new ArrayList<Ronda>();
         this.mazo = new Mazo();
-        cargarRondasDesdeJSON("Balatro.json");
-        mazo.inicializarMazo("Balatro.json");
-        this.mazo.mezclar();
-        this.jugador = jugador;
+        this.tienda = new Tienda();
+        cargarRondasDesdeJSON();
+        this.jugador = new Jugador(nombreJugador, this.mazo);
     }
 
-    public void cargarRondasDesdeJSON(String rutaArchivo) {
+    public void cargarRondasDesdeJSON() {
         ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(rutaArchivo)) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/json/Balatro.json")) {
             if (inputStream == null) {
-                throw new IOException("File not found in classpath: " + rutaArchivo);
+                throw new IOException("File not found ");
             }
             JsonNode rootNode = objectMapper.readTree(inputStream);
             JsonNode rondasNode = rootNode.path("rondas");
@@ -38,7 +38,7 @@ public class Balatro {
                 int descartesDisponibles = rondaNode.path("descartes").asInt();
                 int jugadasDisponibles = rondaNode.path("manos").asInt();
 
-                Ronda ronda = new Ronda(numero, puntajeMinimo, descartesDisponibles, jugadasDisponibles);
+                Ronda ronda = new Ronda(numero, puntajeMinimo, descartesDisponibles, jugadasDisponibles, tienda);
                 rondas.add(ronda);
             }
         } catch (IOException e) {

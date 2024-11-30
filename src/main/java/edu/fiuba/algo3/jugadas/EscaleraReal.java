@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.jugadas;
 
-import edu.fiuba.algo3.CartaPoker;
-import edu.fiuba.algo3.Jugada;
-import edu.fiuba.algo3.Puntaje;
+import edu.fiuba.algo3.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -24,27 +22,19 @@ public class EscaleraReal extends Jugada {
 
         // Verifica que las cartas sean del mismo palo y consecutivas
         for (int i = 0; i < cartasOrdenadas.size() - 1; i++) {
-            // Verifica si las cartas son consecutivas y del mismo palo
-            if (!cartasOrdenadas.get(i).esConsecutiva(cartasOrdenadas.get(i + 1)) ||
-                    !cartasOrdenadas.get(i).esMismoPalo(cartasOrdenadas.get(i + 1))) {
+            if(!cartasOrdenadas.get(i).esMismoPalo(cartasOrdenadas.get(i + 1)) && (!cartasOrdenadas.get(0).esMismoValor(new CartaPoker(Valor.AS, Palo.PICAS)))){
                 return false;
+            }else{
+                if(cartasOrdenadas.get(i+1).esMismoValor(new CartaPoker(Valor.DIEZ, Palo.PICAS))){
+                    cartasValidas = new ArrayList<>(cartas); // Asigna todas las cartas
+                    return true;
+                }
             }
+            return false;
         }
 
-        // Verifica que las cartas sean exactamente 10, J, Q, K, A (valores 10, 11, 12, 13, 14)
-        List<Integer> valores = new ArrayList<>();
-        for (CartaPoker carta : cartasOrdenadas) {
-            valores.add(carta.sumarValorCon(0));  // Obtiene el valor de la carta
-        }
-
-        // Para la escalera real, los valores deben ser 10, 11, 12, 13, 14 (correspondientes a 10, J, Q, K, A)
-        Collections.sort(valores);
-        if (valores.equals(List.of(10, 11, 12, 13, 14))) {
-            cartasValidas = new ArrayList<>(cartas); // Asigna todas las cartas
-            return true;
-        }
-
-        return false; // Si no cumple la condición de Escalera Real
+        // Si todas las cartas forman una secuencia, es una Escalera
+        return false;
     }
 
     @Override

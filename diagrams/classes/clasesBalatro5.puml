@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Comodin {
+    - nombre: string
+    - descripcion: string
+
+    + Comodin(valor: int, multiplicador: int, nombre: String, descripcion: String)
+    + {abstract}aplicar(unaJugada: Jugada)
+}
+
+class EfectoJugada {
+    + aplicar(unaJugada: Jugada)
+}
+
+interface Aplicabilidad {
+    + seAplica(): boolean
+}
+
+class Aleatorio {
+    - probabilidad: int
+    + Aleatorio(probabilidad: int)
+    + seAplica(): boolean
+}
+
+class NoAleatorio {
+    + seAplica(): boolean
+}
+
+class EfectoCombinado{
+    + EfectoCombinado(lasCombinacines: List <Comodin>, nombre: string, descripcion: string)
+    + aplicar(unaJugada: Jugada)
+}
+class EfectoPuntaje{
+    + aplicarEfecto(unaJugada: Jugada)
+}
+
+EfectoJugada -up-|> Comodin
+EfectoCombinado -up-|> Comodin
+EfectoCombinado o-- Comodin
+EfectoPuntaje -up-|> Comodin
+Comodin o-right- Aplicabilidad
+Aplicabilidad <|.down. Aleatorio
+Aplicabilidad <|.down. NoAleatorio
+
+@enduml

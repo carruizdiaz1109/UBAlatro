@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.jugadas;
 
 import edu.fiuba.algo3.CartaPoker;
+import edu.fiuba.algo3.ConjuntoCartas;
 import edu.fiuba.algo3.Jugada;
 import edu.fiuba.algo3.Puntaje;
 
@@ -19,22 +20,15 @@ public class EscaleraColor extends Jugada {
 
         // Crea una copia mutable de la lista de cartas para poder ordenarla
         List<CartaPoker> cartasOrdenadas = new ArrayList<>(cartas);
-        cartasOrdenadas.sort(Collections.reverseOrder());
+        cartasOrdenadas.sort(null);
 
-        // Verifica que todas las cartas sean del mismo palo y formen una secuencia consecutiva
-        for (int i = 0; i < cartasOrdenadas.size() - 1; i++) {
-            CartaPoker cartaActual = cartasOrdenadas.get(i);
-            CartaPoker cartaSiguiente = cartasOrdenadas.get(i + 1);
+        ConjuntoCartas conjuntoOrdenado = new ConjuntoCartas(cartasOrdenadas);
+        CartaPoker carta = cartasOrdenadas.get(0);
 
-            // Comprueba que las cartas sean del mismo palo y consecutivas
-            if (!cartaActual.esMismoPalo(cartaSiguiente) || !cartaActual.esConsecutiva(cartaSiguiente)) {
-                return false;
-            }
-        }
+        ConjuntoCartas escalera = carta.obtenerEscalera();
 
-        // Si todas las cartas son del mismo palo y forman una secuencia, es una EscaleraColor
-        cartasValidas = new ArrayList<>(cartas); // Asigna todas las cartas
-        return true;
+        cartasValidas = new ArrayList<>(cartas);
+        return escalera.compararCon(conjuntoOrdenado);
     }
 
     @Override
