@@ -23,7 +23,7 @@ public class JugadaTest {
                 new CartaPoker(Valor.DOS, Palo.TREBOLES),
                 new CartaPoker(Valor.CUATRO, Palo.PICAS)
         ));
-        int puntajeEsperado = (8 + 5);
+        int puntajeEsperado = (8+5);
 
         //Act
         Jugada jugada = Jugada.crearJugada(cartas);
@@ -221,6 +221,69 @@ public class JugadaTest {
         //Assert
         assertTrue(jugada instanceof EscaleraReal);
         assertEquals(valorEsperado, puntajeObtenido);
+    }
+
+    @Test
+    public void testEscaleraHastaAs() {
+        //Arrange
+        List<CartaPoker> cartas = List.of(
+                new CartaPoker(Valor.DIEZ, Palo.PICAS),
+                new CartaPoker(Valor.JOTA, Palo.DIAMANTES),
+                new CartaPoker(Valor.REINA, Palo.TREBOLES),
+                new CartaPoker(Valor.REY, Palo.CORAZONES),
+                new CartaPoker(Valor.AS, Palo.PICAS)
+        );
+        int puntajeEsperado = ((10+10+10+10+11)+30)*4;
+
+        //Act
+        Jugada jugada = Jugada.crearJugada(cartas);
+        int puntajeObtenido = jugada.calcularPuntaje();
+
+        //Assert
+        assertTrue(jugada instanceof Escalera);
+        assertEquals(puntajeEsperado, puntajeObtenido);
+    }
+
+    @Test
+    public void testEscaleraDesdeAs() {
+        //Arrange
+        List<CartaPoker> cartas = List.of(
+                new CartaPoker(Valor.AS, Palo.PICAS),
+                new CartaPoker(Valor.DOS, Palo.PICAS),
+                new CartaPoker(Valor.TRES, Palo.TREBOLES),
+                new CartaPoker(Valor.CUATRO, Palo.CORAZONES),
+                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+        );
+        int puntajeEsperado = ((11+2+3+4+5)+30)*4;
+
+        //Act
+        Jugada jugada = Jugada.crearJugada(cartas);
+        int puntajeObtenido = jugada.calcularPuntaje();
+
+        //Assert
+        assertTrue(jugada instanceof Escalera);
+        assertEquals(puntajeEsperado, puntajeObtenido);
+    }
+
+    @Test
+    public void testEscaleraNoValida() {
+        //Arrange
+        List<CartaPoker> cartas = List.of(
+                new CartaPoker(Valor.REINA, Palo.CORAZONES),
+                new CartaPoker(Valor.REY, Palo.DIAMANTES),
+                new CartaPoker(Valor.AS, Palo.PICAS),
+                new CartaPoker(Valor.DOS, Palo.PICAS),
+                new CartaPoker(Valor.TRES, Palo.TREBOLES)
+        );
+        int puntajeEsperado = (11+5);
+
+        //Act
+        Jugada jugada = Jugada.crearJugada(cartas);
+        int puntajeObtenido = jugada.calcularPuntaje();
+
+        //Assert
+        assertTrue(jugada instanceof CartaAlta);
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 }
 
