@@ -2,6 +2,7 @@ package edu.fiuba.algo3;
 
 import java.util.Objects;
 
+import edu.fiuba.algo3.controllers.InicioController;
 import edu.fiuba.algo3.controllers.MainController;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -22,21 +23,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Inicio.fxml"));
         Parent root = loader.load();
 
-//        MainController controlador = loader.getController();
-//        controlador.setJugador(new Jugador("Enzo", new Mazo()));
-//        controlador.iniciarRonda();
+        // Obtener el controlador de Inicio.fxml
+        InicioController inicioController = loader.getController();
+        inicioController.setStage(stage); // Pasar la referencia del Stage al controlador
 
         Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("UBAlatro");
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/icon.png")));
         stage.getIcons().add(icon);
-        //stage.setResizable(false);
-        stage.setTitle("UBAlatro");
-
-        stage.setScene(scene);
         stage.show();
     }
+
 }
