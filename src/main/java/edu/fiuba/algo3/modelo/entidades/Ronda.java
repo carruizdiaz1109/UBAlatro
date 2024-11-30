@@ -15,7 +15,7 @@ public class Ronda {
     private final int puntajeMinimo; //puntajeASuperar
     private int descartesDisponibles; //descartes
     private int jugadasDisponibles; //manos
-    private Tienda tienda;
+    private final Tienda tienda;
     private final List<Jugada> jugadas;
 
     private final IntegerProperty puntajeAcumulado = new SimpleIntegerProperty();
@@ -75,6 +75,7 @@ public class Ronda {
             System.out.println("Tipo de jugada: " + tipoJugada + ", Puntaje: " + puntaje); // Log para depurar
             acumulador += puntaje;
         }
+        this.puntajeAcumulado.set(acumulador);
         return acumulador;
     }
 

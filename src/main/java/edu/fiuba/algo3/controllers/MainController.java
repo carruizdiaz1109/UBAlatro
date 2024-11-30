@@ -101,7 +101,6 @@ public class MainController {
         actualizarMano();
     }
 
-
     public void actualizarMano() {
         Mano mano = this.jugador.getManoActual();
         List<CartaPoker> cartasActuales = mano.getCartas();
@@ -240,7 +239,8 @@ public class MainController {
     public void clickJugar() {
         if (rondaActual.sePuedeSeguirJugando()) {
             manejarAccionCartaSeleccionada(() -> jugador.jugar());
-            //this.cartasSeleccionadas.clear();
+            System.out.println(cartasSeleccionadas.size());
+            System.out.println(this.rondaActual.calcularTotalRonda());
         }
     }
 
