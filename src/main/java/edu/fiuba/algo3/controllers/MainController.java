@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fiuba.algo3.modelo.entidades.*;
 import edu.fiuba.algo3.modelo.entidades.comodines.*;
+import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
@@ -80,15 +81,20 @@ public class MainController {
     // Método para inicializar al jugador desde el controlador principal
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
-        Puntaje unPuntaje = new Puntaje(20,3);
-        Comodin unComodin = new EfectoPuntaje(unPuntaje,"Gros Michel", "Se suma 20 al puntaje y multiplciador 3", new NoAleatorio());
+        Puntaje puntajeComodin = new Puntaje(20,3);
+        Comodin unComodin = new EfectoPuntaje(puntajeComodin,"Gros Michel", "Se suma 20 al puntaje y multiplciador 3", new NoAleatorio());
         this.jugador.aniadirComodin(unComodin);
+
+        Puntaje puntajeTarot = new Puntaje(100,1);
+        Tarot unTarot = new TarotCarta("El Tonto","+100 de puntaje", puntajeTarot);
+        this.jugador.aniadirTarots(unTarot);
+
         actualizarMano();
 
         ComodinController comodinController = new ComodinController(this.jugador, lblComodin);
         comodinController.cargarCartasComodin();
 
-        TarotController tarotController = new TarotController(tienda, lblTarot);
+        TarotController tarotController = new TarotController(this.jugador, lblTarot);
         tarotController.cargarCartasTarot();
     }
 

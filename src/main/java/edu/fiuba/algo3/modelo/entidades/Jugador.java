@@ -41,6 +41,7 @@ public class Jugador {
         if (this.comodines.size()>0) {
             aplicarComodin(unaJugada);
         }
+        System.out.println(unaJugada.getClass());
         this.rondaActual.agregarJugada(unaJugada);
         this.manoActual.rellenarse();
     }
@@ -86,5 +87,9 @@ public class Jugador {
 
     public ArrayList<Comodin> obtenerComodines() {
         return this.comodines;
+    }
+
+    public ArrayList<Tarot> obtenerTarots() {
+        return this.cartasTarot;
     }
 }
