@@ -1,23 +1,34 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.comodines.Comodin;
+import edu.fiuba.algo3.modelo.entidades.Jugador;
+import edu.fiuba.algo3.modelo.entidades.Tarot;
+import edu.fiuba.algo3.modelo.entidades.comodines.Comodin;
 import edu.fiuba.algo3.vistas.ComodinVisual;
+import edu.fiuba.algo3.vistas.TarotVisual;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
+import java.util.ArrayList;
+
 public class ComodinController {
-    private ComodinVisual comodinVisual;
+    private final HBox lblComodin;
+    private final Jugador jugador;
 
-    public ComodinController(Comodin comodin, String imagePath, double width, double height) {
-        this.comodinVisual = new ComodinVisual(comodin, imagePath, width, height);
+    public ComodinController(Jugador jugador, HBox lblcomodin) {
+        this.jugador = jugador;
+        this.lblComodin = lblcomodin;
     }
 
-    // Metodo para inicializar la vista, por ejemplo, agregarla a un contenedor
-    public void inicializarVista(StackPane contenedor) {
-        contenedor.getChildren().add(comodinVisual);
-    }
+    public void visualizarComodines() {
+        this.lblComodin.getChildren().clear(); // Limpiar el contenedor antes de mostrar nuevas cartas de Tarot
+        ArrayList<Comodin> comodines = this.jugador.obtenerComodines();
 
-    // Metodo para agregar acción al comodín
-    public void agregarAccionClick(Runnable accion) {
-        comodinVisual.setOnMouseClicked(event -> accion.run());
+        for (Comodin comodin : comodines) {
+            String imagePath = "/imagenes/comodines/" + comodin.getNombre() + ".png";
+            ComodinVisual comodinVisual = new ComodinVisual(comodin, imagePath, 100, 150);
+
+            this.lblComodin.getChildren().add(comodinVisual);
+
+        }
     }
 }
