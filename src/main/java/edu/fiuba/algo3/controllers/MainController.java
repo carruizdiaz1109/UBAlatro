@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
@@ -162,6 +163,11 @@ public class MainController {
         vistaCarta.setOnDragDropped(event -> manejarDragDrop(vistaCarta, event));
     }
 
+    private void mostrarDescripcion(javafx.scene.image.ImageView vistaCarta, Comodin comodin){
+        Tooltip tooltip = new Tooltip(comodin.getDescripcion());
+        Tooltip.install(vistaCarta, tooltip);
+    }
+
     public void mostrarCartasComodin(List<Comodin> comodines) {
         lblComodin.getChildren().clear();
 
@@ -189,6 +195,7 @@ public class MainController {
             vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
 
             arrastrar(vistaCarta);
+            mostrarDescripcion(vistaCarta, comodin);
 
             HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
 
