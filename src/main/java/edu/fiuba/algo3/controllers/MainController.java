@@ -80,9 +80,12 @@ public class MainController {
     // Método para inicializar al jugador desde el controlador principal
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
+        Puntaje unPuntaje = new Puntaje(20,3);
+        Comodin unComodin = new EfectoPuntaje(unPuntaje,"Gros Michel", "Se suma 20 al puntaje y multiplciador 3", new NoAleatorio());
+        this.jugador.aniadirComodin(unComodin);
         actualizarMano();
 
-        ComodinController comodinController = new ComodinController(tienda, lblComodin);
+        ComodinController comodinController = new ComodinController(this.jugador, lblComodin);
         comodinController.cargarCartasComodin();
 
         TarotController tarotController = new TarotController(tienda, lblTarot);

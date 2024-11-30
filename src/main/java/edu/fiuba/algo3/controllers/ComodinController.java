@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.modelo.entidades.comodines.*;
-import edu.fiuba.algo3.modelo.entidades.Tienda;
+import edu.fiuba.algo3.modelo.entidades.Jugador;
 
 import java.util.List;
 
@@ -14,10 +14,10 @@ import javafx.scene.layout.HBox;
 public class ComodinController {
 
     private final HBox lblComodin;
-    private final Tienda tienda;
+    private final Jugador jugador;
 
-    public ComodinController(Tienda tienda, HBox lblComodin){
-        this.tienda = tienda;
+    public ComodinController(Jugador unJugador, HBox lblComodin){
+        this.jugador = unJugador;
         this.lblComodin = lblComodin;
     }
 
@@ -97,30 +97,25 @@ public class ComodinController {
                                 .getResource("/imagenes/comodines/" + comodin.getNombre() + ".png")
                                 .toExternalForm()
                 );
+                javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
+                vistaCarta.setFitWidth(120);
+                vistaCarta.setFitHeight(180);
+                vistaCarta.setPreserveRatio(true);
+
+                arrastrar(vistaCarta);
+                mostrarDescripcion(vistaCarta, comodin);
+
+                HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
+
+                lblComodin.getChildren().add(vistaCarta);
             } catch (NullPointerException | IllegalArgumentException e) {
-                imagenCarta = new javafx.scene.image.Image(
-                        getClass()
-                                .getResource("/imagenes/comodines/Comodin Astuto.png")
-                                .toExternalForm()
-                );
+                System.out.println(e);
             }
-
-            javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
-            vistaCarta.setFitWidth(120);
-            vistaCarta.setFitHeight(180);
-            vistaCarta.setPreserveRatio(true);
-
-            arrastrar(vistaCarta);
-            mostrarDescripcion(vistaCarta, comodin);
-
-            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
-
-            lblComodin.getChildren().add(vistaCarta);
         }
     }
 
     public void cargarCartasComodin(){
-        List<Comodin> comodines = tienda.obtenerComodines();
+        List<Comodin> comodines = this.jugador.obtenerComodines();
         mostrarCartasComodin(comodines);
     }
 }

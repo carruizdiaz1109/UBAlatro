@@ -84,4 +84,7 @@ public class Jugador {
         return this.manoActual;
     }
 
+    public ArrayList<Comodin> obtenerComodines() {
+        return this.comodines;
+    }
 }
