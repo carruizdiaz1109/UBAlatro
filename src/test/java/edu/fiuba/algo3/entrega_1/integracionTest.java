@@ -1,8 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.jugadas.*;
-import edu.fiuba.algo3.tarots.EfectoCarta;
+import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.jugadas.FullHouse;
+import edu.fiuba.algo3.modelo.entidades.jugadas.Par;
+import edu.fiuba.algo3.modelo.entidades.jugadas.Trio;
+import edu.fiuba.algo3.modelo.entidades.tarots.EfectoCarta;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

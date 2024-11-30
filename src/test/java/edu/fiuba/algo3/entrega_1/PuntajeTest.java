@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.CartaPoker;
-import edu.fiuba.algo3.Puntaje;
+import edu.fiuba.algo3.modelo.entidades.Puntaje;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

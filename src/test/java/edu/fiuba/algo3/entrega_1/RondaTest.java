@@ -1,8 +1,12 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.jugadas.Descarte;
+import edu.fiuba.algo3.modelo.entidades.Jugada;
+import edu.fiuba.algo3.modelo.entidades.Ronda;
+import edu.fiuba.algo3.modelo.entidades.Tienda;
+import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 
+import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
+import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,7 +58,7 @@ public class RondaTest {
         ronda.agregarJugada(jugadaMock);
         ronda.agregarJugada(jugadaMock);
 
-        assertThrows(ErrorNoHayJugadasDisponibles.class, () -> ronda.agregarJugada(jugadaMock));
+        assertThrows(NoHayJugadasDisponiblesError.class, () -> ronda.agregarJugada(jugadaMock));
     }
 
     @Test
@@ -71,7 +75,7 @@ public class RondaTest {
         ronda.agregarDescarte(descarteMock);
         ronda.agregarDescarte(descarteMock);
 
-        assertThrows(ErrorNoHayDescarteDisponibles.class, () -> ronda.agregarDescarte(descarteMock));
+        assertThrows(NoHayDescarteDisponiblesError.class, () -> ronda.agregarDescarte(descarteMock));
     }
 
     @Test

@@ -1,8 +1,10 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.comodines.*;
-import edu.fiuba.algo3.jugadas.*;
+import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.comodines.*;
+import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
+import edu.fiuba.algo3.modelo.entidades.jugadas.Escalera;
+import edu.fiuba.algo3.modelo.entidades.jugadas.Poker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

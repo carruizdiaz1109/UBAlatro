@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_3;
 
-import edu.fiuba.algo3.Tienda;
+import edu.fiuba.algo3.modelo.entidades.Tienda;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;

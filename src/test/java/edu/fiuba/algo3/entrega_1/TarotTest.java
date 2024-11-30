@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
 
-import edu.fiuba.algo3.*;
-
-import edu.fiuba.algo3.tarots.EfectoCarta;
-import edu.fiuba.algo3.tarots.EfectoJugada;
+import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.excepciones.TarotDistintaJugadaError;
+import edu.fiuba.algo3.modelo.entidades.tarots.EfectoCarta;
+import edu.fiuba.algo3.modelo.entidades.tarots.EfectoJugada;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -63,7 +63,7 @@ public class TarotTest {
         Tarot tarot = new EfectoJugada("Fuerza", "Mejora la mano poker", new Puntaje(30, 3), "poker");
 
         // Assert
-        assertThrows(ErrorTarotDistintaJugada.class, () -> tarot.aplicar(jugadaIncompatible));
+        assertThrows(TarotDistintaJugadaError.class, () -> tarot.aplicar(jugadaIncompatible));
     }
 
 }

@@ -1,9 +1,8 @@
 package edu.fiuba.algo3.vistas;
 
-import edu.fiuba.algo3.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.CartaPoker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 import java.util.Objects;
 

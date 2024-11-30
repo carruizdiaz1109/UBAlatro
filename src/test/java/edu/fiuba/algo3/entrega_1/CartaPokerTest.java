@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.tarots.EfectoCarta;
+import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.tarots.EfectoCarta;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
