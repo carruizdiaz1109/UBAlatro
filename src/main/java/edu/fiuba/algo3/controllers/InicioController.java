@@ -55,14 +55,14 @@ public class InicioController {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ronda.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tienda.fxml"));
             Parent root = loader.load();
-            MainController rondaController = loader.getController();
-            rondaController.setJugador(new Jugador(nombreJugador, new Mazo()));
+            TiendaController tiendaController = loader.getController();
+            tiendaController.setJugador(new Jugador(nombreJugador, new Mazo()));
+            tiendaController.setStage(stage);
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle("UBAlatro - Ronda");
-            rondaController.iniciarRonda();
+            stage.setTitle("UBAlatro - Tienda");
         } catch (IOException e) {
             e.printStackTrace();
         }
