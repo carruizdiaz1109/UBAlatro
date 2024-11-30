@@ -70,26 +70,40 @@ public class MainController {
     }
 
     public void cargarCartasTarot() {
-        List<String> nombresCartasTarot = List.of(
-                "ahorcado.png",
-                "amantes.png"
-        );
-
-        mostrarCartasTarot(nombresCartasTarot);
+        List<Tarot> tarots = tienda.actualizarTarots();
+        mostrarCartasTarot(tarots);
     }
 
-    public void mostrarCartasTarot(List<String> nombresCartasTarot) {
+    private void mostrarDescripcion(javafx.scene.image.ImageView vistaCarta, Tarot tarot){
+        Tooltip tooltip = new Tooltip(tarot.getDescripcion());
+        Tooltip.install(vistaCarta, tooltip);
+    }
+
+    public void mostrarCartasTarot(List<Tarot> tarots) {
         lblTarot.getChildren().clear();
 
-        for (String nombreArchivo : nombresCartasTarot) {
-            javafx.scene.image.Image imagenCarta = new javafx.scene.image.Image(
-                    getClass().getResource("/imagenes/tarot/" + nombreArchivo).toExternalForm()
-            );
+        for (Tarot tarot : tarots) {
+            javafx.scene.image.Image imagenCarta;
+            try {
+                imagenCarta = new javafx.scene.image.Image(
+                        getClass()
+                                .getResource("/imagenes/tarot/" + tarot.getNombre() + ".png")
+                                .toExternalForm()
+                );
+            } catch (NullPointerException | IllegalArgumentException e) {
+                imagenCarta = new javafx.scene.image.Image(
+                        getClass()
+                                .getResource("/imagenes/tarot/ahorcado.png")
+                                .toExternalForm()
+                );
+            }
 
             javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
             vistaCarta.setFitWidth(120); // Ancho de la carta
             vistaCarta.setFitHeight(180); // Alto de la carta
             vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
+
+            mostrarDescripcion(vistaCarta, tarot);
 
             HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
 
@@ -172,8 +186,6 @@ public class MainController {
         lblComodin.getChildren().clear();
 
         for (Comodin comodin : comodines) {
-            System.out.println(comodin.getNombre());
-
             javafx.scene.image.Image imagenCarta;
             try {
                 imagenCarta = new javafx.scene.image.Image(
