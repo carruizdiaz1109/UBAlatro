@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.comodines.Comodin;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
@@ -11,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,13 +46,18 @@ public class MainController {
     private final ArrayList<CartaPoker> cartasSeleccionadas;
     private final Ronda rondaActual;
     private RondaVisual rondaVisual;
+    //private ComodinController comodinController;//Luis ahora
+    private TarotController tarotController; //Luis ahora
+    private Pane mainPane; //Luis ahora
+
 
     public MainController() {
         this.cartasSeleccionadas = new ArrayList<>();
         this.rondaActual = new Ronda(1, 2000, 4,5,new Tienda());
+
     }
 
-    // Método para inicializar al jugador desde el controlador principal
+    // Metodo para inicializar al jugador desde el controlador principal
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
         actualizarMano();
@@ -62,6 +70,7 @@ public class MainController {
         this.jugador.iniciarRonda(this.rondaActual);
         this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles);
 
+        tarotController = new TarotController(mainPane);//Luis ahora
         actualizarMano();
     }
 
