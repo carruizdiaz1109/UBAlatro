@@ -17,8 +17,6 @@ public class IntegracionTest2 {
     @Test
     public void test01SeVerificaQueSeApliqueComodinAEscaleraCorrectamente () {
         //Arrange
-        Mazo mazoMock = mock(Mazo.class);
-        when(mazoMock.tieneCartas()).thenReturn(true);
         Tienda tienda = new Tienda();
         
         Ronda ronda = new Ronda(1,10000,3,3, tienda);
@@ -29,14 +27,15 @@ public class IntegracionTest2 {
         CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
 
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
-        Mano mano = new Mano(cartas);
+        Mazo mazo = new Mazo(cartas);
+        Mano mano = new Mano(mazo);
         Puntaje puntaje = new Puntaje(0, 3);
         EfectoJugada unComodin = new EfectoJugada(Escalera.class, puntaje, "Suben los puntos" ,"x3 de multiplicador si se juega escalera", new NoAleatorio());
-        Jugador jugador = new Jugador("Pepe", mazoMock) {
+        Jugador jugador = new Jugador("Pepe", mazo) {
             @Override
             public void iniciarRonda(Ronda rondaActual){
-                this.rondaActual = ronda;
-                this.mazo = mazoMock;
+                this.rondaActual = rondaActual;
+                this.mazo = mazo;
                 this.manoActual = mano;
             }
         };
@@ -55,24 +54,25 @@ public class IntegracionTest2 {
     @Test
     public void test02SeVerificaQueSeAplicaComodinPuntajeCorrectamente() {
         //Arrange
-        Mazo mazoMock = mock(Mazo.class);
-        when(mazoMock.tieneCartas()).thenReturn(true);
         Tienda tiendaMock = mock(Tienda.class);
         Ronda ronda = new Ronda(1,10000,3,3, tiendaMock);
+
         CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
         CartaPoker carta2 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
         CartaPoker carta3 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
         CartaPoker carta4 = new CartaPoker(Valor.DOS, Palo.CORAZONES);
         CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
+
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
-        Mano mano = new Mano(cartas);
+        Mazo mazo = new Mazo(cartas);
+        Mano mano = new Mano(mazo);
         Puntaje puntaje = new Puntaje(0, 8);
         Comodin unComodin = new EfectoPuntaje( puntaje, "Lluvia de puntos" ,"x8 de multiplicador", new NoAleatorio());
-        Jugador jugador = new Jugador("Pepe", mazoMock) {
+        Jugador jugador = new Jugador("Pepe", mazo) {
             @Override
             public void iniciarRonda(Ronda rondaActual){
                 this.rondaActual = ronda;
-                this.mazo = mazoMock;
+                this.mazo = mazo;
                 this.manoActual = mano;
             }
         };
@@ -91,8 +91,7 @@ public class IntegracionTest2 {
     @Test
     public void test03SeVerificaQueSeAplicaComodinDescarteCorrectamente () {
         //Arrange
-        Mazo mazoMock = mock(Mazo.class);
-        when(mazoMock.tieneCartas()).thenReturn(true);
+
         Tienda tiendaMock = mock(Tienda.class);
         Ronda ronda = new Ronda(1,10000,3,3, tiendaMock);
         CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
@@ -101,14 +100,15 @@ public class IntegracionTest2 {
         CartaPoker carta4 = new CartaPoker(Valor.DOS, Palo.CORAZONES);
         CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
-        Mano mano = new Mano(cartas);
+        Mazo mazo = new Mazo(cartas);
+        Mano mano = new Mano(mazo);
         Puntaje puntaje = new Puntaje(10, 1);
         Comodin unComodin = new EfectoJugada(Descarte.class, puntaje, "Descartar suma" ,"+10 si realiza un descarte", new NoAleatorio());
-        Jugador jugador = new Jugador("Pepe", mazoMock) {
+        Jugador jugador = new Jugador("Pepe", mazo) {
             @Override
             public void iniciarRonda(Ronda rondaActual){
                 this.rondaActual = ronda;
-                this.mazo = mazoMock;
+                this.mazo = mazo;
                 this.manoActual = mano;
             }
         };
@@ -127,8 +127,6 @@ public class IntegracionTest2 {
     @Test
     public void test04SeVerificaQueSeAplicaComodinAleatorioCorrectamente () {
         //Arrange
-        Mazo mazoMock = mock(Mazo.class);
-        when(mazoMock.tieneCartas()).thenReturn(true);
         Tienda tiendaMock = mock(Tienda.class);
         Ronda ronda = new Ronda(1,10000,3,3, tiendaMock);
         CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
@@ -137,12 +135,13 @@ public class IntegracionTest2 {
         CartaPoker carta4 = new CartaPoker(Valor.DOS, Palo.CORAZONES);
         CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
-        Mano mano = new Mano(cartas);
-        Jugador jugador = new Jugador("Pepe", mazoMock) {
+        Mazo mazo = new Mazo(cartas);
+        Mano mano = new Mano(mazo);
+        Jugador jugador = new Jugador("Pepe", mazo) {
             @Override
             public void iniciarRonda(Ronda rondaActual){
                 this.rondaActual = ronda;
-                this.mazo = mazoMock;
+                this.mazo = mazo;
                 this.manoActual = mano;
             }
         };
@@ -168,8 +167,6 @@ public class IntegracionTest2 {
     @Test
     public void test05SeVerificaQueSeAplicaComodinCombinadoCorrectamente() {
         //Arrange
-        Mazo mazoMock = mock(Mazo.class);
-        when(mazoMock.tieneCartas()).thenReturn(true);
         Tienda tiendaMock = mock(Tienda.class);
         Ronda ronda = new Ronda(1,10000,3,3, tiendaMock);
         CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
@@ -178,7 +175,8 @@ public class IntegracionTest2 {
         CartaPoker carta4 = new CartaPoker(Valor.DOS, Palo.CORAZONES);
         CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
-        Mano mano = new Mano(cartas);
+        Mazo mazo = new Mazo(cartas);
+        Mano mano = new Mano(mazo);
         Puntaje puntaje1 = new Puntaje(10, 1);
         Comodin comodin1 = new EfectoPuntaje(puntaje1, "El dibu" ,"1 de cada 1000", new Aleatorio(1000)) {
             @Override
@@ -194,11 +192,11 @@ public class IntegracionTest2 {
         comodinCombinado.agregar(comodin1);
         comodinCombinado.agregar(comodin2);
         comodinCombinado.agregar(comodin3);
-        Jugador jugador = new Jugador("Pepe", mazoMock) {
+        Jugador jugador = new Jugador("Pepe", mazo) {
             @Override
             public void iniciarRonda(Ronda rondaActual){
                 this.rondaActual = ronda;
-                this.mazo = mazoMock;
+                this.mazo = mazo;
                 this.manoActual = mano;
             }
         };

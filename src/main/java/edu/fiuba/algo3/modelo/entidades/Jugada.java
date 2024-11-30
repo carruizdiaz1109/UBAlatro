@@ -61,7 +61,7 @@ public abstract class Jugada  implements Evaluable {
     }
 
     public Jugada evaluar(List<CartaPoker> cartas) {
-        if (esJugada(this.cartas)) {
+        if (esJugada(cartas)) {
             return this;
         } else if (this.siguiente != null) {
             return this.siguiente.evaluar(cartas);

@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo.entidades;
 
+import edu.fiuba.algo3.errores.ErrorCartaNula;
+import edu.fiuba.algo3.errores.ErrorPuntajeNulo;
+
 public class CartaPoker implements Comparable<CartaPoker>{
 
     private static final int contadorId = 1;
@@ -21,6 +24,9 @@ public class CartaPoker implements Comparable<CartaPoker>{
     }
 
     public void modificarPuntaje(Puntaje unPuntaje) {
+        if(unPuntaje == null){
+            throw new ErrorPuntajeNulo();
+        }
         this.puntaje = this.puntaje.sumarPuntaje(unPuntaje);
     }
 
@@ -30,13 +36,31 @@ public class CartaPoker implements Comparable<CartaPoker>{
 
     public int sumarValorCon(int otroValor) { return this.valor.valor() + otroValor; }
 
-    public boolean esMismoValor(CartaPoker otraCarta) { return this.valor == otraCarta.valor; }
+    public boolean esMismoValor(CartaPoker otraCarta) {
+        if(otraCarta == null){
+            throw new ErrorCartaNula();
+        }
+        return this.valor == otraCarta.valor;
+    }
 
-    public boolean esMismoPalo(CartaPoker otraCarta) { return this.palo.equals(otraCarta.palo); }
+    public boolean esMismoPalo(CartaPoker otraCarta) {
+        if(otraCarta == null){
+            throw new ErrorCartaNula();
+        }
+        return this.palo.equals(otraCarta.palo);
+    }
 
-    public boolean esConsecutiva(CartaPoker otraCarta) { return Math.abs(this.valor.valor() - otraCarta.valor.valor()) == 1; }
+    public boolean esConsecutiva(CartaPoker otraCarta) {
+        if(otraCarta == null){
+            throw new ErrorCartaNula();
+        }
+        return Math.abs(this.valor.valor() - otraCarta.valor.valor()) == 1;
+    }
 
     public boolean compararCartaCon(CartaPoker otraCarta) {
+        if(otraCarta == null){
+            throw new ErrorCartaNula();
+        }
         return (this.valor == otraCarta.valor && this.palo.equals(otraCarta.palo));
     }
 
@@ -65,10 +89,17 @@ public class CartaPoker implements Comparable<CartaPoker>{
     }
 
     public void aplicarComodin(Puntaje unPuntaje) {
+        if(unPuntaje == null){
+            throw new ErrorPuntajeNulo();
+        }
         this.puntajeComodin.sumarPuntaje(unPuntaje);
     }
 
-    public void aplicarTarot(Puntaje unPuntaje) {this.puntaje = unPuntaje;}
+    public void aplicarTarot(Puntaje unPuntaje) {
+        if(unPuntaje == null){
+            throw new ErrorPuntajeNulo();
+        }
+        this.puntaje = unPuntaje;}
 
     public String getNombreArchivo() {
         String valorTexto = String.valueOf(valor.valor()); // Por ejemplo, "7" para un 7
