@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.comodines.Comodin;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
@@ -43,10 +44,12 @@ public class MainController {
     private final ArrayList<CartaPoker> cartasSeleccionadas;
     private final Ronda rondaActual;
     private RondaVisual rondaVisual;
+    private Tienda tienda;
 
     public MainController() {
         this.cartasSeleccionadas = new ArrayList<>();
         this.rondaActual = new Ronda(1, 2000, 4,5,new Tienda());
+        this.tienda = new Tienda();
     }
 
     // Método para inicializar al jugador desde el controlador principal
@@ -64,7 +67,6 @@ public class MainController {
 
         actualizarMano();
     }
-
 
     public void cargarCartasTarot() {
         List<String> nombresCartasTarot = List.of(
@@ -94,21 +96,15 @@ public class MainController {
         }
     }
 
-    public void cargarCartasComodin() {
-        List<String> nombresCartasComodin = List.of(
-                "abundante.png",
-                "arriesgado.png",
-                "astuto.png",
-                "bandera.png"
-        );
-
-        mostrarCartasComodin(nombresCartasComodin);
+    public void cargarCartasComodin(){
+        List<Comodin> comodines = tienda.actualizarComodines();
+        mostrarCartasComodin(comodines);
     }
 
     private void iniciarArrastre(javafx.scene.image.ImageView carta, MouseEvent event) {
         Dragboard dragboard = carta.startDragAndDrop(TransferMode.MOVE);
         ClipboardContent content = new ClipboardContent();
-        content.putString(carta.getImage().getUrl()); // Guardamos la URL de la imagen de la carta como el contenido
+        content.putString(carta.getImage().getUrl());
 
         dragboard.setContent(content);
         event.consume();
@@ -166,13 +162,26 @@ public class MainController {
         vistaCarta.setOnDragDropped(event -> manejarDragDrop(vistaCarta, event));
     }
 
-    public void mostrarCartasComodin(List<String> nombresCartasComodin) {
+    public void mostrarCartasComodin(List<Comodin> comodines) {
         lblComodin.getChildren().clear();
 
-        for (String nombreArchivo : nombresCartasComodin) {
-            javafx.scene.image.Image imagenCarta = new javafx.scene.image.Image(
-                    getClass().getResource("/imagenes/comodines/" + nombreArchivo).toExternalForm()
-            );
+        for (Comodin comodin : comodines) {
+            System.out.println(comodin.getNombre());
+
+            javafx.scene.image.Image imagenCarta;
+            try {
+                imagenCarta = new javafx.scene.image.Image(
+                        getClass()
+                                .getResource("/imagenes/comodines/" + comodin.getNombre() + ".png")
+                                .toExternalForm()
+                );
+            } catch (NullPointerException | IllegalArgumentException e) {
+                imagenCarta = new javafx.scene.image.Image(
+                        getClass()
+                                .getResource("/imagenes/comodines/astuto.png")
+                                .toExternalForm()
+                );
+            }
 
             javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
             vistaCarta.setFitWidth(120); // Ancho de la carta
