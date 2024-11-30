@@ -55,7 +55,7 @@ public class InicioController {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ronda.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ronda.fxml"));
             Parent root = loader.load();
             MainController rondaController = loader.getController();
             rondaController.setJugador(new Jugador(nombreJugador, new Mazo()));
