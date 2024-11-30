@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class Tienda {
@@ -204,8 +205,11 @@ public class Tienda {
     }
 
     public List<Comodin> actualizarComodines(){
+        Random random = new Random();
+
         while (!comodinLLeno() && !comodinesAComprar.isEmpty()) {
-            Comodin comodin = comodinesAComprar.remove(0);
+            int indiceAleatorio = random.nextInt(comodinesAComprar.size());
+            Comodin comodin = comodinesAComprar.remove(indiceAleatorio);
             comodinesALaVenta.add(comodin);
         }
         return new ArrayList<>(comodinesALaVenta);
@@ -213,8 +217,12 @@ public class Tienda {
     }
 
     public List<Tarot> actualizarTarots(){
+        Random random = new Random();
+
         while (!tarotLLeno() && !tarotsAComprar.isEmpty()) {
-            Tarot tarot = tarotsAComprar.remove(0);
+            int indiceAleatorio = random.nextInt(tarotsAComprar.size());
+
+            Tarot tarot = tarotsAComprar.remove(indiceAleatorio);
             tarotsALaVenta.add(tarot);
         }
         return new ArrayList<>(tarotsALaVenta);
