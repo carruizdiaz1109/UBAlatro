@@ -3,7 +3,7 @@ package edu.fiuba.algo3.entrega_3;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.fiuba.algo3.Tienda;
+import edu.fiuba.algo3.modelo.entidades.Tienda;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 

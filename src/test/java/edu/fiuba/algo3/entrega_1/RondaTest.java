@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.entidades.Jugada;
-import edu.fiuba.algo3.modelo.entidades.Ronda;
-import edu.fiuba.algo3.modelo.entidades.Tienda;
+import edu.fiuba.algo3.modelo.entidades.*;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;

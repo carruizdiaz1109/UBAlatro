@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.comodines.*;
-import edu.fiuba.algo3.Tienda;
+import edu.fiuba.algo3.modelo.entidades.comodines.*;
+import edu.fiuba.algo3.modelo.entidades.Tienda;
 
 import java.util.List;
 

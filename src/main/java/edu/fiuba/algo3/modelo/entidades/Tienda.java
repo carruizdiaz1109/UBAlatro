@@ -1,16 +1,13 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.modelo.entidades;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.fiuba.algo3.jugadas.*;
-import edu.fiuba.algo3.comodines.*;
-import edu.fiuba.algo3.tarots.*;
-import edu.fiuba.algo3.tarots.EfectoJugada;
-import java.io.IOException;
-import java.io.InputStream;
+import edu.fiuba.algo3.modelo.entidades.comodines.*;
+import edu.fiuba.algo3.modelo.entidades.comodines.EfectoJugada;
+import edu.fiuba.algo3.modelo.entidades.jugadas.*;
+import edu.fiuba.algo3.modelo.entidades.tarots.*;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 public class Tienda {
@@ -49,12 +46,12 @@ public class Tienda {
             if (activacionNode != null && activacionNode.has("Mano Jugada")) {
                 String tipoJugada = activacionNode.get("Mano Jugada").asText();
                 Class<? extends Jugada> claseJugada = obtenerClaseJugada(tipoJugada);
-                Comodin comodinJugada = new edu.fiuba.algo3.comodines.EfectoJugada(claseJugada, puntaje, nombre, descripcion, new NoAleatorio());
+                Comodin comodinJugada = new EfectoJugada(claseJugada, puntaje, nombre, descripcion, new NoAleatorio());
                 this.comodinesALaVenta.add(comodinJugada);
             }
 
             if (activacionNode != null && activacionNode.asText().equals("Descarte")) {
-                Comodin comodinDescarte = new edu.fiuba.algo3.comodines.EfectoJugada(Descarte.class, puntaje, nombre, descripcion, new NoAleatorio());
+                Comodin comodinDescarte = new EfectoJugada(Descarte.class, puntaje, nombre, descripcion, new NoAleatorio());
                 this.comodinesALaVenta.add(comodinDescarte);
             }
         }
@@ -83,9 +80,9 @@ public class Tienda {
         String ejemplar = tarotNode.get("ejemplar").asText();
 
         if (sobre.equalsIgnoreCase("carta")) {
-            return new EfectoCarta(nombre, descripcion, puntaje);
+            return new TarotCarta(nombre, descripcion, puntaje);
         } else if (sobre.equalsIgnoreCase("mano")) {
-            return new EfectoJugada(nombre, descripcion, puntaje, ejemplar);
+            return new TarotJugada(nombre, descripcion, puntaje, ejemplar);
         }
         return null;
     }

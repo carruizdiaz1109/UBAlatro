@@ -3,7 +3,6 @@ package edu.fiuba.algo3;
 import java.util.Objects;
 
 import edu.fiuba.algo3.controllers.InicioController;
-import edu.fiuba.algo3.controllers.MainController;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

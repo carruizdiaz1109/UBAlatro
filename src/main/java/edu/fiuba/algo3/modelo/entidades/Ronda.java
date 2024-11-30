@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.entidades;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
+import edu.fiuba.algo3.modelo.entidades.Tienda;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class Ronda {
     private final int puntajeMinimo; //puntajeASuperar
     private int descartesDisponibles; //descartes
     private int jugadasDisponibles; //manos
-    private final Tienda tienda;
+    private Tienda tienda;
     private final List<Jugada> jugadas;
 
 
