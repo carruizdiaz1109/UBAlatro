@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.Tarot;
-import edu.fiuba.algo3.Tienda;
+import edu.fiuba.algo3.modelo.entidades.tarots.*;
+import edu.fiuba.algo3.modelo.entidades.Tarot;
+import edu.fiuba.algo3.modelo.entidades.Tienda;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 
@@ -9,8 +10,8 @@ import java.util.List;
 
 public class TarotController {
 
-    private HBox lblTarot;
-    private Tienda tienda;
+    private final HBox lblTarot;
+    private final Tienda tienda;
 
     public TarotController(Tienda tienda, HBox lblTarot) {
         this.lblTarot = lblTarot;
@@ -55,7 +56,7 @@ public class TarotController {
     }
 
     public void cargarCartasTarot() {
-        List<Tarot> tarots = tienda.actualizarTarots();
+        List<Tarot> tarots = tienda.obtenerTarots();
         mostrarCartasTarot(tarots);
     }
 }

@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.Jugador;
-import edu.fiuba.algo3.Mazo;
+import edu.fiuba.algo3.modelo.entidades.Jugador;
+import edu.fiuba.algo3.modelo.entidades.Mazo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 public class InicioController {
@@ -56,7 +55,7 @@ public class InicioController {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ronda.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ronda.fxml"));
             Parent root = loader.load();
             MainController rondaController = loader.getController();
             rondaController.setJugador(new Jugador(nombreJugador, new Mazo()));

@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.comodines.*;
-import edu.fiuba.algo3.Tienda;
+import edu.fiuba.algo3.modelo.entidades.comodines.*;
+import edu.fiuba.algo3.modelo.entidades.Tienda;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import javafx.scene.layout.HBox;
 
 public class ComodinController {
 
-    private HBox lblComodin;
-    private Tienda tienda;
+    private final HBox lblComodin;
+    private final Tienda tienda;
 
     public ComodinController(Tienda tienda, HBox lblComodin){
         this.tienda = tienda;
@@ -120,7 +120,7 @@ public class ComodinController {
     }
 
     public void cargarCartasComodin(){
-        List<Comodin> comodines = tienda.actualizarComodines();
+        List<Comodin> comodines = tienda.obtenerComodines();
         mostrarCartasComodin(comodines);
     }
 }

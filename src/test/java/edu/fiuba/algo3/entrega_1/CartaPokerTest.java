@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.errores.ErrorCartaNula;
-import edu.fiuba.algo3.errores.ErrorPuntajeNulo;
-import edu.fiuba.algo3.tarots.EfectoCarta;
+import edu.fiuba.algo3.modelo.excepciones.CartaNulaError;
+import edu.fiuba.algo3.modelo.excepciones.PuntajeNuloError;
+import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
+import edu.fiuba.algo3.modelo.entidades.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -86,7 +86,7 @@ public class CartaPokerTest {
         Puntaje puntajeEsperado = new Puntaje(3,1);
 
         CartaPoker carta = new CartaPoker(Valor.CUATRO, Palo.CORAZONES);
-        Tarot unTarot = new EfectoCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(3, 1));
+        Tarot unTarot = new TarotCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(3, 1));
 
         unTarot.aplicar(carta);
 
@@ -115,48 +115,48 @@ public class CartaPokerTest {
     public void test10ModificarPuntajeNuloTiraExcepcion(){
         CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
 
-        assertThrows(ErrorPuntajeNulo.class, () -> carta.modificarPuntaje(null));
+        assertThrows(PuntajeNuloError.class, () -> carta.modificarPuntaje(null));
     }
 
     @Test
     public void test11CompararValorConCartaNulaTiraExcepcion(){
         CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
 
-        assertThrows(ErrorCartaNula.class, () -> carta.esMismoValor(null));
+        assertThrows(CartaNulaError.class, () -> carta.esMismoValor(null));
     }
 
     @Test
     public void test12CompararPaloConCartaNulaTiraExcepcion(){
         CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
 
-        assertThrows(ErrorCartaNula.class, () -> carta.esMismoPalo(null));
+        assertThrows(CartaNulaError.class, () -> carta.esMismoPalo(null));
     }
 
     @Test
     public void test13ConsecutivaConCartaNulaTiraExcepcion(){
         CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
 
-        assertThrows(ErrorCartaNula.class, () -> carta.esConsecutiva(null));
+        assertThrows(CartaNulaError.class, () -> carta.esConsecutiva(null));
     }
 
     @Test
     public void test14CompararCartaConCartaNulaTiraExcepcion(){
         CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
 
-        assertThrows(ErrorCartaNula.class, () -> carta.compararCartaCon(null));
+        assertThrows(CartaNulaError.class, () -> carta.compararCartaCon(null));
     }
 
     @Test
     public void test15AplicarComodinConPuntajeNuloTiraExcepcion(){
         CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
 
-        assertThrows(ErrorPuntajeNulo.class, () -> carta.aplicarComodin(null));
+        assertThrows(PuntajeNuloError.class, () -> carta.aplicarComodin(null));
     }
 
     @Test
     public void test16AplicarTarotConPuntajeNuloTiraExcepcion(){
         CartaPoker carta = new CartaPoker(Valor.TRES, Palo.CORAZONES);
 
-        assertThrows(ErrorPuntajeNulo.class, () -> carta.aplicarTarot(null));
+        assertThrows(PuntajeNuloError.class, () -> carta.aplicarTarot(null));
     }
 }

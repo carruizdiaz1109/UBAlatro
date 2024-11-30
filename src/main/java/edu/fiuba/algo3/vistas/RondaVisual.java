@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.vistas;
-import edu.fiuba.algo3.Ronda;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import edu.fiuba.algo3.modelo.entidades.Ronda;
 
 import javafx.scene.control.Label;
 

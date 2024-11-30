@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.CartaPoker;
-import edu.fiuba.algo3.Jugada;
-import edu.fiuba.algo3.Valor;
-import edu.fiuba.algo3.jugadas.*;
-import edu.fiuba.algo3.Palo;
+import edu.fiuba.algo3.modelo.entidades.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.Jugada;
+import edu.fiuba.algo3.modelo.entidades.Valor;
+import edu.fiuba.algo3.modelo.entidades.Palo;
+import edu.fiuba.algo3.modelo.entidades.jugadas.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

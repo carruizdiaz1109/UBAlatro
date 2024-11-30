@@ -1,6 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.modelo.entidades.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.Mazo;
+import edu.fiuba.algo3.modelo.entidades.Palo;
+import edu.fiuba.algo3.modelo.entidades.Valor;
+import edu.fiuba.algo3.modelo.excepciones.MazoVacioError;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -51,7 +55,7 @@ public class MazoTest {
         while (!mazo.getCartas().isEmpty()) {
             mazo.darCarta();
         }
-        assertThrows(ErrorMazoVacio.class, mazo::darCarta);
+        assertThrows(MazoVacioError.class, mazo::darCarta);
     }
 
     @Test

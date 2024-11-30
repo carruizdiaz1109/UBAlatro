@@ -1,7 +1,10 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.comodines.Comodin;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.comodines.*;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
@@ -15,6 +18,8 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class MainController {
@@ -42,8 +47,28 @@ public class MainController {
 
     public MainController() {
         this.cartasSeleccionadas = new ArrayList<>();
-        this.rondaActual = new Ronda(1, 2000, 4,5,new Tienda());
-        this.tienda = new Tienda();
+        try {
+            String json = "{" +
+                    "\"comodines\": [" +
+                    "{ \"nombre\": \"Comodin Astuto\", \"descripcion\": \"+50 fichas si la mano jugada contiene un par\", \"activacion\": { \"Mano Jugada\": \"par\" }, \"efecto\": { \"puntos\": 50, \"multiplicador\": 1 } }, " +
+                    "{ \"nombre\": \"Cumbre Mistica\", \"descripcion\": \"x15 multiplicación por cada descarte\", \"activacion\": \"Descarte\", \"efecto\": { \"puntos\": 1, \"multiplicador\": 15 } } " +
+                    "], " +
+                    "\"tarots\": [" +
+                    "{ \"nombre\": \"El Mago\", \"descripcion\": \"Mejora la mano par\", \"efecto\": { \"puntos\": 15, \"multiplicador\": 2 }, \"sobre\": \"mano\", \"ejemplar\": \"par\" }, " +
+                    "{ \"nombre\": \"El Carro\", \"descripcion\": \"Mejora 1 carta seleccionada y la convierte en una carta de acero.\", \"efecto\": { \"puntos\": 1, \"multiplicador\": 1.5 }, \"sobre\": \"carta\", \"ejemplar\": \"cualquiera\" }" +
+                    "]" +
+                    "}";
+
+            // Convertir el JSON a JsonNode usando ObjectMapper
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode tiendaNode = objectMapper.readTree(json);
+
+            // Crear la tienda con el JSON
+            tienda = new Tienda(tiendaNode);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        this.rondaActual = new Ronda(1, 2000, 4, 5, tienda);
     }
 
     // Método para inicializar al jugador desde el controlador principal
