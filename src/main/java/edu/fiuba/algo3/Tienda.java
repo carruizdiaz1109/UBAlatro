@@ -17,11 +17,20 @@ public class Tienda {
     private final List<CartaPoker> cartasAComprar;
     private final List<Tarot> tarotsAComprar;
     private final List<Comodin> comodinesAComprar;
+    private final List<Tarot> tarotsALaVenta;
+    private final List<Comodin> comodinesALaVenta;
+    private int capacidadComodin;
+    private int capacidadTarots;
 
     public Tienda () {
         this.cartasAComprar = new ArrayList<CartaPoker>();
+        this.tarotsALaVenta = new ArrayList<Tarot>();
+        this.comodinesALaVenta = new ArrayList<Comodin>();
         this.tarotsAComprar = new ArrayList<Tarot>();
         this.comodinesAComprar = new ArrayList<Comodin>();
+        this.capacidadComodin = 5;
+        this.capacidadTarots = 2;
+
         inicializarComodines();
         inicializarTarots();
     }
@@ -184,6 +193,32 @@ public class Tienda {
             default:
                 throw new IllegalArgumentException("Tipo de jugada desconocido: " + tipoJugada);
         }
+    }
+
+    private boolean comodinLLeno(){
+        return (comodinesALaVenta.size() == capacidadComodin);
+    }
+
+    private boolean tarotLLeno(){
+        return (tarotsALaVenta.size() == capacidadTarots);
+    }
+
+    public List<Comodin> actualizarComodines(){
+        while (!comodinLLeno() && !comodinesAComprar.isEmpty()) {
+            Comodin comodin = comodinesAComprar.remove(0);
+            comodinesALaVenta.add(comodin);
+        }
+        return new ArrayList<>(comodinesALaVenta);
+
+    }
+
+    public List<Tarot> actualizarTarots(){
+        while (!tarotLLeno() && !tarotsAComprar.isEmpty()) {
+            Tarot tarot = tarotsAComprar.remove(0);
+            tarotsALaVenta.add(tarot);
+        }
+        return new ArrayList<>(tarotsALaVenta);
+
     }
 
     public List<Comodin> obtenerComodines() {
