@@ -50,11 +50,13 @@ public class RondaTest {
 
     @Test
     void test04ErrorAgregarJugadaSinJugadasDisponibles() {
+        when(jugadaMock.calcularPuntaje()).thenReturn(500);
         ronda.agregarJugada(jugadaMock);
         ronda.agregarJugada(jugadaMock);
         ronda.agregarJugada(jugadaMock);
 
         assertThrows(ErrorNoHayJugadasDisponibles.class, () -> ronda.agregarJugada(jugadaMock));
+        assertFalse(ronda.estadoRonda());
     }
 
     @Test
