@@ -1,12 +1,15 @@
-package edu.fiuba.algo3.controllers;
+/*package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.modelo.entidades.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.comodines.Comodin;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
@@ -14,10 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.scene.input.ClipboardContent;
 
 public class MainController {
     @FXML
@@ -31,144 +30,42 @@ public class MainController {
     @FXML
     private Label lblDescartesDisponibles;
     @FXML
-    private HBox lblTarot;
-    @FXML
     private HBox lblComodin;
+    @FXML
+    private HBox lblTarot;
+
 
     private Jugador jugador;
     private final ArrayList<CartaPoker> cartasSeleccionadas;
     private final Ronda rondaActual;
     private RondaVisual rondaVisual;
+    private Tienda tienda;
 
     public MainController() {
         this.cartasSeleccionadas = new ArrayList<>();
-        this.rondaActual = new Ronda(1, 2000, 4,5,new Tienda());
+        this.rondaActual = new Ronda(1, 2000, 4,5,new Tienda(JsonNode));
+        //this.tienda = new Tienda();
     }
 
+    // Método para inicializar al jugador desde el controlador principal
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
         actualizarMano();
-        cargarCartasTarot();
-        cargarCartasComodin();
+
+        ComodinController comodinController = new ComodinController(tienda, lblComodin);
+        comodinController.cargarCartasComodin();
+
+        TarotController tarotController = new TarotController(tienda, lblTarot);
+        tarotController.cargarCartasTarot();
     }
 
     public void iniciarRonda() {
         this.jugador.iniciarRonda(this.rondaActual);
         this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles);
+
         actualizarMano();
     }
 
-    public void cargarCartasTarot() {
-        List<String> nombresCartasTarot = List.of(
-            "ahorcado.png",
-            "amantes.png"
-        );
-        mostrarCartasTarot(nombresCartasTarot);
-    }
-
-    public void mostrarCartasTarot(List<String> nombresCartasTarot) {
-        lblTarot.getChildren().clear();
-        for (String nombreArchivo : nombresCartasTarot) {
-            javafx.scene.image.Image imagenCarta = new javafx.scene.image.Image(
-                    getClass().getResource("/imagenes/tarot/" + nombreArchivo).toExternalForm()
-            );
-            javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
-            vistaCarta.setFitHeight(200);
-            vistaCarta.setPreserveRatio(true);
-            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(17.5, 10, 0, 0));
-            lblTarot.getChildren().add(vistaCarta);
-        }
-    }
-
-    public void cargarCartasComodin() {
-        List<String> nombresCartasComodin = List.of(
-            "abundante.png",
-            "arriesgado.png",
-            "astuto.png",
-            "bandera.png"
-        );
-        mostrarCartasComodin(nombresCartasComodin);
-    }
-
-    private void iniciarArrastre(javafx.scene.image.ImageView carta, MouseEvent event) {
-        Dragboard dragboard = carta.startDragAndDrop(TransferMode.MOVE);
-        ClipboardContent content = new ClipboardContent();
-        content.putString(carta.getImage().getUrl());
-        dragboard.setContent(content);
-        event.consume();
-    }
-
-    private void manejarDragOver(DragEvent event) {
-        if (event.getGestureSource() != event.getTarget() && event.getDragboard().hasString()) {
-            event.acceptTransferModes(TransferMode.MOVE);
-        }
-        event.consume();
-    }
-
-    private void manejarDragDrop(javafx.scene.image.ImageView cartaDestino, DragEvent event) {
-        Dragboard dragboard = event.getDragboard();
-        if (dragboard.hasString()) {
-            String url = dragboard.getString();
-
-            // Reorganizamos las cartas de comodín
-            javafx.scene.image.ImageView cartaArrastrada = encontrarCartaPorURL(url);
-            if (cartaArrastrada != null) {
-                // Reorganizamos las cartas en lblComodin
-                int indexDestino = lblComodin.getChildren().indexOf(cartaDestino);
-                int indexArrastrada = lblComodin.getChildren().indexOf(cartaArrastrada);
-
-                if (indexDestino != -1 && indexArrastrada != -1) {
-                    if (indexDestino < indexArrastrada) {
-                        lblComodin.getChildren().remove(cartaArrastrada);
-                        lblComodin.getChildren().add(indexDestino, cartaArrastrada);
-                    } else {
-                        lblComodin.getChildren().remove(cartaArrastrada);
-                        lblComodin.getChildren().add(indexDestino, cartaArrastrada);
-                    }
-                }
-            }
-        }
-        event.setDropCompleted(true);
-        event.consume();
-    }
-
-    private javafx.scene.image.ImageView encontrarCartaPorURL(String url) {
-        for (Node node : lblComodin.getChildren()) {
-            if (node instanceof javafx.scene.image.ImageView) {
-                javafx.scene.image.ImageView carta = (javafx.scene.image.ImageView) node;
-                if (carta.getImage().getUrl().equals(url)) {
-                    return carta;
-                }
-            }
-        }
-        return null;
-    }
-
-    private void arrastrar(javafx.scene.image.ImageView vistaCarta) {
-        vistaCarta.setOnDragDetected(event -> iniciarArrastre(vistaCarta, event));
-        vistaCarta.setOnDragOver(event -> manejarDragOver(event));
-        vistaCarta.setOnDragDropped(event -> manejarDragDrop(vistaCarta, event));
-    }
-
-    public void mostrarCartasComodin(List<String> nombresCartasComodin) {
-        lblComodin.getChildren().clear();
-
-        for (String nombreArchivo : nombresCartasComodin) {
-            javafx.scene.image.Image imagenCarta = new javafx.scene.image.Image(
-                    getClass().getResource("/imagenes/comodines/" + nombreArchivo).toExternalForm()
-            );
-
-            javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
-            vistaCarta.setFitHeight(200);
-            vistaCarta.setPreserveRatio(true);
-
-            arrastrar(vistaCarta);
-
-            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(17.5, 10, 0, 0));
-
-            lblComodin.getChildren().add(vistaCarta);
-        }
-    }
 
     public void actualizarMano() {
         Mano mano = this.jugador.getManoActual();
@@ -371,3 +268,4 @@ public class MainController {
     }
 
 }
+*/

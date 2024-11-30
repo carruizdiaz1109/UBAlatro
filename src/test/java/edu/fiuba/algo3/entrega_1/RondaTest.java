@@ -9,6 +9,10 @@ import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -87,6 +91,44 @@ public class RondaTest {
         ronda.agregarDescarte(descarteMock);
 
         assertEquals(1500, ronda.calcularTotalRonda());
+    }
+
+    @Test
+    void test08SeJuegaUnaRondaCompletaConTresManos(){
+        Ronda ronda = new Ronda(1, 120, 3, 3, tiendaMock);
+        ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
+                new CartaPoker(Valor.CINCO, Palo.PICAS),
+                new CartaPoker(Valor.CINCO, Palo.TREBOLES)
+        ));
+
+        Jugada jugada1 = Jugada.crearJugada(cartas);
+        Jugada jugada2 = Jugada.crearJugada(cartas);
+        Jugada jugada3 = Jugada.crearJugada(cartas);
+
+        ronda.agregarJugada(jugada1);
+        ronda.agregarJugada(jugada2);
+        ronda.agregarJugada(jugada3);
+
+        assertTrue(ronda.verificarPuntaje());
+    }
+
+    @Test
+    void test09SeJuegaUnaRondaConTodasLasJugadasPosiblesYNoLLegaAlPuntaje(){
+        Ronda ronda = new Ronda(1, 2000, 3, 3, tiendaMock);
+        ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
+                new CartaPoker(Valor.CINCO, Palo.PICAS),
+                new CartaPoker(Valor.CINCO, Palo.TREBOLES)
+        ));
+
+        Jugada jugada1 = Jugada.crearJugada(cartas);
+        Jugada jugada2 = Jugada.crearJugada(cartas);
+        Jugada jugada3 = Jugada.crearJugada(cartas);
+
+        ronda.agregarJugada(jugada1);
+        ronda.agregarJugada(jugada2);
+        ronda.agregarJugada(jugada3);
+
+        assertFalse(ronda.verificarPuntaje());
     }
 
 }
