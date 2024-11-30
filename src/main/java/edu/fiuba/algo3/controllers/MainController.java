@@ -90,7 +90,7 @@ public class MainController {
             } catch (NullPointerException | IllegalArgumentException e) {
                 imagenCarta = new javafx.scene.image.Image(
                         getClass()
-                                .getResource("/imagenes/tarot/ahorcado.png")
+                                .getResource("/imagenes/tarot/El Ahorcado.png")
                                 .toExternalForm()
                 );
             }
