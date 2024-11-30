@@ -38,13 +38,13 @@ public class EscaleraReal extends Jugada {
         return  false;
     }
 
-        @Override
-        protected List<CartaPoker> seleccionarCartasValidas (List < CartaPoker > cartas) {
-            // Si `esJugada` fue verdadero, `cartasValidas` ya debe contener todas las cartas de Escalera Real
-            if (cartasValidas != null && cartasValidas.size() == 5) {
-                return cartasValidas;
-            }
-
-            return List.of();  // Devuelve una lista vacía si no es Escalera Real
+    @Override
+    protected List<CartaPoker> seleccionarCartasValidas (List < CartaPoker > cartas) {
+        // Si `esJugada` fue verdadero, `cartasValidas` ya debe contener todas las cartas de Escalera Real
+        if (cartasValidas != null && cartasValidas.size() == 5) {
+            return cartasValidas;
         }
+
+        return List.of();  // Devuelve una lista vacía si no es Escalera Real
+    }
 }

@@ -5,8 +5,6 @@ import edu.fiuba.algo3.modelo.excepciones.PuntajeNuloError;
 
 public class CartaPoker implements Comparable<CartaPoker>{
 
-    private static final int contadorId = 1;
-
     private final Valor valor;
     private final Palo palo;
     private Puntaje puntaje;
