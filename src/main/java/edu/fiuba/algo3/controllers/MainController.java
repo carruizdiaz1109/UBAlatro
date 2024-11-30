@@ -1,5 +1,6 @@
-package edu.fiuba.algo3.controllers;
+/*package edu.fiuba.algo3.controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.comodines.Comodin;
 import edu.fiuba.algo3.vistas.CartaVisual;
@@ -42,8 +43,8 @@ public class MainController {
 
     public MainController() {
         this.cartasSeleccionadas = new ArrayList<>();
-        this.rondaActual = new Ronda(1, 2000, 4,5,new Tienda());
-        this.tienda = new Tienda();
+        this.rondaActual = new Ronda(1, 2000, 4,5,new Tienda(JsonNode));
+        //this.tienda = new Tienda();
     }
 
     // Método para inicializar al jugador desde el controlador principal
@@ -267,3 +268,4 @@ public class MainController {
     }
 
 }
+*/

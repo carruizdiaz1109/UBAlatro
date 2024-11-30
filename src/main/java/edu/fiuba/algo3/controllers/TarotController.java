@@ -9,8 +9,8 @@ import java.util.List;
 
 public class TarotController {
 
-    private HBox lblTarot;
-    private Tienda tienda;
+    private final HBox lblTarot;
+    private final Tienda tienda;
 
     public TarotController(Tienda tienda, HBox lblTarot) {
         this.lblTarot = lblTarot;
@@ -55,7 +55,7 @@ public class TarotController {
     }
 
     public void cargarCartasTarot() {
-        List<Tarot> tarots = tienda.actualizarTarots();
+        List<Tarot> tarots = tienda.obtenerTarots();
         mostrarCartasTarot(tarots);
     }
 }

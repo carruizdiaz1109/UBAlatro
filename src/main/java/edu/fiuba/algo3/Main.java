@@ -2,7 +2,7 @@ package edu.fiuba.algo3;
 
 import java.util.Objects;
 
-import edu.fiuba.algo3.controllers.MainController;
+//import edu.fiuba.algo3.controllers.MainController;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,9 +24,9 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Main.fxml"));
         Parent root = loader.load();
 
-        MainController controlador = loader.getController();
-        controlador.setJugador(new Jugador("Enzo", new Mazo()));
-        controlador.iniciarRonda();
+        //MainController controlador = loader.getController();
+        //controlador.setJugador(new Jugador("Enzo", new Mazo()));
+        //controlador.iniciarRonda();
 
         Scene scene = new Scene(root);
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/icon.png")));
