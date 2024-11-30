@@ -29,7 +29,7 @@
     <dependency>
       <groupId>com.tngtech.archunit</groupId>
       <artifactId>archunit</artifactId>
-      <version>0.21.0</version> <!-- O la versión que prefieras -->
+      <version>0.21.0</version>
       <scope>test</scope>
     </dependency>
 
@@ -47,6 +47,11 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
+      <version>${javafx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-media</artifactId>
       <version>${javafx.version}</version>
     </dependency>
 
@@ -84,8 +89,8 @@
         <version>3.8.0</version>
         <configuration>
           <release>11</release>
-            <source>16</source>
-            <target>16</target>
+          <source>16</source>
+          <target>16</target>
         </configuration>
       </plugin>
 

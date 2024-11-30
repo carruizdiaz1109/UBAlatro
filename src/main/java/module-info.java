@@ -9,7 +9,7 @@ module edu.fiuba.algo3 {
     requires com.fasterxml.jackson.databind;
     requires java.desktop;
     requires javafx.fxml;
-    requires javafx.graphics;
+    requires javafx.media;
     exports edu.fiuba.algo3.controllers;
 
     opens edu.fiuba.algo3 to javafx.fxml, org.junit.jupiter, to .org.mockito;
