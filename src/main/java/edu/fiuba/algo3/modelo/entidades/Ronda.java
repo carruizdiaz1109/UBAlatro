@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.entidades;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
-import edu.fiuba.algo3.modelo.entidades.Tienda;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,7 @@ public class Ronda {
     private final int puntajeMinimo; //puntajeASuperar
     private int descartesDisponibles; //descartes
     private int jugadasDisponibles; //manos
-    private Tienda tienda;
+    private final Tienda tienda;
     private final List<Jugada> jugadas;
 
 
@@ -27,12 +26,12 @@ public class Ronda {
         this.tienda = tienda;
     }
 
-    public boolean verificarPuntaje() {
+    public boolean rondaSuperada() {
         return (this.puntajeMinimo <= calcularTotalRonda());
     }
 
     public void agregarJugada(Jugada unaJugada) {
-        if (estadoRonda()) {
+        if (sePuedeSeguirJugando()) {
             this.jugadas.add(unaJugada);
             this.jugadasDisponibles--;
         }else{
@@ -40,15 +39,15 @@ public class Ronda {
         }
     }
 
-    public boolean estadoRonda() {
-        return (this.jugadasDisponibles > 0);
+    public boolean sePuedeSeguirJugando() {
+        return (this.jugadasDisponibles > 0 && !rondaSuperada());
     }
 
     public void agregarDescarte(Descarte unDescarte) {
-        if (estadoRonda() && this.descartesDisponibles > 0) {
+        if (sePuedeSeguirJugando() && this.descartesDisponibles > 0) {
             this.jugadas.add(unDescarte);
             this.descartesDisponibles--;
-        }else{
+        }else {
             throw new NoHayDescarteDisponiblesError();
         }
     }

@@ -12,15 +12,11 @@ import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class MainController {
@@ -243,7 +239,7 @@ public class MainController {
 
     @FXML
     public void clickJugar() {
-        if (rondaActual.estadoRonda()) {
+        if (rondaActual.sePuedeSeguirJugando()) {
             manejarAccionCartaSeleccionada(() -> jugador.jugar());
         }
     }

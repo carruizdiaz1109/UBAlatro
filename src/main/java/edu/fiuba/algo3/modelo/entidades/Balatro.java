@@ -51,7 +51,7 @@ public class Balatro {
 
     public void iniciarJuego() {
         for (Ronda ronda : this.rondas) {
-            if (ronda.verificarPuntaje()) {
+            if (ronda.rondaSuperada()) {
                 this.jugador.iniciarRonda(ronda);
             }
         }
