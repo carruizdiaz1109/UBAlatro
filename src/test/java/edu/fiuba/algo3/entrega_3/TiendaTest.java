@@ -16,7 +16,6 @@ public class TiendaTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        // JSON de ejemplo
         String json = "{" +
                 "\"comodines\": [" +
                 "{ \"nombre\": \"Comodin Astuto\", \"descripcion\": \"+50 fichas si la mano jugada contiene un par\", \"activacion\": { \"Mano Jugada\": \"par\" }, \"efecto\": { \"puntos\": 50, \"multiplicador\": 1 } }, " +
@@ -25,14 +24,18 @@ public class TiendaTest {
                 "\"tarots\": [" +
                 "{ \"nombre\": \"El Mago\", \"descripcion\": \"Mejora la mano par\", \"efecto\": { \"puntos\": 15, \"multiplicador\": 2 }, \"sobre\": \"mano\", \"ejemplar\": \"par\" }, " +
                 "{ \"nombre\": \"El Carro\", \"descripcion\": \"Mejora 1 carta seleccionada y la convierte en una carta de acero.\", \"efecto\": { \"puntos\": 1, \"multiplicador\": 1.5 }, \"sobre\": \"carta\", \"ejemplar\": \"cualquiera\" }" +
-                "]" +
-                "}";
+                "], " +
+                "\"carta\": {" +
+                "\"nombre\": \"10 de Corazones\", " +
+                "\"palo\": \"Corazones\", " +
+                "\"numero\": \"10\", " +
+                "\"puntos\": 10, " +
+                "\"multiplicador\": \"1\"" +
+                "}" + "}";
 
-        // Convertir el JSON a JsonNode usando ObjectMapper
         ObjectMapper objectMapper = new ObjectMapper();
         tiendaNode = objectMapper.readTree(json);
 
-        // Crear la tienda con el JSON
         tienda = new Tienda(tiendaNode);
     }
 
@@ -46,6 +49,11 @@ public class TiendaTest {
     public void test02SeInicializanCorrectamenteTarots() {
         int cantidadTarots = tienda.obtenerTarots().size();
         assertEquals(2, cantidadTarots); // Esperamos que haya 2 tarots
+    }
 
+    @Test
+    public void test03SeInicializanCorrectamenteCartass() {
+        int cantidadCartas = tienda.obtenerCartas().size();
+        assertEquals(1, cantidadCartas); // Esperamos que haya 2 tarots
     }
 }

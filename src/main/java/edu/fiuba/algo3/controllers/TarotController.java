@@ -2,7 +2,7 @@ package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.modelo.entidades.tarots.*;
 import edu.fiuba.algo3.modelo.entidades.Tarot;
-import edu.fiuba.algo3.modelo.entidades.Tienda;
+import edu.fiuba.algo3.modelo.entidades.Jugador;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 
@@ -11,11 +11,11 @@ import java.util.List;
 public class TarotController {
 
     private final HBox lblTarot;
-    private final Tienda tienda;
+    private final Jugador jugador;
 
-    public TarotController(Tienda tienda, HBox lblTarot) {
+    public TarotController(Jugador unJugador , HBox lblTarot) {
         this.lblTarot = lblTarot;
-        this.tienda = tienda;
+        this.jugador = unJugador;
     }
 
     private void mostrarDescripcion(javafx.scene.image.ImageView vistaCarta, Tarot tarot){
@@ -34,29 +34,26 @@ public class TarotController {
                                 .getResource("/imagenes/tarot/" + tarot.getNombre() + ".png")
                                 .toExternalForm()
                 );
+                javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
+                vistaCarta.setFitWidth(120);
+                vistaCarta.setFitHeight(180);
+                vistaCarta.setPreserveRatio(true);
+
+                mostrarDescripcion(vistaCarta, tarot);
+
+                HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
+
+                lblTarot.getChildren().add(vistaCarta);
             } catch (NullPointerException | IllegalArgumentException e) {
-                imagenCarta = new javafx.scene.image.Image(
-                        getClass()
-                                .getResource("/imagenes/tarot/El Ahorcado.png")
-                                .toExternalForm()
-                );
+                System.out.println(e);
             }
 
-            javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
-            vistaCarta.setFitWidth(120);
-            vistaCarta.setFitHeight(180);
-            vistaCarta.setPreserveRatio(true);
 
-            mostrarDescripcion(vistaCarta, tarot);
-
-            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
-
-            lblTarot.getChildren().add(vistaCarta);
         }
     }
 
     public void cargarCartasTarot() {
-        List<Tarot> tarots = tienda.obtenerTarots();
+        List<Tarot> tarots = this.jugador.obtenerTarots();
         mostrarCartasTarot(tarots);
     }
 }

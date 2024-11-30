@@ -31,44 +31,39 @@ public class RondaTest {
     }
 
     @Test
-    public void test01VerificarPuntajeConPuntajeInsuficiente() {
+    public void test01SeVerificaQueSePuedeSeguirJugando() {
         when(jugadaMock.calcularPuntaje()).thenReturn(2500);
         ronda.agregarJugada(jugadaMock);
-        assertFalse(ronda.verificarPuntaje());
+
+        assertTrue(ronda.sePuedeSeguirJugando());
     }
 
     @Test
-    void test02VerificarPuntajeConPuntajeSuficiente() {
-        // Simular que calcularTotalRonda devuelve 3500
-        when(jugadaMock.calcularPuntaje()).thenReturn(3000);
-        ronda.agregarJugada(jugadaMock);
-        assertTrue(ronda.verificarPuntaje());
-    }
-
-    @Test
-    void test03AgregarJugadaExitosamente() {
+    public void test02SeJuegaUnaJugadaYSeVerificaElPuntaje() {
         when(jugadaMock.calcularPuntaje()).thenReturn(1000);
 
         ronda.agregarJugada(jugadaMock);
         int puntajeRonda = ronda.calcularTotalRonda();
-        assertEquals(1000, puntajeRonda);
+        assertEquals(jugadaMock.calcularPuntaje(), puntajeRonda);
     }
 
     @Test
-    void test04ErrorAgregarJugadaSinJugadasDisponibles() {
+   public  void test03NoSePuedeSeguirJugandoSiNoQuedanJugadas() {
+        when(jugadaMock.calcularPuntaje()).thenReturn(50);
         ronda.agregarJugada(jugadaMock);
         ronda.agregarJugada(jugadaMock);
         ronda.agregarJugada(jugadaMock);
 
         assertThrows(NoHayJugadasDisponiblesError.class, () -> ronda.agregarJugada(jugadaMock));
+        assertFalse(ronda.sePuedeSeguirJugando());
     }
 
     @Test
-    void test05AgregarDescarteExitosamente(){
+    public void test05AgregarDescarteExitosamente(){
         when(descarteMock.calcularPuntaje()).thenReturn(500);
         ronda.agregarDescarte(descarteMock);
 
-        assertEquals(500, ronda.calcularTotalRonda());
+        assertEquals(descarteMock.calcularPuntaje(), ronda.calcularTotalRonda());
     }
 
     @Test
@@ -81,7 +76,7 @@ public class RondaTest {
     }
 
     @Test
-    void test07CalcularTotalRonda() {
+    void test07CalcularTotalRondaTrasUnaJugadaYUnDescarte() {
         when(jugadaMock.calcularPuntaje()).thenReturn(1000);
         when(descarteMock.calcularPuntaje()).thenReturn(500);
 
@@ -107,7 +102,8 @@ public class RondaTest {
         ronda.agregarJugada(jugada2);
         ronda.agregarJugada(jugada3);
 
-        assertTrue(ronda.verificarPuntaje());
+        assertFalse(ronda.sePuedeSeguirJugando());
+        assertTrue(ronda.rondaSuperada());
     }
 
     @Test
@@ -126,7 +122,7 @@ public class RondaTest {
         ronda.agregarJugada(jugada2);
         ronda.agregarJugada(jugada3);
 
-        assertFalse(ronda.verificarPuntaje());
+        assertFalse(ronda.rondaSuperada());
     }
 
 }

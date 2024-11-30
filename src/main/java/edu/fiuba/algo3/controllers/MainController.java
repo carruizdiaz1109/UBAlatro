@@ -5,21 +5,18 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fiuba.algo3.modelo.entidades.*;
 import edu.fiuba.algo3.modelo.entidades.comodines.*;
+import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class MainController {
@@ -56,8 +53,14 @@ public class MainController {
                     "\"tarots\": [" +
                     "{ \"nombre\": \"El Mago\", \"descripcion\": \"Mejora la mano par\", \"efecto\": { \"puntos\": 15, \"multiplicador\": 2 }, \"sobre\": \"mano\", \"ejemplar\": \"par\" }, " +
                     "{ \"nombre\": \"El Carro\", \"descripcion\": \"Mejora 1 carta seleccionada y la convierte en una carta de acero.\", \"efecto\": { \"puntos\": 1, \"multiplicador\": 1.5 }, \"sobre\": \"carta\", \"ejemplar\": \"cualquiera\" }" +
-                    "]" +
-                    "}";
+                    "], " +
+                    "\"carta\": {" +
+                    "\"nombre\": \"10 de Corazones\", " +
+                    "\"palo\": \"Corazones\", " +
+                    "\"numero\": \"10\", " +
+                    "\"puntos\": 10, " +
+                    "\"multiplicador\": \"1\"" +
+                    "}" + "}";
 
             // Convertir el JSON a JsonNode usando ObjectMapper
             ObjectMapper objectMapper = new ObjectMapper();
@@ -74,12 +77,20 @@ public class MainController {
     // Método para inicializar al jugador desde el controlador principal
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
+        Puntaje puntajeComodin = new Puntaje(20,3);
+        Comodin unComodin = new EfectoPuntaje(puntajeComodin,"Gros Michel", "Se suma 20 al puntaje y multiplciador 3", new NoAleatorio());
+        this.jugador.aniadirComodin(unComodin);
+
+        Puntaje puntajeTarot = new Puntaje(100,1);
+        Tarot unTarot = new TarotCarta("El Tonto","+100 de puntaje", puntajeTarot);
+        this.jugador.aniadirTarots(unTarot);
+
         actualizarMano();
 
-        ComodinController comodinController = new ComodinController(tienda, lblComodin);
+        ComodinController comodinController = new ComodinController(this.jugador, lblComodin);
         comodinController.cargarCartasComodin();
 
-        TarotController tarotController = new TarotController(tienda, lblTarot);
+        TarotController tarotController = new TarotController(this.jugador, lblTarot);
         tarotController.cargarCartasTarot();
     }
 
@@ -199,7 +210,6 @@ public class MainController {
         transition.play();
     }
 
-
     private void animarCartasSeleccionadas(Runnable onComplete) {
         List<CartaVisual> cartasParaAnimar = lblMano.getChildren().stream()
                 .filter(node -> node instanceof CartaVisual)
@@ -228,7 +238,7 @@ public class MainController {
 
     @FXML
     public void clickJugar() {
-        if (rondaActual.estadoRonda()) {
+        if (rondaActual.sePuedeSeguirJugando()) {
             manejarAccionCartaSeleccionada(() -> jugador.jugar());
             //this.cartasSeleccionadas.clear();
         }

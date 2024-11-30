@@ -35,11 +35,11 @@ public class InicioController {
     @FXML
     public void initialize() {
         String videoPath = Objects.requireNonNull(getClass().getResource("/videos/background.mp4")).toExternalForm();
-        //Media media = new Media(videoPath);
-        //MediaPlayer mediaPlayer = new MediaPlayer(media);
-        //mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        //mediaPlayer.setAutoPlay(true);
-        //backgroundMediaView.setMediaPlayer(mediaPlayer);
+//        Media media = new Media(videoPath);
+//        MediaPlayer mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//        mediaPlayer.setAutoPlay(true);
+//        backgroundMediaView.setMediaPlayer(mediaPlayer);
         jugarButton.setOnAction(event -> iniciarJuego());
     }
 
@@ -47,7 +47,7 @@ public class InicioController {
     private void iniciarJuego() {
         String nombreJugador = nombreTextField.getText();
         if (nombreJugador == null || nombreJugador.trim().isEmpty()) {
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            Alert alerta = new Alert(Alert.AlertType.WARNING);                //el cartelito esta medio feaso pero después lo cambiamos
             alerta.setTitle("Nombre inválido");
             alerta.setHeaderText("Debe ingresar un nombre para jugar.");
             alerta.showAndWait();

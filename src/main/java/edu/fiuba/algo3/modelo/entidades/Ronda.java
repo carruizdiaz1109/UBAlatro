@@ -4,7 +4,6 @@ import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import edu.fiuba.algo3.modelo.entidades.Tienda;
-
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.IntegerProperty;
@@ -38,32 +37,32 @@ public class Ronda {
         this.cantidadDescartes.set(descartesDisponibles);
     }
 
-    public boolean verificarPuntaje() {
+    public boolean rondaSuperada() {
         return (this.puntajeMinimo <= calcularTotalRonda());
     }
 
     public void agregarJugada(Jugada unaJugada) {
-        if (estadoRonda()) {
+        if (this.jugadasDisponibles > 0) {
             this.jugadas.add(unaJugada);
             this.jugadasDisponibles--;
             this.manosDisponibles.set(this.jugadasDisponibles); // Actualizar el property
             this.puntajeAcumulado.set(calcularTotalRonda());
-        }else{
+        } else {
             throw new NoHayJugadasDisponiblesError();
         }
     }
 
-    public boolean estadoRonda() {
+    public boolean sePuedeSeguirJugando() {
         return (this.jugadasDisponibles > 0);
     }
 
     public void agregarDescarte(Descarte unDescarte) {
-        if (estadoRonda() && this.descartesDisponibles > 0) {
+        if (this.descartesDisponibles > 0) {
             this.jugadas.add(unDescarte);
             this.descartesDisponibles--;
             this.cantidadDescartes.set(this.descartesDisponibles); // Actualizar el property
             this.puntajeAcumulado.set(calcularTotalRonda()); // Act
-        }else{
+        }else {
             throw new NoHayDescarteDisponiblesError();
         }
     }
@@ -77,22 +76,6 @@ public class Ronda {
             acumulador += puntaje;
         }
         return acumulador;
-    }
-
-    public int getPuntajeAcumulado() {
-        return this.calcularTotalRonda();
-    }
-
-    public int getManosDisponibles() {
-        return this.jugadasDisponibles;
-    }
-
-    public int getPuntajeObjetivo() {
-        return this.puntajeMinimo;
-    }
-
-    public int getCantidadDescartes() {
-        return this.descartesDisponibles;
     }
 
     // Métodos para acceder a los properties

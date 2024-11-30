@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.entidades.Balatro;
-import edu.fiuba.algo3.modelo.entidades.Jugador;
 import edu.fiuba.algo3.modelo.entidades.Ronda;
 import org.junit.jupiter.api.Test;
 
@@ -35,10 +34,10 @@ public class BalatroTest {
         Balatro balatro = new Balatro("Javier");
 
         Ronda mockRonda1 = mock(Ronda.class);
-        when(mockRonda1.verificarPuntaje()).thenReturn(true);
+        when(mockRonda1.rondaSuperada()).thenReturn(true);
 
         Ronda mockRonda2 = mock(Ronda.class);
-        when(mockRonda2.verificarPuntaje()).thenReturn(true);
+        when(mockRonda2.rondaSuperada()).thenReturn(true);
 
         Field rondasField = Balatro.class.getDeclaredField("rondas");
         rondasField.setAccessible(true);
