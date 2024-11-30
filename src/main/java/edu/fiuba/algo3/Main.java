@@ -6,13 +6,9 @@ import edu.fiuba.algo3.controllers.InicioController;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.fxml.FXMLLoader;
-import utilities.Paths;
 
 public class Main extends Application {
 
@@ -25,7 +21,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml"));
         Parent root = loader.load();
 
-        // Obtener el controlador de Inicio.fxml
+        // Obtener el controlador de inicio.fxml
         InicioController inicioController = loader.getController();
         inicioController.setStage(stage); // Pasar la referencia del Stage al controlador
 
