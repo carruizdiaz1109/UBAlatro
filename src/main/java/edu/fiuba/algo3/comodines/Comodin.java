@@ -26,4 +26,12 @@ public abstract class Comodin implements Aleatoreidad {
     }
 
     public abstract void aplicar(Jugada jugada);
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
 }

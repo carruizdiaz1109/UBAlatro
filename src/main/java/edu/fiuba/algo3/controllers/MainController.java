@@ -1,20 +1,22 @@
-package edu.fiuba.algo3.controllers;
+/*package edu.fiuba.algo3.controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.comodines.Comodin;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 public class MainController {
     @FXML
@@ -27,20 +29,22 @@ public class MainController {
     private Label lblObjetivo;
     @FXML
     private Label lblDescartesDisponibles;
-
-    @FXML
-    private HBox lblTarot;
     @FXML
     private HBox lblComodin;
+    @FXML
+    private HBox lblTarot;
+
 
     private Jugador jugador;
     private final ArrayList<CartaPoker> cartasSeleccionadas;
     private final Ronda rondaActual;
     private RondaVisual rondaVisual;
+    private Tienda tienda;
 
     public MainController() {
         this.cartasSeleccionadas = new ArrayList<>();
-        this.rondaActual = new Ronda(1, 2000, 4,5,new Tienda());
+        this.rondaActual = new Ronda(1, 2000, 4,5,new Tienda(JsonNode));
+        //this.tienda = new Tienda();
     }
 
     // Método para inicializar al jugador desde el controlador principal
@@ -48,8 +52,11 @@ public class MainController {
         this.jugador = jugador;
         actualizarMano();
 
-        cargarCartasTarot();
-        cargarCartasComodin();
+        ComodinController comodinController = new ComodinController(tienda, lblComodin);
+        comodinController.cargarCartasComodin();
+
+        TarotController tarotController = new TarotController(tienda, lblTarot);
+        tarotController.cargarCartasTarot();
     }
 
     public void iniciarRonda() {
@@ -59,64 +66,6 @@ public class MainController {
         actualizarMano();
     }
 
-
-    public void cargarCartasTarot() {
-        List<String> nombresCartasTarot = List.of(
-                "ahorcado.png",
-                "amantes.png"
-        );
-
-        mostrarCartasTarot(nombresCartasTarot);
-    }
-
-    public void mostrarCartasTarot(List<String> nombresCartasTarot) {
-        lblTarot.getChildren().clear();
-
-        for (String nombreArchivo : nombresCartasTarot) {
-            javafx.scene.image.Image imagenCarta = new javafx.scene.image.Image(
-                    getClass().getResource("/imagenes/tarot/" + nombreArchivo).toExternalForm()
-            );
-
-            javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
-            vistaCarta.setFitWidth(120); // Ancho de la carta
-            vistaCarta.setFitHeight(180); // Alto de la carta
-            vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
-
-            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
-
-            lblTarot.getChildren().add(vistaCarta);
-        }
-    }
-
-    public void cargarCartasComodin() {
-        List<String> nombresCartasComodin = List.of(
-                "abundante.png",
-                "arriesgado.png",
-                "astuto.png",
-                "bandera.png"
-        );
-
-        mostrarCartasComodin(nombresCartasComodin);
-    }
-
-    public void mostrarCartasComodin(List<String> nombresCartasComodin) {
-        lblComodin.getChildren().clear();
-
-        for (String nombreArchivo : nombresCartasComodin) {
-            javafx.scene.image.Image imagenCarta = new javafx.scene.image.Image(
-                    getClass().getResource("/imagenes/comodines/" + nombreArchivo).toExternalForm()
-            );
-
-            javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
-            vistaCarta.setFitWidth(120); // Ancho de la carta
-            vistaCarta.setFitHeight(180); // Alto de la carta
-            vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
-
-            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
-
-            lblComodin.getChildren().add(vistaCarta);
-        }
-    }
 
     public void actualizarMano() {
         Mano mano = this.jugador.getManoActual();
@@ -319,3 +268,4 @@ public class MainController {
     }
 
 }
+*/

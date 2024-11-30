@@ -19,5 +19,13 @@ public abstract class Tarot {
 
     public abstract void aplicar(Object objeto);
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
 }
 
