@@ -10,10 +10,17 @@ import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import javax.swing.text.LabelView;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +41,8 @@ public class MainController {
     private HBox lblComodin;
     @FXML
     private HBox lblTarot;
-
+    @FXML
+    private Label lblResultado;
 
     private Jugador jugador;
     private final ArrayList<CartaPoker> cartasSeleccionadas;
@@ -74,7 +82,7 @@ public class MainController {
         this.rondaActual = new Ronda(1, 2000, 4, 5, tienda);
     }
 
-    // Método para inicializar al jugador desde el controlador principal
+    // Metodo para inicializar al jugador desde el controlador principal
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
         Puntaje puntajeComodin = new Puntaje(20,3);
@@ -238,9 +246,16 @@ public class MainController {
     @FXML
     public void clickJugar() {
         if (rondaActual.sePuedeSeguirJugando()) {
-            manejarAccionCartaSeleccionada(() -> jugador.jugar());
-            System.out.println(cartasSeleccionadas.size());
-            System.out.println(this.rondaActual.calcularTotalRonda());
+            manejarAccionCartaSeleccionada(() -> {
+                jugador.jugar();
+                Ronda.RondaEstado estado = rondaActual.getEstado();
+
+                if (estado == Ronda.RondaEstado.GANADA) {
+                    mostrarResultado(true);
+                } else if (estado == Ronda.RondaEstado.PERDIDA) {
+                    mostrarResultado(false);
+                }
+            });
         }
     }
 
@@ -253,25 +268,23 @@ public class MainController {
         if (cartasSeleccionadas.isEmpty()) {
             return;
         }
-
         Runnable onComplete = () -> {
             System.out.println("Cartas a jugar:" + this.cartasSeleccionadas.size());
             jugador.seleccionarCarta(cartasSeleccionadas);
             accionEspecifica.run();
-            this.cartasSeleccionadas.clear();
-
+            this.cartasSeleccionadas.clear(); //las cartas no se deberían borrar
             rellenarMano();
         };
-
         animarCartasSeleccionadas(onComplete);
+        verificarFinDeRonda();
     }
 
     private void rellenarMano() {
         Mano mano = jugador.getManoActual();
         List<CartaPoker> cartasFaltantes = mano.getCartas().stream()
-                .filter(carta -> lblMano.getChildren().stream()
-                        .noneMatch(node -> node instanceof CartaVisual && ((CartaVisual) node).getCarta().equals(carta)))
-                .collect(Collectors.toList());
+            .filter(carta -> lblMano.getChildren().stream()
+            .noneMatch(node -> node instanceof CartaVisual && ((CartaVisual) node).getCarta().equals(carta)))
+            .collect(Collectors.toList());
 
         agregarCartasSecuencialmente(cartasFaltantes, 0);
     }
@@ -302,4 +315,31 @@ public class MainController {
         transition.play();
     }
 
+    public void verificarFinDeRonda() {
+        if (rondaActual.getEstado() != Ronda.RondaEstado.EN_CURSO) {
+            mostrarResultado(rondaActual.getEstado() == Ronda.RondaEstado.GANADA);
+        }
+    }
+
+    private void mostrarResultado(boolean gano) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultado.fxml"));
+            Parent root = loader.load();
+
+            ResultadoController resultadoController = loader.getController();
+            if (gano) {
+                resultadoController.mostrarMensaje("Ganaste");
+            } else {
+                resultadoController.mostrarMensaje("Perdiste");
+            }
+
+            // Cambia la escena para mostrar el resultado
+            Stage stage = (Stage) lblMano.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
