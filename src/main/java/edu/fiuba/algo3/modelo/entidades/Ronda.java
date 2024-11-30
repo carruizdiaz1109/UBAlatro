@@ -31,20 +31,20 @@ public class Ronda {
     }
 
     public void agregarJugada(Jugada unaJugada) {
-        if (sePuedeSeguirJugando()) {
+        if (this.jugadasDisponibles > 0) {
             this.jugadas.add(unaJugada);
             this.jugadasDisponibles--;
-        }else{
+        } else {
             throw new NoHayJugadasDisponiblesError();
         }
     }
 
     public boolean sePuedeSeguirJugando() {
-        return (this.jugadasDisponibles > 0 && !rondaSuperada());
+        return (this.jugadasDisponibles > 0);
     }
 
     public void agregarDescarte(Descarte unDescarte) {
-        if (sePuedeSeguirJugando() && this.descartesDisponibles > 0) {
+        if (this.descartesDisponibles > 0) {
             this.jugadas.add(unDescarte);
             this.descartesDisponibles--;
         }else {

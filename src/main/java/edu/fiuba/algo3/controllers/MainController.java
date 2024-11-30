@@ -210,7 +210,6 @@ public class MainController {
         transition.play();
     }
 
-
     private void animarCartasSeleccionadas(Runnable onComplete) {
         List<CartaVisual> cartasParaAnimar = lblMano.getChildren().stream()
                 .filter(node -> node instanceof CartaVisual)
