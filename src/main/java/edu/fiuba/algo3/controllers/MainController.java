@@ -84,11 +84,10 @@ public class MainController {
             );
 
             javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
-            vistaCarta.setFitWidth(120); // Ancho de la carta
-            vistaCarta.setFitHeight(180); // Alto de la carta
+            vistaCarta.setFitHeight(200); // Alto de la carta
             vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
 
-            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
+            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(17.5, 10, 0, 0));
 
             lblTarot.getChildren().add(vistaCarta);
         }
@@ -175,13 +174,12 @@ public class MainController {
             );
 
             javafx.scene.image.ImageView vistaCarta = new javafx.scene.image.ImageView(imagenCarta);
-            vistaCarta.setFitWidth(120); // Ancho de la carta
-            vistaCarta.setFitHeight(180); // Alto de la carta
-            vistaCarta.setPreserveRatio(true); // Mantener la proporción de la imagen
+            vistaCarta.setFitHeight(200);
+            vistaCarta.setPreserveRatio(true);
 
             arrastrar(vistaCarta);
 
-            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(50, 10, 50, 10));
+            HBox.setMargin(vistaCarta, new javafx.geometry.Insets(17.5, 10, 0, 0));
 
             lblComodin.getChildren().add(vistaCarta);
         }
