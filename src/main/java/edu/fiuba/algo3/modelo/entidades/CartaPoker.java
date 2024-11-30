@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.entidades;
 
-import edu.fiuba.algo3.errores.ErrorCartaNula;
-import edu.fiuba.algo3.errores.ErrorPuntajeNulo;
+import edu.fiuba.algo3.modelo.excepciones.CartaNulaError;
+import edu.fiuba.algo3.modelo.excepciones.PuntajeNuloError;
 
 public class CartaPoker implements Comparable<CartaPoker>{
 
@@ -25,7 +25,7 @@ public class CartaPoker implements Comparable<CartaPoker>{
 
     public void modificarPuntaje(Puntaje unPuntaje) {
         if(unPuntaje == null){
-            throw new ErrorPuntajeNulo();
+            throw new PuntajeNuloError();
         }
         this.puntaje = this.puntaje.sumarPuntaje(unPuntaje);
     }
@@ -38,28 +38,28 @@ public class CartaPoker implements Comparable<CartaPoker>{
 
     public boolean esMismoValor(CartaPoker otraCarta) {
         if(otraCarta == null){
-            throw new ErrorCartaNula();
+            throw new CartaNulaError();
         }
         return this.valor == otraCarta.valor;
     }
 
     public boolean esMismoPalo(CartaPoker otraCarta) {
         if(otraCarta == null){
-            throw new ErrorCartaNula();
+            throw new CartaNulaError();
         }
         return this.palo.equals(otraCarta.palo);
     }
 
     public boolean esConsecutiva(CartaPoker otraCarta) {
         if(otraCarta == null){
-            throw new ErrorCartaNula();
+            throw new CartaNulaError();
         }
         return Math.abs(this.valor.valor() - otraCarta.valor.valor()) == 1;
     }
 
     public boolean compararCartaCon(CartaPoker otraCarta) {
         if(otraCarta == null){
-            throw new ErrorCartaNula();
+            throw new CartaNulaError();
         }
         return (this.valor == otraCarta.valor && this.palo.equals(otraCarta.palo));
     }
@@ -90,14 +90,14 @@ public class CartaPoker implements Comparable<CartaPoker>{
 
     public void aplicarComodin(Puntaje unPuntaje) {
         if(unPuntaje == null){
-            throw new ErrorPuntajeNulo();
+            throw new PuntajeNuloError();
         }
         this.puntajeComodin.sumarPuntaje(unPuntaje);
     }
 
     public void aplicarTarot(Puntaje unPuntaje) {
         if(unPuntaje == null){
-            throw new ErrorPuntajeNulo();
+            throw new PuntajeNuloError();
         }
         this.puntaje = unPuntaje;}
 

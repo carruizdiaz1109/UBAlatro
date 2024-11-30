@@ -30,7 +30,6 @@ public class MainController {
     private Label lblObjetivo;
     @FXML
     private Label lblDescartesDisponibles;
-
     @FXML
     private HBox lblTarot;
     @FXML
@@ -58,7 +57,6 @@ public class MainController {
         this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles);
         actualizarMano();
     }
-
 
     public void cargarCartasTarot() {
         List<String> nombresCartasTarot = List.of(
