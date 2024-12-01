@@ -1,14 +1,8 @@
 package edu.fiuba.algo3.modelo.entidades.jugadas;
 
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
-import edu.fiuba.algo3.modelo.entidades.ConjuntoCartas;
-import edu.fiuba.algo3.modelo.entidades.Jugada;
 import edu.fiuba.algo3.modelo.entidades.Puntaje;
-import edu.fiuba.algo3.modelo.entidades.Palo;
-
-import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
 
 public class EscaleraColor extends Escalera {
 

@@ -64,27 +64,6 @@ public abstract class CartaPoker implements Comparable<CartaPoker>{
         return (this.valor == otraCarta.valor && this.palo.equals(otraCarta.palo));
     }
 
-    public ConjuntoCartas obtenerEscalera() {
-        ConjuntoCartas escalera = new ConjuntoCartas();
-        escalera.agregarCarta(this);
-
-        Valor[] valores = Valor.values();
-        int indexActual = this.valor.ordinal(); // Posición actual del valor en el enum
-
-        for (int i = 1; i <= 4; i++) {
-            int nuevoIndex = indexActual + i;
-            if (nuevoIndex >= valores.length) {
-                break; // Si supera el rango de valores, se frena
-            }
-
-            Valor nuevoValor = valores[nuevoIndex];
-            CartaPoker nuevaCarta = CartaFactory.crearCarta(nuevoValor, this.palo);
-            escalera.agregarCarta(nuevaCarta);
-        }
-
-        return escalera;
-    }
-
     public void aplicarComodin(Puntaje unPuntaje) {
         verificarPuntajeNulo(unPuntaje);
         this.puntajeComodin.sumarPuntaje(unPuntaje);
