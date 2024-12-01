@@ -36,10 +36,62 @@
                      <VBox.margin>
                         <Insets bottom="30.0" left="50.0" right="50.0" top="50.0" />
                      </VBox.margin>
+                     <children>
+                        <HBox fx:id="lblComodinTienda1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="196.0" prefWidth="213.0" style="-fx-background-color: #e83812;">
+                           <VBox.margin>
+                              <Insets left="40.0" top="70.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox fx:id="lblTarotTienda1" focusTraversable="true" layoutX="260.0" layoutY="89.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="201.0" prefWidth="222.0" style="-fx-background-color: #e83812;">
+                           <VBox.margin>
+                              <Insets left="510.0" top="-200.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox fx:id="lblTarotTienda2" focusTraversable="true" layoutX="510.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="201.0" prefWidth="222.0" style="-fx-background-color: #e83812;">
+                           <VBox.margin>
+                              <Insets left="750.0" top="-200.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox fx:id="lblCartaTienda1" focusTraversable="true" layoutX="750.0" layoutY="91.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="201.0" prefWidth="222.0" style="-fx-background-color: #e83812;">
+                           <VBox.margin>
+                              <Insets left="1010.0" top="-200.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox fx:id="lblComodinTienda2" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="198.0" prefWidth="222.0" style="-fx-background-color: #e83812;">
+                           <VBox.margin>
+                              <Insets left="270.0" top="-200.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Button fx:id="clickComodinTienda1" mnemonicParsing="false" text="Comprar">
+                           <VBox.margin>
+                              <Insets left="110.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="clickComodinTienda2" layoutX="120.0" layoutY="303.0" mnemonicParsing="false" text="Comprar">
+                           <VBox.margin>
+                              <Insets left="360.0" top="-25.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="clickTarotTienda1" layoutX="370.0" layoutY="300.0" mnemonicParsing="false" text="Comprar">
+                           <VBox.margin>
+                              <Insets left="570.0" top="-25.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="clickTarotTienda2" layoutX="580.0" layoutY="300.0" mnemonicParsing="false" text="Comprar">
+                           <VBox.margin>
+                              <Insets left="840.0" top="-25.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="CartaTienda1" layoutX="850.0" layoutY="300.0" mnemonicParsing="false" text="Comprar">
+                           <VBox.margin>
+                              <Insets left="1100.0" top="-25.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
                   </VBox>
                   <VBox prefHeight="165.0" prefWidth="1398.0">
                      <children>
-                        <Button fx:id="btnContinuar" mnemonicParsing="false" prefHeight="60.0" prefWidth="1406.0" style="-fx-background-color: #6FCAA5; -fx-border-radius: 20; -fx-background-radius: 20;" text="Continuar" textAlignment="CENTER" textFill="#383582" onAction="#clickContinuar">
+                        <Button fx:id="btnContinuar" mnemonicParsing="false" onAction="#clickContinuar" prefHeight="60.0" prefWidth="1406.0" style="-fx-background-color: #6FCAA5; -fx-border-radius: 20; -fx-background-radius: 20;" text="Continuar" textAlignment="CENTER" textFill="#383582">
                            <font>
                               <Font name="Consolas Bold" size="22.0" />
                            </font>
