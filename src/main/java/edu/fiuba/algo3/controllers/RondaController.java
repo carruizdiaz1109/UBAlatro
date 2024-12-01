@@ -28,18 +28,19 @@ public class RondaController {
     @FXML
     private HBox lblMano;
     @FXML
-    private Label lblPuntajeAcumulado;
+    public Label lblPuntajeAcumulado;
     @FXML
-    private Label lblJugadasDisponibles;
+    public Label lblJugadasDisponibles;
     @FXML
-    private Label lblObjetivo;
+    public Label lblObjetivo;
     @FXML
-    private Label lblDescartesDisponibles;
+    public Label lblDescartesDisponibles;
 
     @FXML
     private HBox lblTarot;
     @FXML
     private HBox lblComodin;
+
     @FXML
     private Label lblResultado;
 
@@ -48,10 +49,9 @@ public class RondaController {
     private final Ronda rondaActual;
     private RondaVisual rondaVisual;
     private Tienda tienda;
-    private final Balatro juego;
+    private BalatroController balatroController;
 
-    public RondaController(Balatro balatro) {
-        this.juego = balatro;
+    public RondaController() {
         this.cartasSeleccionadas = new ArrayList<>();
         try {
             String json = "{" +
@@ -83,18 +83,12 @@ public class RondaController {
         this.rondaActual = new Ronda(1, 2000, 4, 5, tienda);
     }
 
-    // Método para inicializar al jugador desde el controlador principal
+    public void setBalatroController(BalatroController balatroController) {
+        this.balatroController = balatroController;
+    }
+
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
-        Puntaje puntajeComodin = new Puntaje(20,3);
-        Comodin unComodin = new EfectoPuntaje(puntajeComodin,"Gros Michel", "Se suma 20 al puntaje y multiplciador 3", new NoAleatorio());
-        this.jugador.aniadirComodin(unComodin);
-
-        Puntaje puntajeTarot = new Puntaje(100,1);
-        Tarot unTarot = new TarotCarta("El Tonto","+100 de puntaje", puntajeTarot);
-        this.jugador.aniadirTarots(unTarot);
-
-        actualizarMano();
         ComodinController comodinController = new ComodinController(this.jugador, lblComodin);
         comodinController.visualizarComodines();
 
@@ -102,10 +96,11 @@ public class RondaController {
         tarotController.visualizarTarots();
     }
 
-    public void iniciarRonda() {
-        this.jugador.iniciarRonda(this.rondaActual);
-        this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles);
+    public void setRondaVisual(RondaVisual rondaVisual) {
+        this.rondaVisual = rondaVisual;
+    }
 
+    public void iniciarRonda() {
         actualizarMano();
     }
 
@@ -245,10 +240,10 @@ public class RondaController {
 
     @FXML
     public void clickJugar() {
-        if (rondaActual.sePuedeSeguirJugando()) {
+        if (this.rondaActual.sePuedeSeguirJugando()) {
             manejarAccionCartaSeleccionada(() -> {
-                jugador.jugar();
-                Ronda.RondaEstado estado = rondaActual.getEstado();
+                this.jugador.jugar();
+                Ronda.RondaEstado estado = this.rondaActual.getEstado();
 
                 if (estado == Ronda.RondaEstado.GANADA) {
                     mostrarResultado(true);
@@ -342,4 +337,6 @@ public class RondaController {
             e.printStackTrace();
         }
     }
+
+
 }

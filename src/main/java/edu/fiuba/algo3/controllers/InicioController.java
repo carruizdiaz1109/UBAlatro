@@ -3,6 +3,7 @@ package edu.fiuba.algo3.controllers;
 import edu.fiuba.algo3.modelo.entidades.Balatro;
 import edu.fiuba.algo3.modelo.entidades.Jugador;
 import edu.fiuba.algo3.modelo.entidades.Mazo;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,7 +29,7 @@ public class InicioController {
     private MediaView backgroundMediaView;
 
     private Stage stage;
-    private String nombreJugador;
+    private BalatroController balatroController;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -37,30 +38,35 @@ public class InicioController {
     @FXML
     public void initialize() {
         String videoPath = Objects.requireNonNull(getClass().getResource("/videos/background.mp4")).toExternalForm();
-//        Media media = new Media(videoPath);
-//        MediaPlayer mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//        mediaPlayer.setAutoPlay(true);
-//        backgroundMediaView.setMediaPlayer(mediaPlayer);
-        jugarButton.setOnAction(event -> iniciarJuego());
+    }
+
+    @FXML
+    public void onContinuarClick(ActionEvent event) {
+        iniciarJuego();
     }
 
     @FXML
     private void iniciarJuego() {
         String nombreJugador = nombreTextField.getText();
         if (nombreJugador == null || nombreJugador.trim().isEmpty()) {
-            Alert alerta = new Alert(Alert.AlertType.WARNING);                //el cartelito esta medio feaso pero después lo cambiamos
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
             alerta.setTitle("Nombre inválido");
             alerta.setHeaderText("Debe ingresar un nombre para jugar.");
             alerta.showAndWait();
             return;
         }
-        this.nombreJugador = nombreJugador;
+        Balatro balatro = new Balatro(nombreJugador);
+        balatroController.setBalatro(balatro);
+        balatroController.setStage(stage);
+        avanzarRonda();
     }
 
-    public String getNombreJugador(){
-        return this.nombreJugador;
+    public void setBalatroController(BalatroController balatroController) {
+        this.balatroController = balatroController;
     }
 
+    public void avanzarRonda() {
+        this.balatroController.avanzarRonda();
+    }
 }
 

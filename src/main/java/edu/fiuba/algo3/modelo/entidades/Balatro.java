@@ -16,12 +16,14 @@ public class Balatro {
     private final List<Ronda> rondas;
     private final Mazo mazo;
     private final Jugador jugador;
+    private int indiceRondaActual;
 
     public Balatro(String nombreJugador) {
         this.rondas = new ArrayList<Ronda>();
         this.mazo = new Mazo();
         cargarRondasDesdeJSON();
         this.jugador = new Jugador(nombreJugador, this.mazo);
+        this.indiceRondaActual = 0;
     }
 
     public void cargarRondasDesdeJSON() {
@@ -49,11 +51,27 @@ public class Balatro {
         }
     }
 
-    public void iniciarJuego() {
-        for (Ronda ronda : this.rondas) {
-            if (ronda.rondaSuperada()) {
-                this.jugador.iniciarRonda(ronda);
-            }
+    public void avanzarRonda() {
+        if (indiceRondaActual < this.rondas.size() - 1) {
+            this.indiceRondaActual ++;
+        } else {
+            System.out.println("No quedan rondas para avanzar");
         }
+    }
+
+    public Ronda getRondaActual() {
+        if (indiceRondaActual < this.rondas.size()) {
+            return this.rondas.get(this.indiceRondaActual);
+        }
+        return null;
+    }
+
+    public void jugarRonda() {
+        Ronda rondaActual = getRondaActual();
+        this.jugador.iniciarRonda(rondaActual);
+    }
+
+    public Jugador getJugador() {
+        return this.jugador;
     }
 }

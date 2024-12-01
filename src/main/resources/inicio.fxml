@@ -53,17 +53,13 @@
                   </TextField>
                </children>
             </VBox>
-            <VBox prefHeight="260.0" prefWidth="1702.0">
+            <VBox >
                <children>
-                  <Button fx:id="jugarButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="302.0" style="-fx-background-color: #6FCAA6; -fx-border-radius: 10; -fx-background-radius: 10;" text="Jugar" textFill="#383582">
-                     <VBox.margin>
-                        <Insets left="700.0" right="700.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Consolas" size="21.0" />
-                     </font>
-                  </Button>
+                  <Button fx:id="jugarButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="302.0" style="-fx-background-color: #6FCAA6; -fx-border-radius: 10; -fx-background-radius: 10;" text="Jugar" textFill="#383582" onAction="#onContinuarClick"/>
                </children>
+               <VBox.margin>
+                  <Insets left="700.0" right="700.0"/>
+               </VBox.margin>
             </VBox>
          </children>
       </VBox>

@@ -121,4 +121,8 @@ public class Ronda {
     public IntegerProperty cantidadDescartesProperty() {
         return cantidadDescartes;
     }
+
+    public Tienda getTienda(){
+        return  this.tienda;
+    }
 }

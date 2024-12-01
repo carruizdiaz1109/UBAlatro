@@ -1,64 +1,68 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.modelo.entidades.Jugador;
+import edu.fiuba.algo3.modelo.entidades.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.Tarot;
+import edu.fiuba.algo3.modelo.entidades.Tienda;
 import edu.fiuba.algo3.modelo.entidades.comodines.Comodin;
+import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.ComodinVisual;
+import edu.fiuba.algo3.vistas.TarotVisual;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.fxml.FXMLLoader;
 
-import java.io.IOException;
+import javafx.scene.layout.HBox;
+
 import java.util.ArrayList;
 
 public class TiendaController {
-    private Jugador jugador;
-    private Stage stage;
+    private Tienda tienda;
+    private BalatroController balatroController;
 
     @FXML
     private Button btnContinuar;
 
     @FXML
-    private StackPane comodines;
+    private HBox comodines;
 
+    public TiendaController() {}
 
-    public void setJugador(Jugador jugador) {
-        this.jugador = jugador;
+    public void setTienda(Tienda tienda) {
+        this.tienda = tienda;
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void visualizarComodines() {
-        this.comodines.getChildren().clear();
-        ArrayList<Comodin> comodines = this.jugador.obtenerComodines();
-
-        for (Comodin comodin : comodines) {
-            String imagePath = "/imagenes/comodines/" + comodin.getNombre() + ".png";
-            ComodinVisual comodinVisual = new ComodinVisual(comodin, imagePath, 100, 150);
-
-            this.comodines.getChildren().add(comodinVisual);
-        }
+    public void setBalatroController(BalatroController balatroController) {
+        this.balatroController = balatroController;
     }
 
     @FXML
-    public void clickContinuar() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ronda.fxml"));
-            Parent root = loader.load();
-            RondaController rondaController = loader.getController();
-            rondaController.setJugador(jugador);
-            rondaController.iniciarRonda();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("UBAlatro - Ronda");
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void onContinuarClick() {
+        this.balatroController.mostrarRonda();
+    }
+
+    public void visualizarComprables() {
+        this.comodines.getChildren().clear();
+        ArrayList<Comodin> listaComodines = this.tienda.obtenerComodines();
+        ArrayList<Tarot> listTarot = this.tienda.obtenerTarots();
+        ArrayList<CartaPoker> listCartasPoker = this.tienda.obtenerCartas();
+
+        for (Comodin comodin : listaComodines) {
+            String imagePath = "/imagenes/comodines/" + comodin.getNombre() + ".png";
+            ComodinVisual comodinVisual = new ComodinVisual(comodin, imagePath, 100, 150);
+            this.comodines.getChildren().add(comodinVisual);
+        }
+        for (Tarot tarot : listTarot) {
+            String imagePath = "/imagenes/tarot/" + tarot.getNombre() + ".png"; // Asumimos que las cartas de tarot tienen un nombre
+            TarotVisual tarotVisual = new TarotVisual(tarot, imagePath, 100, 150); // Tamaño fijo o dinámico
+            this.comodines.getChildren().add(tarotVisual);
+        }
+        for (CartaPoker carta: listCartasPoker) {
+            CartaVisual cartaVisual = new CartaVisual( carta,
+                    "/imagenes/cartas/" + carta.getNombreArchivo(),
+                    120,
+                    180
+            );
+            this.comodines.getChildren().add(cartaVisual);
+
         }
     }
 }
-
