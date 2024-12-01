@@ -16,17 +16,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.swing.text.LabelView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MainController {
+public class RondaController {
     @FXML
     private HBox lblMano;
     @FXML
@@ -50,8 +48,10 @@ public class MainController {
     private final Ronda rondaActual;
     private RondaVisual rondaVisual;
     private Tienda tienda;
+    private final Balatro juego;
 
-    public MainController() {
+    public RondaController(Balatro balatro) {
+        this.juego = balatro;
         this.cartasSeleccionadas = new ArrayList<>();
         try {
             String json = "{" +

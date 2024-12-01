@@ -30,7 +30,7 @@ public class TiendaController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ronda.fxml"));
             Parent root = loader.load();
-            MainController rondaController = loader.getController();
+            RondaController rondaController = loader.getController();
             rondaController.setJugador(jugador);
             rondaController.iniciarRonda();
             Scene scene = new Scene(root);

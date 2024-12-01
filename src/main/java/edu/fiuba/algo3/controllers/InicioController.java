@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.controllers;
 
+import edu.fiuba.algo3.modelo.entidades.Balatro;
 import edu.fiuba.algo3.modelo.entidades.Jugador;
 import edu.fiuba.algo3.modelo.entidades.Mazo;
 import javafx.fxml.FXML;
@@ -27,6 +28,7 @@ public class InicioController {
     private MediaView backgroundMediaView;
 
     private Stage stage;
+    private String nombreJugador;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -53,19 +55,12 @@ public class InicioController {
             alerta.showAndWait();
             return;
         }
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tienda.fxml"));
-            Parent root = loader.load();
-            TiendaController tiendaController = loader.getController();
-            tiendaController.setJugador(new Jugador(nombreJugador, new Mazo()));
-            tiendaController.setStage(stage);
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("UBAlatro - Tienda");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.nombreJugador = nombreJugador;
     }
+
+    public String getNombreJugador(){
+        return this.nombreJugador;
+    }
+
 }
 

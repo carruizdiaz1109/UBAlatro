@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1700.0" style="-fx-background-image: url('background.png'); -fx-background-size: cover;" stylesheets="styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fiuba.algo3.controllers.MainController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1700.0" style="-fx-background-image: url('background.png'); -fx-background-size: cover;" stylesheets="styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fiuba.algo3.controllers.RondaController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="1000.0" prefWidth="342.0" style="-fx-background-image: url('panel.png'); -fx-border-color: transparent #3CAC5A transparent #3CAC5A; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, #3CAC5A, 40, 0.8, 0, 0);">
          <HBox.margin>
