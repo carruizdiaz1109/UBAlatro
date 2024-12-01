@@ -70,7 +70,7 @@ public class MainController {
     public void initialize() {
         // Configurar la imagen del mazo
         //String imagePath = "/imagenes/tarot/Muerte.png";
-        String imagePath = getClass().getResource("/imagenes/tarot/Muerte.png").toExternalForm();
+        String imagePath = getClass().getResource("/imagenes/cartas/dorso.png").toExternalForm();
         imagenMazo = new ImageView(imagePath); // Ruta relativa a los recursos
         imagenMazo.setFitWidth(120);  // Ajustar ancho
         imagenMazo.setFitHeight(180); // Ajustar altura
