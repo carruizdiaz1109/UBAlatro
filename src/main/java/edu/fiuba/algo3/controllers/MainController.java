@@ -10,8 +10,10 @@ import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -36,6 +38,16 @@ public class MainController {
     @FXML
     private HBox lblComodin;
 
+    @FXML
+    private HBox lblMazo;
+
+    @FXML
+    private Label lblCartasMazoDisponibles;
+    private int cartasDisponibles = 44;
+    private final int TOTAL_CARTAS = 52;
+    // Nodo para mostrar la imagen del mazo
+    private ImageView imagenMazo;
+
     private Jugador jugador;
     private final ArrayList<CartaPoker> cartasSeleccionadas;
     private final Ronda rondaActual;
@@ -44,6 +56,40 @@ public class MainController {
     private Pane mainPane;
 
 
+    // Metodo para actualizar el texto del Label
+    private void actualizarLabelCartasDisponibles() {
+        lblCartasMazoDisponibles.setText(cartasDisponibles + "/" + TOTAL_CARTAS);
+        if (cartasDisponibles <= 0) {
+            imagenMazo.setVisible(false); // Ocultar la imagen
+        } else {
+            imagenMazo.setVisible(true); // Mostrar la imagen
+        }
+    }
+
+    @FXML
+    public void initialize() {
+        // Configurar la imagen del mazo
+        //String imagePath = "/imagenes/tarot/Muerte.png";
+        String imagePath = getClass().getResource("/imagenes/tarot/Muerte.png").toExternalForm();
+        imagenMazo = new ImageView(imagePath); // Ruta relativa a los recursos
+        imagenMazo.setFitWidth(120);  // Ajustar ancho
+        imagenMazo.setFitHeight(180); // Ajustar altura
+        imagenMazo.setPreserveRatio(true); // Mantener proporciones
+
+        //parte superior, parteDerecha, ,parteIzquierda
+        //HBox.setMargin(imagenMazo, new Insets(30, 60, 10, 10));
+        //HBox.setMargin(imagenMazo, new Insets(10));
+
+        // Agregar la imagen al HBox
+        lblMazo.getChildren().add(imagenMazo);
+
+        // Inicializar el Label de cartas disponibles
+        actualizarLabelCartasDisponibles();
+    }
+
+
+
+    //-----------------------
     public MainController() {
         this.cartasSeleccionadas = new ArrayList<>();
         try {
@@ -76,7 +122,7 @@ public class MainController {
         this.rondaActual = new Ronda(1, 2000, 4, 5, tienda);
     }
 
-    // Método para inicializar al jugador desde el controlador principal
+    // Metodo para inicializar al jugador desde el controlador principal
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
         Puntaje puntajeComodin = new Puntaje(20,3);
@@ -256,6 +302,14 @@ public class MainController {
 
         Runnable onComplete = () -> {
             System.out.println("Cartas a jugar:" + this.cartasSeleccionadas.size());
+
+            // Reducir el número de cartas disponibles en el mazo
+            cartasDisponibles -= this.cartasSeleccionadas.size();
+            // Asegurarnos de que no haya valores negativos
+            cartasDisponibles = Math.max(cartasDisponibles, 0);
+            // Actualizar el Label
+            actualizarLabelCartasDisponibles();
+
             jugador.seleccionarCarta(cartasSeleccionadas);
             accionEspecifica.run();
             this.cartasSeleccionadas.clear();

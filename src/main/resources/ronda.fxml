@@ -278,100 +278,100 @@
       </VBox>
       <VBox alignment="TOP_CENTER" prefHeight="1080.0" prefWidth="1465.0">
          <HBox.margin>
-            <Insets bottom="30.0" left="40.0" right="30.0" top="30.0"/>
+            <Insets bottom="30.0" left="40.0" right="30.0" top="30.0" />
          </HBox.margin>
          <HBox alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1306.0">
             <StackPane alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1044.0">
-               <HBox opacity="0.5" prefHeight="260.0" prefWidth="1044.0"
-                     style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
+               <HBox opacity="0.5" prefHeight="260.0" prefWidth="1044.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
                   <StackPane.margin>
-                     <Insets right="15.0"/>
+                     <Insets right="15.0" />
                   </StackPane.margin>
                </HBox>
                <HBox fx:id="lblComodin" alignment="TOP_CENTER" prefHeight="142.0" prefWidth="947.0">
                   <StackPane.margin>
-                     <Insets right="15.0"/>
+                     <Insets right="15.0" />
                   </StackPane.margin>
                </HBox>
             </StackPane>
             <StackPane alignment="TOP_CENTER" prefHeight="260.0" prefWidth="425.0">
-               <HBox opacity="0.5" prefHeight="260.0" prefWidth="425.0"
-                     style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
+               <HBox opacity="0.5" prefHeight="260.0" prefWidth="425.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
                   <StackPane.margin>
-                     <Insets right="15.0"/>
+                     <Insets right="15.0" />
                   </StackPane.margin>
                </HBox>
                <HBox fx:id="lblTarot" alignment="TOP_CENTER" prefHeight="260.0" prefWidth="425.0">
                   <StackPane.margin>
-                     <Insets right="15.0"/>
+                     <Insets right="15.0" />
                   </StackPane.margin>
                </HBox>
             </StackPane>
          </HBox>
-         <VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="1306.0"/>
+         <VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="1306.0" />
          <HBox alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1500.0">
             <StackPane alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1187.0">
-               <HBox opacity="0.5" prefHeight="260.0" prefWidth="1009.0"
-                     style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
+               <HBox opacity="0.5" prefHeight="260.0" prefWidth="1009.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
                   <StackPane.margin>
-                     <Insets right="15.0"/>
+                     <Insets right="15.0" />
                   </StackPane.margin>
-               </HBox>
-               <HBox fx:id="lblMano" alignment="CENTER" prefHeight="260.0" prefWidth="1004.0" spacing="10">
-                  <StackPane.margin>
-                     <Insets right="15.0"/>
-                  </StackPane.margin>
+                  <children>
+                     <HBox fx:id="lblMano" alignment="CENTER" prefHeight="260.0" prefWidth="1004.0" spacing="10" />
+                  </children>
                </HBox>
             </StackPane>
-            <HBox alignment="TOP_CENTER" opacity="0.5" prefHeight="260.0" prefWidth="218.0"
-                  style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;"/>
+            <HBox fx:id="lblMazo" alignment="TOP_CENTER" opacity="0.5" prefHeight="260.0" prefWidth="218.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
+               <children>
+                  <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="63.0">
+                     <children>
+                        <Label fx:id="lblCartasMazoDisponibles" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="CartasMazoDisponibles">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children></HBox>
          </HBox>
          <HBox alignment="TOP_CENTER" prefHeight="81.0" prefWidth="1407.0">
             <children>
                <HBox alignment="TOP_CENTER" prefHeight="76.0" prefWidth="332.0">
                   <children>
-                     <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickJugar"
-                             prefHeight="112.0" prefWidth="360.0"
-                             style="-fx-background-color: #6FCAA5; -fx-border-radius: 20; -fx-background-radius: 20;"
-                             text="jugar" textAlignment="CENTER" textFill="#383582">
+                     <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickJugar" prefHeight="112.0" prefWidth="360.0" style="-fx-background-color: #6FCAA5; -fx-border-radius: 20; -fx-background-radius: 20;" text="jugar" textAlignment="CENTER" textFill="#383582">
                         <font>
-                           <Font name="Consolas Bold" size="24.0"/>
+                           <Font name="Consolas Bold" size="24.0" />
                         </font>
                         <cursor>
-                           <Cursor fx:constant="HAND"/>
+                           <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
                   </children>
                   <opaqueInsets>
-                     <Insets/>
+                     <Insets />
                   </opaqueInsets>
                   <HBox.margin>
-                     <Insets/>
+                     <Insets />
                   </HBox.margin>
                </HBox>
                <HBox prefHeight="76.0" prefWidth="332.0">
                   <children>
-                     <Button mnemonicParsing="false" onAction="#clickDescartar" prefHeight="302.0" prefWidth="676.0"
-                             style="-fx-background-color: #FFA694; -fx-border-radius: 20; -fx-background-radius: 20;"
-                             text="descartar" textFill="#383582">
+                     <Button mnemonicParsing="false" onAction="#clickDescartar" prefHeight="302.0" prefWidth="676.0" style="-fx-background-color: #FFA694; -fx-border-radius: 20; -fx-background-radius: 20;" text="descartar" textFill="#383582">
                         <font>
-                           <Font name="Consolas Bold" size="24.0"/>
+                           <Font name="Consolas Bold" size="24.0" />
                         </font>
                         <HBox.margin>
-                           <Insets/>
+                           <Insets />
                         </HBox.margin>
                         <cursor>
-                           <Cursor fx:constant="HAND"/>
+                           <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
                   </children>
                   <HBox.margin>
-                     <Insets left="30.0"/>
+                     <Insets left="30.0" />
                   </HBox.margin>
                </HBox>
             </children>
             <VBox.margin>
-               <Insets top="30.0"/>
+               <Insets top="30.0" />
             </VBox.margin>
          </HBox>
       </VBox>
