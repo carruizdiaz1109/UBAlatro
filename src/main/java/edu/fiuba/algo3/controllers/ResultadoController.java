@@ -18,8 +18,8 @@ public class ResultadoController {
 
     @FXML
     public void initialize() {
-        btnVolverAJugar.setOnAction(event -> volverAJugar());
-        btnSalir.setOnAction(event -> salir());
+        this.btnVolverAJugar.setOnAction(event -> volverAJugar());
+        this.btnSalir.setOnAction(event -> salir());
     }
 
     public void mostrarMensaje(String mensaje) {
@@ -28,7 +28,6 @@ public class ResultadoController {
 
     private void volverAJugar() {
         System.out.println("Volver a jugar presionado");
-        // Aquí puedes reiniciar el juego o cargar otra escena
     }
 
     private void salir() {

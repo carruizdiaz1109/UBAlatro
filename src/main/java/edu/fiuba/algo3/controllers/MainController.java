@@ -325,9 +325,9 @@ public class MainController {
     private void mostrarResultado(boolean gano) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultado.fxml"));
-            Parent root = loader.load();
-
+            Parent root = loader.load(); // Cargar el archivo FXML
             ResultadoController resultadoController = loader.getController();
+
             if (gano) {
                 resultadoController.mostrarMensaje("Ganaste");
             } else {

@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fiuba.algo3.controllers.MainController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fiuba.algo3.controllers.ResultadoController">
    <children>
       <VBox prefHeight="251.0" prefWidth="1700.0" />
       <VBox prefHeight="142.0" prefWidth="1700.0">
@@ -24,7 +24,7 @@
       </VBox>
       <VBox prefHeight="222.0" prefWidth="1700.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Volver a jugar" textFill="#383582" style="-fx-background-color: #6FCAA5; -fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER">
+            <Button fx:id="btnVolverAJugar" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Volver a jugar" textFill="#383582" style="-fx-background-color: #6FCAA5; -fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER">
                <VBox.margin>
                   <Insets left="600.0" right="600.0" top="50.0" />
                </VBox.margin>
@@ -32,7 +32,7 @@
                   <Font name="Consolas Bold" size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Salir" textFill="#383582" style="-fx-background-color: #FFA6A7; -fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER">
+            <Button fx:id="btnSalir" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Salir" textFill="#383582" style="-fx-background-color: #FFA6A7; -fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER">
                <VBox.margin>
                   <Insets left="600.0" right="600.0" top="50.0" />
                </VBox.margin>
