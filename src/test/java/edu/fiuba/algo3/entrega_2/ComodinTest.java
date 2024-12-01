@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.comodines.*;
 import edu.fiuba.algo3.modelo.entidades.jugadas.CartaAlta;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Escalera;

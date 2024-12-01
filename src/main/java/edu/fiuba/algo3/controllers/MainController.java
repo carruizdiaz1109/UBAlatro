@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;

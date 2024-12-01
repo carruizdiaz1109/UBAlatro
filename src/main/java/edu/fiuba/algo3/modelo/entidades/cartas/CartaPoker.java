@@ -1,20 +1,37 @@
-package edu.fiuba.algo3.modelo.entidades;
+package edu.fiuba.algo3.modelo.entidades.cartas;
 
+import edu.fiuba.algo3.modelo.entidades.ConjuntoCartas;
+import edu.fiuba.algo3.modelo.entidades.Palo;
+import edu.fiuba.algo3.modelo.entidades.Puntaje;
+import edu.fiuba.algo3.modelo.entidades.Valor;
 import edu.fiuba.algo3.modelo.excepciones.CartaNulaError;
 import edu.fiuba.algo3.modelo.excepciones.PuntajeNuloError;
 
-public class CartaPoker implements Comparable<CartaPoker>{
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-    private final Valor valor;
-    private final Palo palo;
-    private Puntaje puntaje;
-    private final Puntaje puntajeComodin;
+public abstract class CartaPoker {
+
+    protected final Valor valor;
+    protected final Palo palo;
+    protected Puntaje puntaje;
+    protected final Puntaje puntajeComodin;
 
     public CartaPoker(Valor valor, Palo palo){
         this.valor = valor;
         this.palo = palo;
-        this.puntaje = new Puntaje( this.valor.valor(), 1);
+        this.puntaje = obtenerPuntaje();
         this.puntajeComodin = new Puntaje(0,1);
+    }
+
+    public abstract Puntaje obtenerPuntaje();
+
+    public List<Integer> obtenerValoresPosibles() {
+        if (this.valor == Valor.AS) {
+            return Arrays.asList(1, 14);
+        }
+        return Collections.singletonList(this.valor.valor());
     }
 
     public CartaPoker comprar() {
@@ -51,9 +68,6 @@ public class CartaPoker implements Comparable<CartaPoker>{
         verificarCartaNula(otraCarta);
         return (this.valor == otraCarta.valor && this.palo.equals(otraCarta.palo));
     }
-
-    @Override
-    public int compareTo(CartaPoker otraCarta) { return Integer.compare(this.valor.valor(), otraCarta.valor.valor()); }
 
     public ConjuntoCartas obtenerEscalera() {
         ConjuntoCartas escalera = new ConjuntoCartas();

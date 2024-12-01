@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.entidades.tarots;
 
-import edu.fiuba.algo3.modelo.entidades.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.Puntaje;
 import edu.fiuba.algo3.modelo.entidades.Tarot;
 

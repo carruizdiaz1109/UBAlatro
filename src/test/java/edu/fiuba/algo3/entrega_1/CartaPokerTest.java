@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.excepciones.CartaNulaError;
 import edu.fiuba.algo3.modelo.excepciones.PuntajeNuloError;
 import edu.fiuba.algo3.modelo.entidades.tarots.EfectoCarta;

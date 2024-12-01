@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.comodines.*;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Escalera;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class IntegracionTest2 {
     @Test

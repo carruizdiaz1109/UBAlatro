@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.entidades.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.Jugada;
 import edu.fiuba.algo3.modelo.entidades.Valor;
 import edu.fiuba.algo3.modelo.entidades.Palo;
@@ -60,7 +60,7 @@ public class JugadaTest {
         //Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 new CartaPoker(Valor.TRES, Palo.PICAS),
-                    new CartaPoker(Valor.TRES, Palo.TREBOLES),
+                new CartaPoker(Valor.TRES, Palo.TREBOLES),
                 new CartaPoker(Valor.CINCO, Palo.DIAMANTES),
                 new CartaPoker(Valor.CINCO, Palo.DIAMANTES),
                 new CartaPoker(Valor.DOS, Palo.PICAS)

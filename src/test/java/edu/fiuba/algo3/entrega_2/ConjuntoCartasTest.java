@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.entidades.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.ConjuntoCartas;
 import edu.fiuba.algo3.modelo.entidades.Palo;
 import edu.fiuba.algo3.modelo.entidades.Valor;

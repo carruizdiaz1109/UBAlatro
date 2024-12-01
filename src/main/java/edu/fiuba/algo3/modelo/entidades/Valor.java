@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.entidades;
 import java.util.Arrays;
 
 public enum Valor {
+    AS(1),
     DOS(2),
     TRES(3),
     CUATRO(4),
@@ -14,8 +15,7 @@ public enum Valor {
     DIEZ(10),
     JOTA(11),
     REINA(12),
-    REY(13),
-    AS(14);
+    REY(13);
 
     private final int valor;
 
