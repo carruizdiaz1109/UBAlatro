@@ -4,9 +4,9 @@ import edu.fiuba.algo3.modelo.entidades.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.Puntaje;
 import edu.fiuba.algo3.modelo.entidades.Tarot;
 
-public class EfectoCarta extends Tarot {
+public class TarotCarta extends Tarot {
 
-    public EfectoCarta(String nombre, String descripcion, Puntaje efecto) {
+    public TarotCarta(String nombre, String descripcion, Puntaje efecto) {
         super(nombre, descripcion, efecto, "carta", "cualquiera");
     }
 

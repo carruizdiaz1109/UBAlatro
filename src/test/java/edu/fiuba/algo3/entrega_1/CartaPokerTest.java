@@ -2,7 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.excepciones.CartaNulaError;
 import edu.fiuba.algo3.modelo.excepciones.PuntajeNuloError;
-import edu.fiuba.algo3.modelo.entidades.tarots.EfectoCarta;
+import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
 import edu.fiuba.algo3.modelo.entidades.*;
 import org.junit.jupiter.api.Test;
 
@@ -86,7 +86,7 @@ public class CartaPokerTest {
         Puntaje puntajeEsperado = new Puntaje(3,1);
 
         CartaPoker carta = new CartaPoker(Valor.CUATRO, Palo.CORAZONES);
-        Tarot unTarot = new EfectoCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(3, 1));
+        Tarot unTarot = new TarotCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(3, 1));
 
         unTarot.aplicar(carta);
 

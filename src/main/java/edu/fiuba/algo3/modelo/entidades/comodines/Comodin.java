@@ -9,22 +9,30 @@ public abstract class Comodin implements Aleatoriedad {
     protected String nombre;
     protected String descripcion;
     protected Puntaje puntaje;
-    private Aleatoriedad aleatoriedad;
+    private Aleatoriedad aleatoreidad;
 
-    public Comodin(Puntaje puntaje, String nombre, String descripcion, Aleatoriedad unaAleatoriedad) {
+    public Comodin(Puntaje puntaje, String nombre, String descripcion, Aleatoriedad unaAleatoreidad) {
         this.puntaje = puntaje;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.aleatoriedad = unaAleatoriedad;
+        this.aleatoreidad = unaAleatoreidad;
     }
 
     public boolean seAplica() {
-        return this.aleatoriedad.seAplica();
+        return this.aleatoreidad.seAplica();
     }
 
-    public void setAleatoreidad(Aleatoriedad nuevaAleatoriedad) {
-        this.aleatoriedad = nuevaAleatoriedad;
+    public void setAleatoreidad(Aleatoriedad nuevaAleatoreidad) {
+        this.aleatoreidad = nuevaAleatoreidad;
     }
 
     public abstract void aplicar(Jugada jugada);
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
 }

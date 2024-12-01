@@ -1,150 +1,75 @@
 package edu.fiuba.algo3.modelo.entidades;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fiuba.algo3.modelo.entidades.comodines.*;
+import edu.fiuba.algo3.modelo.entidades.comodines.EfectoJugada;
 import edu.fiuba.algo3.modelo.entidades.jugadas.*;
-import edu.fiuba.algo3.modelo.entidades.tarots.EfectoCarta;
-import edu.fiuba.algo3.modelo.entidades.tarots.EfectoJugada;
+import edu.fiuba.algo3.modelo.entidades.tarots.*;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Tienda {
-    private final List<CartaPoker> cartasAComprar;
-    private final List<Tarot> tarotsAComprar;
-    private final List<Comodin> comodinesAComprar;
+    private final List<CartaPoker> cartasALaVenta;
+    private final List<Tarot> tarotsALaVenta;
+    private final List<Comodin> comodinesALaVenta;
 
-    public Tienda () {
-        this.cartasAComprar = new ArrayList<CartaPoker>();
-        this.tarotsAComprar = new ArrayList<Tarot>();
-        this.comodinesAComprar = new ArrayList<Comodin>();
-        inicializarComodines();
-        inicializarTarots();
+
+    public Tienda (JsonNode tiendaNode) {
+        this.cartasALaVenta = new ArrayList<CartaPoker>();
+        this.tarotsALaVenta = new ArrayList<Tarot>();
+        this.comodinesALaVenta = new ArrayList<Comodin>();
+
+        inicializarComodines(tiendaNode);
+        inicializarTarots(tiendaNode);
+        inicializarCartas(tiendaNode);
     }
 
-    private void inicializarComodines() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = getClass().getResourceAsStream("/json/Comodines.json")) {
-            if (inputStream == null) {
-                System.out.println("Recurso no encontrado: json/Comodines.json");
-            } else {
-                System.out.println("Recurso encontrado correctamente.");
-            }
-            JsonNode rootNode = objectMapper.readTree(inputStream);
-            JsonNode alPuntajeNode = rootNode.get("Al Puntaje");
-            JsonNode comodinesPuntajeNode = alPuntajeNode.get("comodines");
+    private void inicializarComodines(JsonNode tiendaNode) {
+        JsonNode comodinesNode = tiendaNode.path("comodines");
 
-            for (JsonNode comodinPuntajeNode : comodinesPuntajeNode) {
-                Comodin efectoPuntaje = inicializarComodin(comodinPuntajeNode, EfectoPuntaje.class);
-                if (efectoPuntaje != null) {
-                    this.comodinesAComprar.add(efectoPuntaje);
-                }
-            }
-
-            JsonNode aJugadaNode = rootNode.get("Bonus por Mano Jugada");
-            JsonNode comodinesaJugadaNode = aJugadaNode.get("comodines");
-
-            for (JsonNode comodinJugadaNode : comodinesaJugadaNode) {
-                Comodin efectoJugada = inicializarComodin(comodinJugadaNode, edu.fiuba.algo3.modelo.entidades.comodines.EfectoJugada.class);
-                if (efectoJugada != null) {
-                    this.comodinesAComprar.add(efectoJugada);
-                }
-            }
-
-            JsonNode alDescarteNode = rootNode.get("Bonus por Descarte");
-            JsonNode comodinesDescarteNode = alDescarteNode.get("comodines");
-
-            for (JsonNode comodinDescarte : comodinesDescarteNode) {
-                Comodin efectoDescarte = inicializarComodin(comodinDescarte, edu.fiuba.algo3.modelo.entidades.comodines.EfectoJugada.class);
-                if (efectoDescarte != null) {
-                    this.comodinesAComprar.add(efectoDescarte);
-                }
-            }
-
-            JsonNode chanceNode = rootNode.get("Chance de activarse aleatoriamente");
-            JsonNode comodinesAleatoriosNode = chanceNode.get("comodines");
-
-            for (JsonNode comodinAleatorioNode : comodinesAleatoriosNode) {
-                Comodin efectoPuntaje = inicializarComodin(comodinAleatorioNode, EfectoPuntaje.class);
-                if (efectoPuntaje != null) {
-                    this.comodinesAComprar.add(efectoPuntaje);
-                }
-            }
-
-            JsonNode combinacionNode = rootNode.get("Combinación");
-            JsonNode comodinesCombinacionNode = combinacionNode.get("comodines");
-            for (JsonNode comodinCombinacionNode : comodinesCombinacionNode) {
-                String nombreCombinacion = comodinCombinacionNode.get("nombre").asText();
-                String descripcionCombinacion = comodinCombinacionNode.get("descripcion").asText();
-                EfectoCombinado comodinCombinado = new EfectoCombinado(nombreCombinacion, descripcionCombinacion, new NoAleatorio());
-                JsonNode comodinesSubNode = comodinCombinacionNode.get("comodines");
-
-                // Procesar subcomodines dentro de la combinación
-                for (JsonNode subComodinNode : comodinesSubNode) {
-                    Comodin subComodin = inicializarComodin(subComodinNode, EfectoPuntaje.class); // O tipo adecuado
-                    if (subComodin != null) {
-                        comodinCombinado.agregar(subComodin);
-                    }
-                }
-                this.comodinesAComprar.add(comodinCombinado);
-            }
-        } catch (IOException e) {
-            e.printStackTrace(); // Manejo
-        }
-    }
-
-    private Comodin inicializarComodin(JsonNode comodinNode, Class<? extends Comodin> tipoEfecto) {
-        String nombre = comodinNode.get("nombre").asText();
-        String descripcion = comodinNode.get("descripcion").asText();
-        JsonNode efectoNode = comodinNode.get("efecto");
-        int multiplicador = efectoNode.get("multiplicador").asInt();
-        int valor = efectoNode.get("puntos").asInt();
-        Puntaje puntaje = new Puntaje(valor, multiplicador);
-
-        if (tipoEfecto.equals(EfectoPuntaje.class)) {
+        for (JsonNode comodinNode : comodinesNode) {
             JsonNode activacionNode = comodinNode.get("activacion");
+            String nombre = comodinNode.get("nombre").asText();
+            String descripcion = comodinNode.get("descripcion").asText();
+            JsonNode efectoNode = comodinNode.get("efecto");
+            int multiplicador = efectoNode.get("multiplicador").asInt();
+            int valor = efectoNode.get("puntos").asInt();
+            Puntaje puntaje = new Puntaje(valor, multiplicador);
+
             if (activacionNode != null && activacionNode.has("1 en")){
                 int chance = activacionNode.get("1 en").asInt();
-                return new EfectoPuntaje(puntaje, nombre, descripcion, new Aleatorio(chance));
+                Comodin comodinAleatorio  = new EfectoPuntaje(puntaje, nombre, descripcion, new Aleatorio(chance));
+                this.comodinesALaVenta.add(comodinAleatorio);
             }
-            return new EfectoPuntaje(puntaje, nombre, descripcion, new NoAleatorio());
 
-        } else if (tipoEfecto.equals(edu.fiuba.algo3.modelo.entidades.comodines.EfectoJugada.class)) {
-            JsonNode activacionNode = comodinNode.get("activacion");
             if (activacionNode != null && activacionNode.has("Mano Jugada")) {
                 String tipoJugada = activacionNode.get("Mano Jugada").asText();
                 Class<? extends Jugada> claseJugada = obtenerClaseJugada(tipoJugada);
-                return new edu.fiuba.algo3.modelo.entidades.comodines.EfectoJugada(claseJugada, puntaje, nombre, descripcion, new NoAleatorio());
-            } else {
-                // Caso para "Bonus por Descarte"
-                return new edu.fiuba.algo3.modelo.entidades.comodines.EfectoJugada(Descarte.class, puntaje, nombre, descripcion, new NoAleatorio());
+                Comodin comodinJugada = new EfectoJugada(claseJugada, puntaje, nombre, descripcion, new NoAleatorio());
+                this.comodinesALaVenta.add(comodinJugada);
             }
-        }
-        return null;
-    }
 
-    private void inicializarTarots() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = getClass().getResourceAsStream("/json/Tarot.json")) {
-            JsonNode rootNode = objectMapper.readTree(inputStream);
-            JsonNode tarotsNode = rootNode.get("tarots");
-
-            for (JsonNode tarotNode : tarotsNode) {
-                Tarot tarot = inicializarTarot(tarotNode);
-                if (tarot != null) {
-                    this.tarotsAComprar.add(tarot);
-                }
+            if (activacionNode != null && activacionNode.asText().equals("Descarte")) {
+                Comodin comodinDescarte = new EfectoJugada(Descarte.class, puntaje, nombre, descripcion, new NoAleatorio());
+                this.comodinesALaVenta.add(comodinDescarte);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
-    private Tarot inicializarTarot(JsonNode tarotNode) {
+    private void inicializarTarots(JsonNode tiendaNode) {
+        JsonNode tarotsNode = tiendaNode.path("tarots");
+
+        for (JsonNode tarotNode : tarotsNode) {
+            Tarot tarot = crearTarot(tarotNode);
+            if (tarot != null) {
+                this.tarotsALaVenta.add(tarot);
+            }
+        }
+    }
+
+    private Tarot crearTarot(JsonNode tarotNode) {
         String nombre = tarotNode.get("nombre").asText();
         String descripcion = tarotNode.get("descripcion").asText();
         JsonNode efectoNode = tarotNode.get("efecto");
@@ -156,9 +81,9 @@ public class Tienda {
         String ejemplar = tarotNode.get("ejemplar").asText();
 
         if (sobre.equalsIgnoreCase("carta")) {
-            return new EfectoCarta(nombre, descripcion, puntaje);
+            return new TarotCarta(nombre, descripcion, puntaje);
         } else if (sobre.equalsIgnoreCase("mano")) {
-            return new EfectoJugada(nombre, descripcion, puntaje, ejemplar);
+            return new TarotJugada(nombre, descripcion, puntaje, ejemplar);
         }
         return null;
     }
@@ -187,10 +112,24 @@ public class Tienda {
     }
 
     public List<Comodin> obtenerComodines() {
-        return this.comodinesAComprar;
+        return this.comodinesALaVenta;
     }
 
     public List<Tarot> obtenerTarots() {
-        return this.tarotsAComprar;
+        return this.tarotsALaVenta;
+    }
+
+    public List<CartaPoker> obtenerCartas() {
+        return this.cartasALaVenta;
+    }
+    private void inicializarCartas(JsonNode tiendaNode) {
+        JsonNode cartaNode = tiendaNode.path("carta");
+        String paloStr = cartaNode.get("palo").asText();
+        String numeroStr = cartaNode.get("numero").asText();
+
+        Palo palo = Palo.obtenerPaloDesdeString(paloStr);
+        Valor valor = Valor.obtenerValorDesdeString(numeroStr);
+
+        this.cartasALaVenta.add(new CartaPoker(valor, palo));
     }
 }
