@@ -25,20 +25,20 @@ public class BalatroController {
 
     public BalatroController() {}
 
-    public void setBalatro(Balatro juego) {
-        this.balatro = juego;
-    }
-
     @FXML
     public void initialize() {}
-        public void setStage(Stage stage) {
+    public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void setBalatro(Balatro juego) {
+        this.balatro = juego;
     }
 
     public void inicializarRonda() {
         Ronda actual = this.balatro.getRondaActual();
         this.balatro.jugarRonda();
-        Jugador jugador = this.balatro.getJugador();
+        //Jugador jugador = this.balatro.getJugador();
         mostrarTienda(actual);
     }
 
@@ -46,6 +46,8 @@ public class BalatroController {
         try {
             this.tiendaVisual = new TiendaVisual(this.stage);
             this.tiendaVisual.setTienda(actual.getTienda());
+            this.tiendaVisual.setBalatroController(this);
+
             this.tiendaVisual.mostrar();
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,7 +64,7 @@ public class BalatroController {
         Ronda actual = this.balatro.getRondaActual();
         Jugador jugador = this.balatro.getJugador();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ruta/ronda.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ronda.fxml"));
             Parent root = loader.load();
 
             RondaController rondaController = loader.getController();
