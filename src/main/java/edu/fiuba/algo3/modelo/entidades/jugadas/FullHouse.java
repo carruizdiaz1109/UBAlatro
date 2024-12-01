@@ -17,6 +17,8 @@ public class FullHouse extends Jugada {
 
     @Override
     public boolean esJugada(List<CartaPoker> cartas) {
+
+        if (cartas.size() != 5) return false;
         List<CartaPoker> cartasOrdenadas = new ArrayList<>(cartas);
         cartasOrdenadas.sort(Collections.reverseOrder());
 

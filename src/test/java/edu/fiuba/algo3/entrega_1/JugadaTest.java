@@ -15,7 +15,7 @@ import java.util.List;
 public class JugadaTest {
 
     @Test
-    public void testCartaAlta() {
+    public void testCartaAlta5Cartas() {
         //Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 CartaFactory.crearCarta(Valor.CINCO, Palo.PICAS),
@@ -28,6 +28,23 @@ public class JugadaTest {
 
         //Act
         Jugada jugada = Jugada.crearJugada(cartas);
+        int puntajeObtenido = jugada.calcularPuntaje();
+
+        //Assert
+        assertTrue(jugada instanceof CartaAlta);
+        assertEquals(puntajeEsperado, puntajeObtenido);
+    }
+
+    @Test
+    public void testCartaAlta1Carta() {
+        //Arrange
+        ArrayList<CartaPoker> carta = new ArrayList<>(List.of(
+                CartaFactory.crearCarta(Valor.OCHO, Palo.DIAMANTES)
+        ));
+        int puntajeEsperado = (8+5);
+
+        //Act
+        Jugada jugada = Jugada.crearJugada(carta);
         int puntajeObtenido = jugada.calcularPuntaje();
 
         //Assert

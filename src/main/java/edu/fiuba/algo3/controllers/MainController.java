@@ -252,6 +252,7 @@ public class MainController {
         if (rondaActual.sePuedeSeguirJugando()) {
             manejarAccionCartaSeleccionada(() -> {
                 jugador.jugar();
+                System.out.println("Cartas seleccionadas para jugar: " + cartasSeleccionadas);
                 Ronda.RondaEstado estado = rondaActual.getEstado();
 
                 if (estado == Ronda.RondaEstado.GANADA) {
