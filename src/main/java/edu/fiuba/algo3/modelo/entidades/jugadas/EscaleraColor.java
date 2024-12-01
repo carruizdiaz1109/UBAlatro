@@ -21,7 +21,6 @@ public class EscaleraColor extends Jugada {
         if (cartas.size() != 5) return false; // Must have exactly 5 cards
 
         // Ensure all cards have the same suit
-        Palo paloInicial = cartas.get(0).palo;
         for (CartaPoker carta : cartas) {
             if (!carta.esMismoPalo(cartas.get(0))) return false; // Different suit
         }
