@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.entidades;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.comodines.*;
 import edu.fiuba.algo3.modelo.entidades.comodines.EfectoJugada;
@@ -134,6 +135,6 @@ public class Tienda {
         Palo palo = Palo.obtenerPaloDesdeString(paloStr);
         Valor valor = Valor.obtenerValorDesdeString(numeroStr);
 
-        this.cartasALaVenta.add(new CartaPoker(valor, palo));
+        this.cartasALaVenta.add(CartaFactory.crearCarta(valor, palo));
     }
 }

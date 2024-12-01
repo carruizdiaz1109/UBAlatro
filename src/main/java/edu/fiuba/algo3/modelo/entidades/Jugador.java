@@ -42,6 +42,7 @@ public class Jugador {
         if (this.comodines.size()>0) {
             aplicarComodin(unaJugada);
         }
+        System.out.println();
         System.out.println(unaJugada.getClass());
         this.rondaActual.agregarJugada(unaJugada);
         this.manoActual.rellenarse();

@@ -87,7 +87,7 @@ public class CartaPokerTest {
         Puntaje puntajeEsperado = new Puntaje(3,1);
 
         CartaPoker carta = CartaFactory.crearCarta(Valor.CUATRO, Palo.CORAZONES);
-        Tarot unTarot = new EfectoCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(3, 1));
+        Tarot unTarot = new TarotCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(3, 1));
 
         unTarot.aplicar(carta);
 

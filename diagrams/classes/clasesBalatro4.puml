@@ -113,12 +113,15 @@ package Model {
     Par -up--|> Jugada
     DoblePar -up--|> Jugada
     Trio -up--|> Jugada
+
     Escalera -up--|> Jugada
+    EscaleraColor -up-|> Escalera
+    EscaleraReal -up-|> EscaleraColor
+
     Color -up--|> Jugada
     FullHouse -up--|> Jugada
     Poker -up--|> Jugada
-    EscaleraColor -up--|> Jugada
-    EscaleraReal -up--|> Jugada
     Descarte -up--|> Jugada
+
 }
 @enduml
