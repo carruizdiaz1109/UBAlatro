@@ -247,13 +247,9 @@ public class RondaController {
                 try {
                     jugador.jugar();
                 } catch (NoHayJugadasDisponiblesError e) {
-                    System.out.println("No hay jugadas disponibles. Fin de la ronda.");
                     verificarFinDeRonda();
                 }
             });
-
-        } else {
-            verificarFinDeRonda();
         }
     }
 

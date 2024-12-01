@@ -74,4 +74,8 @@ public class Balatro {
     public Jugador getJugador() {
         return this.jugador;
     }
+
+    public void reiniciar() {
+        this.indiceRondaActual = 0;
+    }
 }

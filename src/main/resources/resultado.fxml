@@ -24,7 +24,7 @@
       </VBox>
       <VBox prefHeight="222.0" prefWidth="1700.0">
          <children>
-            <Button fx:id="btnVolverAJugar" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Volver a jugar" textFill="#383582" style="-fx-background-color: #6FCAA5; -fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER">
+            <Button fx:id="btnVolverAJugar" visible="true" styleClass="button" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Volver a jugar" textFill="#383582" style="-fx-background-color: #6FCAA5; -fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER">
                <VBox.margin>
                   <Insets left="600.0" right="600.0" top="50.0" />
                </VBox.margin>
@@ -32,7 +32,15 @@
                   <Font name="Consolas Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnSalir" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Salir" textFill="#383582" style="-fx-background-color: #FFA6A7; -fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER">
+            <Button fx:id="btnRondaSiguiente" visible="true" styleClass="button" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Siguiente Ronda" textFill="#383582" style="-fx-background-color: #6FCAA5; -fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets left="600.0" right="600.0" top="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Consolas Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnSalir" styleClass="button" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Salir" textFill="#383582" style="-fx-background-color: #FFA6A7; -fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER">
                <VBox.margin>
                   <Insets left="600.0" right="600.0" top="50.0" />
                </VBox.margin>

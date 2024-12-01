@@ -40,8 +40,12 @@ public class BalatroController {
     public void inicializarRonda() {
         Ronda actual = this.balatro.getRondaActual();
         this.balatro.jugarRonda();
-        //Jugador jugador = this.balatro.getJugador();
         mostrarTienda(actual);
+    }
+
+    public void reiniciarJuego() {
+        this.balatro.reiniciar();
+        this.inicializarRonda();
     }
 
     public void avanzarRonda() {
