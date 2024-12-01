@@ -11,9 +11,9 @@ import java.util.List;
 
 
 public class Tienda {
-    private final List<CartaPoker> cartasALaVenta;
-    private final List<Tarot> tarotsALaVenta;
-    private final List<Comodin> comodinesALaVenta;
+    private final ArrayList<CartaPoker> cartasALaVenta;
+    private final ArrayList<Tarot> tarotsALaVenta;
+    private final ArrayList<Comodin> comodinesALaVenta;
 
 
     public Tienda (JsonNode tiendaNode) {
@@ -30,10 +30,32 @@ public class Tienda {
         JsonNode comodinesNode = tiendaNode.path("comodines");
 
         for (JsonNode comodinNode : comodinesNode) {
-            JsonNode activacionNode = comodinNode.get("activacion");
-            String nombre = comodinNode.get("nombre").asText();
-            String descripcion = comodinNode.get("descripcion").asText();
-            JsonNode efectoNode = comodinNode.get("efecto");
+            if (comodinNode.has("comodines")) {
+                JsonNode subComodines = comodinNode.get("comodines");
+                String nombre = comodinNode.get("nombre").asText();
+                String descripcion = comodinNode.get("descripcion").asText();
+                EfectoCombinado comodinCombinado = new EfectoCombinado(nombre, descripcion, new NoAleatorio());
+                for (JsonNode subComodin : subComodines) {
+                    Comodin comodinAñadir = procesarComodin(subComodin);
+                    if (comodinAñadir != null) {
+                        comodinCombinado.agregar(comodinAñadir);
+                    }
+                }
+                this.comodinesALaVenta.add(comodinCombinado);
+            } else {
+                Comodin comodinIndividual = procesarComodin(comodinNode);
+                if (comodinIndividual != null) {
+                    this.comodinesALaVenta.add(comodinIndividual);
+                }
+            }
+        }
+    }
+
+    private Comodin procesarComodin(JsonNode comodinIndividual) {
+            JsonNode activacionNode = comodinIndividual.get("activacion");
+            String nombre = comodinIndividual.get("nombre").asText();
+            String descripcion = comodinIndividual.get("descripcion").asText();
+            JsonNode efectoNode = comodinIndividual.get("efecto");
             int multiplicador = efectoNode.get("multiplicador").asInt();
             int valor = efectoNode.get("puntos").asInt();
             Puntaje puntaje = new Puntaje(valor, multiplicador);
@@ -41,21 +63,21 @@ public class Tienda {
             if (activacionNode != null && activacionNode.has("1 en")){
                 int chance = activacionNode.get("1 en").asInt();
                 Comodin comodinAleatorio  = new EfectoPuntaje(puntaje, nombre, descripcion, new Aleatorio(chance));
-                this.comodinesALaVenta.add(comodinAleatorio);
+                return comodinAleatorio;
             }
 
             if (activacionNode != null && activacionNode.has("Mano Jugada")) {
                 String tipoJugada = activacionNode.get("Mano Jugada").asText();
                 Class<? extends Jugada> claseJugada = obtenerClaseJugada(tipoJugada);
                 Comodin comodinJugada = new EfectoJugada(claseJugada, puntaje, nombre, descripcion, new NoAleatorio());
-                this.comodinesALaVenta.add(comodinJugada);
+                return comodinJugada;
             }
 
             if (activacionNode != null && activacionNode.asText().equals("Descarte")) {
                 Comodin comodinDescarte = new EfectoJugada(Descarte.class, puntaje, nombre, descripcion, new NoAleatorio());
-                this.comodinesALaVenta.add(comodinDescarte);
+                return comodinDescarte;
             }
-        }
+        return null;
     }
 
     private void inicializarTarots(JsonNode tiendaNode) {
@@ -111,15 +133,15 @@ public class Tienda {
         }
     }
 
-    public List<Comodin> obtenerComodines() {
+    public ArrayList<Comodin> obtenerComodines() {
         return this.comodinesALaVenta;
     }
 
-    public List<Tarot> obtenerTarots() {
+    public ArrayList<Tarot> obtenerTarots() {
         return this.tarotsALaVenta;
     }
 
-    public List<CartaPoker> obtenerCartas() {
+    public ArrayList<CartaPoker> obtenerCartas() {
         return this.cartasALaVenta;
     }
     private void inicializarCartas(JsonNode tiendaNode) {
