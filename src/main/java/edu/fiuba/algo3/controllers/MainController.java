@@ -329,9 +329,9 @@ public class MainController {
 
             ResultadoController resultadoController = loader.getController();
             if (gano) {
-                resultadoController.mostrarMensaje("Ganaste");
+                resultadoController.mostrarMensaje("Ganaste", true);
             } else {
-                resultadoController.mostrarMensaje("Perdiste");
+                resultadoController.mostrarMensaje("Perdiste", false);
             }
 
             Stage stage = (Stage) lblMano.getScene().getWindow();
