@@ -20,10 +20,10 @@ public class BalatroController {
     @FXML
     private TiendaController tiendaController;
 
-    private RondaVisual rondaVisual;
     private TiendaVisual tiendaVisual;
     private Stage stage;
     private Balatro balatro;
+    private String nombre;
 
     public BalatroController() {}
 
@@ -44,7 +44,7 @@ public class BalatroController {
     }
 
     public void reiniciarJuego() {
-        this.balatro.reiniciar();
+        this.balatro = new Balatro("Prueba");
         this.inicializarRonda();
     }
 
