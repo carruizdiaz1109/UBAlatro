@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class CartaPoker implements Comparable<CartaPoker>{
 
     protected final Valor valor;
-    protected final Palo palo;
+    public final Palo palo;
     protected Puntaje puntaje;
     protected final Puntaje puntajeComodin;
 
@@ -27,12 +27,7 @@ public abstract class CartaPoker implements Comparable<CartaPoker>{
 
     public abstract Puntaje obtenerPuntaje();
 
-    public List<Integer> obtenerValoresPosibles() {
-        if (this.valor == Valor.AS) {
-            return Arrays.asList(1, 14);
-        }
-        return Collections.singletonList(this.valor.valor());
-    }
+    public abstract List<Integer> obtenerValoresPosibles();
 
     public CartaPoker comprar() {
         return this;
