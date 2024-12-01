@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 public class BalatroController {
 
@@ -42,6 +44,11 @@ public class BalatroController {
         mostrarTienda(actual);
     }
 
+    public void avanzarRonda() {
+        this.balatro.avanzarRonda();
+        inicializarRonda();
+    }
+
     public void mostrarTienda(Ronda actual) {
         try {
             this.tiendaVisual = new TiendaVisual(this.stage);
@@ -54,13 +61,7 @@ public class BalatroController {
         }
     }
 
-    public void avanzarRonda() {
-        this.balatro.avanzarRonda();
-        inicializarRonda();
-    }
-
     public void mostrarRonda() {
-        System.out.println("Se llega hasta aca");
         Ronda actual = this.balatro.getRondaActual();
         Jugador jugador = this.balatro.getJugador();
         try {
@@ -69,7 +70,6 @@ public class BalatroController {
 
             RondaController rondaController = loader.getController();
 
-            // Configurar RondaVisual
             RondaVisual rondaVisual = new RondaVisual(
                     actual,
                     rondaController.lblPuntajeAcumulado,
@@ -78,17 +78,42 @@ public class BalatroController {
                     rondaController.lblDescartesDisponibles
             );
 
-            // Inyectar dependencias
             rondaController.setJugador(jugador);
+            rondaController.setBalatroController(this);
             rondaController.setRondaVisual(rondaVisual);
             rondaController.iniciarRonda();
 
-            // Mostrar la escena
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void mostrarResultado(boolean gano) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultado.fxml"));
+            Parent root = loader.load();
+
+            ResultadoController resultadoController = loader.getController();
+            resultadoController.setBalatroController(this);
+
+            if (gano) {
+                resultadoController.mostrarMensaje("Ganaste", true);
+            } else {
+                resultadoController.mostrarMensaje("Perdiste", false);
+            }
+
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void finDeRonda(boolean gano) {
+        mostrarResultado(gano);
     }
 
 

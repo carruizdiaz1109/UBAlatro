@@ -17,21 +17,12 @@ public class Ronda {
     private int jugadasDisponibles; //manos
     private final Tienda tienda;
     private final List<Jugada> jugadas;
-    private RondaEstado estado;
 
     private final IntegerProperty puntajeAcumulado = new SimpleIntegerProperty();
     private final IntegerProperty manosDisponibles = new SimpleIntegerProperty();
     private final IntegerProperty puntajeObjetivo = new SimpleIntegerProperty();
     private final IntegerProperty cantidadDescartes = new SimpleIntegerProperty();
-
-    public RondaEstado getEstado() { return estado; }
-
-    public enum RondaEstado {
-        GANADA,
-        PERDIDA,
-        EN_CURSO,
-        //SIN_EMPEZAR se puede usar para algo o está de mas?
-    }
+    private RondaEstado estado;
 
     public Ronda(int numero, int puntajeMinimo, int descartesDisponibles, int jugadasDisponibles, Tienda tienda) {
         this.numero = numero;
@@ -45,67 +36,75 @@ public class Ronda {
         this.manosDisponibles.set(jugadasDisponibles);
         this.puntajeObjetivo.set(puntajeMinimo);
         this.cantidadDescartes.set(descartesDisponibles);
-
         this.estado = RondaEstado.EN_CURSO;
     }
 
-    public boolean rondaSuperada() {
-        return (this.puntajeMinimo <= calcularTotalRonda());
+    public RondaEstado getEstado() { return estado; }
+
+    public enum RondaEstado {
+        GANADA,
+        PERDIDA,
+        EN_CURSO
     }
 
-    public RondaEstado agregarJugada(Jugada unaJugada) {
-        if (this.jugadasDisponibles > 0) {
-            this.jugadas.add(unaJugada);
-            this.jugadasDisponibles--;
-            this.manosDisponibles.set(this.jugadasDisponibles);
-            this.puntajeAcumulado.set(calcularTotalRonda());
-        } else {
-            throw new NoHayJugadasDisponiblesError();
-        }
-        return estado;
+    public boolean rondaSuperada() {
+        int totalRonda = calcularTotalRonda();
+        System.out.println("Total ronda: " + totalRonda);
+        return (this.puntajeMinimo <= totalRonda);
     }
 
     public boolean sePuedeSeguirJugando() {
-        return (this.jugadasDisponibles > 0);
+        return (this.jugadasDisponibles > 1 && this.estado == RondaEstado.EN_CURSO);
     }
 
-    public RondaEstado agregarDescarte(Descarte unDescarte) {
-        if (this.descartesDisponibles > 0) {
+    public void agregarJugada(Jugada unaJugada) {
+        if (sePuedeSeguirJugando()) {
+            this.jugadas.add(unaJugada);
+            this.jugadasDisponibles --;
+            actualizarPropiedades();
+        } else {
+            this.estado = RondaEstado.PERDIDA;
+            throw new NoHayJugadasDisponiblesError();
+        }
+        verificarEstadoRonda();
+    }
+
+    public void agregarDescarte(Descarte unDescarte) {
+        if (this.descartesDisponibles > 0 && sePuedeSeguirJugando()) {
             this.jugadas.add(unDescarte);
             this.descartesDisponibles--;
-            this.cantidadDescartes.set(this.descartesDisponibles); // Actualizar el property
-            this.puntajeAcumulado.set(calcularTotalRonda()); // Act
+            actualizarPropiedades();
         }else {
             throw new NoHayDescarteDisponiblesError();
         }
-        return estado;
+        verificarEstadoRonda();
     }
 
     public int calcularTotalRonda () {
         int acumulador = 0;
         for (Jugada jugada : this.jugadas) {
             int puntaje = jugada.calcularPuntaje();
-            String tipoJugada = jugada.getClass().getSimpleName(); // Obtener el nombre de la clase
-            System.out.println("Tipo de jugada: " + tipoJugada + ", Puntaje: " + puntaje); // Log para depurar
+            String tipoJugada = jugada.getClass().getSimpleName();
+            System.out.println("Tipo de jugada: " + tipoJugada + ", Puntaje: " + puntaje);
             acumulador += puntaje;
         }
-        this.puntajeAcumulado.set(acumulador);
-        verificarEstadoRonda(acumulador);
         return acumulador;
     }
 
-    public RondaEstado verificarEstadoRonda(int puntajeRonda) {
-        if (estado == RondaEstado.EN_CURSO) {
-            if (puntajeRonda >= puntajeMinimo) {
-                estado = RondaEstado.GANADA;
-            } else if (jugadasDisponibles <= 0) {
-                estado = RondaEstado.PERDIDA;
-            }
+    public void verificarEstadoRonda() {
+        if (rondaSuperada()) {
+            this.estado = RondaEstado.GANADA;
+        } else if(!sePuedeSeguirJugando()) {
+            this.estado = RondaEstado.PERDIDA;
         }
-        return estado;
     }
 
-    // Métodos para acceder a los properties
+    private void actualizarPropiedades() {
+        manosDisponibles.set(jugadasDisponibles);
+        cantidadDescartes.set(descartesDisponibles);
+        puntajeAcumulado.set(calcularTotalRonda());
+    }
+
     public IntegerProperty puntajeAcumuladoProperty() {
         return puntajeAcumulado;
     }

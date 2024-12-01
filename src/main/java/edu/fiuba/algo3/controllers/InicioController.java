@@ -66,7 +66,7 @@ public class InicioController {
     }
 
     public void avanzarRonda() {
-        this.balatroController.avanzarRonda();
+        this.balatroController.inicializarRonda();
     }
 }
 

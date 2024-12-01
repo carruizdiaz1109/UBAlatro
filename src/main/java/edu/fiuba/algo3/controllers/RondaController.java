@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fiuba.algo3.modelo.entidades.*;
 import edu.fiuba.algo3.modelo.entidades.comodines.*;
 import edu.fiuba.algo3.modelo.entidades.tarots.*;
+import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
@@ -19,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -240,17 +242,18 @@ public class RondaController {
 
     @FXML
     public void clickJugar() {
-        if (this.rondaActual.sePuedeSeguirJugando()) {
+        if (rondaActual.sePuedeSeguirJugando()) {
             manejarAccionCartaSeleccionada(() -> {
-                this.jugador.jugar();
-                Ronda.RondaEstado estado = this.rondaActual.getEstado();
-
-                if (estado == Ronda.RondaEstado.GANADA) {
-                    mostrarResultado(true);
-                } else if (estado == Ronda.RondaEstado.PERDIDA) {
-                    mostrarResultado(false);
+                try {
+                    jugador.jugar();
+                } catch (NoHayJugadasDisponiblesError e) {
+                    System.out.println("No hay jugadas disponibles. Fin de la ronda.");
+                    verificarFinDeRonda();
                 }
             });
+
+        } else {
+            verificarFinDeRonda();
         }
     }
 
@@ -268,11 +271,9 @@ public class RondaController {
             jugador.seleccionarCarta(cartasSeleccionadas);
             accionEspecifica.run();
             this.cartasSeleccionadas.clear();
-
             rellenarMano();
         };
         animarCartasSeleccionadas(onComplete);
-        verificarFinDeRonda();
     }
 
     private void rellenarMano() {
@@ -312,31 +313,9 @@ public class RondaController {
     }
 
     public void verificarFinDeRonda() {
-        if (rondaActual.getEstado() != Ronda.RondaEstado.EN_CURSO) {
-            mostrarResultado(rondaActual.getEstado() == Ronda.RondaEstado.GANADA);
-        }
+        boolean gano;
+        gano = rondaActual.rondaSuperada();
+        this.balatroController.finDeRonda(gano);
     }
-
-    private void mostrarResultado(boolean gano) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultado.fxml"));
-            Parent root = loader.load(); // Cargar el archivo FXML
-            ResultadoController resultadoController = loader.getController();
-
-            if (gano) {
-                resultadoController.mostrarMensaje("Ganaste");
-            } else {
-                resultadoController.mostrarMensaje("Perdiste");
-            }
-
-            Stage stage = (Stage) lblMano.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }
+
