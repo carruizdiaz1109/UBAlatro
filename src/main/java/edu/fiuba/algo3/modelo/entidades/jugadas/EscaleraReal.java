@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.entidades.jugadas;
 
 import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 
 import java.util.List;
@@ -24,10 +25,10 @@ public class EscaleraReal extends Jugada {
 
             // Verifica que las cartas sean del mismo palo y consecutivas
             for (int i = 0; i < cartasOrdenadas.size() - 1; i++) {
-                if (!cartasOrdenadas.get(i).esMismoPalo(cartasOrdenadas.get(i + 1)) && (!cartasOrdenadas.get(0).esMismoValor(new CartaPoker(Valor.AS, Palo.PICAS)))) {
+                if (!cartasOrdenadas.get(i).esMismoPalo(cartasOrdenadas.get(i + 1)) && (!cartasOrdenadas.get(0).esMismoValor(CartaFactory.crearCarta(Valor.AS, Palo.PICAS)))) {
                     return false;
                 } else {
-                    if (cartasOrdenadas.get(i + 1).esMismoValor(new CartaPoker(Valor.DIEZ, Palo.PICAS))) {
+                    if (cartasOrdenadas.get(i + 1).esMismoValor(CartaFactory.crearCarta(Valor.DIEZ, Palo.PICAS))) {
                         cartasValidas = new ArrayList<>(cartas); // Asigna todas las cartas
                         return true;
                     }

@@ -83,7 +83,7 @@ public abstract class CartaPoker {
             }
 
             Valor nuevoValor = valores[nuevoIndex];
-            CartaPoker nuevaCarta = new CartaPoker(nuevoValor, this.palo);
+            CartaPoker nuevaCarta = CartaFactory.crearCarta(nuevoValor, this.palo);
             escalera.agregarCarta(nuevaCarta);
         }
 

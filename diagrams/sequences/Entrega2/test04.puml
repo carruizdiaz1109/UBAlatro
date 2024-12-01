@@ -12,7 +12,7 @@ participant "unComodin:EfectoAleatorio" as comodin
 
 user -> ronda **: Ronda(1,10000,3,3);
 loop i=2, i<7, i++
-    user -> carta **: new CartaPoker(i, Palo);
+    user -> carta **: CartaFactory.crearCarta(i, Palo);
 end
 user -> mano **: new Mano(cartas);
 user -> jugador **: Jugador("Pepe", mazoMock);

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +35,7 @@ class ManoTest {
         when(mazoMock.darCarta()).thenAnswer(invocation -> {
             Valor valor = Valor.CUATRO;
             Palo palo = Palo.PICAS;
-            return new CartaPoker(valor, palo);
+            return CartaFactory.crearCarta(valor, palo);
         });
     }
 
@@ -49,11 +50,11 @@ class ManoTest {
     @Test
     void test02DescartarYRellenarMano() {
 
-        CartaPoker c1 = new CartaPoker(Valor.CINCO, Palo.PICAS);
-        CartaPoker c2 = new CartaPoker(Valor.CINCO, Palo.TREBOLES);
-        CartaPoker c3 = new CartaPoker(Valor.OCHO, Palo.DIAMANTES);
-        CartaPoker c4 = new CartaPoker(Valor.DOS, Palo.CORAZONES);
-        CartaPoker c5 = new CartaPoker(Valor.TRES, Palo.PICAS);
+        CartaPoker c1 = CartaFactory.crearCarta(Valor.CINCO, Palo.PICAS);
+        CartaPoker c2 = CartaFactory.crearCarta(Valor.CINCO, Palo.TREBOLES);
+        CartaPoker c3 = CartaFactory.crearCarta(Valor.OCHO, Palo.DIAMANTES);
+        CartaPoker c4 = CartaFactory.crearCarta(Valor.DOS, Palo.CORAZONES);
+        CartaPoker c5 = CartaFactory.crearCarta(Valor.TRES, Palo.PICAS);
 
         Mano mano = new Mano(new ArrayList<>(List.of(c1, c2, c3, c4, c5)));
 
@@ -70,15 +71,15 @@ class ManoTest {
     @Test
     public void test03CompararManosIguales(){
         ArrayList<CartaPoker> cartas1 = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.DIAMANTES)
         ));
 
         ArrayList<CartaPoker> cartas2 = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.DIAMANTES)
         ));
 
         Mano mano1 = new Mano(cartas1);
@@ -90,15 +91,15 @@ class ManoTest {
     @Test
     public void test04CompararManosDistintas(){
         ArrayList<CartaPoker> cartas1 = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CUATRO, Palo.DIAMANTES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CUATRO, Palo.DIAMANTES)
         ));
 
         ArrayList<CartaPoker> cartas2 = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.DIAMANTES)
         ));
 
         Mano mano1 = new Mano(cartas1);
@@ -110,13 +111,13 @@ class ManoTest {
     @Test
     public void test05CompararCartasSeleccionadas(){
         ArrayList<CartaPoker> cartasSeleccionadas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS)
         ));
 
         ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CUATRO, Palo.DIAMANTES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CUATRO, Palo.DIAMANTES)
         ));
 
         Mano mano = new Mano(cartas);
@@ -128,15 +129,15 @@ class ManoTest {
     @Test
     public void test06SeDescartanCartas() {
         ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CUATRO, Palo.DIAMANTES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CUATRO, Palo.DIAMANTES)
         ));
 
         Mano mano = new Mano(cartas);
         mano.seleccionarCartas(new ArrayList<>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES)
         )));
         assertNotNull(mano.descartar());
     }

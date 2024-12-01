@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.comodines.*;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
@@ -20,11 +21,11 @@ public class IntegracionTest2 {
         Tienda tienda = new Tienda();
         
         Ronda ronda = new Ronda(1,10000,3,3, tienda);
-        CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
-        CartaPoker carta2 = new CartaPoker(Valor.TRES, Palo.DIAMANTES);
-        CartaPoker carta3 = new CartaPoker(Valor.CUATRO, Palo.DIAMANTES);
-        CartaPoker carta4 = new CartaPoker(Valor.CINCO, Palo.CORAZONES);
-        CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
+        CartaPoker carta1 = CartaFactory.crearCarta(Valor.DOS, Palo.PICAS);
+        CartaPoker carta2 = CartaFactory.crearCarta(Valor.TRES, Palo.DIAMANTES);
+        CartaPoker carta3 = CartaFactory.crearCarta(Valor.CUATRO, Palo.DIAMANTES);
+        CartaPoker carta4 = CartaFactory.crearCarta(Valor.CINCO, Palo.CORAZONES);
+        CartaPoker carta5 = CartaFactory.crearCarta(Valor.SEIS, Palo.PICAS);
 
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
         Mazo mazo = new Mazo(cartas);
@@ -57,11 +58,11 @@ public class IntegracionTest2 {
         Tienda tiendaMock = mock(Tienda.class);
         Ronda ronda = new Ronda(1,10000,3,3, tiendaMock);
 
-        CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
-        CartaPoker carta2 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
-        CartaPoker carta3 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
-        CartaPoker carta4 = new CartaPoker(Valor.DOS, Palo.CORAZONES);
-        CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
+        CartaPoker carta1 = CartaFactory.crearCarta(Valor.DOS, Palo.PICAS);
+        CartaPoker carta2 = CartaFactory.crearCarta(Valor.DOS, Palo.DIAMANTES);
+        CartaPoker carta3 = CartaFactory.crearCarta(Valor.DOS, Palo.DIAMANTES);
+        CartaPoker carta4 = CartaFactory.crearCarta(Valor.DOS, Palo.CORAZONES);
+        CartaPoker carta5 = CartaFactory.crearCarta(Valor.SEIS, Palo.PICAS);
 
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
         Mazo mazo = new Mazo(cartas);
@@ -94,11 +95,11 @@ public class IntegracionTest2 {
 
         Tienda tiendaMock = mock(Tienda.class);
         Ronda ronda = new Ronda(1,10000,3,3, tiendaMock);
-        CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
-        CartaPoker carta2 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
-        CartaPoker carta3 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
-        CartaPoker carta4 = new CartaPoker(Valor.DOS, Palo.CORAZONES);
-        CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
+        CartaPoker carta1 = CartaFactory.crearCarta(Valor.DOS, Palo.PICAS);
+        CartaPoker carta2 = CartaFactory.crearCarta(Valor.DOS, Palo.DIAMANTES);
+        CartaPoker carta3 = CartaFactory.crearCarta(Valor.DOS, Palo.DIAMANTES);
+        CartaPoker carta4 = CartaFactory.crearCarta(Valor.DOS, Palo.CORAZONES);
+        CartaPoker carta5 = CartaFactory.crearCarta(Valor.SEIS, Palo.PICAS);
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
         Mazo mazo = new Mazo(cartas);
         Mano mano = new Mano(mazo);
@@ -129,11 +130,11 @@ public class IntegracionTest2 {
         //Arrange
         Tienda tiendaMock = mock(Tienda.class);
         Ronda ronda = new Ronda(1,10000,3,3, tiendaMock);
-        CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
-        CartaPoker carta2 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
-        CartaPoker carta3 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
-        CartaPoker carta4 = new CartaPoker(Valor.DOS, Palo.CORAZONES);
-        CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
+        CartaPoker carta1 = CartaFactory.crearCarta(Valor.DOS, Palo.PICAS);
+        CartaPoker carta2 = CartaFactory.crearCarta(Valor.DOS, Palo.DIAMANTES);
+        CartaPoker carta3 = CartaFactory.crearCarta(Valor.DOS, Palo.DIAMANTES);
+        CartaPoker carta4 = CartaFactory.crearCarta(Valor.DOS, Palo.CORAZONES);
+        CartaPoker carta5 = CartaFactory.crearCarta(Valor.SEIS, Palo.PICAS);
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
         Mazo mazo = new Mazo(cartas);
         Mano mano = new Mano(mazo);
@@ -169,11 +170,11 @@ public class IntegracionTest2 {
         //Arrange
         Tienda tiendaMock = mock(Tienda.class);
         Ronda ronda = new Ronda(1,10000,3,3, tiendaMock);
-        CartaPoker carta1 = new CartaPoker(Valor.DOS, Palo.PICAS);
-        CartaPoker carta2 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
-        CartaPoker carta3 = new CartaPoker(Valor.DOS, Palo.DIAMANTES);
-        CartaPoker carta4 = new CartaPoker(Valor.DOS, Palo.CORAZONES);
-        CartaPoker carta5 = new CartaPoker(Valor.SEIS, Palo.PICAS);
+        CartaPoker carta1 = CartaFactory.crearCarta(Valor.DOS, Palo.PICAS);
+        CartaPoker carta2 = CartaFactory.crearCarta(Valor.DOS, Palo.DIAMANTES);
+        CartaPoker carta3 = CartaFactory.crearCarta(Valor.DOS, Palo.DIAMANTES);
+        CartaPoker carta4 = CartaFactory.crearCarta(Valor.DOS, Palo.CORAZONES);
+        CartaPoker carta5 = CartaFactory.crearCarta(Valor.SEIS, Palo.PICAS);
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
         Mazo mazo = new Mazo(cartas);
         Mano mano = new Mano(mazo);

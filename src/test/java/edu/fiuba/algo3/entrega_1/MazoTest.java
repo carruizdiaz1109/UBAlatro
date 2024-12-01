@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.Mazo;
 import edu.fiuba.algo3.modelo.entidades.Palo;
@@ -92,16 +93,16 @@ public class MazoTest {
     @Test
     public void test08CompararMazosIguales(){
         ArrayList<CartaPoker> cartas1 = new ArrayList<>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.DIAMANTES)
         ));
 
 
         ArrayList<CartaPoker> cartas2 = new ArrayList<>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.DIAMANTES)
         ));
 
 
@@ -116,15 +117,15 @@ public class MazoTest {
     @Test
     public void test09CompararMazosDistintaCatidadCartas(){
         ArrayList<CartaPoker> cartas1 = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.DIAMANTES)
         ));
 
 
         ArrayList<CartaPoker> cartas2 = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES)
         ));
 
 
@@ -139,16 +140,16 @@ public class MazoTest {
     @Test
     public void test10CompararMazosDistintos(){
         ArrayList<CartaPoker> cartas1 = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.DIAMANTES)
         ));
 
 
         ArrayList<CartaPoker> cartas2 = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.DOS, Palo.CORAZONES),
-                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.DOS, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.DIAMANTES)
         ));
 
 
@@ -162,8 +163,8 @@ public class MazoTest {
     @Test
     public void test11SeVerificaQueSentercambiaConElDeDescarteCorrectamente() {
         ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES)
         ));
         Mazo mazo1 = new Mazo(cartas);
         Mazo mazo2 = new Mazo(cartas);
