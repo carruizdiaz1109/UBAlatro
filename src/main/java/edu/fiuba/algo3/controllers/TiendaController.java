@@ -30,6 +30,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class TiendaController {
     private Jugador jugador;
@@ -67,24 +68,31 @@ public class TiendaController {
 
         // Agregar comodines
         Comodin comodin1 = tienda.obtenerComodines().get(0);
-        ComodinVisual comodinVisual1 = new ComodinVisual(comodin1, "/imagenes/comodines/Comodin Astuto.png", 150, 200);
+        //System.out.println(comodin1.getNombre());
+        String cm1 = comodin1.getNombre();
+        ComodinVisual comodinVisual1 = new ComodinVisual(comodin1, "/imagenes/comodines/" + cm1 + ".png", 150, 200);
         lblComodinTienda1.getChildren().add(comodinVisual1);
 
         Comodin comodin2 = tienda.obtenerComodines().get(1);
-        ComodinVisual comodinVisual2 = new ComodinVisual(comodin2, "/imagenes/comodines/Cumbre Mistica.png", 150, 200);
+        String cm2 = comodin2.getNombre();
+        ComodinVisual comodinVisual2 = new ComodinVisual(comodin2, "/imagenes/comodines/" + cm2 + ".png", 150, 200);
         lblComodinTienda2.getChildren().add(comodinVisual2);
 
         // Agregar cartas de tarot
         Tarot tarot1 = tienda.obtenerTarots().get(0);
-        TarotVisual tarotVisual1 = new TarotVisual(tarot1, "/imagenes/tarot/El Mago.png", 150, 200);
+        String tr1 = tarot1.getNombre();
+        TarotVisual tarotVisual1 = new TarotVisual(tarot1, "/imagenes/tarot/" + tr1 + ".png", 150, 200);
         lblTarotTienda1.getChildren().add(tarotVisual1);
 
         Tarot tarot2 = tienda.obtenerTarots().get(1);
-        TarotVisual tarotVisual2 = new TarotVisual(tarot2, "/imagenes/tarot/El Carro.png", 150, 200);
+        String tr2 = tarot2.getNombre();
+        TarotVisual tarotVisual2 = new TarotVisual(tarot2, "/imagenes/tarot/" + tr2 + ".png", 150, 200);
         lblTarotTienda2.getChildren().add(tarotVisual2);
 
         // Agregar carta de póker
         CartaPoker carta = tienda.obtenerCartas().get(0);
+        String ct = carta.getNombreArchivo();
+        //String ct = carta.getNombreArchivo(); no funciona no se porque, me trae el nombre pero rompe si lo mesclo con el imagePath
         CartaVisual cartaVisual = new CartaVisual(carta, "/imagenes/cartas/2C.png", 150, 200);
         lblCartaTienda1.getChildren().add(cartaVisual);
 
