@@ -17,15 +17,12 @@ public class Escalera extends Jugada {
 
     @Override
     public boolean esJugada(List<CartaPoker> cartas) {
-        if (cartas.size() != 5) return false; // Must have exactly 5 cards
-
-        // Generate all possible sequences from card values
+        if (cartas.size() != 5) return false;
         List<List<Integer>> posiblesSecuencias = generarSecuencias(cartas);
 
-        // Check if any sequence forms a straight
         for (List<Integer> secuencia : posiblesSecuencias) {
             if (esEscalera(secuencia)) {
-                cartasValidas = new ArrayList<>(cartas); // Save valid cards
+                cartasValidas = new ArrayList<>(cartas);
                 return true;
             }
         }
@@ -37,15 +34,15 @@ public class Escalera extends Jugada {
         return cartasValidas != null ? cartasValidas : List.of();
     }
 
-    private boolean esEscalera(List<Integer> valores) {
-        Collections.sort(valores); // Sort values
+    protected boolean esEscalera(List<Integer> valores) {
+        Collections.sort(valores);
         for (int i = 0; i < valores.size() - 1; i++) {
-            if (valores.get(i + 1) - valores.get(i) != 1) return false; // Not consecutive
+            if (valores.get(i + 1) - valores.get(i) != 1) return false;
         }
         return true;
     }
 
-    private List<List<Integer>> generarSecuencias(List<CartaPoker> cartas) {
+    protected List<List<Integer>> generarSecuencias(List<CartaPoker> cartas) {
         List<List<Integer>> secuencias = new ArrayList<>();
         generarSecuenciasRecursivamente(cartas, 0, new ArrayList<>(), secuencias);
         return secuencias;
@@ -59,7 +56,7 @@ public class Escalera extends Jugada {
         for (int valor : cartas.get(index).obtenerValoresPosibles()) {
             actual.add(valor);
             generarSecuenciasRecursivamente(cartas, index + 1, actual, secuencias);
-            actual.remove(actual.size() - 1); // Backtrack
+            actual.remove(actual.size() - 1);
         }
     }
 }
