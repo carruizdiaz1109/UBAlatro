@@ -35,30 +35,22 @@ public class CartaPoker implements Comparable<CartaPoker>{
     public int sumarValorCon(int otroValor) { return this.valor.valor() + otroValor; }
 
     public boolean esMismoValor(CartaPoker otraCarta) {
-        if(otraCarta == null){
-            throw new CartaNulaError();
-        }
+        verificarCartaNula(otraCarta);
         return this.valor == otraCarta.valor;
     }
 
     public boolean esMismoPalo(CartaPoker otraCarta) {
-        if(otraCarta == null){
-            throw new CartaNulaError();
-        }
+        verificarCartaNula(otraCarta);
         return this.palo.equals(otraCarta.palo);
     }
 
     public boolean esConsecutiva(CartaPoker otraCarta) {
-        if(otraCarta == null){
-            throw new CartaNulaError();
-        }
+        verificarCartaNula(otraCarta);
         return Math.abs(this.valor.valor() - otraCarta.valor.valor()) == 1;
     }
 
     public boolean compararCartaCon(CartaPoker otraCarta) {
-        if(otraCarta == null){
-            throw new CartaNulaError();
-        }
+        verificarCartaNula(otraCarta);
         return (this.valor == otraCarta.valor && this.palo.equals(otraCarta.palo));
     }
 
@@ -121,6 +113,10 @@ public class CartaPoker implements Comparable<CartaPoker>{
         }
 
         return valorTexto + paloTexto + ".png"; // Ejemplo: "7H.png"
+    }
+
+    private void verificarCartaNula(CartaPoker otraCarta) {
+        if(otraCarta == null) throw new CartaNulaError();
     }
 }
 
