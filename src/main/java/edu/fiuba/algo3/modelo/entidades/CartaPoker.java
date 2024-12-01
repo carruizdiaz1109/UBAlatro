@@ -22,9 +22,7 @@ public class CartaPoker implements Comparable<CartaPoker>{
     }
 
     public void modificarPuntaje(Puntaje unPuntaje) {
-        if(unPuntaje == null){
-            throw new PuntajeNuloError();
-        }
+        verificarPuntajeNulo(unPuntaje);
         this.puntaje = this.puntaje.sumarPuntaje(unPuntaje);
     }
 
@@ -79,16 +77,12 @@ public class CartaPoker implements Comparable<CartaPoker>{
     }
 
     public void aplicarComodin(Puntaje unPuntaje) {
-        if(unPuntaje == null){
-            throw new PuntajeNuloError();
-        }
+        verificarPuntajeNulo(unPuntaje);
         this.puntajeComodin.sumarPuntaje(unPuntaje);
     }
 
     public void aplicarTarot(Puntaje unPuntaje) {
-        if(unPuntaje == null){
-            throw new PuntajeNuloError();
-        }
+        verificarPuntajeNulo(unPuntaje);
         this.puntaje = unPuntaje;}
 
     public String getNombreArchivo() {
@@ -117,6 +111,10 @@ public class CartaPoker implements Comparable<CartaPoker>{
 
     private void verificarCartaNula(CartaPoker otraCarta) {
         if(otraCarta == null) throw new CartaNulaError();
+    }
+
+    public void verificarPuntajeNulo(Puntaje unPuntaje) {
+        if(unPuntaje == null) throw new PuntajeNuloError();
     }
 }
 
