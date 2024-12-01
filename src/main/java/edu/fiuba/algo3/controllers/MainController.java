@@ -334,7 +334,6 @@ public class MainController {
                 resultadoController.mostrarMensaje("Perdiste");
             }
 
-            // Cambia la escena para mostrar el resultado
             Stage stage = (Stage) lblMano.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
