@@ -5,9 +5,7 @@ import edu.fiuba.algo3.modelo.entidades.Jugador;
 import edu.fiuba.algo3.vistas.TarotVisual;
 import javafx.scene.layout.HBox;
 import javafx.scene.input.MouseEvent;
-
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TarotController {
