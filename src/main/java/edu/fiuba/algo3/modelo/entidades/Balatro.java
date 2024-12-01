@@ -16,12 +16,10 @@ public class Balatro {
     private final List<Ronda> rondas;
     private final Mazo mazo;
     private final Jugador jugador;
-    private final Tienda tienda;
 
     public Balatro(String nombreJugador) {
         this.rondas = new ArrayList<Ronda>();
         this.mazo = new Mazo();
-        this.tienda = new Tienda();
         cargarRondasDesdeJSON();
         this.jugador = new Jugador(nombreJugador, this.mazo);
     }
@@ -41,6 +39,8 @@ public class Balatro {
                 int descartesDisponibles = rondaNode.path("descartes").asInt();
                 int jugadasDisponibles = rondaNode.path("manos").asInt();
 
+                JsonNode tiendaNode = rondaNode.path("tienda");
+                Tienda tienda = new Tienda(tiendaNode);
                 Ronda ronda = new Ronda(numero, puntajeMinimo, descartesDisponibles, jugadasDisponibles, tienda);
                 rondas.add(ronda);
             }
@@ -51,7 +51,7 @@ public class Balatro {
 
     public void iniciarJuego() {
         for (Ronda ronda : this.rondas) {
-            if (ronda.verificarPuntaje()) {
+            if (ronda.rondaSuperada()) {
                 this.jugador.iniciarRonda(ronda);
             }
         }

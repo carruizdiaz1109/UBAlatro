@@ -1,14 +1,16 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.entidades.Jugada;
-import edu.fiuba.algo3.modelo.entidades.Ronda;
-import edu.fiuba.algo3.modelo.entidades.Tienda;
+import edu.fiuba.algo3.modelo.entidades.*;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -29,44 +31,39 @@ public class RondaTest {
     }
 
     @Test
-    public void test01VerificarPuntajeConPuntajeInsuficiente() {
+    public void test01SeVerificaQueSePuedeSeguirJugando() {
         when(jugadaMock.calcularPuntaje()).thenReturn(2500);
         ronda.agregarJugada(jugadaMock);
-        assertFalse(ronda.verificarPuntaje());
+
+        assertTrue(ronda.sePuedeSeguirJugando());
     }
 
     @Test
-    void test02VerificarPuntajeConPuntajeSuficiente() {
-        // Simular que calcularTotalRonda devuelve 3500
-        when(jugadaMock.calcularPuntaje()).thenReturn(3000);
-        ronda.agregarJugada(jugadaMock);
-        assertTrue(ronda.verificarPuntaje());
-    }
-
-    @Test
-    void test03AgregarJugadaExitosamente() {
+    public void test02SeJuegaUnaJugadaYSeVerificaElPuntaje() {
         when(jugadaMock.calcularPuntaje()).thenReturn(1000);
 
         ronda.agregarJugada(jugadaMock);
         int puntajeRonda = ronda.calcularTotalRonda();
-        assertEquals(1000, puntajeRonda);
+        assertEquals(jugadaMock.calcularPuntaje(), puntajeRonda);
     }
 
     @Test
-    void test04ErrorAgregarJugadaSinJugadasDisponibles() {
+   public  void test03NoSePuedeSeguirJugandoSiNoQuedanJugadas() {
+        when(jugadaMock.calcularPuntaje()).thenReturn(50);
         ronda.agregarJugada(jugadaMock);
         ronda.agregarJugada(jugadaMock);
         ronda.agregarJugada(jugadaMock);
 
         assertThrows(NoHayJugadasDisponiblesError.class, () -> ronda.agregarJugada(jugadaMock));
+        assertFalse(ronda.sePuedeSeguirJugando());
     }
 
     @Test
-    void test05AgregarDescarteExitosamente(){
+    public void test05AgregarDescarteExitosamente(){
         when(descarteMock.calcularPuntaje()).thenReturn(500);
         ronda.agregarDescarte(descarteMock);
 
-        assertEquals(500, ronda.calcularTotalRonda());
+        assertEquals(descarteMock.calcularPuntaje(), ronda.calcularTotalRonda());
     }
 
     @Test
@@ -79,7 +76,7 @@ public class RondaTest {
     }
 
     @Test
-    void test07CalcularTotalRonda() {
+    void test07CalcularTotalRondaTrasUnaJugadaYUnDescarte() {
         when(jugadaMock.calcularPuntaje()).thenReturn(1000);
         when(descarteMock.calcularPuntaje()).thenReturn(500);
 
@@ -87,6 +84,45 @@ public class RondaTest {
         ronda.agregarDescarte(descarteMock);
 
         assertEquals(1500, ronda.calcularTotalRonda());
+    }
+
+    @Test
+    void test08SeJuegaUnaRondaCompletaConTresManos(){
+        Ronda ronda = new Ronda(1, 120, 3, 3, tiendaMock);
+        ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
+                new CartaPoker(Valor.CINCO, Palo.PICAS),
+                new CartaPoker(Valor.CINCO, Palo.TREBOLES)
+        ));
+
+        Jugada jugada1 = Jugada.crearJugada(cartas);
+        Jugada jugada2 = Jugada.crearJugada(cartas);
+        Jugada jugada3 = Jugada.crearJugada(cartas);
+
+        ronda.agregarJugada(jugada1);
+        ronda.agregarJugada(jugada2);
+        ronda.agregarJugada(jugada3);
+
+        assertFalse(ronda.sePuedeSeguirJugando());
+        assertTrue(ronda.rondaSuperada());
+    }
+
+    @Test
+    void test09SeJuegaUnaRondaConTodasLasJugadasPosiblesYNoLLegaAlPuntaje(){
+        Ronda ronda = new Ronda(1, 2000, 3, 3, tiendaMock);
+        ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
+                new CartaPoker(Valor.CINCO, Palo.PICAS),
+                new CartaPoker(Valor.CINCO, Palo.TREBOLES)
+        ));
+
+        Jugada jugada1 = Jugada.crearJugada(cartas);
+        Jugada jugada2 = Jugada.crearJugada(cartas);
+        Jugada jugada3 = Jugada.crearJugada(cartas);
+
+        ronda.agregarJugada(jugada1);
+        ronda.agregarJugada(jugada2);
+        ronda.agregarJugada(jugada3);
+
+        assertFalse(ronda.rondaSuperada());
     }
 
 }

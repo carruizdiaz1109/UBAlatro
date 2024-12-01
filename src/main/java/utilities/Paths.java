@@ -1,5 +1,5 @@
 package utilities;
 
 public class Paths {
-    public static final String MAIN = "/ronda.fxml";
+    public static final String MAIN = "/Main.fxml";
 }

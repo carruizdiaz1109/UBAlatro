@@ -4,7 +4,7 @@ import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.excepciones.CartaNulaError;
 import edu.fiuba.algo3.modelo.excepciones.PuntajeNuloError;
-import edu.fiuba.algo3.modelo.entidades.tarots.EfectoCarta;
+import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
 import edu.fiuba.algo3.modelo.entidades.*;
 import org.junit.jupiter.api.Test;
 
