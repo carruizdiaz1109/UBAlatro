@@ -25,9 +25,9 @@ public class TarotController {
         lblTarot.getChildren().clear();
         ArrayList<Tarot> cartasTarot = jugador.obtenerTarots();
 
-        for (Tarot carta : cartasTarot) {
-            String imagePath = "/imagenes/tarot/" + carta.getNombre() + ".png";
-            TarotVisual tarotVisual = new TarotVisual(carta, imagePath);
+        for (Tarot tarot : cartasTarot) {
+            String imagePath = "/imagenes/tarot/" + tarot.getNombre() + ".png";
+            TarotVisual tarotVisual = new TarotVisual(tarot, imagePath);
 
             // Crear un StackPane para la carta y sus botones
             StackPane stackPane = new StackPane();
@@ -42,12 +42,12 @@ public class TarotController {
             // Botón "Usar"
             Button botonUsar = new Button("Usar");
             botonUsar.setStyle("-fx-background-color: #FFA94D; -fx-border-radius: 10; -fx-background-radius: 10;");
-            botonUsar.setOnAction(event -> realizarAccionTarot(carta, botonUsar));
+            //botonUsar.setOnAction(event -> manejarUsarTarot());
 
             // Botón "Eliminar"
             Button botonEliminar = new Button("X");
             botonEliminar.setStyle("-fx-background-color: #d24431; -fx-border-radius: 10; -fx-background-radius: 10;");
-            botonEliminar.setOnAction(event -> realizarAccionTarot(carta, botonEliminar));
+            botonEliminar.setOnAction(event -> manejarEliminarTarot(tarot, stackPane));
 
             // Añadir botones al VBox
             vboxBotones.getChildren().addAll(botonUsar, botonEliminar);
@@ -81,12 +81,10 @@ public class TarotController {
         }
     }
 
-    private void realizarAccionTarot(Tarot carta, Button boton) {
-        if ("Usar".equals(boton.getText())) {
-            System.out.println("Usando tarot: " + carta.getNombre());
-        } else if ("X".equals(boton.getText())) {
-            System.out.println("Eliminando tarot: " + carta.getNombre());
-        }
-        boton.getParent().setVisible(false);
+    private void manejarEliminarTarot(Tarot unTarot, StackPane stackPane) {
+        jugador.eliminarTarot(unTarot);
+        lblTarot.getChildren().remove(stackPane);
+        System.out.println("Tarot eliminado: " + unTarot.getNombre());
     }
+
 }

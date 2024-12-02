@@ -6,17 +6,11 @@ import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.entidades.Tienda;
 import edu.fiuba.algo3.modelo.entidades.comodines.Comodin;
 import edu.fiuba.algo3.modelo.interfaces.Comprable;
-import edu.fiuba.algo3.vistas.CartaVisual;
-import edu.fiuba.algo3.vistas.ComodinVisual;
-import edu.fiuba.algo3.vistas.TarotVisual;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
@@ -147,7 +141,7 @@ public class TiendaController {
         if (comprable instanceof Comodin) {
             jugador.aniadirComodin((Comodin) comprable);
         } else if (comprable instanceof Tarot) {
-            jugador.aniadirTarots((Tarot) comprable);
+            jugador.aniadirTarot((Tarot) comprable);
         } else if (comprable instanceof CartaPoker) {
             jugador.aniadirCartaPoker((CartaPoker) comprable);
         }

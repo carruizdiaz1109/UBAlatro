@@ -19,7 +19,7 @@ public class JugadorTest {
         Tarot unTarot = new TarotCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(3, 3));
 
         int puntajeEsperado = (3 * 3);
-        jugador.aniadirTarots(unTarot);
+        jugador.aniadirTarot(unTarot);
         jugador.utilizarTarot(unTarot, carta);
         int puntajeObtenido = carta.calcularPuntaje();
         assertEquals(puntajeEsperado,puntajeObtenido);
