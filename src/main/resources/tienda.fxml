@@ -34,20 +34,13 @@
                      <VBox.margin>
                         <Insets bottom="30.0" left="50.0" right="50.0" top="50.0" />
                      </VBox.margin>
-
-                     <StackPane alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1044.0">
-                        <HBox opacity="0.5" prefHeight="260.0" prefWidth="1044.0"
-                              style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
-                           <StackPane.margin>
-                              <Insets right="15.0"/>
-                           </StackPane.margin>
+                     <children>
+                        <HBox fx:id="comodines" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="196.0" prefWidth="213.0" style="-fx-background-color: #e83812;">
+                           <VBox.margin>
+                              <Insets left="40.0" top="70.0" />
+                           </VBox.margin>
                         </HBox>
-                        <HBox fx:id="comodines" alignment="TOP_CENTER" prefHeight="142.0" prefWidth="947.0">
-                           <StackPane.margin>
-                              <Insets right="15.0"/>
-                           </StackPane.margin>
-                        </HBox>
-                     </StackPane>
+                     </children>
                   </VBox>
                   <VBox prefHeight="165.0" prefWidth="1398.0">
                      <children>

@@ -9,6 +9,30 @@ import edu.fiuba.algo3.vistas.ComodinVisual;
 import edu.fiuba.algo3.vistas.TarotVisual;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.fxml.FXMLLoader;
+
+import java.io.IOException;
+
+
+import com.fasterxml.jackson.databind.JsonNode;
+import edu.fiuba.algo3.modelo.entidades.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.Jugador;
+import edu.fiuba.algo3.modelo.entidades.Tarot;
+import edu.fiuba.algo3.modelo.entidades.Tienda;
+import edu.fiuba.algo3.modelo.entidades.comodines.Comodin;
+import edu.fiuba.algo3.vistas.CartaVisual;
+import edu.fiuba.algo3.vistas.ComodinVisual;
+import edu.fiuba.algo3.vistas.TarotVisual;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
@@ -26,9 +50,10 @@ public class TiendaController {
     @FXML
     private HBox comodines;
 
+
     public TiendaController() {}
 
-    public void setTienda(Tienda tienda) {
+   public void setTienda(Tienda tienda) {
         this.tienda = tienda;
     }
 
@@ -40,6 +65,7 @@ public class TiendaController {
     public void onContinuarClick() {
         this.balatroController.mostrarRonda();
     }
+
 
     public void visualizarComprables() {
         this.comodines.getChildren().clear();
