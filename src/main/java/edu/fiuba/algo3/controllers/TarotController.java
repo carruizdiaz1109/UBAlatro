@@ -35,9 +35,9 @@ public class TarotController {
 
             // Crear un VBox para alinear los botones verticalmente
             VBox vboxBotones = new VBox();
-            vboxBotones.setSpacing(5); // Espaciado entre botones
-            vboxBotones.setAlignment(Pos.CENTER); // Centrar los botones dentro del VBox
-            vboxBotones.setVisible(false); // Inicialmente oculto
+            vboxBotones.setSpacing(5);
+            vboxBotones.setAlignment(Pos.CENTER);
+            vboxBotones.setVisible(false); // Ocultar botones inicialmente
 
             // Botón "Usar"
             Button botonUsar = new Button("Usar");
@@ -57,12 +57,13 @@ public class TarotController {
 
             // Configurar el clic en la carta para alternar la visibilidad del VBox
             tarotVisual.setOnMouseClicked(event -> {
-                boolean esVisible = vboxBotones.isVisible(); // Estado actual de la carta clickeada
+                boolean esVisible = vboxBotones.isVisible();
 
                 // Ocultar los botones de todas las demás cartas
                 lblTarot.getChildren().forEach(node -> {
                     if (node instanceof StackPane) {
-                        ((StackPane) node).getChildren().stream()
+                        StackPane sp = (StackPane) node;
+                        sp.getChildren().stream()
                                 .filter(child -> child instanceof VBox)
                                 .forEach(child -> ((VBox) child).setVisible(false));
                     }
@@ -80,16 +81,12 @@ public class TarotController {
         }
     }
 
-
-
-
-    private void alternarBoton(Button boton) {
-        boton.setVisible(!boton.isVisible());
-    }
-
     private void realizarAccionTarot(Tarot carta, Button boton) {
-        // Lógica para ejecutar la acción con el tarot
-        System.out.println("Usando tarot: " + carta.getNombre());
-        boton.setVisible(false); // Ocultar el botón después de usarlo
+        if ("Usar".equals(boton.getText())) {
+            System.out.println("Usando tarot: " + carta.getNombre());
+        } else if ("X".equals(boton.getText())) {
+            System.out.println("Eliminando tarot: " + carta.getNombre());
+        }
+        boton.getParent().setVisible(false);
     }
 }

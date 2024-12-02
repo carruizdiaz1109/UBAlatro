@@ -17,35 +17,12 @@ public abstract class ElementoVisual<T> extends ImageView {
         this.setFitWidth(ancho);
         this.setFitHeight(alto);
         this.setPreserveRatio(true);
-        this.hacerArrastrable(); // Comportamiento común
     }
 
-    // Getter para la referencia del modelo
     public T getReferencia() {
         return referencia;
     }
 
-    // Método común para hacer arrastrable
-    private void hacerArrastrable() {
-        final double[] offsetX = {0};
-        final double[] offsetY = {0};
-
-        this.setOnMousePressed(event -> {
-            offsetX[0] = event.getSceneX() - this.getLayoutX();
-            offsetY[0] = event.getSceneY() - this.getLayoutY();
-        });
-
-        this.setOnMouseDragged(event -> {
-            this.setLayoutX(event.getSceneX() - offsetX[0]);
-            this.setLayoutY(event.getSceneY() - offsetY[0]);
-        });
-
-        this.setOnMouseReleased(event -> {
-            System.out.println("Elemento soltado en: " + this.getLayoutX() + ", " + this.getLayoutY());
-        });
-    }
-
-    // Métodos para ajustar las dimensiones de forma centralizada
     public static void setDimensiones(double nuevoAncho, double nuevoAlto) {
         ancho = nuevoAncho;
         alto = nuevoAlto;
