@@ -24,35 +24,18 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         BalatroController balatroController = new BalatroController();
-
         FXMLLoader loaderInicio = new FXMLLoader(getClass().getResource("/inicio.fxml"));
         Parent rootInicio = loaderInicio.load();
-        InicioController inicioController = loaderInicio.getController();
 
-        // Pasar los controladores e información al InicioController
+        InicioController inicioController = loaderInicio.getController();
         inicioController.setBalatroController(balatroController);
-        inicioController.setStage(stage);  // Pasamos el Stage al controller de Inicio
+        inicioController.setStage(stage);
 
         Scene inicioScene = new Scene(rootInicio);
         stage.setScene(inicioScene);
         stage.setTitle("UBAlatro - Inicio");
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/icon.png")));
+        stage.getIcons().add(icon);
         stage.show();
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml"));
-//        Parent root = loader.load();
-//        InicioController inicioController = loader.getController();
-//
-//        Balatro balatro = new Balatro("Nombre del Jugador");
-//
-//        balatroController.setBalatro(balatro);
-//        balatroController.setStage(stage);
-//        balatroController.avanzarRonda();
-//        FXMLLoader loaderRonda = new FXMLLoader(getClass().getResource("/ronda.fxml"));
-//        loader.setController(rondaController);
-//        Parent rootRonda = loaderRonda.load();
-//        Scene sceneRonda = new Scene(rootRonda);
-//        stage.setScene(sceneRonda);
-//        stage.setTitle("UBAlatro - Tienda");
-
     }
-
 }

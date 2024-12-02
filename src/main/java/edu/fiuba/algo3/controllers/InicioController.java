@@ -38,6 +38,11 @@ public class InicioController {
     @FXML
     public void initialize() {
         String videoPath = Objects.requireNonNull(getClass().getResource("/videos/background.mp4")).toExternalForm();
+        Media media = new Media(videoPath);
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.setAutoPlay(true);
+        backgroundMediaView.setMediaPlayer(mediaPlayer);
     }
 
     @FXML
