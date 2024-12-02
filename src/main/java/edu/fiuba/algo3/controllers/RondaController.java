@@ -1,28 +1,18 @@
 package edu.fiuba.algo3.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import edu.fiuba.algo3.modelo.entidades.*;
-import edu.fiuba.algo3.modelo.entidades.comodines.*;
-import edu.fiuba.algo3.modelo.entidades.tarots.*;
+
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

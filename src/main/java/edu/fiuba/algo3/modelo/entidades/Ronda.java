@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.entidades;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
-import edu.fiuba.algo3.modelo.entidades.Tienda;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.IntegerProperty;
