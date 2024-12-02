@@ -87,6 +87,7 @@ public class Ronda {
             System.out.println("Tipo de jugada: " + tipoJugada + ", Puntaje: " + puntaje);
             acumulador += puntaje;
         }
+        System.out.println("acumulador: " + acumulador);
         return acumulador;
     }
 
@@ -99,9 +100,10 @@ public class Ronda {
     }
 
     private void actualizarPropiedades() {
+        int puntaje = calcularTotalRonda();
         manosDisponibles.set(jugadasDisponibles);
         cantidadDescartes.set(descartesDisponibles);
-        puntajeAcumulado.set(calcularTotalRonda());
+        puntajeAcumulado.set(puntaje);
     }
 
     public IntegerProperty puntajeAcumuladoProperty() {
