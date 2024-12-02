@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 
 import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.excepciones.TarotDistintaJugadaError;
 import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
 import edu.fiuba.algo3.modelo.entidades.tarots.TarotJugada;

@@ -1,15 +1,12 @@
 package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.modelo.entidades.Jugador;
-import edu.fiuba.algo3.modelo.entidades.Tarot;
 import edu.fiuba.algo3.modelo.entidades.comodines.Comodin;
 import edu.fiuba.algo3.vistas.ComodinVisual;
-import edu.fiuba.algo3.vistas.TarotVisual;
 import javafx.scene.Node;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
 

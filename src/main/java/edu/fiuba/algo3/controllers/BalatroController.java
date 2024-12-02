@@ -120,5 +120,4 @@ public class BalatroController {
         mostrarResultado(gano);
     }
 
-
 }

@@ -44,7 +44,8 @@ public class BalatroTest {
         rondasField.set(balatro, List.of(mockRonda1, mockRonda2));
 
         // Act
-        balatro.iniciarJuego();
+        //balatro.iniciarJuego();
+        balatro.jugarRonda();
 
         // Assert
         assertTrue(true, "El método iniciarJuego se ejecutó sin errores.");

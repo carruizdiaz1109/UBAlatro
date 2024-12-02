@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.modelo.entidades.Tarot;
+import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.entidades.Jugador;
 import edu.fiuba.algo3.vistas.TarotVisual;
 import javafx.scene.layout.HBox;

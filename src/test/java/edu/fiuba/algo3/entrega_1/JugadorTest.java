@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.excepciones.TarotsNoDisponiblesError;
 import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
 import org.junit.jupiter.api.Test;

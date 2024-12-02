@@ -19,5 +19,6 @@ module edu.fiuba.algo3 {
     opens edu.fiuba.algo3.modelo.excepciones to javafx.fxml, org.junit.jupiter, to.org.mockito;
     exports edu.fiuba.algo3.modelo.interfaces;
     opens edu.fiuba.algo3.modelo.interfaces to javafx.fxml, org.junit.jupiter, to.org.mockito;
+    opens edu.fiuba.algo3.modelo.entidades.tarots to javafx.fxml, org.junit.jupiter, to.org.mockito;
 
 }
