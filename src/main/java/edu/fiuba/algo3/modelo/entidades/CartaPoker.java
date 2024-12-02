@@ -2,8 +2,9 @@ package edu.fiuba.algo3.modelo.entidades;
 
 import edu.fiuba.algo3.modelo.excepciones.CartaNulaError;
 import edu.fiuba.algo3.modelo.excepciones.PuntajeNuloError;
+import edu.fiuba.algo3.modelo.interfaces.Comprable;
 
-public class CartaPoker implements Comparable<CartaPoker>{
+public class CartaPoker implements Comparable<CartaPoker>, Comprable {
 
     private static final int contadorId = 1;
 
@@ -17,10 +18,6 @@ public class CartaPoker implements Comparable<CartaPoker>{
         this.palo = palo;
         this.puntaje = new Puntaje( this.valor.valor(), 1);
         this.puntajeComodin = new Puntaje(0,1);
-    }
-
-    public CartaPoker comprar() {
-        return this;
     }
 
     public void modificarPuntaje(Puntaje unPuntaje) {
@@ -63,9 +60,6 @@ public class CartaPoker implements Comparable<CartaPoker>{
         }
         return (this.valor == otraCarta.valor && this.palo.equals(otraCarta.palo));
     }
-
-    @Override
-    public int compareTo(CartaPoker otraCarta) { return Integer.compare(this.valor.valor(), otraCarta.valor.valor()); }
 
     public ConjuntoCartas obtenerEscalera() {
         ConjuntoCartas escalera = new ConjuntoCartas();
@@ -124,5 +118,11 @@ public class CartaPoker implements Comparable<CartaPoker>{
 
         return valorTexto + paloTexto + ".png"; // Ejemplo: "7H.png"
     }
+
+    @Override
+    public int compareTo(CartaPoker otraCarta) { return Integer.compare(this.valor.valor(), otraCarta.valor.valor()); }
+
+    @Override
+    public Comprable comprar() { return this; }
 }
 
