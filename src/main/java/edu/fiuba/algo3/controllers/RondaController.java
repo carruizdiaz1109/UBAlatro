@@ -285,10 +285,8 @@ public class RondaController {
     }
 
     public void verificarFinDeRonda() {
-        boolean gano;
         if (!this.rondaActual.sePuedeSeguirJugando()) {
-            gano = rondaActual.rondaSuperada();
-            this.balatroController.finDeRonda(gano);
+            this.balatroController.finDeRonda();
         }
     }
 }

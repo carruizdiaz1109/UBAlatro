@@ -29,6 +29,7 @@ public class BalatroController {
 
     @FXML
     public void initialize() {}
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -95,18 +96,21 @@ public class BalatroController {
         }
     }
 
-    private void mostrarResultado(boolean gano) {
+    private void mostrarResultado(Balatro.EstadoJuego estadoJuego) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultado.fxml"));
             Parent root = loader.load();
 
             ResultadoController resultadoController = loader.getController();
+
             resultadoController.setBalatroController(this);
 
-            if (gano) {
-                resultadoController.mostrarMensaje("Ganaste", true);
+            if (estadoJuego == Balatro.EstadoJuego.GANADO) {
+                resultadoController.mostrarMensaje("Ganaste el juego", estadoJuego);
+            } else if (estadoJuego == Balatro.EstadoJuego.EMPEZADO) {
+                resultadoController.mostrarMensaje("Siguiente ronda", estadoJuego);
             } else {
-                resultadoController.mostrarMensaje("Perdiste", false);
+                resultadoController.mostrarMensaje("Perdiste", estadoJuego);
             }
 
             stage.setScene(new Scene(root));
@@ -117,9 +121,8 @@ public class BalatroController {
         }
     }
 
-    public void finDeRonda(boolean gano) {
-        mostrarResultado(gano);
+    public void finDeRonda() {
+        this.balatro.verificarEstadoJuego();
+       mostrarResultado(this.balatro.getEstadoJuego());
     }
-
-
 }
