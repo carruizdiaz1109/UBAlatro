@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.modelo.entidades.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.Jugador;
 import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.entidades.Tienda;

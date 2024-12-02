@@ -29,10 +29,6 @@ public abstract class CartaPoker implements Comparable<CartaPoker>, Comprable {
 
     public abstract List<Integer> obtenerValoresPosibles();
 
-    public CartaPoker comprar() {
-        return this;
-    }
-
     public void modificarPuntaje(Puntaje unPuntaje) {
         verificarPuntajeNulo(unPuntaje);
         this.puntaje = this.puntaje.sumarPuntaje(unPuntaje);
@@ -109,6 +105,8 @@ public abstract class CartaPoker implements Comparable<CartaPoker>, Comprable {
     public int compareTo(CartaPoker otraCarta) { return Integer.compare(this.valor.valor(), otraCarta.valor.valor()); }
 
    @Override
-    public Comprable comprar() { return this; }
+    public Comprable comprar() {
+        return this;
+    }
 }
 
