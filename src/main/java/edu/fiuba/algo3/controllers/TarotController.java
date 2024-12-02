@@ -27,7 +27,7 @@ public class TarotController {
 
         for (Tarot carta : cartasTarot) {
             String imagePath = "/imagenes/tarot/" + carta.getNombre() + ".png";
-            TarotVisual tarotVisual = new TarotVisual(carta, imagePath, 100, 150);
+            TarotVisual tarotVisual = new TarotVisual(carta, imagePath);
 
             // Crear un StackPane para la carta y sus botones
             StackPane stackPane = new StackPane();
@@ -57,8 +57,19 @@ public class TarotController {
 
             // Configurar el clic en la carta para alternar la visibilidad del VBox
             tarotVisual.setOnMouseClicked(event -> {
-                boolean visible = vboxBotones.isVisible();
-                vboxBotones.setVisible(!visible);
+                boolean esVisible = vboxBotones.isVisible(); // Estado actual de la carta clickeada
+
+                // Ocultar los botones de todas las demás cartas
+                lblTarot.getChildren().forEach(node -> {
+                    if (node instanceof StackPane) {
+                        ((StackPane) node).getChildren().stream()
+                                .filter(child -> child instanceof VBox)
+                                .forEach(child -> ((VBox) child).setVisible(false));
+                    }
+                });
+
+                // Alternar visibilidad del VBox en la carta actual
+                vboxBotones.setVisible(!esVisible);
             });
 
             // Centrar los botones sobre la carta
@@ -68,6 +79,9 @@ public class TarotController {
             lblTarot.getChildren().add(stackPane);
         }
     }
+
+
+
 
     private void alternarBoton(Button boton) {
         boton.setVisible(!boton.isVisible());

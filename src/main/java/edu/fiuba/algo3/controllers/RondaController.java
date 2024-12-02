@@ -6,8 +6,6 @@ import edu.fiuba.algo3.modelo.entidades.*;
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
-import edu.fiuba.algo3.modelo.entidades.comodines.*;
-import edu.fiuba.algo3.modelo.entidades.tarots.*;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
@@ -15,16 +13,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.scene.input.ClipboardContent;
 
 public class RondaController {
 
@@ -93,7 +86,7 @@ public class RondaController {
         lblMano.getChildren().removeIf(node -> {
             if (node instanceof CartaVisual) {
                 CartaVisual cartaVisual = (CartaVisual) node;
-                return !cartasActuales.contains(cartaVisual.getCarta());
+                return !cartasActuales.contains(cartaVisual.getReferencia());
             }
             return false;
         });
@@ -101,15 +94,11 @@ public class RondaController {
         for (CartaPoker cartaPoker : cartasActuales) {
             boolean yaEstaEnMano = lblMano.getChildren().stream()
                     .filter(node -> node instanceof CartaVisual)
-                    .anyMatch(node -> ((CartaVisual) node).getCarta().equals(cartaPoker));
+                    .anyMatch(node -> ((CartaVisual) node).getReferencia().equals(cartaPoker));
 
             if (!yaEstaEnMano) {
-                CartaVisual cartaVisual = new CartaVisual(
-                        cartaPoker,
-                        "/imagenes/cartas/" + cartaPoker.getNombreArchivo(),
-                        120,
-                        180
-                );
+                String ImagePath = "/imagenes/cartas/" + cartaPoker.getNombreArchivo();
+                CartaVisual cartaVisual = new CartaVisual(cartaPoker, ImagePath);
                 cartaVisual.setOnMouseClicked(event -> seleccionarCarta(cartaVisual));
                 agregarCarta(cartaVisual);
             }
@@ -165,12 +154,12 @@ public class RondaController {
     private void seleccionarCarta(CartaVisual cartaVisual) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(150), cartaVisual);
 
-        if (this.cartasSeleccionadas.contains(cartaVisual.getCarta())) {
-            this.cartasSeleccionadas.remove(cartaVisual.getCarta());
+        if (this.cartasSeleccionadas.contains(cartaVisual.getReferencia())) {
+            this.cartasSeleccionadas.remove(cartaVisual.getReferencia());
             transition.setToY(0);
             cartaVisual.getStyleClass().remove("seleccionada");
         } else if(this.cartasSeleccionadas.size() < 5) {
-            this.cartasSeleccionadas.add(cartaVisual.getCarta());
+            this.cartasSeleccionadas.add(cartaVisual.getReferencia());
             transition.setToY(-30);
             cartaVisual.getStyleClass().add("seleccionada");
         }
@@ -197,7 +186,7 @@ public class RondaController {
         List<CartaVisual> cartasParaAnimar = lblMano.getChildren().stream()
                 .filter(node -> node instanceof CartaVisual)
                 .map(node -> (CartaVisual) node)
-                .filter(cartaVisual -> cartasSeleccionadas.contains(cartaVisual.getCarta()))
+                .filter(cartaVisual -> cartasSeleccionadas.contains(cartaVisual.getReferencia()))
                 .collect(Collectors.toList());
 
         if (cartasParaAnimar.isEmpty()) {
@@ -264,7 +253,7 @@ public class RondaController {
         Mano mano = jugador.getManoActual();
         List<CartaPoker> cartasFaltantes = mano.getCartas().stream()
             .filter(carta -> lblMano.getChildren().stream()
-            .noneMatch(node -> node instanceof CartaVisual && ((CartaVisual) node).getCarta().equals(carta)))
+            .noneMatch(node -> node instanceof CartaVisual && ((CartaVisual) node).getReferencia().equals(carta)))
             .collect(Collectors.toList());
 
         agregarCartasSecuencialmente(cartasFaltantes, 0);
@@ -277,12 +266,8 @@ public class RondaController {
         }
 
         CartaPoker cartaPoker = cartas.get(index);
-        CartaVisual cartaVisual = new CartaVisual(
-                cartaPoker,
-                "/imagenes/cartas/" + cartaPoker.getNombreArchivo(),
-                120,
-                180
-        );
+        String ImagePath = "/imagenes/cartas/" + cartaPoker.getNombreArchivo();
+        CartaVisual cartaVisual = new CartaVisual(cartaPoker, ImagePath);
 
         cartaVisual.setTranslateX(lblMano.getWidth());
         cartaVisual.setTranslateY(0);
