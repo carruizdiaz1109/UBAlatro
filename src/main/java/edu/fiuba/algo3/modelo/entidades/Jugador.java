@@ -64,6 +64,10 @@ public class Jugador {
         }
     }
 
+    public void eliminarTarot(Tarot tarotEliminado) {
+        this.cartasTarot.remove(tarotEliminado);
+    }
+
     public void aniadirComodin(Comodin unComodin) {
         this.comodines.add(unComodin);
     }

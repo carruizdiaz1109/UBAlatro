@@ -98,7 +98,7 @@ public class MainController {
         ComodinController comodinController = new ComodinController(this.jugador, lblComodin);
         comodinController.visualizarComodines();
 
-        TarotController tarotController = new TarotController(this.jugador, lblTarot);
+        TarotController tarotController = new TarotController(this.jugador, lblTarot, lblMano);
         tarotController.visualizarTarots();
     }
 

@@ -6,17 +6,31 @@ import edu.fiuba.algo3.vistas.TarotVisual;
 import javafx.scene.layout.HBox;
 import javafx.scene.input.MouseEvent;
 
+import javafx.scene.control.Button;
+
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TarotController {
     private final HBox lblTarot;
     private final Jugador jugador;
+    private final HBox lblMano;
+    private Button botonEliminar;
 
-    public TarotController(Jugador jugador, HBox lbltarot) {
+
+    public TarotController(Jugador jugador, HBox lbltarot, HBox lblMano) {
         this.jugador = jugador;
         this.lblTarot = lbltarot;
+        this.lblMano = lblMano;
+        inicializarBotonEliminar();
+    }
+
+    private void inicializarBotonEliminar(){
+
+        botonEliminar = new Button("Eliminar");
+        botonEliminar.setVisible(false);
+        botonEliminar.setOnAction(event -> manejarEliminarTarot());
+        lblMano.getChildren().add(botonEliminar);
     }
 
     public void visualizarTarots() {
@@ -42,5 +56,22 @@ public class TarotController {
 
         System.out.println("Carta de Tarot clickeada: " + carta);
         //this.jugador.utilizarTarot(carta, );
+
+        botonEliminar.setLayoutX(tarotVisual.getLayoutX() + tarotVisual.getFitWidth() + 10);
+        botonEliminar.setLayoutY(tarotVisual.getLayoutY());
+        botonEliminar.setVisible(true);
+
+        botonEliminar.setUserData(tarotVisual);
+    }
+
+    private void manejarEliminarTarot() {
+        TarotVisual  tarotVisual = (TarotVisual) botonEliminar.getUserData();
+        Tarot cartaTarot = tarotVisual.getCartaTarot();
+
+        jugador.eliminarTarot(cartaTarot);
+        lblTarot.getChildren().remove(tarotVisual);
+
+        System.out.println("Carta Tarot eliminada: " + cartaTarot);
+        botonEliminar.setVisible(false);
     }
 }
