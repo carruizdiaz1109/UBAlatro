@@ -153,8 +153,9 @@ public class TiendaController {
         }
 
         // Deshabilita el botón y muestra una confirmación
+        boton.setDisable(true);
         slotMap.keySet().forEach(btn -> btn.setDisable(true));
-        boton.setDisable(false);
+        boton.setDisable(true);
         System.out.println("Has comprado: " + comprable.getClass().getSimpleName());
     }
 
