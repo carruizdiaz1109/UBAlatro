@@ -2,6 +2,7 @@ package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.modelo.entidades.Jugador;
 import edu.fiuba.algo3.modelo.entidades.comodines.Comodin;
+import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.vistas.ComodinVisual;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -38,7 +39,7 @@ public class ComodinController {
             Button botonEliminar = new Button("X");
             botonEliminar.setStyle("-fx-background-color: #d24431; -fx-border-radius: 10; -fx-background-radius: 10;");
             botonEliminar.setVisible(false); // Inicialmente oculto
-            botonEliminar.setOnAction(event -> realizarAccionComodin(comodin, botonEliminar));
+            botonEliminar.setOnAction(event -> manejarEliminarTarot(comodin, stackPane));
 
             // Añadir comodín y botón al StackPane
             stackPane.getChildren().addAll(comodinVisual, botonEliminar);
@@ -57,14 +58,10 @@ public class ComodinController {
         }
     }
 
-    private void alternarBoton(Button boton) {
-        boton.setVisible(!boton.isVisible());
-    }
-
-    private void realizarAccionComodin(Comodin comodin, Button boton) {
-        // Lógica para ejecutar la acción con el comodín
-        System.out.println("Usando comodín: " + comodin.getNombre());
-        boton.setVisible(false); // Ocultar el botón después de usarlo
+    private void manejarEliminarTarot(Comodin comodin, StackPane stackPane) {
+        jugador.eliminarComodin(comodin);
+        lblComodin.getChildren().remove(stackPane);
+        System.out.println("Comodin eliminado: " + comodin.getNombre());
     }
 
     private javafx.scene.image.ImageView encontrarCartaPorURL(String url) {
