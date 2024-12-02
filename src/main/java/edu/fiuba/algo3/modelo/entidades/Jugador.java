@@ -14,7 +14,7 @@ public class Jugador {
     private final String nombre;
     protected Mano manoActual;
     protected Mazo mazo;
-    private final ArrayList<Tarot> cartasTarot;
+    private final ArrayList<Tarot> tarots;
     private final ArrayList<Comodin> comodines;
     protected Ronda rondaActual;
 
@@ -22,7 +22,7 @@ public class Jugador {
         this.nombre = nombre;
         this.mazo = mazo;
         this.manoActual = new Mano(this.mazo);
-        this.cartasTarot = new ArrayList<Tarot>();
+        this.tarots = new ArrayList<Tarot>();
         this.comodines = new ArrayList<Comodin>();
     }
 
@@ -53,9 +53,9 @@ public class Jugador {
         this.manoActual.seleccionarCartas(cartasASeleccionar);
     }
 
-    public void aniadirTarots(Tarot unTarot) {
-        if (this.cartasTarot.size() < 2) {
-            this.cartasTarot.add(unTarot);
+    public void aniadirTarot(Tarot unTarot) {
+        if (this.tarots.size() < 2) {
+            this.tarots.add(unTarot);
         }
     }
 
@@ -67,8 +67,26 @@ public class Jugador {
 
     public void aniadirCartaPoker(CartaPoker cartaPoker) { this.mazo.agregarCartaPoker(cartaPoker); }
 
+    public void eliminarTarot(Tarot unTarot) {
+        if (tarots.contains(unTarot)) {
+            tarots.remove(unTarot);
+            System.out.println("Tarot eliminado del inventario: " + unTarot.getNombre());
+        } else {
+            System.out.println("Error: El tarot no está en el inventario.");
+        }
+    }
+
+    public void eliminarComodin(Comodin unComodin) {
+        if (comodines.contains(unComodin)) {
+            comodines.remove(unComodin);
+            System.out.println("Comodin eliminado del inventario: " + unComodin.getNombre());
+        } else {
+            System.out.println("Error: El comodin no está en el inventario.");
+        }
+    }
+
     public void utilizarTarot(Tarot tarotaAplicar, CartaPoker cartaPoker) {
-        if (!this.cartasTarot.isEmpty() && this.cartasTarot.contains(tarotaAplicar)) {
+        if (!this.tarots.isEmpty() && this.tarots.contains(tarotaAplicar)) {
             tarotaAplicar.aplicar(cartaPoker);
         } else {
             throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
@@ -99,6 +117,6 @@ public class Jugador {
     }
 
     public ArrayList<Tarot> obtenerTarots() {
-        return this.cartasTarot;
+        return this.tarots;
     }
 }

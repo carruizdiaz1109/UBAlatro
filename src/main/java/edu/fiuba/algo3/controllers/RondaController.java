@@ -6,24 +6,18 @@ import edu.fiuba.algo3.modelo.entidades.*;
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
-import edu.fiuba.algo3.modelo.entidades.comodines.*;
-import edu.fiuba.algo3.modelo.entidades.tarots.*;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.scene.input.ClipboardContent;
 
 public class RondaController {
 
@@ -92,7 +86,7 @@ public class RondaController {
         lblMano.getChildren().removeIf(node -> {
             if (node instanceof CartaVisual) {
                 CartaVisual cartaVisual = (CartaVisual) node;
-                return !cartasActuales.contains(cartaVisual.getCarta());
+                return !cartasActuales.contains(cartaVisual.getReferencia());
             }
             return false;
         });
@@ -100,15 +94,11 @@ public class RondaController {
         for (CartaPoker cartaPoker : cartasActuales) {
             boolean yaEstaEnMano = lblMano.getChildren().stream()
                     .filter(node -> node instanceof CartaVisual)
-                    .anyMatch(node -> ((CartaVisual) node).getCarta().equals(cartaPoker));
+                    .anyMatch(node -> ((CartaVisual) node).getReferencia().equals(cartaPoker));
 
             if (!yaEstaEnMano) {
-                CartaVisual cartaVisual = new CartaVisual(
-                        cartaPoker,
-                        "/imagenes/cartas/" + cartaPoker.getNombreArchivo(),
-                        120,
-                        180
-                );
+                String ImagePath = "/imagenes/cartas/" + cartaPoker.getNombreArchivo();
+                CartaVisual cartaVisual = new CartaVisual(cartaPoker, ImagePath);
                 cartaVisual.setOnMouseClicked(event -> seleccionarCarta(cartaVisual));
                 agregarCarta(cartaVisual);
             }
@@ -164,12 +154,12 @@ public class RondaController {
     private void seleccionarCarta(CartaVisual cartaVisual) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(150), cartaVisual);
 
-        if (this.cartasSeleccionadas.contains(cartaVisual.getCarta())) {
-            this.cartasSeleccionadas.remove(cartaVisual.getCarta());
+        if (this.cartasSeleccionadas.contains(cartaVisual.getReferencia())) {
+            this.cartasSeleccionadas.remove(cartaVisual.getReferencia());
             transition.setToY(0);
             cartaVisual.getStyleClass().remove("seleccionada");
         } else if(this.cartasSeleccionadas.size() < 5) {
-            this.cartasSeleccionadas.add(cartaVisual.getCarta());
+            this.cartasSeleccionadas.add(cartaVisual.getReferencia());
             transition.setToY(-30);
             cartaVisual.getStyleClass().add("seleccionada");
         }
@@ -196,7 +186,7 @@ public class RondaController {
         List<CartaVisual> cartasParaAnimar = lblMano.getChildren().stream()
                 .filter(node -> node instanceof CartaVisual)
                 .map(node -> (CartaVisual) node)
-                .filter(cartaVisual -> cartasSeleccionadas.contains(cartaVisual.getCarta()))
+                .filter(cartaVisual -> cartasSeleccionadas.contains(cartaVisual.getReferencia()))
                 .collect(Collectors.toList());
 
         if (cartasParaAnimar.isEmpty()) {
@@ -263,7 +253,7 @@ public class RondaController {
         Mano mano = jugador.getManoActual();
         List<CartaPoker> cartasFaltantes = mano.getCartas().stream()
             .filter(carta -> lblMano.getChildren().stream()
-            .noneMatch(node -> node instanceof CartaVisual && ((CartaVisual) node).getCarta().equals(carta)))
+            .noneMatch(node -> node instanceof CartaVisual && ((CartaVisual) node).getReferencia().equals(carta)))
             .collect(Collectors.toList());
 
         agregarCartasSecuencialmente(cartasFaltantes, 0);
@@ -276,12 +266,8 @@ public class RondaController {
         }
 
         CartaPoker cartaPoker = cartas.get(index);
-        CartaVisual cartaVisual = new CartaVisual(
-                cartaPoker,
-                "/imagenes/cartas/" + cartaPoker.getNombreArchivo(),
-                120,
-                180
-        );
+        String ImagePath = "/imagenes/cartas/" + cartaPoker.getNombreArchivo();
+        CartaVisual cartaVisual = new CartaVisual(cartaPoker, ImagePath);
 
         cartaVisual.setTranslateX(lblMano.getWidth());
         cartaVisual.setTranslateY(0);
@@ -299,6 +285,48 @@ public class RondaController {
         if (!this.rondaActual.sePuedeSeguirJugando()) {
             this.balatroController.finDeRonda();
         }
+    }
+
+    @FXML
+    private void manejarClickCarta(Node cartaVisual, Node contenedorBoton) {
+        // Si el botón ya está visible, lo ocultamos
+        if (contenedorBoton.isVisible()) {
+            contenedorBoton.setVisible(false);
+            return;
+        }
+
+        // Ocultar cualquier otro botón visible
+        lblComodin.getChildren().forEach(node -> {
+            if (node instanceof HBox) {
+                node.setVisible(false);
+            }
+        });
+        lblTarot.getChildren().forEach(node -> {
+            if (node instanceof HBox) {
+                node.setVisible(false);
+            }
+        });
+
+        // Mostrar el botón asociado a la carta
+        contenedorBoton.setVisible(true);
+    }
+
+    private HBox crearContenedorConBoton(Node cartaVisual, String textoBoton) {
+        // Crear un botón
+        Button boton = new Button(textoBoton);
+        boton.getStyleClass().add("boton-accion"); // Clase CSS para el botón
+        boton.setOnAction(event -> {
+            // Aquí se define la acción del botón
+            System.out.println("Botón de carta clickeado");
+        });
+
+        // Crear un contenedor que incluye la carta y el botón
+        HBox contenedor = new HBox();
+        contenedor.getChildren().addAll(cartaVisual, boton);
+        contenedor.setSpacing(5); // Espaciado entre carta y botón
+        contenedor.setVisible(false); // Inicialmente oculto
+
+        return contenedor;
     }
 }
 

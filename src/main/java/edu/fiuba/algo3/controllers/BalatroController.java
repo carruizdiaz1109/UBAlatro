@@ -28,7 +28,9 @@ public class BalatroController {
     public BalatroController() {}
 
     @FXML
-    public void initialize() {}
+    public void initialize() {
+
+    }
     public void setStage(Stage stage) {
         this.stage = stage;
     }

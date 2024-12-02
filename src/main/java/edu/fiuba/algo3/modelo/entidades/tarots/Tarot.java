@@ -11,7 +11,6 @@ public abstract class Tarot implements Comprable {
     private String sobre;
     protected String ejemplar;
 
-
     public Tarot(String nombre, String descripcion, Puntaje puntaje, String sobre, String ejemplar) {
         this.nombre = nombre;
         this.descripcion = descripcion;

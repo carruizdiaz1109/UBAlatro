@@ -21,5 +21,4 @@ public class TarotCarta extends Tarot {
     public void aplicar(CartaPoker unaCarta) {
         unaCarta.aplicarTarot(this.puntaje);
     }
-
 }
