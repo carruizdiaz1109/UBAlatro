@@ -16,10 +16,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import javafx.application.Platform;
+import javafx.scene.control.Button;
 import javax.swing.text.LabelView;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,6 +44,8 @@ public class MainController {
     private HBox lblComodin;
     @FXML
     private Label lblResultado;
+    @FXML
+    private Button btnSalir;
 
     private Jugador jugador;
     private final ArrayList<CartaPoker> cartasSeleccionadas;
@@ -341,5 +343,12 @@ public class MainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void salirDelJuego(){
+        System.out.println("El botón Salir ha sido presionado.");
+        Platform.exit();
+        System.exit(0);
     }
 }
