@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fiuba.algo3.modelo.entidades.*;
 import edu.fiuba.algo3.modelo.entidades.comodines.*;
 import edu.fiuba.algo3.modelo.entidades.tarots.*;
+import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
@@ -173,7 +174,6 @@ public class RondaController {
         }
 
         transition.play();
-        System.out.println("Cartas seleccionadas: " + this.cartasSeleccionadas.size());
     }
 
     private void animarCartaHaciaAbajo(CartaVisual cartaVisual, Runnable onFinished) {
@@ -234,7 +234,15 @@ public class RondaController {
 
     @FXML
     public void clickDescartar() {
-        manejarAccionCartaSeleccionada(() -> jugador.descartar());
+        if (rondaActual.sePuedeDescartar() && rondaActual.sePuedeSeguirJugando()) {
+            manejarAccionCartaSeleccionada(() -> jugador.descartar());
+            try {
+                jugador.descartar();
+                verificarFinDeRonda();
+            } catch (NoHayDescarteDisponiblesError e ){
+                verificarFinDeRonda();
+            }
+        }
     }
 
     private void manejarAccionCartaSeleccionada(Runnable accionEspecifica) {
@@ -242,7 +250,6 @@ public class RondaController {
             return;
         }
         Runnable onComplete = () -> {
-            System.out.println("Cartas a jugar:" + this.cartasSeleccionadas.size());
             jugador.seleccionarCarta(cartasSeleccionadas);
             accionEspecifica.run();
             this.cartasSeleccionadas.clear();

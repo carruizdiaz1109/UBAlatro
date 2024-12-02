@@ -70,14 +70,14 @@ public class Ronda {
     }
 
     public void agregarDescarte(Descarte unDescarte) {
-        if (this.descartesDisponibles > 0 && sePuedeSeguirJugando()) {
+        if (sePuedeDescartar() && sePuedeSeguirJugando()) {
             this.jugadas.add(unDescarte);
             this.descartesDisponibles--;
             actualizarPropiedades();
         }else {
+            verificarEstadoRonda();
             throw new NoHayDescarteDisponiblesError();
         }
-        verificarEstadoRonda();
     }
 
     public int calcularTotalRonda () {
@@ -119,6 +119,10 @@ public class Ronda {
 
     public IntegerProperty cantidadDescartesProperty() {
         return cantidadDescartes;
+    }
+
+    public boolean sePuedeDescartar() {
+        return (this.descartesDisponibles > 0);
     }
 
     public Tienda getTienda(){

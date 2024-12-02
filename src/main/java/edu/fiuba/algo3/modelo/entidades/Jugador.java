@@ -76,9 +76,11 @@ public class Jugador {
 
     public void descartar() {
         Descarte unDesarte = this.manoActual.descartar();
+        if (unDesarte != null) {
         aplicarComodin(unDesarte);
         this.rondaActual.agregarDescarte(unDesarte);
         this.manoActual.rellenarse();
+        }
     }
 
     public Mano getManoActual() {

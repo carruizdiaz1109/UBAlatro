@@ -52,12 +52,13 @@ public class Mano extends ConjuntoCartas {
     }
 
     public Descarte descartar() {
-        Descarte unDescarte = null;
-        if(!this.seleccionadas.isEmpty()) {
-            unDescarte = new Descarte(this.seleccionadas);
+        if (this.seleccionadas.isEmpty()) {
+            return null;
         }
+        Descarte unDescarte = new Descarte(this.seleccionadas);
         this.cartas.removeAll(this.seleccionadas);
         this.seleccionadas.clear();
+
         return unDescarte;
     }
 
