@@ -1,7 +1,10 @@
-package edu.fiuba.algo3.modelo.entidades;
+package edu.fiuba.algo3.modelo.entidades.tarots;
 
 
-public abstract class Tarot {
+import edu.fiuba.algo3.modelo.entidades.Puntaje;
+import edu.fiuba.algo3.modelo.interfaces.Comprable;
+
+public abstract class Tarot implements Comprable {
     private String nombre;
     private String descripcion;
     protected Puntaje puntaje;
@@ -27,5 +30,7 @@ public abstract class Tarot {
         return descripcion;
     }
 
+    @Override
+    public Comprable comprar() { return this; }
 }
 

@@ -3,8 +3,9 @@ package edu.fiuba.algo3.modelo.entidades.comodines;
 import edu.fiuba.algo3.modelo.entidades.Jugada;
 import edu.fiuba.algo3.modelo.entidades.Puntaje;
 import edu.fiuba.algo3.modelo.interfaces.Aleatoriedad;
+import edu.fiuba.algo3.modelo.interfaces.Comprable;
 
-public abstract class Comodin implements Aleatoriedad {
+public abstract class Comodin implements Aleatoriedad, Comprable {
 
     protected String nombre;
     protected String descripcion;
@@ -36,4 +37,6 @@ public abstract class Comodin implements Aleatoriedad {
         return nombre;
     }
 
+    @Override
+    public Comprable comprar() { return this; }
 }

@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.entidades.*;
 import edu.fiuba.algo3.modelo.entidades.jugadas.FullHouse;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Par;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Trio;
+import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
 import org.junit.jupiter.api.Test;
 

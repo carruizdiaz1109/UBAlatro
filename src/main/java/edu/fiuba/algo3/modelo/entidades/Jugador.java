@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.entidades;
 
 import edu.fiuba.algo3.modelo.entidades.comodines.Comodin;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
+import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.excepciones.MazoVacioError;
 import edu.fiuba.algo3.modelo.excepciones.TarotsNoDisponiblesError;
 
@@ -50,11 +51,19 @@ public class Jugador {
         this.manoActual.seleccionarCartas(cartasASeleccionar);
     }
 
-    public void aniadirTarots(Tarot cartaTarot) {
+    public void aniadirTarots(Tarot unTarot) {
         if (this.cartasTarot.size() < 2) {
-            this.cartasTarot.add(cartaTarot);
+            this.cartasTarot.add(unTarot);
         }
     }
+
+    public void aniadirComodin(Comodin unComodin) {
+        if (this.comodines.size() < 5) {
+            this.comodines.add(unComodin);
+        }
+    }
+
+    public void aniadirCartaPoker(CartaPoker cartaPoker) { this.mazo.agregarCartaPoker(cartaPoker); }
 
     public void utilizarTarot(Tarot tarotaAplicar, CartaPoker cartaPoker) {
         if (!this.cartasTarot.isEmpty() && this.cartasTarot.contains(tarotaAplicar)) {
@@ -62,10 +71,6 @@ public class Jugador {
         } else {
             throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
         }
-    }
-
-    public void aniadirComodin(Comodin unComodin) {
-        this.comodines.add(unComodin);
     }
 
     public void aplicarComodin(Jugada unaJugada) {

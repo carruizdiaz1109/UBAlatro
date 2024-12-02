@@ -29,7 +29,6 @@ public class BalatroController {
 
     @FXML
     public void initialize() {}
-
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -56,7 +55,7 @@ public class BalatroController {
 
     public void mostrarTienda(Ronda actual) {
         try {
-            this.tiendaVisual = new TiendaVisual(this.stage);
+            this.tiendaVisual = new TiendaVisual(this.stage, balatro.getJugador());
             this.tiendaVisual.setTienda(actual.getTienda());
             this.tiendaVisual.setBalatroController(this);
 
@@ -125,4 +124,5 @@ public class BalatroController {
         this.balatro.verificarEstadoJuego();
        mostrarResultado(this.balatro.getEstadoJuego());
     }
+
 }

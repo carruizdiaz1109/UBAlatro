@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.entidades.jugadas.*;
 import edu.fiuba.algo3.modelo.entidades.tarots.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Tienda {

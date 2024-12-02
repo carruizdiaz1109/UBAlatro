@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.entidades.tarots;
 import edu.fiuba.algo3.modelo.excepciones.TarotDistintaJugadaError;
 import edu.fiuba.algo3.modelo.entidades.Jugada;
 import edu.fiuba.algo3.modelo.entidades.Puntaje;
-import edu.fiuba.algo3.modelo.entidades.Tarot;
 
 public class TarotJugada extends Tarot {
 

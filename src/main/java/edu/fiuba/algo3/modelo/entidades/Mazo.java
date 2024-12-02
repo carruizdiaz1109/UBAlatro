@@ -74,4 +74,5 @@ public class Mazo extends ConjuntoCartas {
         }
     }
 
+    public void agregarCartaPoker(CartaPoker carta) { this.cartas.add(carta); }
 }
