@@ -3,6 +3,7 @@ package edu.fiuba.algo3.vistas;
 import edu.fiuba.algo3.controllers.BalatroController;
 import edu.fiuba.algo3.controllers.TiendaController;
 import edu.fiuba.algo3.modelo.entidades.Balatro;
+import edu.fiuba.algo3.modelo.entidades.Jugador;
 import edu.fiuba.algo3.modelo.entidades.Tienda;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,10 +16,11 @@ public class TiendaVisual {
     private final Stage stage;
     private Tienda tienda;
     private BalatroController balatroController;
+    private Jugador jugador;
 
-
-    public TiendaVisual(Stage stage) {
+    public TiendaVisual(Stage stage, Jugador jugador) {
         this.stage = stage;
+        this.jugador = jugador;
     }
 
     public void setTienda(Tienda tiendaAMostar) {
@@ -32,6 +34,7 @@ public class TiendaVisual {
 
         controller.setTienda(this.tienda);
         controller.setBalatroController(this.balatroController);
+        controller.setJugador(this.jugador);
         controller.visualizarComprables();
 
         stage.setScene(new Scene(root));
