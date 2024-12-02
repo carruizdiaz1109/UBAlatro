@@ -35,4 +35,5 @@ public abstract class Comodin implements Aleatoriedad {
     public String getNombre() {
         return nombre;
     }
+
 }
