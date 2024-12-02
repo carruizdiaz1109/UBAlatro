@@ -78,6 +78,10 @@ public class Jugador {
         }
     }
 
+    public void eliminarComodin(Comodin comodinEliminado) {
+        this.comodines.remove(comodinEliminado);
+    }
+
     public void descartar() {
         Descarte unDesarte = this.manoActual.descartar();
         aplicarComodin(unDesarte);
