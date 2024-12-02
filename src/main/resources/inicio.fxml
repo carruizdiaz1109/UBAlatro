@@ -15,7 +15,7 @@
       <MediaView fx:id="backgroundMediaView" fitHeight="900.0" fitWidth="1700.0" preserveRatio="false" />
       <VBox alignment="CENTER" spacing="20.0">
          <children>
-            <VBox prefHeight="374.0" prefWidth="1702.0">
+            <VBox prefHeight="94.0" prefWidth="1700.0">
                <children>
                   <HBox prefHeight="141.0" prefWidth="1700.0">
                      <children>
@@ -30,9 +30,6 @@
                            </font>
                         </Text>
                      </children>
-                     <VBox.margin>
-                        <Insets top="230.0" />
-                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>
@@ -53,12 +50,15 @@
                   </TextField>
                </children>
             </VBox>
-            <VBox >
+            <VBox>
                <children>
-                  <Button fx:id="jugarButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="302.0" style="-fx-background-color: #6FCAA6; -fx-border-radius: 10; -fx-background-radius: 10;" text="Jugar" textFill="#383582" onAction="#onContinuarClick"/>
+                  <Button fx:id="jugarButton" mnemonicParsing="false" onAction="#onContinuarClick" prefHeight="40.0" prefWidth="302.0" style="-fx-background-color: #6FCAA6; -fx-border-radius: 10; -fx-background-radius: 10;" text="Jugar" textFill="#383582">
+                     <font>
+                        <Font name="Consolas Bold" size="23.0" />
+                     </font></Button>
                </children>
                <VBox.margin>
-                  <Insets left="700.0" right="700.0"/>
+                  <Insets left="700.0" right="700.0" />
                </VBox.margin>
             </VBox>
          </children>
