@@ -30,7 +30,7 @@ public class Balatro {
         this.mazo = new Mazo();
         cargarRondasDesdeJSON();
         this.jugador = new Jugador(nombreJugador, this.mazo);
-        this.indiceRondaActual = 3;
+        this.indiceRondaActual = 0;
         this.estadoJuego = EstadoJuego.EMPEZADO;
     }
 
