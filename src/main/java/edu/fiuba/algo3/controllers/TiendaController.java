@@ -121,7 +121,7 @@ public class TiendaController {
         } else if (comprable instanceof CartaPoker) {
             CartaPoker carta = (CartaPoker) comprable;
             imagePath = "/imagenes/cartas/" + carta.getNombreArchivo(); // Asumimos que `getNombreArchivo` devuelve el nombre correcto
-            Tooltip tooltip = new Tooltip("Carta: " + carta.toString());
+            Tooltip tooltip = new Tooltip("Carta: " + carta);
             Tooltip.install(slot, tooltip);
         }
 
@@ -159,6 +159,6 @@ public class TiendaController {
 
     @FXML
     public void onContinuarClick() {
-        System.out.println("Botón Continuar presionado");
+        this.balatroController.mostrarRonda();
     }
 }
