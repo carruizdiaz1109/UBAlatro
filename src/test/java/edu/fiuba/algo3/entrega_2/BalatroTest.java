@@ -35,7 +35,6 @@ public class BalatroTest {
 
         Ronda mockRonda1 = mock(Ronda.class);
         when(mockRonda1.rondaSuperada()).thenReturn(true);
-
         Ronda mockRonda2 = mock(Ronda.class);
         when(mockRonda2.rondaSuperada()).thenReturn(true);
 
@@ -44,9 +43,29 @@ public class BalatroTest {
         rondasField.set(balatro, List.of(mockRonda1, mockRonda2));
 
         // Act
-        balatro.iniciarJuego();
+        balatro.jugarRonda();
+        balatro.verificarEstadoJuego();
+        balatro.avanzarRonda();
+        balatro.jugarRonda();
+        balatro.verificarEstadoJuego();
+        assertEquals(Balatro.EstadoJuego.GANADO, balatro.getEstadoJuego());
+    }
 
-        // Assert
-        assertTrue(true, "El método iniciarJuego se ejecutó sin errores.");
+    @Test
+    public void test03BalatroTieneEstadoPerdidoCuandoSePierdeRonda() throws Exception {
+        // Arrange
+        Balatro balatro = new Balatro("Javier");
+
+        Ronda mockRonda1 = mock(Ronda.class);
+        when(mockRonda1.rondaSuperada()).thenReturn(false);
+
+        Field rondasField = Balatro.class.getDeclaredField("rondas");
+        rondasField.setAccessible(true);
+        rondasField.set(balatro, List.of(mockRonda1));
+
+        // Act
+        balatro.jugarRonda();
+        balatro.verificarEstadoJuego();
+        assertEquals(Balatro.EstadoJuego.PERDIDO, balatro.getEstadoJuego());
     }
 }

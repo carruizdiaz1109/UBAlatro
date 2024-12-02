@@ -29,7 +29,14 @@ public class IntegracionTest2 {
                 "\"tarots\": [" +
                 "{ \"nombre\": \"El Mago\", \"descripcion\": \"Mejora la mano par\", \"efecto\": { \"puntos\": 15, \"multiplicador\": 2 }, \"sobre\": \"mano\", \"ejemplar\": \"par\" }, " +
                 "{ \"nombre\": \"El Carro\", \"descripcion\": \"Mejora 1 carta seleccionada y la convierte en una carta de acero.\", \"efecto\": { \"puntos\": 1, \"multiplicador\": 1.5 }, \"sobre\": \"carta\", \"ejemplar\": \"cualquiera\" }" +
-                "]" +
+                "], " +
+                "\"carta\": {" +
+                "\"nombre\": \"Rey de Corazones\", " +
+                "\"palo\": \"Corazones\", " +
+                "\"numero\": \"Rey\", " +
+                "\"puntos\": 10, " +
+                "\"multiplicador\": \"1\" " +
+                "}" +
                 "}";
 
         // Convertir el JSON a JsonNode usando ObjectMapper

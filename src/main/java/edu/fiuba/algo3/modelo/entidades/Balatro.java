@@ -71,7 +71,7 @@ public class Balatro {
     }
 
     public Ronda getRondaActual() {
-        if (indiceRondaActual < this.rondas.size()) {
+        if (indiceRondaActual < this.rondas.size() ) {
             return this.rondas.get(this.indiceRondaActual);
         }
         return null;
@@ -89,6 +89,8 @@ public class Balatro {
         if (indiceRondaActual == this.rondas.size() - 1) {
             if (this.getRondaActual().rondaSuperada()) {
                 this.estadoJuego = EstadoJuego.GANADO;
+            } else {
+                this.estadoJuego = EstadoJuego.PERDIDO;
             }
         } else if (!getRondaActual().rondaSuperada()) {
             this.estadoJuego = EstadoJuego.PERDIDO;
