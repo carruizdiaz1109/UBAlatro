@@ -1,12 +1,14 @@
 package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.modelo.entidades.Balatro;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.util.Objects;
 
@@ -25,9 +27,11 @@ public class ResultadoController {
     @FXML
     private Button btnRondaSiguiente;
 
-
     @FXML
     private VBox root;
+
+    @FXML
+    private VBox resultadoBox;
     private BalatroController balatroController;
 
     @FXML
@@ -36,6 +40,7 @@ public class ResultadoController {
         btnVolverAJugar.setOnAction(event -> volverAJugar());
         btnSalir.setOnAction(event -> salir());
         btnRondaSiguiente.setOnAction(event -> siguienteRonda());
+        aplicarTransicion();
     }
 
     public void setBalatroController(BalatroController balatroController) {
@@ -43,18 +48,28 @@ public class ResultadoController {
     }
 
     public void mostrarMensaje(String mensaje, Balatro.EstadoJuego estadoJuego) {
-        lblResultado.setText(mensaje);
+        lblResultado.setText(mensaje);  // Actualiza el texto con el mensaje
 
+        // Controla el estado del cuadro de resultado según el estado del juego
         if (estadoJuego == Balatro.EstadoJuego.EMPEZADO) {
-            root.setStyle("-fx-background-color: linear-gradient(to bottom, #4CAF50, #81C784);");
+            // Recuadro verde para la ronda intermedia
+            resultadoBox.setStyle("-fx-background-color: white; -fx-border-color: #6D9F4B; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0, 0);");
+
+            // Mostrar botón de siguiente ronda, ocultar el de volver a jugar
             btnRondaSiguiente.setVisible(true);
             btnVolverAJugar.setVisible(false);
-        } else if (estadoJuego == Balatro.EstadoJuego.GANADO){
-            root.setStyle("-fx-background-color: linear-gradient(to bottom, #4CAF50, #81C784);");
+        } else if (estadoJuego == Balatro.EstadoJuego.GANADO) {
+            // Recuadro verde para la victoria final
+            resultadoBox.setStyle("-fx-background-color: white; -fx-border-color: #4CAF50; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0, 0);");
+
+            // Mostrar botón para volver a jugar, ocultar el de siguiente ronda
             btnRondaSiguiente.setVisible(false);
             btnVolverAJugar.setVisible(true);
         } else {
-            root.setStyle("-fx-background-color: linear-gradient(to bottom, #E53935, #EF9A9A);");
+            // Recuadro rojo para la derrota
+            resultadoBox.setStyle("-fx-background-color: white; -fx-border-color: #E53935; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0, 0);");
+
+            // Mostrar botón de volver a jugar, ocultar el de siguiente ronda
             btnRondaSiguiente.setVisible(false);
             btnVolverAJugar.setVisible(true);
         }
@@ -76,6 +91,13 @@ public class ResultadoController {
         if (alert.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
             System.exit(0);
         }
+    }
+
+    private void aplicarTransicion() {
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.5), root);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+        fadeIn.play();
     }
 
 }
