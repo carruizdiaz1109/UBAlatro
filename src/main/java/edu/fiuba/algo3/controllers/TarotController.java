@@ -16,7 +16,7 @@ public class TarotController {
     private final Jugador jugador;
     private final HBox lblMano;
     private Button botonEliminar;
-
+    private Button botonUsar;
 
     public TarotController(Jugador jugador, HBox lbltarot, HBox lblMano) {
         this.jugador = jugador;
@@ -31,6 +31,11 @@ public class TarotController {
         botonEliminar.setVisible(false);
         botonEliminar.setOnAction(event -> manejarEliminarTarot());
         lblMano.getChildren().add(botonEliminar);
+
+        botonUsar = new Button("Usar");
+        botonUsar.setVisible(false);
+        botonUsar.setOnAction(event -> manejarUsoTarot());
+        lblMano.getChildren().add(botonUsar);
     }
 
     public void visualizarTarots() {
@@ -57,11 +62,16 @@ public class TarotController {
         System.out.println("Carta de Tarot clickeada: " + carta);
         //this.jugador.utilizarTarot(carta, );
 
-        botonEliminar.setLayoutX(tarotVisual.getLayoutX() + tarotVisual.getFitWidth() + 10);
-        botonEliminar.setLayoutY(tarotVisual.getLayoutY());
-        botonEliminar.setVisible(true);
+        double offsetX = tarotVisual.getFitWidth() + 10;
+        botonUsar.setLayoutX(tarotVisual.getLayoutX() + offsetX);
+        botonUsar.setLayoutY(tarotVisual.getLayoutY());
+        botonEliminar.setLayoutX(tarotVisual.getLayoutX() + offsetX);
+        botonEliminar.setLayoutY(tarotVisual.getLayoutY() + 60);
+
+        mostrarBotones();
 
         botonEliminar.setUserData(tarotVisual);
+        botonUsar.setUserData(carta);
     }
 
     private void manejarEliminarTarot() {
@@ -72,6 +82,23 @@ public class TarotController {
         lblTarot.getChildren().remove(tarotVisual);
 
         System.out.println("Carta Tarot eliminada: " + cartaTarot);
+        ocultarBotones();
+    }
+
+    private void manejarUsoTarot() {
+        Tarot cartaTarot = (Tarot) botonUsar.getUserData();
+        jugador.utilizarTarot(cartaTarot);
+        jugador.eliminarTarot(cartaTarot);
+    }
+
+    private void ocultarBotones() {
+        botonUsar.setVisible(false);
         botonEliminar.setVisible(false);
     }
+
+    private void mostrarBotones(){
+        botonUsar.setVisible(true);
+        botonEliminar.setVisible(true);
+    }
+
 }

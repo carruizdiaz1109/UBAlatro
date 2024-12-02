@@ -56,9 +56,14 @@ public class Jugador {
         }
     }
 
-    public void utilizarTarot(Tarot tarotaAplicar, CartaPoker cartaPoker) {
-        if (!this.cartasTarot.isEmpty() && this.cartasTarot.contains(tarotaAplicar)) {
+    public void utilizarTarot(Tarot tarotaAplicar) {
+        ArrayList<CartaPoker> seleccionadas = manoActual.getSeleccionadas();
+        if (!this.cartasTarot.isEmpty() && this.cartasTarot.contains(tarotaAplicar) && seleccionadas.size() == 1) {
+            CartaPoker cartaPoker = seleccionadas.get(0);
             tarotaAplicar.aplicar(cartaPoker);
+        } else if (!this.cartasTarot.isEmpty() && this.cartasTarot.contains(tarotaAplicar) && seleccionadas.size() > 1) {
+            Jugada unaJugada = this.manoActual.jugar();
+            tarotaAplicar.aplicar(unaJugada);
         } else {
             throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
         }

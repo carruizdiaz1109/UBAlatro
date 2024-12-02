@@ -82,4 +82,8 @@ public class Mano extends ConjuntoCartas {
         //rellenarse();
         return jugadaNueva;
     }
+
+    public ArrayList<CartaPoker> getSeleccionadas(){
+        return this.seleccionadas;
+    }
 }
