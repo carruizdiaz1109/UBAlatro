@@ -3,12 +3,13 @@ package edu.fiuba.algo3.modelo.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.jugadas.*;
 import edu.fiuba.algo3.modelo.interfaces.Evaluable;
 
 public abstract class Jugada  implements Evaluable {
     private final Puntaje sumaValores;
-    private Puntaje puntaje;
+    protected Puntaje puntaje;
     protected List<CartaPoker> cartas;
     protected List<CartaPoker> cartasValidas;
     private Puntaje puntajeComodin;

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.entidades;
 
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 import edu.fiuba.algo3.modelo.excepciones.CapacidadLlenaError;
 

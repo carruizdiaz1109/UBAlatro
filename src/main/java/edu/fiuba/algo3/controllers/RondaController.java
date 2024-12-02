@@ -5,19 +5,28 @@ import edu.fiuba.algo3.modelo.entidades.*;
 
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.comodines.*;
+import edu.fiuba.algo3.modelo.entidades.tarots.*;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import javafx.scene.input.ClipboardContent;
 
 public class RondaController {
+
     @FXML
     private HBox lblMano;
     @FXML
@@ -38,7 +47,7 @@ public class RondaController {
     private Label lblResultado;
 
     private Jugador jugador;
-    private final ArrayList<CartaPoker> cartasSeleccionadas;
+    private ArrayList<CartaPoker> cartasSeleccionadas;
     private Ronda rondaActual;
     private RondaVisual rondaVisual;
     private Tienda tienda;
@@ -71,6 +80,8 @@ public class RondaController {
     }
 
     public void iniciarRonda() {
+        this.jugador.iniciarRonda(this.rondaActual);
+        this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles);
         actualizarMano();
     }
 

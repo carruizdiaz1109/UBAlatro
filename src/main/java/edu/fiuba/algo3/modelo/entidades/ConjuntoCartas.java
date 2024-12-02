@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.entidades;
 
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
+
 import java.util.ArrayList;
 import java.util.List;
 

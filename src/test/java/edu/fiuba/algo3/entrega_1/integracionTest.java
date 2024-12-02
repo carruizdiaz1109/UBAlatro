@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.jugadas.FullHouse;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Par;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Trio;
@@ -17,10 +19,10 @@ public class integracionTest {
     @Test
     public void test01VerificarQueUnJugadorPoseaCartasSuficientesParaEmpezarElJuegoEnSuMazo(){
         ArrayList<CartaPoker> cartasEsperadas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS)));
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS)));
 
         ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS)));
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS)));
 
         Mazo mazo = new Mazo(cartas);
         Mazo mazoEsperado = new Mazo(cartasEsperadas);
@@ -31,26 +33,26 @@ public class integracionTest {
     @Test
     public void test02SeVerificaQueAUnJugadorSeLeReparten8CartasDeSuMazo(){
         ArrayList<CartaPoker> cartasEsperadas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CINCO, Palo.DIAMANTES),
-                new CartaPoker(Valor.REY, Palo.PICAS),
-                new CartaPoker(Valor.AS, Palo.PICAS),
-                new CartaPoker(Valor.DOS, Palo.CORAZONES),
-                new CartaPoker(Valor.SIETE, Palo.DIAMANTES),
-                new CartaPoker(Valor.REY, Palo.CORAZONES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.REY, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.AS, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.DOS, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.REY, Palo.CORAZONES)
         ));
         Mano manoEsperada = new Mano(cartasEsperadas);
 
         ArrayList<CartaPoker> cartas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CINCO, Palo.DIAMANTES),
-                new CartaPoker(Valor.REY, Palo.PICAS),
-                new CartaPoker(Valor.AS, Palo.PICAS),
-                new CartaPoker(Valor.DOS, Palo.CORAZONES),
-                new CartaPoker(Valor.SIETE, Palo.DIAMANTES),
-                new CartaPoker(Valor.REY, Palo.CORAZONES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.REY, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.AS, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.DOS, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.REY, Palo.CORAZONES)
         ));
         Mazo mazo = new Mazo(cartas);
         Mano mano = new Mano(mazo);
@@ -63,10 +65,10 @@ public class integracionTest {
     public void test03SeVerificaQueSePuedaJugarUnaManoDeUnMazo() {
 
         ArrayList<CartaPoker> cartasEsperadas = new ArrayList<CartaPoker>(List.of(
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.DIEZ, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.DIAMANTES),
-                new CartaPoker(Valor.DIEZ, Palo.CORAZONES)
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.DIEZ, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.DIEZ, Palo.CORAZONES)
         ));
 
         ArrayList<CartaPoker> cartas = new ArrayList<>(cartasEsperadas);
@@ -85,9 +87,9 @@ public class integracionTest {
        int puntajeEsperado = 12;
 
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
-                new CartaPoker(Valor.TRES, Palo.PICAS),
-                new CartaPoker(Valor.SIETE, Palo.CORAZONES),
-                new CartaPoker(Valor.CINCO, Palo.DIAMANTES)
+                CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.DIAMANTES)
         ));
         Jugada jugada = Jugada.crearJugada(cartas);
 
@@ -99,11 +101,11 @@ public class integracionTest {
     @Test
     public void test05SeRespetaElOrdenDePrioridadDeLasManosDePoker(){
         List<CartaPoker> cartas = List.of(
-            new CartaPoker(Valor.DIEZ, Palo.PICAS),
-            new CartaPoker(Valor.DIEZ, Palo.TREBOLES),
-            new CartaPoker(Valor.DIEZ, Palo.CORAZONES),
-            new CartaPoker(Valor.CINCO, Palo.DIAMANTES),
-            new CartaPoker(Valor.CINCO, Palo.PICAS)
+            CartaFactory.crearCarta(Valor.DIEZ, Palo.PICAS),
+            CartaFactory.crearCarta(Valor.DIEZ, Palo.TREBOLES),
+            CartaFactory.crearCarta(Valor.DIEZ, Palo.CORAZONES),
+            CartaFactory.crearCarta(Valor.CINCO, Palo.DIAMANTES),
+            CartaFactory.crearCarta(Valor.CINCO, Palo.PICAS)
         );
 
         Jugada jugada = Jugada.crearJugada(cartas);
@@ -117,7 +119,7 @@ public class integracionTest {
     public void test06JugadorAplicaTarotAUnaCartaYSeLeModificaElValor(){
         int puntajeEsperado = 10;
 
-        CartaPoker cartaPoker = new CartaPoker(Valor.DOS, Palo.PICAS);
+        CartaPoker cartaPoker = CartaFactory.crearCarta(Valor.DOS, Palo.PICAS);
 
         Tarot tarot = new TarotCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(10, 1));
         tarot.aplicar(cartaPoker);
@@ -131,7 +133,7 @@ public class integracionTest {
     public void test07JugadorAplicaTarotAUnaCartaYSeLeModificaElMultiplicador(){
         int puntajeEsperado = 60;
 
-        CartaPoker cartaPoker = new CartaPoker(Valor.DIEZ, Palo.CORAZONES);
+        CartaPoker cartaPoker = CartaFactory.crearCarta(Valor.DIEZ, Palo.CORAZONES);
 
         Tarot tarot = new TarotCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(10, 6));
         tarot.aplicar(cartaPoker);

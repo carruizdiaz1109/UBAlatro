@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.entidades.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.ConjuntoCartas;
 import edu.fiuba.algo3.modelo.entidades.Palo;
 import edu.fiuba.algo3.modelo.entidades.Valor;
@@ -17,7 +18,7 @@ public class ConjuntoCartasTest {
 
     @Test
     public void test01SeAgregaUnaCarta(){
-        CartaPoker carta = new CartaPoker(Valor.DOS, Palo.PICAS);
+        CartaPoker carta = CartaFactory.crearCarta(Valor.DOS, Palo.PICAS);
 
         List<CartaPoker> listaEsperada = new ArrayList<>();
         listaEsperada.add(carta);
@@ -31,7 +32,7 @@ public class ConjuntoCartasTest {
 
     @Test
     public void test02DevuelveTrueSiElConjuntoNoEstaVacio(){
-        CartaPoker carta = new CartaPoker(Valor.DOS, Palo.PICAS);
+        CartaPoker carta = CartaFactory.crearCarta(Valor.DOS, Palo.PICAS);
 
         ConjuntoCartas conjunto = new ConjuntoCartas();
         conjunto.agregarCarta(carta);
@@ -42,7 +43,7 @@ public class ConjuntoCartasTest {
     @Test
     public void test03EliminarCartasDevuelveConjuntoVacio(){
         ConjuntoCartas conjuntoEsperado = new ConjuntoCartas();
-        CartaPoker carta = new CartaPoker(Valor.DOS, Palo.PICAS);
+        CartaPoker carta = CartaFactory.crearCarta(Valor.DOS, Palo.PICAS);
 
         ConjuntoCartas conjunto = new ConjuntoCartas();
         conjunto.agregarCarta(carta);

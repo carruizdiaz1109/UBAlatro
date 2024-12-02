@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo.entidades;
 import java.util.Arrays;
 
 public enum Valor {
-    AS(11),
+    AS(1),
     DOS(2),
     TRES(3),
     CUATRO(4),
@@ -13,9 +13,9 @@ public enum Valor {
     OCHO(8),
     NUEVE(9),
     DIEZ(10),
-    JOTA(10),
-    REINA(10),
-    REY(10);
+    JOTA(11),
+    REINA(12),
+    REY(13);
 
     private final int valor;
 
@@ -28,7 +28,6 @@ public enum Valor {
     }
 
     public static Valor obtenerValorDesdeString(String numeroStr) {
-        // Intentar convertir el número del string a entero
         try {
             int numero = Integer.parseInt(numeroStr);
             // Si el número es válido, devolver el valor correspondiente
@@ -51,13 +50,11 @@ public enum Valor {
                 default:
                     throw new IllegalArgumentException("Valor no reconocido: " + numeroStr);
             }
-        }
-        throw new IllegalArgumentException(
-                "Valor no reconocido: " + numeroStr + ". Valores posibles: " +
-                        Arrays.toString(Valor.values())
+        } throw new IllegalArgumentException(
+            "Valor no reconocido: " + numeroStr + ". Valores posibles: " +
+                Arrays.toString(Valor.values())
         );
     }
-
 }
 
 

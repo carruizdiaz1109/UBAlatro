@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo.entidades;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.excepciones.MazoVacioError;
 
 import java.io.IOException;
@@ -55,7 +57,7 @@ public class Mazo extends ConjuntoCartas {
                 Palo palo = Palo.obtenerPaloDesdeString(paloStr); // Convert string to enum
                 Valor valor = Valor.obtenerValorDesdeString(numeroStr); // Convert string to enum
 
-                CartaPoker carta = new CartaPoker(valor, palo);
+                CartaPoker carta = CartaFactory.crearCarta(valor, palo);
                 this.agregarCarta(carta); // Ensure 'mazo' is initialized as a collection
             }
         } catch (IOException e) {

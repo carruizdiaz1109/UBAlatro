@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
@@ -90,8 +92,8 @@ public class RondaTest {
     void test08SeJuegaUnaRondaCompletaConTresManos(){
         Ronda ronda = new Ronda(1, 120, 3, 3, tiendaMock);
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
-                new CartaPoker(Valor.CINCO, Palo.PICAS),
-                new CartaPoker(Valor.CINCO, Palo.TREBOLES)
+                CartaFactory.crearCarta(Valor.CINCO, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.TREBOLES)
         ));
 
         Jugada jugada1 = Jugada.crearJugada(cartas);
@@ -110,8 +112,8 @@ public class RondaTest {
     void test09SeJuegaUnaRondaConTodasLasJugadasPosiblesYNoLLegaAlPuntaje(){
         Ronda ronda = new Ronda(1, 2000, 3, 3, tiendaMock);
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
-                new CartaPoker(Valor.CINCO, Palo.PICAS),
-                new CartaPoker(Valor.CINCO, Palo.TREBOLES)
+                CartaFactory.crearCarta(Valor.CINCO, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.TREBOLES)
         ));
 
         Jugada jugada1 = Jugada.crearJugada(cartas);

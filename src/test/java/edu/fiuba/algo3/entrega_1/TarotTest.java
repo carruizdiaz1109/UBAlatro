@@ -3,6 +3,8 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.entidades.*;
 import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.excepciones.TarotDistintaJugadaError;
 import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
 import edu.fiuba.algo3.modelo.entidades.tarots.TarotJugada;
@@ -19,7 +21,7 @@ public class TarotTest {
     public void test01TarotModificaValorCarta() {
 
         // Arrange
-        CartaPoker carta = new CartaPoker(Valor.DOS, Palo.PICAS);
+        CartaPoker carta = CartaFactory.crearCarta(Valor.DOS, Palo.PICAS);
 
         Puntaje puntaje = new Puntaje(10, 2);
         Tarot tarot = new TarotCarta("El Tonto", "Mejora la mano carta mas alta", puntaje);
@@ -39,8 +41,8 @@ public class TarotTest {
 
         // Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
-                new CartaPoker(Valor.DOS, Palo.PICAS),
-                new CartaPoker(Valor.DOS, Palo.TREBOLES)
+                CartaFactory.crearCarta(Valor.DOS, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.DOS, Palo.TREBOLES)
         ));
         Jugada jugada = Jugada.crearJugada(cartas);
         Tarot tarot = new TarotJugada("El Tonto", "Mejora la mano carta mas alta", new Puntaje(15, 2), "par");
@@ -57,8 +59,8 @@ public class TarotTest {
 
         // Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
-                new CartaPoker(Valor.DOS, Palo.PICAS),
-                new CartaPoker(Valor.DOS, Palo.TREBOLES)
+                CartaFactory.crearCarta(Valor.DOS, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.DOS, Palo.TREBOLES)
         ));
         Jugada jugadaIncompatible = Jugada.crearJugada(cartas);
         Tarot tarot = new TarotJugada("Fuerza", "Mejora la mano poker", new Puntaje(30, 3), "poker");

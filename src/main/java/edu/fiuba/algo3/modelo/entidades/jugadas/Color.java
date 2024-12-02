@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.entidades.jugadas;
 
-import edu.fiuba.algo3.modelo.entidades.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.Jugada;
 import edu.fiuba.algo3.modelo.entidades.Puntaje;
 
@@ -15,7 +15,9 @@ public class Color extends Jugada {
 
     @Override
     public boolean esJugada(List<CartaPoker> cartas) {
-        // Crea una copia mutable de la lista de cartas para evitar modificar la lista original
+
+        if (cartas.size() != 5) return false;
+
         List<CartaPoker> cartasOrdenadas = new ArrayList<>(cartas);
 
         // Verifica que todas las cartas sean del mismo palo

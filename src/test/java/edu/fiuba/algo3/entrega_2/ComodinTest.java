@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.comodines.*;
 import edu.fiuba.algo3.modelo.entidades.jugadas.CartaAlta;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Escalera;
@@ -17,8 +19,8 @@ public class ComodinTest {
 
         // Arrange
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
-                new CartaPoker(Valor.DOS, Palo.PICAS),
-                new CartaPoker(Valor.DOS, Palo.TREBOLES)
+                CartaFactory.crearCarta(Valor.DOS, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.DOS, Palo.TREBOLES)
         ));
         Jugada jugada = Jugada.crearJugada(cartas);
         Puntaje puntaje = new Puntaje(10, 1);
@@ -38,11 +40,11 @@ public class ComodinTest {
     public void test02SeAplicaUnComodinEscaleraAJugadaEscalera() {
         //Arrange
         List<CartaPoker> cartas = List.of(
-                new CartaPoker(Valor.DOS, Palo.PICAS),
-                new CartaPoker(Valor.TRES, Palo.DIAMANTES),
-                new CartaPoker(Valor.CUATRO, Palo.DIAMANTES),
-                new CartaPoker(Valor.CINCO, Palo.CORAZONES),
-                new CartaPoker(Valor.SEIS, Palo.PICAS)
+                CartaFactory.crearCarta(Valor.DOS, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.TRES, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.CUATRO, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.SEIS, Palo.PICAS)
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado1 = (2+3+4+5+6+30)*12;
@@ -60,11 +62,11 @@ public class ComodinTest {
     public void test03NoSeAplicaUnComodinJugadaSiNoEsLaJugada() {
         //Arrange
         List<CartaPoker> cartas = List.of(
-                new CartaPoker(Valor.DOS, Palo.PICAS),
-                new CartaPoker(Valor.TRES, Palo.DIAMANTES),
-                new CartaPoker(Valor.CUATRO, Palo.DIAMANTES),
-                new CartaPoker(Valor.CINCO, Palo.CORAZONES),
-                new CartaPoker(Valor.SEIS, Palo.PICAS)
+                CartaFactory.crearCarta(Valor.DOS, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.TRES, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.CUATRO, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.CINCO, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.SEIS, Palo.PICAS)
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
         Puntaje puntaje = new Puntaje(0, 3);
@@ -81,11 +83,11 @@ public class ComodinTest {
     public void test04SeAplicaUnComodinAlPuntaje() {
         //Arrange
         List<CartaPoker> cartas = List.of(
-                new CartaPoker(Valor.DOS, Palo.PICAS),
-                new CartaPoker(Valor.DOS, Palo.DIAMANTES),
-                new CartaPoker(Valor.DOS, Palo.DIAMANTES),
-                new CartaPoker(Valor.DOS, Palo.CORAZONES),
-                new CartaPoker(Valor.SEIS, Palo.PICAS)
+                CartaFactory.crearCarta(Valor.DOS, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.DOS, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.DOS, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.DOS, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.SEIS, Palo.PICAS)
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado = (2*4+60)*7*8;
@@ -103,11 +105,11 @@ public class ComodinTest {
     public void test05SeAplicaUnComodinAleatorio() {
         //Arrange
         List<CartaPoker> cartas = List.of(
-                new CartaPoker(Valor.DOS, Palo.PICAS),
-                new CartaPoker(Valor.DOS, Palo.DIAMANTES),
-                new CartaPoker(Valor.DOS, Palo.DIAMANTES),
-                new CartaPoker(Valor.DOS, Palo.CORAZONES),
-                new CartaPoker(Valor.SEIS, Palo.PICAS)
+                CartaFactory.crearCarta(Valor.DOS, Palo.PICAS),
+                CartaFactory.crearCarta(Valor.DOS, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.DOS, Palo.DIAMANTES),
+                CartaFactory.crearCarta(Valor.DOS, Palo.CORAZONES),
+                CartaFactory.crearCarta(Valor.SEIS, Palo.PICAS)
         );
         Jugada unaJugada = Jugada.crearJugada(cartas);
         int puntajeEsperado = (2*4+60+10)*7;
@@ -139,7 +141,7 @@ public class ComodinTest {
         comodinCombinado.agregar(comodin2);
 
         List<CartaPoker> cartas = List.of(
-                new CartaPoker(Valor.DOS, Palo.PICAS)
+                CartaFactory.crearCarta(Valor.DOS, Palo.PICAS)
         );
         Jugada jugada = new CartaAlta(cartas);
         int puntajeEsperado = (5+20)*2;

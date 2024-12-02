@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.entidades;
 
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.comodines.Comodin;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
@@ -42,6 +43,7 @@ public class Jugador {
         if (this.comodines.size()>0) {
             aplicarComodin(unaJugada);
         }
+        System.out.println();
         System.out.println(unaJugada.getClass());
         this.rondaActual.agregarJugada(unaJugada);
         this.manoActual.rellenarse();

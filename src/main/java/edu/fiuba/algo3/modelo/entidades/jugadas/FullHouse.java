@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.entidades.jugadas;
 
-import edu.fiuba.algo3.modelo.entidades.CartaPoker;
+import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.Jugada;
 import edu.fiuba.algo3.modelo.entidades.Puntaje;
 
@@ -17,6 +17,8 @@ public class FullHouse extends Jugada {
 
     @Override
     public boolean esJugada(List<CartaPoker> cartas) {
+
+        if (cartas.size() != 5) return false;
         List<CartaPoker> cartasOrdenadas = new ArrayList<>(cartas);
         cartasOrdenadas.sort(Collections.reverseOrder());
 
