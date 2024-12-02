@@ -37,7 +37,7 @@ public class ComodinController {
 
             // Botón "Eliminar"
             Button botonEliminar = new Button("X");
-            botonEliminar.setStyle("-fx-background-color: #d24431; -fx-border-radius: 10; -fx-background-radius: 10;");
+            botonEliminar.setStyle("-fx-background-color: #ff595a; -fx-border-radius: 10; -fx-background-radius: 10;");
             botonEliminar.setVisible(false); // Inicialmente oculto
             botonEliminar.setOnAction(event -> manejarEliminarTarot(comodin, stackPane));
 

@@ -67,7 +67,8 @@ public abstract class CartaPoker implements Comparable<CartaPoker>, Comprable {
 
     public void aplicarTarot(Puntaje unPuntaje) {
         verificarPuntajeNulo(unPuntaje);
-        this.puntaje = unPuntaje;}
+        this.puntaje = this.puntaje.sumarPuntaje(unPuntaje);
+    }
 
     public String getNombreArchivo() {
         String valorTexto = String.valueOf(valor.valor()); // Por ejemplo, "7" para un 7

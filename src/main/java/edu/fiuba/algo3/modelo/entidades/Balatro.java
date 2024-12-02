@@ -96,6 +96,4 @@ public class Balatro {
             this.estadoJuego = EstadoJuego.PERDIDO;
         }
     }
-
-
 }
