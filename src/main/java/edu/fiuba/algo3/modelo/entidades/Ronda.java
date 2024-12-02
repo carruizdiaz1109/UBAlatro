@@ -54,7 +54,7 @@ public class Ronda {
     }
 
     public boolean sePuedeSeguirJugando() {
-        return (this.jugadasDisponibles > 1 && this.estado == RondaEstado.EN_CURSO);
+        return (this.jugadasDisponibles > 0 && this.estado == RondaEstado.EN_CURSO);
     }
 
     public void agregarJugada(Jugada unaJugada) {

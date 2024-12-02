@@ -48,46 +48,23 @@ public class RondaController {
 
     private Jugador jugador;
     private final ArrayList<CartaPoker> cartasSeleccionadas;
-    private final Ronda rondaActual;
+    private Ronda rondaActual;
     private RondaVisual rondaVisual;
     private Tienda tienda;
     private BalatroController balatroController;
 
     public RondaController() {
         this.cartasSeleccionadas = new ArrayList<>();
-        try {
-            String json = "{" +
-                    "\"comodines\": [" +
-                    "{ \"nombre\": \"Comodin Astuto\", \"descripcion\": \"+50 fichas si la mano jugada contiene un par\", \"activacion\": { \"Mano Jugada\": \"par\" }, \"efecto\": { \"puntos\": 50, \"multiplicador\": 1 } }, " +
-                    "{ \"nombre\": \"Cumbre Mistica\", \"descripcion\": \"x15 multiplicación por cada descarte\", \"activacion\": \"Descarte\", \"efecto\": { \"puntos\": 1, \"multiplicador\": 15 } } " +
-                    "], " +
-                    "\"tarots\": [" +
-                    "{ \"nombre\": \"El Mago\", \"descripcion\": \"Mejora la mano par\", \"efecto\": { \"puntos\": 15, \"multiplicador\": 2 }, \"sobre\": \"mano\", \"ejemplar\": \"par\" }, " +
-                    "{ \"nombre\": \"El Carro\", \"descripcion\": \"Mejora 1 carta seleccionada y la convierte en una carta de acero.\", \"efecto\": { \"puntos\": 1, \"multiplicador\": 1.5 }, \"sobre\": \"carta\", \"ejemplar\": \"cualquiera\" }" +
-                    "], " +
-                    "\"carta\": {" +
-                    "\"nombre\": \"10 de Corazones\", " +
-                    "\"palo\": \"Corazones\", " +
-                    "\"numero\": \"10\", " +
-                    "\"puntos\": 10, " +
-                    "\"multiplicador\": \"1\"" +
-                    "}" + "}";
-
-            // Convertir el JSON a JsonNode usando ObjectMapper
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode tiendaNode = objectMapper.readTree(json);
-
-            // Crear la tienda con el JSON
-            tienda = new Tienda(tiendaNode);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        this.rondaActual = new Ronda(1, 2000, 4, 5, tienda);
     }
 
     public void setBalatroController(BalatroController balatroController) {
         this.balatroController = balatroController;
     }
+
+    public void setRondaActual(Ronda rondaActual) {
+        this.rondaActual = rondaActual;
+    }
+
 
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
@@ -246,11 +223,13 @@ public class RondaController {
             manejarAccionCartaSeleccionada(() -> {
                 try {
                     jugador.jugar();
+                    verificarFinDeRonda();
                 } catch (NoHayJugadasDisponiblesError e) {
                     verificarFinDeRonda();
                 }
             });
         }
+        verificarFinDeRonda();
     }
 
     @FXML
@@ -310,8 +289,10 @@ public class RondaController {
 
     public void verificarFinDeRonda() {
         boolean gano;
-        gano = rondaActual.rondaSuperada();
-        this.balatroController.finDeRonda(gano);
+        if (!this.rondaActual.sePuedeSeguirJugando()) {
+            gano = rondaActual.rondaSuperada();
+            this.balatroController.finDeRonda(gano);
+        }
     }
 }
 

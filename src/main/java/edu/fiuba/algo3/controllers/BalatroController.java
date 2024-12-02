@@ -85,6 +85,7 @@ public class BalatroController {
             rondaController.setJugador(jugador);
             rondaController.setBalatroController(this);
             rondaController.setRondaVisual(rondaVisual);
+            rondaController.setRondaActual(this.balatro.getRondaActual());
             rondaController.iniciarRonda();
 
             stage.setScene(new Scene(root));
