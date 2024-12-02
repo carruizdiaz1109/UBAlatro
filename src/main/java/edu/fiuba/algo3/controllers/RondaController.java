@@ -13,6 +13,7 @@ import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -299,6 +300,48 @@ public class RondaController {
         if (!this.rondaActual.sePuedeSeguirJugando()) {
             this.balatroController.finDeRonda();
         }
+    }
+
+    @FXML
+    private void manejarClickCarta(Node cartaVisual, Node contenedorBoton) {
+        // Si el botón ya está visible, lo ocultamos
+        if (contenedorBoton.isVisible()) {
+            contenedorBoton.setVisible(false);
+            return;
+        }
+
+        // Ocultar cualquier otro botón visible
+        lblComodin.getChildren().forEach(node -> {
+            if (node instanceof HBox) {
+                node.setVisible(false);
+            }
+        });
+        lblTarot.getChildren().forEach(node -> {
+            if (node instanceof HBox) {
+                node.setVisible(false);
+            }
+        });
+
+        // Mostrar el botón asociado a la carta
+        contenedorBoton.setVisible(true);
+    }
+
+    private HBox crearContenedorConBoton(Node cartaVisual, String textoBoton) {
+        // Crear un botón
+        Button boton = new Button(textoBoton);
+        boton.getStyleClass().add("boton-accion"); // Clase CSS para el botón
+        boton.setOnAction(event -> {
+            // Aquí se define la acción del botón
+            System.out.println("Botón de carta clickeado");
+        });
+
+        // Crear un contenedor que incluye la carta y el botón
+        HBox contenedor = new HBox();
+        contenedor.getChildren().addAll(cartaVisual, boton);
+        contenedor.setSpacing(5); // Espaciado entre carta y botón
+        contenedor.setVisible(false); // Inicialmente oculto
+
+        return contenedor;
     }
 }
 
