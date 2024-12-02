@@ -45,7 +45,7 @@
                            <children>
                               <VBox prefHeight="200.0" prefWidth="220.0">
                                  <children>
-                                    <VBox fx:id="slot1" prefHeight="415.0" prefWidth="220.0" />
+                                    <VBox fx:id="slot1" alignment="CENTER" prefHeight="415.0" prefWidth="220.0" />
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
                                           <Button fx:id="comprarSlot1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #FFCC79; -fx-border-radius: 10; -fx-background-radius: 10;" text="Comprar" textAlignment="CENTER">
@@ -62,7 +62,7 @@
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="220.0">
                                  <children>
-                                    <VBox fx:id="slot2" prefHeight="415.0" prefWidth="220.0" />
+                                    <VBox fx:id="slot2" alignment="CENTER" prefHeight="415.0" prefWidth="220.0" />
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
                                           <Button fx:id="comprarSlot2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #FFCC79; -fx-border-radius: 10; -fx-background-radius: 10;" text="Comprar" textAlignment="CENTER">
@@ -79,7 +79,7 @@
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="220.0">
                                  <children>
-                                    <VBox fx:id="slot3" prefHeight="415.0" prefWidth="220.0" />
+                                    <VBox fx:id="slot3" alignment="CENTER" prefHeight="415.0" prefWidth="220.0" />
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
                                           <Button fx:id="comprarSlot3" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #FFCC79; -fx-border-radius: 10; -fx-background-radius: 10;" text="Comprar" textAlignment="CENTER">
@@ -96,7 +96,7 @@
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="220.0">
                                  <children>
-                                    <VBox fx:id="slot4" prefHeight="415.0" prefWidth="220.0" />
+                                    <VBox fx:id="slot4" alignment="CENTER" prefHeight="415.0" prefWidth="220.0" />
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
                                           <Button fx:id="comprarSlot4" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #FFCC79; -fx-border-radius: 10; -fx-background-radius: 10;" text="Comprar" textAlignment="CENTER">
@@ -113,7 +113,7 @@
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="220.0">
                                  <children>
-                                    <VBox fx:id="slot5" prefHeight="415.0" prefWidth="220.0" />
+                                    <VBox fx:id="slot5" alignment="CENTER" prefHeight="415.0" prefWidth="220.0" />
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
                                           <Button fx:id="comprarSlot5" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #FFCC79; -fx-border-radius: 10; -fx-background-radius: 10;" text="Comprar" textAlignment="CENTER">

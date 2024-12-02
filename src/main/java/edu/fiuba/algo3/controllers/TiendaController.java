@@ -129,8 +129,7 @@ public class TiendaController {
         if (imagePath != null) {
             try {
                 ImageView imageView = new ImageView(new javafx.scene.image.Image(getClass().getResourceAsStream(imagePath)));
-                imageView.setFitWidth(100); // Tamaño fijo para el slot
-                imageView.setFitHeight(150);
+                imageView.setFitWidth(160); // Tamaño fijo para el slot
                 imageView.setPreserveRatio(true);
 
                 slot.getChildren().add(imageView);
