@@ -80,15 +80,11 @@ public abstract class Jugada implements Evaluable {
     public int calcularPuntaje() {
         sumarValores();
         this.puntaje = this.puntaje.sumarPuntaje(this.puntajeComodin);
-        System.out.println("En calcular puntaje "+ this.puntaje.calcularPuntaje());
         return this.puntaje.calcularPuntaje();
     }
 
     public void aplicarComodin(Puntaje unPuntaje) {
-        System.out.println("Metodo aplicar comodin en jugada. puntaje antes de aplicarlo "+this.puntajeComodin.calcularPuntaje());
         this.puntajeComodin = this.puntajeComodin.sumarPuntaje(unPuntaje);
-        System.out.println("Metodo aplicar comodin en jugada. puntaje despues de aplicarloo "+this.puntajeComodin.calcularPuntaje());
-
     }
 
     public void aplicarTarot(Puntaje unPuntaje){

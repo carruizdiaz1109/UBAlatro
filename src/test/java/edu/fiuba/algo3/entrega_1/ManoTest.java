@@ -56,7 +56,8 @@ class ManoTest {
         CartaPoker c4 = CartaFactory.crearCarta(Valor.DOS, Palo.CORAZONES);
         CartaPoker c5 = CartaFactory.crearCarta(Valor.TRES, Palo.PICAS);
 
-        Mano mano = new Mano(new ArrayList<>(List.of(c1, c2, c3, c4, c5)));
+        Mazo unMazo = new Mazo(new ArrayList<>(List.of(c1, c2, c3, c4, c5)));
+        Mano mano = new Mano(unMazo);
 
         mano.seleccionarCartas(new ArrayList<>(List.of(c1, c3)));
         mano.descartar();
@@ -133,8 +134,8 @@ class ManoTest {
                 CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES),
                 CartaFactory.crearCarta(Valor.CUATRO, Palo.DIAMANTES)
         ));
-
-        Mano mano = new Mano(cartas);
+        Mazo mazo = new Mazo(cartas);
+        Mano mano = new Mano(mazo);
         mano.seleccionarCartas(new ArrayList<>(List.of(
                 CartaFactory.crearCarta(Valor.TRES, Palo.PICAS),
                 CartaFactory.crearCarta(Valor.SIETE, Palo.CORAZONES)
