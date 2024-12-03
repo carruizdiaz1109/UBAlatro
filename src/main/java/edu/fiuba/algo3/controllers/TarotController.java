@@ -76,13 +76,10 @@ public class TarotController {
 
     private void manejarUsarTarot(Tarot tarot, StackPane stackPane) {
         try {
-            rondaController.utilizarTarot(tarot);
-            //jugador.utilizarTarot(tarot);
-            //System.out.println("Tarot utilizado: " + tarot.getNombre());
-            //manejarEliminarTarot(tarot, stackPane);
+            rondaController.utilizarTarot(tarot, stackPane);
+            manejarEliminarTarot(tarot, stackPane);
         } catch (Exception e) {
             System.err.println("Error al usar el tarot: " + e.getMessage());
         }
     }
-
 }

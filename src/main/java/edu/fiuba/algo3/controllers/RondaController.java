@@ -95,7 +95,7 @@ public class RondaController {
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 
         // Ajustar volumen
-        mediaPlayer.setVolume(0.5);
+        mediaPlayer.setVolume(0.1);
 
         // Reproducir sonido
         mediaPlayer.play();
@@ -362,12 +362,13 @@ public class RondaController {
         return contenedor;
     }
 
-    public void utilizarTarot(Tarot tarotAAplicar){
+    public void utilizarTarot(Tarot tarotAAplicar, Node stackPane){
         System.out.println("Cantidad de cartas seleccionadas: " + cartasSeleccionadas.size());
         if (this.cartasSeleccionadas.size() == 1 ) {
             System.out.println("Se aplica el tarot a la carta seleccionada");
             tarotAAplicar.aplicar(this.cartasSeleccionadas.get(0));
             actualizarMano();
+            VisualManager.mostrarCartelCarta(stackPane, this.cartasSeleccionadas.get(0));
             //this.cartasSeleccionadas.get(0).aplicarTarot(tarotAAplicar);
         }
     }
