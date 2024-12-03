@@ -81,6 +81,8 @@ public class Ronda {
     public void agregarDescarte(Descarte unDescarte) {
         if (sePuedeDescartar() && sePuedeSeguirJugando()) {
             this.puntajeUltimaJugada.set(unDescarte.calcularPuntaje());
+            this.ptsUltimaJugada.set(unDescarte.obtenerPuntaje().obtenerPuntos());
+            this.multUltimaJugada.set(unDescarte.obtenerPuntaje().obtenerMultiplicador());
             this.jugadas.add(unDescarte);
             this.descartesDisponibles--;
             actualizarPropiedades();

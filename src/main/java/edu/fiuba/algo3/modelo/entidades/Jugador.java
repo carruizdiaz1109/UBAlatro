@@ -53,12 +53,12 @@ public class Jugador {
     }
 
     public void descartar() {
-        Descarte unDesarte = this.manoActual.descartar();
-        if (unDesarte != null) {
-            aplicarComodin(unDesarte);
-            unDesarte.calcularPuntaje();
+        Descarte unDescarte = this.manoActual.descartar();
+        if (unDescarte != null) {
+            aplicarComodin(unDescarte);
+            unDescarte.calcularPuntaje();
             this.rondaActual.setUltimaJugada("");
-            this.rondaActual.agregarDescarte(unDesarte);
+            this.rondaActual.agregarDescarte(unDescarte);
         }
         this.manoActual.rellenarse();
     }
