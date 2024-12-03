@@ -417,8 +417,14 @@ public class RondaController {
         if (this.cartasSeleccionadas.size() == 1 ) {
             System.out.println("Se aplica el tarot a la carta seleccionada");
             tarotAAplicar.aplicar(this.cartasSeleccionadas.get(0));
+            Node nodoSeleccionado = lblMano.getChildren().stream()
+                    .filter(node -> node instanceof CartaVisual)
+                    .map(node -> (CartaVisual) node)
+                    .filter(cartaVisual -> cartasSeleccionadas.contains(cartaVisual.getReferencia()))
+                    .findFirst()
+                    .orElse(null);
+            VisualManager.mostrarCartelCarta(nodoSeleccionado, cartasSeleccionadas.get(0));
             actualizarMano();
-            //this.cartasSeleccionadas.get(0).aplicarTarot(tarotAAplicar);
         }
     }
 }
