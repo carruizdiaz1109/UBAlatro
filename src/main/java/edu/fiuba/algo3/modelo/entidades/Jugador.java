@@ -94,6 +94,7 @@ public class Jugador {
 
         if (tarotaAplicar instanceof TarotCarta) {
             ArrayList<CartaPoker> seleccionadas = manoActual.getSeleccionadas();
+            System.out.println(seleccionadas.size());
             if (seleccionadas.size() == 1) {
                 CartaPoker cartaPoker = seleccionadas.get(0);
                 tarotaAplicar.aplicar(cartaPoker);

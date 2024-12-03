@@ -72,6 +72,8 @@ public class TarotController {
     }
 
     private void manejarUsarTarot(Tarot tarot, StackPane stackPane) {
+        System.out.println("Seleccione una carta");
+
         try {
             jugador.utilizarTarot(tarot);
             System.out.println("Tarot utilizado: " + tarot.getNombre());
