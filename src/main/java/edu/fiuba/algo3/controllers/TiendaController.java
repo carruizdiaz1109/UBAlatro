@@ -16,10 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TiendaController {
 
@@ -97,35 +94,28 @@ public class TiendaController {
     }
 
     private void mostrarElementoEnSlot(Comprable comprable, VBox slot) {
-        slot.getChildren().clear(); // Limpia el slot
 
-        // Cargar la imagen
+        slot.getChildren().clear();
         String imagePath = null;
 
         if (comprable instanceof Comodin) {
             Comodin comodin = (Comodin) comprable;
-            imagePath = "/imagenes/comodines/" + comodin.getNombre() + ".png"; // Ruta relativa al recurso
-            Tooltip tooltip = new Tooltip(comodin.getDescripcion());
-            Tooltip.install(slot, tooltip);
-
+            imagePath = "/imagenes/comodines/" + comodin.getNombre() + ".png";
+            VisualManager.mostrarCartelComodin(slot, comodin);
         } else if (comprable instanceof Tarot) {
             Tarot tarot = (Tarot) comprable;
             imagePath = "/imagenes/tarot/" + tarot.getNombre() + ".png";
-            Tooltip tooltip = new Tooltip(tarot.getDescripcion());
-            Tooltip.install(slot, tooltip);
-
+            VisualManager.mostrarCartelTarot(slot, tarot);
         } else if (comprable instanceof CartaPoker) {
             CartaPoker carta = (CartaPoker) comprable;
-            imagePath = "/imagenes/cartas/" + carta.getNombreArchivo(); // Asumimos que `getNombreArchivo` devuelve el nombre correcto
-            Tooltip tooltip = new Tooltip("Carta: " + carta);
-            Tooltip.install(slot, tooltip);
+            imagePath = "/imagenes/cartas/" + carta.getNombreArchivo();
+            VisualManager.mostrarCartelCarta(slot, carta);
         }
 
-        // Si la ruta no es nula, crea y añade el ImageView
         if (imagePath != null) {
             try {
-                ImageView imageView = new ImageView(new javafx.scene.image.Image(getClass().getResourceAsStream(imagePath)));
-                imageView.setFitWidth(160); // Tamaño fijo para el slot
+                ImageView imageView = new ImageView(new javafx.scene.image.Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath))));
+                imageView.setFitWidth(160);
                 imageView.setPreserveRatio(true);
 
                 slot.getChildren().add(imageView);

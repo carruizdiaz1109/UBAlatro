@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class CartaPoker implements Comparable<CartaPoker>, Comprable {
 
     protected final Valor valor;
-    public final Palo palo;
+    protected final Palo palo;
     protected Puntaje puntaje;
     protected final Puntaje puntajeComodin;
 
@@ -101,6 +101,8 @@ public abstract class CartaPoker implements Comparable<CartaPoker>, Comprable {
     public void verificarPuntajeNulo(Puntaje unPuntaje) {
         if(unPuntaje == null) throw new PuntajeNuloError();
     }
+
+    public Puntaje getPuntaje() { return puntaje; }
 
     @Override
     public int compareTo(CartaPoker otraCarta) { return Integer.compare(this.valor.valor(), otraCarta.valor.valor()); }

@@ -28,6 +28,7 @@ public class TarotController {
         for (Tarot tarot : cartasTarot) {
             String imagePath = "/imagenes/tarot/" + tarot.getNombre() + ".png";
             TarotVisual tarotVisual = new TarotVisual(tarot, imagePath);
+            VisualManager.mostrarCartelTarot(tarotVisual, tarot);
 
             StackPane stackPane = new StackPane();
             stackPane.setPrefSize(100, 150);
