@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.entidades;
 
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,12 +80,23 @@ public abstract class Jugada  implements Evaluable {
     public int calcularPuntaje() {
         sumarValores();
         this.puntaje = this.puntaje.sumarPuntaje(this.puntajeComodin);
+        System.out.println("En calcular puntaje "+ this.puntaje.calcularPuntaje());
         return this.puntaje.calcularPuntaje();
     }
 
     public void aplicarComodin(Puntaje unPuntaje) {
+        System.out.println("Puntaje del la comodin " +unPuntaje.calcularPuntaje());
+        System.out.println("Puntaje del del descarte antes de aplicarlo "+this.puntajeComodin.calcularPuntaje());
         this.puntajeComodin = this.puntajeComodin.sumarPuntaje(unPuntaje);
+        System.out.println("Puntaje del del descarte despues de aplicarlo "+this.puntajeComodin.calcularPuntaje());
+
     }
 
-    public void aplicarTarot(Puntaje unPuntaje){ this.puntajeComodin = this.puntajeComodin.sumarPuntaje(unPuntaje); }
+    public void aplicarTarot(Puntaje unPuntaje){
+        this.puntaje = unPuntaje;
+    }
+
+    public Puntaje getPuntaje() {
+        return this.puntaje;
+    }
 }

@@ -45,8 +45,8 @@ public class Jugador {
         if (this.comodines.size()>0) {
             aplicarComodin(unaJugada);
         }
-        System.out.println();
-        System.out.println(unaJugada.getClass());
+        System.out.println("La jugada vale " + unaJugada.calcularPuntaje());
+        System.out.println("Metodo jugar de jugador" + unaJugada.getClass());
         this.rondaActual.agregarJugada(unaJugada);
         this.manoActual.rellenarse();
     }
