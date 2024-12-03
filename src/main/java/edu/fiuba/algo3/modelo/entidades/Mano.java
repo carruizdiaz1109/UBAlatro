@@ -40,7 +40,7 @@ public class Mano extends ConjuntoCartas {
         for (CartaPoker carta : cartasASeleccionar) {
             if (this.seleccionadas.size() < this.capacidad) {
                 this.seleccionadas.add(carta);
-            }else{
+            } else {
                 throw new CapacidadLlenaError();
             }
         }

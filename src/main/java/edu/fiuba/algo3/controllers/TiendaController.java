@@ -129,20 +129,23 @@ public class TiendaController {
     private void realizarCompra(Button boton) {
         // Recupera el elemento asociado al botón
         Comprable comprable = slotMap.get(boton);
+        try {
+            if (comprable instanceof Comodin) {
+                jugador.aniadirComodin((Comodin) comprable);
+            } else if (comprable instanceof Tarot) {
+                jugador.aniadirTarot((Tarot) comprable);
+            } else if (comprable instanceof CartaPoker) {
+                jugador.aniadirCartaPoker((CartaPoker) comprable);
+            }
 
-        if (comprable instanceof Comodin) {
-            jugador.aniadirComodin((Comodin) comprable);
-        } else if (comprable instanceof Tarot) {
-            jugador.aniadirTarot((Tarot) comprable);
-        } else if (comprable instanceof CartaPoker) {
-            jugador.aniadirCartaPoker((CartaPoker) comprable);
+            reproducirSonidoCompra();
+
+            boton.setDisable(true);
+            slotMap.keySet().forEach(btn -> btn.setDisable(true));
+            System.out.println("Has comprado: " + comprable.getClass().getSimpleName());
+        } catch (RuntimeException e) {
+            System.out.println(e);
         }
-
-        reproducirSonidoCompra();
-
-        boton.setDisable(true);
-        slotMap.keySet().forEach(btn -> btn.setDisable(true));
-        System.out.println("Has comprado: " + comprable.getClass().getSimpleName());
     }
     public void reproducirSonidoCompra() {
         // Ruta del archivo de sonido

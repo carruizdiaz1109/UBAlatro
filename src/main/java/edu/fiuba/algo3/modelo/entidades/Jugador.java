@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
 import edu.fiuba.algo3.modelo.entidades.tarots.TarotJugada;
+import edu.fiuba.algo3.modelo.excepciones.CapacidadLlenaError;
 import edu.fiuba.algo3.modelo.excepciones.MazoVacioError;
 import edu.fiuba.algo3.modelo.excepciones.TarotsNoDisponiblesError;
 
@@ -68,12 +69,16 @@ public class Jugador {
     public void aniadirTarot(Tarot unTarot) {
         if (this.tarots.size() < 2) {
             this.tarots.add(unTarot);
+        } else {
+            throw new CapacidadLlenaError();
         }
     }
 
     public void aniadirComodin(Comodin unComodin) {
         if (this.comodines.size() < 5) {
             this.comodines.add(unComodin);
+        } else {
+            throw new CapacidadLlenaError();
         }
     }
 
