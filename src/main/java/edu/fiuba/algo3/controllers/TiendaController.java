@@ -9,11 +9,12 @@ import edu.fiuba.algo3.modelo.interfaces.Comprable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-
 import javafx.scene.image.ImageView;
 
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.util.*;
 
@@ -22,6 +23,7 @@ public class TiendaController {
     private Tienda tienda;
     private Jugador jugador;
     private BalatroController balatroController;
+    MediaPlayer mediaPlayer;
 
     @FXML
     private VBox slot1, slot2, slot3, slot4, slot5;
@@ -136,12 +138,24 @@ public class TiendaController {
             jugador.aniadirCartaPoker((CartaPoker) comprable);
         }
 
-        // Deshabilita el botón y muestra una confirmación
+        reproducirSonidoCompra();
+
         boton.setDisable(true);
         slotMap.keySet().forEach(btn -> btn.setDisable(true));
         System.out.println("Has comprado: " + comprable.getClass().getSimpleName());
     }
+    public void reproducirSonidoCompra() {
+        // Ruta del archivo de sonido
+        String rutaSonido = getClass().getResource("/sample/sonidoCompra.mp3").toExternalForm();
+        Media media = new Media(rutaSonido);
+        mediaPlayer = new MediaPlayer(media);
 
+        // Ajustar volumen
+        mediaPlayer.setVolume(0.9);
+
+        // Reproducir sonido
+        mediaPlayer.play();
+    }
     @FXML
     public void onContinuarClick() {
         this.balatroController.mostrarRonda();

@@ -15,6 +15,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +49,7 @@ public class RondaController {
     private RondaVisual rondaVisual;
     private Tienda tienda;
     private BalatroController balatroController;
+    private MediaPlayer mediaPlayer;
 
 
     public RondaController() {
@@ -79,6 +82,23 @@ public class RondaController {
         this.jugador.iniciarRonda(this.rondaActual);
         this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles);
         actualizarMano();
+        reproducirSonidoDeFondo();
+    }
+
+    public void reproducirSonidoDeFondo() {
+        // Ruta del archivo de sonido
+        String rutaSonido = getClass().getResource("/sample/sonidoDeFondo.mp3").toExternalForm();
+        Media media = new Media(rutaSonido);
+        mediaPlayer = new MediaPlayer(media);
+
+        // Configurar el sonido para que se repita en bucle
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
+        // Ajustar volumen
+        mediaPlayer.setVolume(0.5);
+
+        // Reproducir sonido
+        mediaPlayer.play();
     }
 
     public void actualizarMano() {
