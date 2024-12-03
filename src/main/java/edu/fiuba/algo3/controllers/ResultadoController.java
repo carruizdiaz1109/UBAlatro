@@ -66,14 +66,14 @@ public class ResultadoController {
             btnVolverAJugar.setVisible(false);
         } else if (estadoJuego == Balatro.EstadoJuego.GANADO) {
             // Recuadro verde para la victoria final
-            resultadoBox.setStyle("-fx-background-color: green; -fx-border-color: #4CAF50; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0, 0);");
+            resultadoBox.setStyle("-fx-background-color: #6fcaa4; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0, 0);");
 
             // Mostrar botón para volver a jugar, ocultar el de siguiente ronda
             btnRondaSiguiente.setVisible(false);
             btnVolverAJugar.setVisible(true);
         } else {
             // Recuadro rojo para la derrota
-            resultadoBox.setStyle("-fx-background-color: red; -fx-border-color: #E53935; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0, 0);");
+            resultadoBox.setStyle("-fx-background-color: #f37374; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0, 0);");
 
             // Mostrar botón de volver a jugar, ocultar el de siguiente ronda
             btnRondaSiguiente.setVisible(false);

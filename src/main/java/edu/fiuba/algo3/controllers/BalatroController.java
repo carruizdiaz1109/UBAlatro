@@ -129,7 +129,7 @@ public class BalatroController {
 
     public void finDeRonda() {
         this.balatro.verificarEstadoJuego();
-       mostrarResultado(this.balatro.getEstadoJuego());
+        mostrarResultado(this.balatro.getEstadoJuego());
     }
 
 }
