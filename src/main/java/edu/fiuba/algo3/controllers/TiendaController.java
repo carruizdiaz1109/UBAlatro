@@ -151,7 +151,7 @@ public class TiendaController {
         mediaPlayer = new MediaPlayer(media);
 
         // Ajustar volumen
-        mediaPlayer.setVolume(0.9);
+        mediaPlayer.setVolume(0.5);
 
         // Reproducir sonido
         mediaPlayer.play();

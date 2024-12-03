@@ -7,16 +7,25 @@ import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
+import edu.fiuba.algo3.modelo.excepciones.TarotsNoDisponiblesError;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +51,8 @@ public class RondaController {
 
     @FXML
     private Label lblResultado;
+    @FXML
+    private Button btnSalir;
 
     private Jugador jugador;
     private ArrayList<CartaPoker> cartasSeleccionadas;
@@ -83,7 +94,10 @@ public class RondaController {
         this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles);
         actualizarMano();
         reproducirSonidoDeFondo();
+        btnSalir.setOnAction(event -> salir());
+
     }
+
 
     public void reproducirSonidoDeFondo() {
         // Ruta del archivo de sonido
@@ -269,6 +283,43 @@ public class RondaController {
         }
     }
 
+    private void salir() {
+        Stage stage = new Stage();
+        stage.setTitle("Salir del Juego");
+
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+
+        VBox root = new VBox(10);
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(20));
+
+        Label lblMensaje = new Label("¿Estás seguro de que deseas salir?");
+        lblMensaje.setStyle("-fx-font-size: 16px; -fx-text-fill: #333;");
+
+        HBox botones = new HBox(10);
+        botones.setAlignment(Pos.CENTER);
+
+        Button btnSalir = new Button("Salir");
+        btnSalir.setStyle("-fx-background-color: #d9534f; -fx-text-fill: white; -fx-font-size: 14px;");
+        btnSalir.setOnAction(e -> {
+            System.exit(0);
+        });
+
+        Button btnCancelar = new Button("Cancelar");
+        btnCancelar.setStyle("-fx-background-color: #5bc0de; -fx-text-fill: white; -fx-font-size: 14px;");
+        btnCancelar.setOnAction(e -> stage.close());
+
+        botones.getChildren().addAll(btnSalir, btnCancelar);
+
+        root.getChildren().addAll(lblMensaje, botones);
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+
+        stage.showAndWait();
+    }
+
     private void manejarAccionCartaSeleccionada(Runnable accionEspecifica) {
         if (cartasSeleccionadas.isEmpty()) {
             return;
@@ -362,14 +413,21 @@ public class RondaController {
         return contenedor;
     }
 
-    public void utilizarTarot(Tarot tarotAAplicar, Node stackPane){
+    public void utilizarTarot(Tarot tarotAAplicar){
         System.out.println("Cantidad de cartas seleccionadas: " + cartasSeleccionadas.size());
         if (this.cartasSeleccionadas.size() == 1 ) {
             System.out.println("Se aplica el tarot a la carta seleccionada");
             tarotAAplicar.aplicar(this.cartasSeleccionadas.get(0));
+            Node nodoSeleccionado = lblMano.getChildren().stream()
+                    .filter(node -> node instanceof CartaVisual)
+                    .map(node -> (CartaVisual) node)
+                    .filter(cartaVisual -> cartasSeleccionadas.contains(cartaVisual.getReferencia()))
+                    .findFirst()
+                    .orElse(null);
+            VisualManager.mostrarCartelCarta(nodoSeleccionado, cartasSeleccionadas.get(0));
             actualizarMano();
-            VisualManager.mostrarCartelCarta(stackPane, this.cartasSeleccionadas.get(0));
-            //this.cartasSeleccionadas.get(0).aplicarTarot(tarotAAplicar);
+        } else {
+            throw new TarotsNoDisponiblesError("No se selecciono nignuna carta");
         }
     }
 }
