@@ -46,7 +46,7 @@ public class Balatro {
             for (JsonNode rondaNode : rondasNode) {
                 int numero = rondaNode.path("nro").asInt();
                 int puntajeMinimo = rondaNode.path("puntajeASuperar").asInt();
-                int descartesDisponibles = rondaNode.path("descartes").asInt();
+                int descartesDisponibles = rondaNode.path("Descartes").asInt();
                 int jugadasDisponibles = rondaNode.path("manos").asInt();
 
                 JsonNode tiendaNode = rondaNode.path("tienda");
@@ -82,7 +82,8 @@ public class Balatro {
     }
 
     public EstadoJuego getEstadoJuego(){
-        return this.estadoJuego;
+    //    return this.estadoJuego;
+        return EstadoJuego.GANADO;
     }
 
     public void verificarEstadoJuego() {

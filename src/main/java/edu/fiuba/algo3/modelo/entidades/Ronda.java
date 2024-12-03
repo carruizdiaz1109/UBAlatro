@@ -14,7 +14,7 @@ public class Ronda {
 
     private final int numero;
     private final int puntajeMinimo; //puntajeASuperar
-    private int descartesDisponibles; //descartes
+    private int descartesDisponibles; //Descartes
     private int jugadasDisponibles; //manos
     private final Tienda tienda;
     private final List<Jugada> jugadas;
@@ -81,6 +81,8 @@ public class Ronda {
     public void agregarDescarte(Descarte unDescarte) {
         if (sePuedeDescartar() && sePuedeSeguirJugando()) {
             this.puntajeUltimaJugada.set(unDescarte.calcularPuntaje());
+            this.ptsUltimaJugada.set(unDescarte.obtenerPuntaje().obtenerPuntos());
+            this.multUltimaJugada.set(unDescarte.obtenerPuntaje().obtenerMultiplicador());
             this.jugadas.add(unDescarte);
             this.descartesDisponibles--;
             actualizarPropiedades();

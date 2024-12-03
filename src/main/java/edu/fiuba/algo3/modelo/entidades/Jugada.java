@@ -80,8 +80,16 @@ public abstract class Jugada implements Evaluable {
     }
 
     public int calcularPuntaje() {
+        System.out.println("\npuntaje de la jugada:\n     " + this.puntaje.mostrarPuntos() +" "+ this.puntaje.mostrarMultiplicador());
+
         sumarValores();
+
+        System.out.println("puntaje de la juagda + cartas sumadas:\n     " + this.puntaje.mostrarPuntos() +" "+ this.puntaje.mostrarMultiplicador());
+
         this.puntaje = this.puntaje.sumarPuntaje(this.puntajeComodin);
+
+        System.out.println("puntaje de la juagda + cartas sumadas + comodines aplicados:\n     " + this.puntaje.mostrarPuntos() +" "+ this.puntaje.mostrarMultiplicador() + "\n");
+
         return this.puntaje.calcularPuntaje();
     }
 

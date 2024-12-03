@@ -3,7 +3,7 @@
     {
       "nro": 1,
       "manos": 3,
-      "descartes": 3,
+      "Descartes": 3,
       "puntajeASuperar": 3000,
       "tienda": {
         "comodines": [
@@ -19,7 +19,7 @@
           {
             "nombre": "Cumbre Mistica",
             "descripcion": "x15 multiplicación por cada descarte",
-            "activacion": "descarte",
+            "activacion": "Descarte",
             "efecto": {
               "puntos": 1,
               "multiplicador": 15
@@ -60,7 +60,7 @@
     {
       "nro": 2,
       "manos": 4,
-      "descartes": 4,
+      "Descartes": 4,
       "puntajeASuperar": 3600,
       "tienda": {
         "comodines": [
@@ -76,7 +76,7 @@
           {
             "nombre": "Ritual del Valle",
             "descripcion": "+75 fichas por cada descarte",
-            "activacion": "descarte",
+            "activacion": "Descarte",
             "efecto": {
               "puntos": 75,
               "multiplicador": 1
@@ -117,7 +117,7 @@
     {
       "nro": 3,
       "manos": 4,
-      "descartes": 4,
+      "Descartes": 4,
       "puntajeASuperar": 4320,
       "tienda": {
         "comodines": [
@@ -133,7 +133,7 @@
           {
             "nombre": "Talisman de Descarte",
             "descripcion": "+100 fichas por cada descarte",
-            "activacion": "descarte",
+            "activacion": "Descarte",
             "efecto": {
               "puntos": 100,
               "multiplicador": 1
@@ -174,7 +174,7 @@
     {
       "nro": 4,
       "manos": 4,
-      "descartes": 4,
+      "Descartes": 4,
       "puntajeASuperar": 5184,
       "tienda": {
         "comodines": [
@@ -212,7 +212,7 @@
             "nombre": "La Suma Sacerdotisa",
             "descripcion": "Mejora la mano doble par",
             "efecto": {
-              "puntos": 20,
+              "puntos": 25,
               "multiplicador": 2
             },
             "sobre": "mano",
@@ -231,7 +231,7 @@
     {
       "nro": 5,
       "manos": 4,
-      "descartes": 5,
+      "Descartes": 5,
       "puntajeASuperar": 6220,
       "tienda": {
         "comodines": [
@@ -259,8 +259,8 @@
             "nombre": "El Emperador",
             "descripcion": "Mejora la mano trio",
             "efecto": {
-              "puntos": 20,
-              "multiplicador": 2
+              "puntos": 40,
+              "multiplicador": 3
             },
             "sobre": "mano",
             "ejemplar": "trio"
@@ -288,14 +288,14 @@
     {
       "nro": 6,
       "manos": 4,
-      "descartes": 6,
+      "Descartes": 6,
       "puntajeASuperar": 7465,
       "tienda": {
         "comodines": [
           {
             "nombre": "Bandera",
             "descripcion": "+30 fichas por cada descarte",
-            "activacion": "descarte",
+            "activacion": "Descarte",
             "efecto": {
               "puntos": 30,
               "multiplicador": 1
@@ -360,7 +360,7 @@
     {
       "nro": 7,
       "manos": 4,
-      "descartes": 7,
+      "Descartes": 7,
       "puntajeASuperar": 8959,
       "tienda": {
         "comodines": [
@@ -389,7 +389,7 @@
               {
                 "nombre": "Bandera",
                 "descripcion": "+30 fichas por cada descarte",
-                "activacion": "descarte",
+                "activacion": "Descarte",
                 "efecto": {
                   "puntos": 30,
                   "multiplicador": 1
@@ -432,7 +432,7 @@
     {
       "nro": 8,
       "manos": 4,
-      "descartes": 8,
+      "Descartes": 8,
       "puntajeASuperar": 10750,
       "tienda": {
         "comodines" : [
