@@ -99,7 +99,7 @@ public class RondaController {
 
     public void iniciarRonda() {
         this.jugador.iniciarRonda(this.rondaActual);
-        this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugada, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles, lblRonda);
+        this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugada, lblPuntajeJugada, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles, lblRonda);
         actualizarMano();
         btnSalir.setOnAction(event -> salir());
     }

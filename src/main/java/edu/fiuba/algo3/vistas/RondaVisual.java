@@ -8,10 +8,11 @@ public class RondaVisual {
 
     private final Ronda ronda;
 
-    public RondaVisual(Ronda ronda, Label lblPuntajeAcumulado, Label lblJugada, Label lblManosDisponibles,
+    public RondaVisual(Ronda ronda, Label lblPuntajeAcumulado, Label lblJugada, Label lblPuntajeJugada, Label lblManosDisponibles,
                        Label lblPuntajeObjetivo, Label lblCantidadDescartes, Label lblRonda) {
         lblPuntajeAcumulado.textProperty().bind(ronda.puntajeAcumuladoProperty().asString());
         lblJugada.textProperty().bind(ronda.ultimaJugadaProperty());
+        lblPuntajeJugada.textProperty().bind(ronda.puntajeUltimaJugadaProperty().asString());
         lblManosDisponibles.textProperty().bind(ronda.manosDisponiblesProperty().asString());
         lblPuntajeObjetivo.textProperty().bind(ronda.puntajeObjetivoProperty().asString());
         lblCantidadDescartes.textProperty().bind(ronda.cantidadDescartesProperty().asString());

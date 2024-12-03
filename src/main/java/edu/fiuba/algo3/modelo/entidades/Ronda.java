@@ -19,8 +19,9 @@ public class Ronda {
     private final Tienda tienda;
     private final List<Jugada> jugadas;
 
-    private final StringProperty ultimaJugada = new SimpleStringProperty("");
     private final IntegerProperty puntajeAcumulado = new SimpleIntegerProperty();
+    private final StringProperty ultimaJugada = new SimpleStringProperty("");
+    private final IntegerProperty puntajeUltimaJugada = new SimpleIntegerProperty();
     private final IntegerProperty manosDisponibles = new SimpleIntegerProperty();
     private final IntegerProperty puntajeObjetivo = new SimpleIntegerProperty();
     private final IntegerProperty cantidadDescartes = new SimpleIntegerProperty();
@@ -63,6 +64,7 @@ public class Ronda {
 
     public void agregarJugada(Jugada unaJugada) {
         if (sePuedeSeguirJugando()) {
+            this.puntajeUltimaJugada.set(unaJugada.calcularPuntaje());
             this.jugadas.add(unaJugada);
             this.jugadasDisponibles --;
             actualizarPropiedades();
@@ -74,6 +76,7 @@ public class Ronda {
 
     public void agregarDescarte(Descarte unDescarte) {
         if (sePuedeDescartar() && sePuedeSeguirJugando()) {
+            this.puntajeUltimaJugada.set(unDescarte.calcularPuntaje());
             this.jugadas.add(unDescarte);
             this.descartesDisponibles--;
             actualizarPropiedades();
@@ -108,11 +111,15 @@ public class Ronda {
         manosDisponibles.set(jugadasDisponibles);
         cantidadDescartes.set(descartesDisponibles);
         puntajeAcumulado.set(puntaje);
-
+        puntajeUltimaJugada.set(puntajeUltimaJugada.get());
     }
 
-   public IntegerProperty puntajeAcumuladoProperty() {
+    public IntegerProperty puntajeAcumuladoProperty() {
         return puntajeAcumulado;
+    }
+
+    public IntegerProperty puntajeUltimaJugadaProperty() {
+        return puntajeUltimaJugada;
     }
 
     public IntegerProperty manosDisponiblesProperty() {
@@ -132,8 +139,6 @@ public class Ronda {
     }
 
     public StringProperty ultimaJugadaProperty() { return ultimaJugada; }
-
-    public String getUltimaJugada() { return ultimaJugada.get(); }
 
     public void setUltimaJugada(String ultimaJugada) { this.ultimaJugada.set(ultimaJugada); }
 
