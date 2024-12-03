@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.entidades.tarots;
 
+import edu.fiuba.algo3.modelo.entidades.ConfiguracionJugadas;
 import edu.fiuba.algo3.modelo.excepciones.TarotDistintaJugadaError;
 import edu.fiuba.algo3.modelo.entidades.Jugada;
 import edu.fiuba.algo3.modelo.entidades.Puntaje;
@@ -25,8 +26,9 @@ public class TarotJugada extends Tarot {
         }
     }
 
-    public void aplicar() {
-        ConfiguracionCadena.setPuntaje(ejemplar, efecto);
+    public void aplicarNuevo() {
+        ConfiguracionJugadas singleton = ConfiguracionJugadas.getInstancia();
+        singleton.actualizarPuntuacion(ejemplar, puntaje);
     }
 
 }

@@ -6,8 +6,8 @@ import java.util.List;
 
 public class EscaleraColor extends Escalera {
 
-    public EscaleraColor(List<CartaPoker> cartas) {
-        super(cartas);
+    public EscaleraColor(List<CartaPoker> cartas, String nombreJugada) {
+        super(cartas, nombreJugada);
         this.puntaje = new Puntaje(100, 8);
     }
 

@@ -15,10 +15,13 @@ public abstract class Jugada implements Evaluable {
     private Puntaje puntajeComodin;
     protected Jugada siguiente;
 
-    public Jugada(List<CartaPoker> cartas, Puntaje puntaje) {
+    public Jugada(List<CartaPoker> cartas, String nombreJugada) {
         this.cartas = cartas;
         this.sumaValores = new Puntaje (0,1);
-        this.puntaje = puntaje;
+
+        ConfiguracionJugadas instancia = ConfiguracionJugadas.getInstancia();
+        this.puntaje = instancia.getPuntuacion(nombreJugada);
+
         this.cartasValidas = new ArrayList<>();
         this.puntajeComodin = new Puntaje(0,1);
     }
@@ -31,7 +34,7 @@ public abstract class Jugada implements Evaluable {
         Jugada poker = new Poker(cartas);
         Jugada fullHouse = new FullHouse(cartas);
         Jugada color = new Color(cartas);
-        Jugada escalera = new Escalera(cartas);
+        Jugada escalera = new Escalera(cartas, "Escalera");
         Jugada trio = new Trio(cartas);
         Jugada doblePar = new DoblePar(cartas);
         Jugada par = new Par(cartas);

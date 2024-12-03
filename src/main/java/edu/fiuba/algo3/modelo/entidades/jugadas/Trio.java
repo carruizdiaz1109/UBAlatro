@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Trio extends Jugada {
     public Trio(List<CartaPoker> cartas) {
-        super(cartas, new Puntaje(30, 3));
+        super(cartas, "Trio");
     }
 
     @Override

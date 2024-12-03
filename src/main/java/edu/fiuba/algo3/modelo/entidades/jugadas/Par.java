@@ -10,7 +10,7 @@ import java.util.List;
 public class Par extends Jugada {
 
     public Par(List<CartaPoker> cartas) {
-        super(cartas, new Puntaje(10, 2));
+        super(cartas, "Par");
     }
 
     @Override
