@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.entidades;
 
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +90,5 @@ public abstract class Jugada implements Evaluable {
         this.puntaje = unPuntaje;
     }
 
-    public Puntaje getPuntaje() {
-        return this.puntaje;
-    }
+    public Puntaje obtenerPuntaje() { return this.puntaje; }
 }

@@ -42,4 +42,8 @@ public class Puntaje {
     public String mostrarMultiplicador() {
         return ("multiplicador: " + this.multiplicador);
     }
+
+    public int obtenerPuntos() { return this.puntos; }
+
+    public int obtenerMultiplicador() { return this.multiplicador; }
 }

@@ -45,11 +45,7 @@ public class Jugador {
 
     public void jugar(){
         Jugada unaJugada = this.manoActual.jugar();
-        if (this.comodines.size() > 0) {
-            aplicarComodin(unaJugada);
-        }
-        System.out.println("La jugada vale " + unaJugada.calcularPuntaje());
-        System.out.println("Metodo jugar de jugador" + unaJugada.getClass());
+        if (!this.comodines.isEmpty()) aplicarComodin(unaJugada);
         this.ultimaJugada = unaJugada.getClass().getSimpleName();
         this.rondaActual.setUltimaJugada(this.ultimaJugada);
         this.rondaActual.agregarJugada(unaJugada);
@@ -61,6 +57,7 @@ public class Jugador {
         if (unDesarte != null) {
             aplicarComodin(unDesarte);
             unDesarte.calcularPuntaje();
+            this.rondaActual.setUltimaJugada("");
             this.rondaActual.agregarDescarte(unDesarte);
         }
         this.manoActual.rellenarse();

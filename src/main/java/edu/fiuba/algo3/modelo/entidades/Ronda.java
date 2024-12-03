@@ -22,6 +22,8 @@ public class Ronda {
     private final IntegerProperty puntajeAcumulado = new SimpleIntegerProperty();
     private final StringProperty ultimaJugada = new SimpleStringProperty("");
     private final IntegerProperty puntajeUltimaJugada = new SimpleIntegerProperty();
+    private final IntegerProperty ptsUltimaJugada = new SimpleIntegerProperty();
+    private final IntegerProperty multUltimaJugada = new SimpleIntegerProperty();
     private final IntegerProperty manosDisponibles = new SimpleIntegerProperty();
     private final IntegerProperty puntajeObjetivo = new SimpleIntegerProperty();
     private final IntegerProperty cantidadDescartes = new SimpleIntegerProperty();
@@ -65,8 +67,10 @@ public class Ronda {
     public void agregarJugada(Jugada unaJugada) {
         if (sePuedeSeguirJugando()) {
             this.puntajeUltimaJugada.set(unaJugada.calcularPuntaje());
+            this.ptsUltimaJugada.set(unaJugada.obtenerPuntaje().obtenerPuntos());
+            this.multUltimaJugada.set(unaJugada.obtenerPuntaje().obtenerMultiplicador());
             this.jugadas.add(unaJugada);
-            this.jugadasDisponibles --;
+            this.jugadasDisponibles--;
             actualizarPropiedades();
         } else {
             this.estado = RondaEstado.PERDIDA;
@@ -88,7 +92,7 @@ public class Ronda {
     public int calcularTotalRonda () {
         int acumulador = 0;
         for (Jugada jugada : this.jugadas) {
-            int puntaje = jugada.getPuntaje().calcularPuntaje();
+            int puntaje = jugada.obtenerPuntaje().calcularPuntaje();
             String tipoJugada = jugada.getClass().getSimpleName();
             System.out.println("Calcular total ronda. Tipo de jugada: " + tipoJugada + ", Puntaje: " + puntaje);
             acumulador += puntaje;
@@ -120,6 +124,14 @@ public class Ronda {
 
     public IntegerProperty puntajeUltimaJugadaProperty() {
         return puntajeUltimaJugada;
+    }
+
+    public IntegerProperty ptsUltimaJugadaProperty() {
+        return ptsUltimaJugada;
+    }
+
+    public IntegerProperty multUltimaJugadaProperty() {
+        return multUltimaJugada;
     }
 
     public IntegerProperty manosDisponiblesProperty() {

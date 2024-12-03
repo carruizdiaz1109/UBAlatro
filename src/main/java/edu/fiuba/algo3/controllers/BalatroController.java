@@ -83,6 +83,8 @@ public class BalatroController {
                     rondaController.lblPuntajeAcumulado,
                     rondaController.lblJugada,
                     rondaController.lblPuntajeJugada,
+                    rondaController.lblPts,
+                    rondaController.lblMult,
                     rondaController.lblJugadasDisponibles,
                     rondaController.lblObjetivo,
                     rondaController.lblDescartesDisponibles,

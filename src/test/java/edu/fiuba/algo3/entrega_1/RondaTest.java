@@ -34,7 +34,7 @@ public class RondaTest {
 
     @Test
     public void test01SeVerificaQueSePuedeSeguirJugando() {
-        when(jugadaMock.getPuntaje()).thenReturn(new Puntaje(1000,2));
+        when(jugadaMock.obtenerPuntaje()).thenReturn(new Puntaje(1000,2));
         when(jugadaMock.calcularPuntaje()).thenReturn(2000);
         ronda.agregarJugada(jugadaMock);
 
@@ -43,7 +43,7 @@ public class RondaTest {
 
     @Test
     public void test02SeJuegaUnaJugadaYSeVerificaElPuntaje() {
-        when(jugadaMock.getPuntaje()).thenReturn(new Puntaje(100,1));
+        when(jugadaMock.obtenerPuntaje()).thenReturn(new Puntaje(100,1));
         when(jugadaMock.calcularPuntaje()).thenReturn(100);
 
         ronda.agregarJugada(jugadaMock);
@@ -53,7 +53,7 @@ public class RondaTest {
 
     @Test
    public  void test03NoSePuedeSeguirJugandoSiNoQuedanJugadas() {
-        when(jugadaMock.getPuntaje()).thenReturn(new Puntaje(100,1));
+        when(jugadaMock.obtenerPuntaje()).thenReturn(new Puntaje(100,1));
         when(jugadaMock.calcularPuntaje()).thenReturn(50);
         ronda.agregarJugada(jugadaMock);
         ronda.agregarJugada(jugadaMock);
@@ -65,7 +65,7 @@ public class RondaTest {
 
     @Test
     public void test05AgregarDescarteExitosamente(){
-        when(descarteMock.getPuntaje()).thenReturn(new Puntaje(500,2));
+        when(descarteMock.obtenerPuntaje()).thenReturn(new Puntaje(500,2));
         when(descarteMock.calcularPuntaje()).thenReturn(1000);
         ronda.agregarDescarte(descarteMock);
 
@@ -74,7 +74,7 @@ public class RondaTest {
 
     @Test
     void test06ErrorAgregarDescarteSinDescarteDisponibles() {
-        when(descarteMock.getPuntaje()).thenReturn(new Puntaje(500,1));
+        when(descarteMock.obtenerPuntaje()).thenReturn(new Puntaje(500,1));
         ronda.agregarDescarte(descarteMock);
         ronda.agregarDescarte(descarteMock);
         ronda.agregarDescarte(descarteMock);
@@ -84,8 +84,8 @@ public class RondaTest {
 
     @Test
     void test07CalcularTotalRondaTrasUnaJugadaYUnDescarte() {
-        when(jugadaMock.getPuntaje()).thenReturn(new Puntaje(100,1));
-        when(descarteMock.getPuntaje()).thenReturn(new Puntaje(500,1));
+        when(jugadaMock.obtenerPuntaje()).thenReturn(new Puntaje(100,1));
+        when(descarteMock.obtenerPuntaje()).thenReturn(new Puntaje(500,1));
         when(jugadaMock.calcularPuntaje()).thenReturn(100);
         when(descarteMock.calcularPuntaje()).thenReturn(500);
 
