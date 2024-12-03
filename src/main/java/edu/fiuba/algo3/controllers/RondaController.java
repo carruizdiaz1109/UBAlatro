@@ -81,7 +81,6 @@ public class RondaController {
 
     public void setRondaActual(Ronda rondaActual) {
         this.rondaActual = rondaActual;
-
     }
 
     public void setJugador(Jugador jugador) {

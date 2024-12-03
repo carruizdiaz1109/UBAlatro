@@ -300,7 +300,7 @@
                </HBox>
             </StackPane>
          </HBox>
-         <VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="1306.0" />
+         <VBox id="tablero" alignment="TOP_CENTER" prefHeight="300.0" prefWidth="1306.0" />
          <HBox alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1500.0">
             <StackPane alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1187.0">
                <HBox opacity="0.5" prefHeight="260.0" prefWidth="1009.0" style="-fx-background-color: #6B76BC; -fx-border-radius: 10; -fx-background-radius: 10;">
