@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.comodines.Comodin;
 import edu.fiuba.algo3.modelo.entidades.jugadas.Descarte;
 import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
+import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
+import edu.fiuba.algo3.modelo.entidades.tarots.TarotJugada;
 import edu.fiuba.algo3.modelo.excepciones.MazoVacioError;
 import edu.fiuba.algo3.modelo.excepciones.TarotsNoDisponiblesError;
 
@@ -43,8 +45,8 @@ public class Jugador {
         if (this.comodines.size()>0) {
             aplicarComodin(unaJugada);
         }
-        System.out.println();
-        System.out.println(unaJugada.getClass());
+        System.out.println("La jugada vale " + unaJugada.calcularPuntaje());
+        System.out.println("Metodo jugar de jugador" + unaJugada.getClass());
         this.rondaActual.agregarJugada(unaJugada);
         this.manoActual.rellenarse();
     }
@@ -85,11 +87,25 @@ public class Jugador {
         }
     }
 
-    public void utilizarTarot(Tarot tarotaAplicar, CartaPoker cartaPoker) {
-        if (!this.tarots.isEmpty() && this.tarots.contains(tarotaAplicar)) {
-            tarotaAplicar.aplicar(cartaPoker);
-        } else {
+    public void utilizarTarot(Tarot tarotaAplicar) {
+        if (this.tarots.isEmpty() || !this.tarots.contains(tarotaAplicar)) {
             throw new TarotsNoDisponiblesError("No hay tarots disponibles para jugar");
+        }
+
+        if (tarotaAplicar instanceof TarotCarta) {
+            ArrayList<CartaPoker> seleccionadas = manoActual.getSeleccionadas();
+            System.out.println(seleccionadas.size());
+            if (seleccionadas.size() == 1) {
+                CartaPoker cartaPoker = seleccionadas.get(0);
+                tarotaAplicar.aplicar(cartaPoker);
+            } else {
+                throw new IllegalArgumentException("Debe seleccionar exactamente una carta para aplicar TarotCarta");
+            }
+        } else if (tarotaAplicar instanceof TarotJugada) {
+            Jugada unaJugada = this.manoActual.jugar();
+            tarotaAplicar.aplicar(unaJugada);
+        } else {
+            throw new IllegalArgumentException("Tipo de tarot desconocido");
         }
     }
 

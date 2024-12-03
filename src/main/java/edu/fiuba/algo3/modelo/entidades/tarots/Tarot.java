@@ -31,5 +31,7 @@ public abstract class Tarot implements Comprable {
 
     @Override
     public Comprable comprar() { return this; }
+
+    public Puntaje getPuntaje() { return this.puntaje; }
 }
 

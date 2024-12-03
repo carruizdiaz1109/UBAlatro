@@ -15,10 +15,12 @@ import java.util.ArrayList;
 public class TarotController {
     private final HBox lblTarot;
     private final Jugador jugador;
+    private final RondaController rondaController;
 
-    public TarotController(Jugador jugador, HBox lblTarot) {
+    public TarotController(Jugador jugador, HBox lblTarot, RondaController rondaController) {
         this.jugador = jugador;
         this.lblTarot = lblTarot;
+        this.rondaController = rondaController;
     }
 
     public void visualizarTarots() {
@@ -40,7 +42,7 @@ public class TarotController {
 
             Button botonUsar = new Button("Usar");
             botonUsar.setStyle("-fx-background-color: #6FCAA6; -fx-border-radius: 10; -fx-background-radius: 10;");
-            //botonUsar.setOnAction(event -> manejarUsarTarot(tarot, stackPane, carta));
+            botonUsar.setOnAction(event -> manejarUsarTarot(tarot, stackPane));
 
             Button botonEliminar = new Button(" X ");
             botonEliminar.setStyle("-fx-background-color: #ff595a; -fx-border-radius: 10; -fx-background-radius: 10;");
@@ -66,9 +68,21 @@ public class TarotController {
         }
     }
 
-    private void manejarEliminarTarot(Tarot unTarot, StackPane stackPane) {
+    public void manejarEliminarTarot(Tarot unTarot, StackPane stackPane) {
         jugador.eliminarTarot(unTarot);
         lblTarot.getChildren().remove(stackPane);
         System.out.println("Tarot eliminado: " + unTarot.getNombre());
     }
+
+    private void manejarUsarTarot(Tarot tarot, StackPane stackPane) {
+        try {
+            rondaController.utilizarTarot(tarot);
+            //jugador.utilizarTarot(tarot);
+            //System.out.println("Tarot utilizado: " + tarot.getNombre());
+            //manejarEliminarTarot(tarot, stackPane);
+        } catch (Exception e) {
+            System.err.println("Error al usar el tarot: " + e.getMessage());
+        }
+    }
+
 }

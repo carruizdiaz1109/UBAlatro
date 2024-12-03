@@ -46,22 +46,15 @@ public class Mano extends ConjuntoCartas {
         }
     }
 
-    public void deseleccionarCarta(ArrayList<CartaPoker> cartasADeseleccionar) {
-        for (CartaPoker carta : cartasADeseleccionar){
-            this.seleccionadas.remove(carta);
-        }
-    }
-
-    public Descarte descartar() {
+   public Descarte descartar() {
         if (this.seleccionadas.isEmpty()) {
             return null;
         }
         Descarte unDescarte = new Descarte(this.seleccionadas);
         this.cartas.removeAll(this.seleccionadas);
         this.seleccionadas.clear();
-
         return unDescarte;
-    }
+   }
 
     public boolean compararSeleccionadasCon(ArrayList<CartaPoker> otrasSeleccionadas) {
         if (this.seleccionadas.size() != otrasSeleccionadas.size()) {
@@ -84,4 +77,6 @@ public class Mano extends ConjuntoCartas {
         //rellenarse();
         return jugadaNueva;
     }
+
+    public ArrayList<CartaPoker> getSeleccionadas() { return seleccionadas; }
 }

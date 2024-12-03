@@ -34,7 +34,8 @@ public class RondaTest {
 
     @Test
     public void test01SeVerificaQueSePuedeSeguirJugando() {
-        when(jugadaMock.calcularPuntaje()).thenReturn(2500);
+        when(jugadaMock.getPuntaje()).thenReturn(new Puntaje(1000,2));
+        when(jugadaMock.calcularPuntaje()).thenReturn(2000);
         ronda.agregarJugada(jugadaMock);
 
         assertTrue(ronda.sePuedeSeguirJugando());
@@ -42,7 +43,8 @@ public class RondaTest {
 
     @Test
     public void test02SeJuegaUnaJugadaYSeVerificaElPuntaje() {
-        when(jugadaMock.calcularPuntaje()).thenReturn(1000);
+        when(jugadaMock.getPuntaje()).thenReturn(new Puntaje(100,1));
+        when(jugadaMock.calcularPuntaje()).thenReturn(100);
 
         ronda.agregarJugada(jugadaMock);
         int puntajeRonda = ronda.calcularTotalRonda();
@@ -51,6 +53,7 @@ public class RondaTest {
 
     @Test
    public  void test03NoSePuedeSeguirJugandoSiNoQuedanJugadas() {
+        when(jugadaMock.getPuntaje()).thenReturn(new Puntaje(100,1));
         when(jugadaMock.calcularPuntaje()).thenReturn(50);
         ronda.agregarJugada(jugadaMock);
         ronda.agregarJugada(jugadaMock);
@@ -62,7 +65,8 @@ public class RondaTest {
 
     @Test
     public void test05AgregarDescarteExitosamente(){
-        when(descarteMock.calcularPuntaje()).thenReturn(500);
+        when(descarteMock.getPuntaje()).thenReturn(new Puntaje(500,2));
+        when(descarteMock.calcularPuntaje()).thenReturn(1000);
         ronda.agregarDescarte(descarteMock);
 
         assertEquals(descarteMock.calcularPuntaje(), ronda.calcularTotalRonda());
@@ -70,6 +74,7 @@ public class RondaTest {
 
     @Test
     void test06ErrorAgregarDescarteSinDescarteDisponibles() {
+        when(descarteMock.getPuntaje()).thenReturn(new Puntaje(500,1));
         ronda.agregarDescarte(descarteMock);
         ronda.agregarDescarte(descarteMock);
         ronda.agregarDescarte(descarteMock);
@@ -79,18 +84,20 @@ public class RondaTest {
 
     @Test
     void test07CalcularTotalRondaTrasUnaJugadaYUnDescarte() {
-        when(jugadaMock.calcularPuntaje()).thenReturn(1000);
+        when(jugadaMock.getPuntaje()).thenReturn(new Puntaje(100,1));
+        when(descarteMock.getPuntaje()).thenReturn(new Puntaje(500,1));
+        when(jugadaMock.calcularPuntaje()).thenReturn(100);
         when(descarteMock.calcularPuntaje()).thenReturn(500);
 
         ronda.agregarJugada(jugadaMock);
         ronda.agregarDescarte(descarteMock);
 
-        assertEquals(1500, ronda.calcularTotalRonda());
+        assertEquals(600, ronda.calcularTotalRonda());
     }
 
     @Test
     void test08SeJuegaUnaRondaCompletaConTresManos(){
-        Ronda ronda = new Ronda(1, 120, 3, 3, tiendaMock);
+        Ronda ronda = new Ronda(1, 60, 3, 3, tiendaMock);
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 CartaFactory.crearCarta(Valor.CINCO, Palo.PICAS),
                 CartaFactory.crearCarta(Valor.CINCO, Palo.TREBOLES)

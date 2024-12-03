@@ -3,6 +3,7 @@ package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.modelo.entidades.*;
 
+import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
@@ -47,6 +48,7 @@ public class RondaController {
     private Tienda tienda;
     private BalatroController balatroController;
 
+
     public RondaController() {
         this.cartasSeleccionadas = new ArrayList<>();
     }
@@ -65,7 +67,7 @@ public class RondaController {
         ComodinController comodinController = new ComodinController(this.jugador, lblComodin);
         comodinController.visualizarComodines();
 
-        TarotController tarotController = new TarotController(this.jugador, lblTarot);
+        TarotController tarotController = new TarotController(this.jugador, lblTarot, this);
         tarotController.visualizarTarots();
     }
 
@@ -151,6 +153,16 @@ public class RondaController {
             onComplete.run();
         }
     }
+
+//    public void deseleccionarCartas() {
+//        if(!cartasSeleccionadas.isEmpty()) {
+//            for(CartaVisual carta : cartasSeleccionadas) {
+//                this.cartasSeleccionadas.remove(carta.getReferencia());
+//                transition.setToY(0);
+//                cartaVisual.getStyleClass().remove("seleccionada");
+//            }
+//        }
+//    }
 
     private void seleccionarCarta(CartaVisual cartaVisual) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(150), cartaVisual);
@@ -328,6 +340,16 @@ public class RondaController {
         contenedor.setVisible(false); // Inicialmente oculto
 
         return contenedor;
+    }
+
+    public void utilizarTarot(Tarot tarotAAplicar){
+        System.out.println("Cantidad de cartas seleccionadas: " + cartasSeleccionadas.size());
+        if (this.cartasSeleccionadas.size() == 1 ) {
+            System.out.println("Se aplica el tarot a la carta seleccionada");
+            tarotAAplicar.aplicar(this.cartasSeleccionadas.get(0));
+            actualizarMano();
+            //this.cartasSeleccionadas.get(0).aplicarTarot(tarotAAplicar);
+        }
     }
 }
 

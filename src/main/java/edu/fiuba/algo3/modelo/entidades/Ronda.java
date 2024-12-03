@@ -48,7 +48,7 @@ public class Ronda {
 
     public boolean rondaSuperada() {
         int totalRonda = calcularTotalRonda();
-        System.out.println("Total ronda: " + totalRonda);
+        System.out.println("En ronda superada!!!! Total ronda: " + totalRonda);
         return (this.puntajeMinimo <= totalRonda);
     }
 
@@ -65,7 +65,6 @@ public class Ronda {
             this.estado = RondaEstado.PERDIDA;
             throw new NoHayJugadasDisponiblesError();
         }
-        verificarEstadoRonda();
     }
 
     public void agregarDescarte(Descarte unDescarte) {
@@ -73,8 +72,7 @@ public class Ronda {
             this.jugadas.add(unDescarte);
             this.descartesDisponibles--;
             actualizarPropiedades();
-        }else {
-            verificarEstadoRonda();
+        } else {
             throw new NoHayDescarteDisponiblesError();
         }
     }
@@ -82,11 +80,12 @@ public class Ronda {
     public int calcularTotalRonda () {
         int acumulador = 0;
         for (Jugada jugada : this.jugadas) {
-            int puntaje = jugada.calcularPuntaje();
+            int puntaje = jugada.getPuntaje().calcularPuntaje();
             String tipoJugada = jugada.getClass().getSimpleName();
-            System.out.println("Tipo de jugada: " + tipoJugada + ", Puntaje: " + puntaje);
+            System.out.println("Calcular total ronda. Tipo de jugada: " + tipoJugada + ", Puntaje: " + puntaje);
             acumulador += puntaje;
         }
+
         System.out.println("acumulador: " + acumulador);
         return acumulador;
     }
@@ -100,13 +99,13 @@ public class Ronda {
     }
 
     private void actualizarPropiedades() {
-        int puntaje = calcularTotalRonda();
+        int puntaje = calcularTotalRonda();;
         manosDisponibles.set(jugadasDisponibles);
         cantidadDescartes.set(descartesDisponibles);
         puntajeAcumulado.set(puntaje);
     }
 
-    public IntegerProperty puntajeAcumuladoProperty() {
+   public IntegerProperty puntajeAcumuladoProperty() {
         return puntajeAcumulado;
     }
 
