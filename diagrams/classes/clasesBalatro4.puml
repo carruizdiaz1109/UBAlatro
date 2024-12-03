@@ -12,116 +12,101 @@ package Model {
         + sumarPuntaje(unPuntaje: Puntaje):Puntaje
         + compararPuntajecon(otroPuntaje: int): boolean
         + compararPuntajecon(otroPuntaje: Puntaje): boolean
+        + mostrarPuntos(): string
+        + mostrarMultiplicador(): string
     }
 
-    class CartaPoker {
-        - valor: Valor
-        - palo: Palo
+    abstract class CartaPoker {
         - puntajeComodin: Puntaje
-        - puntajeTarot: Puntaje
 
         + CartaPoker(valor: Valor, palo: Palo)
         + comprar(): CartaPoker
-        + modificarPuntaje(Puntaje: unPuntaje)
-        + calcularPuntaje(): int
-        + sumarValorCon(otroValor: int): int
+        + modificarPuntaje(Puntaje: unPuntaje
         + esMismoValor(otraCarta: CartaPoker): boolean
         + esMismoPalo(otraCarta: CartaPoker): boolean
         + esConsecutiva(otraCarta: CartaPoker): boolean
         + compararCartaCon(otraCarta: CartaPoker): boolean
-        + activarTarot(tarot: Tarot)
-        + obtenerEscalera(): ConjuntoCartas
+        + aplicarTarot(unPuntaje: Puntaje)
         + aplicarComodin(unPuntaje: Puntaje)
+        + comprar(): Comprable
+        + {abstract}obtenerValoresPosibles(): List<Integer>
+        + {abstract}obtenerPuntaje(): Puntaje
     }
 
     abstract class Jugada {
         - sumaValores: Puntaje
         - puntajeComodin: Puntaje
-        - cartasValidas: List<CartaPoker>
+        # cartasValidas: List<CartaPoker>
+        # siguiente: Jugada
 
         + Jugada(cartas: Lista<CartaPoker>, puntaje: Puntaje)
+        - configurarCadena(cartas: List<CartaPoker>): Juagada
         + crearJugada(cartas: List<CartaPoker>): Jugada
-        + aplicarComodin(puntaje: Puntaje)
+        + evaluar(cartas: List<CartaPoker>): Jugada
         + sumarValores()
         + calcularPuntaje(): int
-        + {abstract}esJugada(cartas: List<CartaPoker>): boolean
+        + aplicarComodin(unPuntaje: Puntaje)
+        + aplicarTarot(unPuntaje: Puntaje)
         # {abstract}seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
     }
 
-    class CartaAlta {
-        + esJugada(cartas: List<CartaPoker>): boolean
-        # seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
+    class CartaFactory {
+        + crearCarta(valor: Valor, palo: Palo): CartaPoker
     }
 
-    class Par {
-        + esJugada(cartas: List<CartaPoker>): boolean
-        # seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
+    class Numero {
+       + obtenerPuntaje(): Puntaje
+       + obtenerValoresPosibles(): List<Integer>
     }
 
-    class DoblePar {
-        + esJugada(cartas: List<CartaPoker>): boolean
-        # seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
+    class Figura {
+       + obtenerPuntaje(): Puntaje
+       + obtenerValoresPosibles(): List<Integer>
     }
 
-    class Trio {
-        + esJugada(cartas: List<CartaPoker>): boolean
-        # seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
+    class As {
+       + obtenerPuntaje(): Puntaje
+       + obtenerValoresPosibles(): List<Integer>
     }
 
-    class Escalera {
-        + esJugada(cartas: List<CartaPoker>): boolean
-        # seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
+    enum Palo{
+        CORAZONES
+        PICAS
+        DIAMANTES
+        TREBOLES
+
+        + obtenerPaloDesdeString(paloStr: string): Palo
     }
 
-    class Color {
-        + esJugada(cartas: List<CartaPoker>): boolean
-        # seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
+    enum Valor {
+       AS
+       DOS
+       TRES
+       CUATRO
+       CINCO
+       SEIS
+       SIETE
+       OCHO
+       NUEVE
+       DIEZ
+       JOTA
+       REINA
+       REY
+
+        + obtenerValorDesdeString(numeroStr: string): Valor
     }
 
-    class FullHouse {
-        + esJugada(cartas: List<CartaPoker>): boolean
-        # seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
-    }
-
-    class Poker {
-        + esJugada(cartas: List<CartaPoker>): boolean
-        # seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
-    }
-
-    class EscaleraColor {
-        + esJugada(cartas: List<CartaPoker>): boolean
-        # seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
-    }
-
-    class EscaleraReal {
-        + esJugada(cartas: List<CartaPoker>): boolean
-        # seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
-    }
-
-    class Descarte{
-        - puntajeComodin: Puntaje
-        + Descarte(cartas: List<CartaPoker>)
-        + esJugada(cartas: List<CartaPoker>): boolean
-        # seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
-    }
 
     Jugada *-up- "1..5"CartaPoker
     Jugada o-right- Puntaje
     CartaPoker o-- Puntaje
 
-    CartaAlta -up--|> Jugada
-    Par -up--|> Jugada
-    DoblePar -up--|> Jugada
-    Trio -up--|> Jugada
+    CartaFactory -down-> CartaPoker
+    Numero -up-|> CartaPoker
+    Figura -up-|> CartaPoker
+    As -up-|> CartaPoker
 
-    Escalera -up--|> Jugada
-    EscaleraColor -up-|> Escalera
-    EscaleraReal -up-|> EscaleraColor
-
-    Color -up--|> Jugada
-    FullHouse -up--|> Jugada
-    Poker -up--|> Jugada
-    Descarte -up--|> Jugada
-
+    CartaPoker -left-> Palo
+    CartaPoker -right-> Valor
 }
 @enduml
