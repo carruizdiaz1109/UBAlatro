@@ -40,11 +40,21 @@ public class RondaController {
     @FXML
     public Label lblPuntajeAcumulado;
     @FXML
+    public Label lblJugada;
+    @FXML
+    public Label lblPuntajeJugada;
+    @FXML
+    public Label lblPts;
+    @FXML
+    public Label lblMult;
+    @FXML
     public Label lblJugadasDisponibles;
     @FXML
     public Label lblObjetivo;
     @FXML
     public Label lblDescartesDisponibles;
+    @FXML
+    public Label lblRonda;
     @FXML
     private HBox lblTarot;
     @FXML
@@ -61,7 +71,6 @@ public class RondaController {
     private Tienda tienda;
     private BalatroController balatroController;
 
-
     public RondaController() {
         this.cartasSeleccionadas = new ArrayList<>();
     }
@@ -72,8 +81,8 @@ public class RondaController {
 
     public void setRondaActual(Ronda rondaActual) {
         this.rondaActual = rondaActual;
-    }
 
+    }
 
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
@@ -90,12 +99,10 @@ public class RondaController {
 
     public void iniciarRonda() {
         this.jugador.iniciarRonda(this.rondaActual);
-        this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles);
+        this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles, lblRonda);
         actualizarMano();
         btnSalir.setOnAction(event -> salir());
-
     }
-
 
     public void actualizarMano() {
         Mano mano = this.jugador.getManoActual();
@@ -192,14 +199,12 @@ public class RondaController {
             transition.setToY(-30);
             cartaVisual.getStyleClass().add("seleccionada");
         }
-
         transition.play();
     }
 
     private void animarCartaHaciaAbajo(CartaVisual cartaVisual, Runnable onFinished) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(100), cartaVisual);
         transition.setToY(500);
-
         transition.setOnFinished(event -> {
             lblMano.getChildren().remove(cartaVisual);
             reacomodarCartas();
@@ -207,7 +212,6 @@ public class RondaController {
                 onFinished.run();
             }
         });
-
         transition.play();
     }
 
@@ -222,7 +226,6 @@ public class RondaController {
             if (onComplete != null) onComplete.run();
             return;
         }
-
         animarCartaUnaPorUna(cartasParaAnimar, 0, onComplete);
     }
 

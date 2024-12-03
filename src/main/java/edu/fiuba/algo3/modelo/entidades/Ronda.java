@@ -21,6 +21,7 @@ public class Ronda {
     private final IntegerProperty manosDisponibles = new SimpleIntegerProperty();
     private final IntegerProperty puntajeObjetivo = new SimpleIntegerProperty();
     private final IntegerProperty cantidadDescartes = new SimpleIntegerProperty();
+    private final IntegerProperty numeroRonda = new SimpleIntegerProperty();
     private RondaEstado estado;
 
     public Ronda(int numero, int puntajeMinimo, int descartesDisponibles, int jugadasDisponibles, Tienda tienda) {
@@ -35,6 +36,7 @@ public class Ronda {
         this.manosDisponibles.set(jugadasDisponibles);
         this.puntajeObjetivo.set(puntajeMinimo);
         this.cantidadDescartes.set(descartesDisponibles);
+        this.numeroRonda.set(numero);
         this.estado = RondaEstado.EN_CURSO;
     }
 
@@ -119,6 +121,10 @@ public class Ronda {
 
     public IntegerProperty cantidadDescartesProperty() {
         return cantidadDescartes;
+    }
+
+    public IntegerProperty numeroRondaProperty() {
+        return numeroRonda;
     }
 
     public boolean sePuedeDescartar() {
