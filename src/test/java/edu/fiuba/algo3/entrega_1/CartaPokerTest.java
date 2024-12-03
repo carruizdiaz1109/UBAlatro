@@ -85,16 +85,16 @@ public class CartaPokerTest {
 
     @Test
     public void test08SeAplicaTarotALaCarta(){
-        Puntaje puntajeEsperado = new Puntaje(3,1);
+       // Puntaje puntajeEsperado = new Puntaje(3,1);
 
         CartaPoker carta = CartaFactory.crearCarta(Valor.CUATRO, Palo.CORAZONES);
         Tarot unTarot = new TarotCarta("El Tonto", "Mejora la mano carta mas alta", new Puntaje(3, 1));
 
         unTarot.aplicar(carta);
-
+        int puntajeEsperado = 7;
         int puntajeObtenido = carta.calcularPuntaje();
 
-        assert(puntajeEsperado.compararPuntajecon(puntajeObtenido));
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test
