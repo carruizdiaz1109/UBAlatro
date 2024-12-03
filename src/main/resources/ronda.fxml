@@ -90,18 +90,16 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="78.0" prefWidth="250.0" style="-fx-background-color: #F2E6D2; -fx-border-radius: 10; -fx-background-radius: 10;">
                            <children>
-                              <VBox alignment="TOP_CENTER" prefHeight="38.0" prefWidth="250.0">
-                                 <children>
-                                    <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="221.97657775878906" VBox.vgrow="ALWAYS">
-                                       <font>
-                                          <Font name="Consolas Bold" size="24.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets top="25.0" />
-                                       </VBox.margin>
-                                    </Text>
-                                 </children>
-                              </VBox>
+                              <Label fx:id="lblJugada" alignment="CENTER" prefHeight="47.0" prefWidth="221.0" text="jugada" textAlignment="CENTER" textFill="#383582">
+                                 <font>
+                                    <Font name="Consolas Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblPuntajeJugada" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="222.0" text="puntajeJugada" textAlignment="CENTER" textFill="#383582">
+                                 <font>
+                                    <Font name="Consolas" size="21.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </VBox>
                         <HBox alignment="TOP_CENTER" prefHeight="65.0" prefWidth="250.0">
@@ -111,14 +109,11 @@
                                     <Insets bottom="10.0" left="10.0" top="10.0" />
                                  </HBox.margin>
                                  <children>
-                                    <Text fx:id="lblValorAJugar" fill="#392b79" strokeType="OUTSIDE" strokeWidth="0.0" text="v" textAlignment="CENTER" wrappingWidth="87.98307228088379" HBox.hgrow="ALWAYS">
+                                    <Label fx:id="lblPts" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="222.0" text="pts" textAlignment="CENTER" textFill="#383582">
                                        <font>
-                                          <Font name="Consolas" size="29.0" />
+                                          <Font name="Consolas" size="21.0" />
                                        </font>
-                                       <HBox.margin>
-                                          <Insets top="7.0" />
-                                       </HBox.margin>
-                                    </Text>
+                                    </Label>
                                  </children>
                               </HBox>
                               <HBox alignment="TOP_CENTER" prefHeight="83.0" prefWidth="31.0">
@@ -134,19 +129,16 @@
                                  </children>
                               </HBox>
                               <HBox alignment="TOP_CENTER" prefHeight="43.0" prefWidth="150.0" style="-fx-background-color: #FFA6A7; -fx-border-radius: 10; -fx-background-radius: 10;">
-                                 <children>
-                                    <Text fx:id="lblMultiplicadorAJugar" fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="m" textAlignment="CENTER" wrappingWidth="87.98307228088379">
-                                       <font>
-                                          <Font name="Consolas" size="29.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets top="7.0" />
-                                       </HBox.margin>
-                                    </Text>
-                                 </children>
                                  <HBox.margin>
                                     <Insets bottom="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
+                                 <children>
+                                    <Label fx:id="lblMult" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="222.0" text="mult" textAlignment="CENTER" textFill="#383582">
+                                       <font>
+                                          <Font name="Consolas" size="21.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
                               </HBox>
                            </children>
                         </HBox>
@@ -245,14 +237,11 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="45.0" prefWidth="250.0">
                            <children>
-                              <Text fill="#383582" strokeType="OUTSIDE" strokeWidth="0.0" text="1/8" textAlignment="CENTER" wrappingWidth="221.97657775878906">
+                              <Label fx:id="lblRonda" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="222.0" text="ronda" textAlignment="CENTER" textFill="#383582">
                                  <font>
-                                    <Font name="Consolas Bold" size="24.0" />
+                                    <Font name="Consolas" size="21.0" />
                                  </font>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </Text>
+                              </Label>
                            </children>
                         </VBox>
                      </children>
@@ -261,7 +250,7 @@
             </VBox>
             <VBox prefHeight="110.0" prefWidth="282.0">
                <children>
-                  <Button fx:id="btnSalir" mnemonicParsing="false" prefHeight="41.0" prefWidth="222.0" style="-fx-background-color: #6B76BC;" text="Salir" textFill="#f2e6d2">
+                  <Button fx:id="btnSalir" mnemonicParsing="false" prefHeight="44.0" prefWidth="250.0" style="-fx-background-color: #6B76BC;" text="Salir" textFill="#f2e6d2">
                      <VBox.margin>
                         <Insets bottom="30.0" left="30.0" right="30.0" />
                      </VBox.margin>

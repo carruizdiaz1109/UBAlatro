@@ -83,7 +83,8 @@ public class BalatroController {
                     rondaController.lblPuntajeAcumulado,
                     rondaController.lblJugadasDisponibles,
                     rondaController.lblObjetivo,
-                    rondaController.lblDescartesDisponibles
+                    rondaController.lblDescartesDisponibles,
+                    rondaController.lblRonda
             );
 
             rondaController.setJugador(jugador);
