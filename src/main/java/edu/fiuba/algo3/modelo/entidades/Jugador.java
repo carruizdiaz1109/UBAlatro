@@ -20,6 +20,7 @@ public class Jugador {
     private final ArrayList<Tarot> tarots;
     private final ArrayList<Comodin> comodines;
     protected Ronda rondaActual;
+    protected String ultimaJugada = "";
 
     public Jugador(String nombre, Mazo mazo){
         this.nombre = nombre;
@@ -39,6 +40,7 @@ public class Jugador {
         }
         this.rondaActual = rondaActual;
         this.manoActual.rellenarse();
+        this.ultimaJugada = "";
     }
 
     public void jugar(){
@@ -48,6 +50,8 @@ public class Jugador {
         }
         System.out.println("La jugada vale " + unaJugada.calcularPuntaje());
         System.out.println("Metodo jugar de jugador" + unaJugada.getClass());
+        this.ultimaJugada = unaJugada.getClass().getSimpleName();
+        this.rondaActual.setUltimaJugada(this.ultimaJugada);
         this.rondaActual.agregarJugada(unaJugada);
         this.manoActual.rellenarse();
     }
@@ -130,8 +134,6 @@ public class Jugador {
         }
     }
 
-
-
     public Mano getManoActual() {
         return this.manoActual;
     }
@@ -143,4 +145,6 @@ public class Jugador {
     public ArrayList<Tarot> obtenerTarots() {
         return this.tarots;
     }
+
+    public String obtenerUltimaJugada() { return this.ultimaJugada; }
 }

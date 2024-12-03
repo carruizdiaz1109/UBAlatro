@@ -81,6 +81,7 @@ public class BalatroController {
             RondaVisual rondaVisual = new RondaVisual(
                     actual,
                     rondaController.lblPuntajeAcumulado,
+                    rondaController.lblJugada,
                     rondaController.lblJugadasDisponibles,
                     rondaController.lblObjetivo,
                     rondaController.lblDescartesDisponibles,

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Ronda {
 
@@ -17,6 +19,7 @@ public class Ronda {
     private final Tienda tienda;
     private final List<Jugada> jugadas;
 
+    private final StringProperty ultimaJugada = new SimpleStringProperty("");
     private final IntegerProperty puntajeAcumulado = new SimpleIntegerProperty();
     private final IntegerProperty manosDisponibles = new SimpleIntegerProperty();
     private final IntegerProperty puntajeObjetivo = new SimpleIntegerProperty();
@@ -105,6 +108,7 @@ public class Ronda {
         manosDisponibles.set(jugadasDisponibles);
         cantidadDescartes.set(descartesDisponibles);
         puntajeAcumulado.set(puntaje);
+
     }
 
    public IntegerProperty puntajeAcumuladoProperty() {
@@ -126,6 +130,12 @@ public class Ronda {
     public IntegerProperty numeroRondaProperty() {
         return numeroRonda;
     }
+
+    public StringProperty ultimaJugadaProperty() { return ultimaJugada; }
+
+    public String getUltimaJugada() { return ultimaJugada.get(); }
+
+    public void setUltimaJugada(String ultimaJugada) { this.ultimaJugada.set(ultimaJugada); }
 
     public boolean sePuedeDescartar() {
         return (this.descartesDisponibles > 0);
