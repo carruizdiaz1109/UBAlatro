@@ -10,10 +10,13 @@ import edu.fiuba.algo3.modelo.entidades.jugadas.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class IntegracionTest2 {
     private Tienda tienda;
@@ -246,4 +249,5 @@ public class IntegracionTest2 {
         assertEquals(puntajeEsperado, puntajeObtenido);
 
     }
+
 }

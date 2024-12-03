@@ -42,12 +42,22 @@ public class Jugador {
 
     public void jugar(){
         Jugada unaJugada = this.manoActual.jugar();
-        if (this.comodines.size()>0) {
+        if (this.comodines.size() > 0) {
             aplicarComodin(unaJugada);
         }
         System.out.println("La jugada vale " + unaJugada.calcularPuntaje());
         System.out.println("Metodo jugar de jugador" + unaJugada.getClass());
         this.rondaActual.agregarJugada(unaJugada);
+        this.manoActual.rellenarse();
+    }
+
+    public void descartar() {
+        Descarte unDesarte = this.manoActual.descartar();
+        if (unDesarte != null) {
+            aplicarComodin(unDesarte);
+            unDesarte.calcularPuntaje();
+        }
+        this.rondaActual.agregarDescarte(unDesarte);
         this.manoActual.rellenarse();
     }
 
@@ -115,14 +125,7 @@ public class Jugador {
         }
     }
 
-    public void descartar() {
-        Descarte unDesarte = this.manoActual.descartar();
-        if (unDesarte != null) {
-        aplicarComodin(unDesarte);
-        this.rondaActual.agregarDescarte(unDesarte);
-        this.manoActual.rellenarse();
-        }
-    }
+
 
     public Mano getManoActual() {
         return this.manoActual;
