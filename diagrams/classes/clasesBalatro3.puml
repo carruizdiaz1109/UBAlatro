@@ -28,28 +28,9 @@ abstract class Comodin {
     - nombre: string
     - descripcion: string
 
-    + Comodin(puntaje: Puntaje, nombre: String, descripcion: String, aleatoriedad: Aleatoreidad)
+    + Comodin(puntaje: Puntaje, nombre: String,
+    descripcion: String, aleatoriedad: Aleatoreidad)
     + {abstract}aplicar(unaJugada: Jugada)
-}
-
-class EfectoJugada {
-    - jugadaAAplicar: Class <? extends Jugada>
-    + EfectoJugada(unaJugadaAAplicar, puntaje: Puntaje,
-    nombre: string, descripcion: string, aleatoriedad: Aleatoriedad)
-    + aplicar(unaJugada: Jugada)
-}
-
-class EfectoCombinado{
-    + EfectoCombinado(nombre: string, descripcion: string,
-    unaAleatoriedad: Aleatoriedad)
-    + agregar(comodin: Comodin)
-    + aplicar(unaJugada: Jugada)
-
-}
-class EfectoPuntaje{
-    + EfectoPuntaje(puntaje: Puntaje, nombre: string,
-    descripcion: string, unaAleatoriedad: Aleatoriedad)
-    + aplicar(unaJugada: Jugada)
 }
 
 abstract class Tarot {
@@ -63,29 +44,6 @@ abstract class Tarot {
     + {abstract}aplicar(objeto: Object)
 }
 
-class TarotCarta {
-    + TarotCarta(nombre: String, descripcion: String, efecto: Puntaje)
-    + aplicar(unaCarta: CartaPoker)
-}
-
-class TarotJugada {
-    + TarotCarta(nombre: String, descripcion: String, efecto: Puntaje, ejemplar: String)
-    + aplicar(unaJugada: Jugada)
-}
-
-
-class Puntaje {
-    - puntos: int
-    - multiplicador: int
-
-    + Puntaje(puntos:int, multiplicador:int)
-    + incrementarPuntos(incremento: int)
-    + incrementarMultiplicador(incremento: int)
-    + calcularPuntaje(): int
-    + sumarPuntaje(unPuntaje: Puntaje):Puntaje
-    + compararPuntajecon(otroPuntaje: int): boolean
-    + compararPuntajecon(otroPuntaje: Puntaje): boolean
-}
 
 
 Tienda o-- "*" Comprable
@@ -94,12 +52,8 @@ Comodin .up.|> Aleatoriedad
 Tarot .up.|> Comprable
 
 
-EfectoPuntaje -up-|> Comodin
-EfectoJugada -up-|> Comodin
-EfectoCombinado -up-|> Comodin
-Comodin o-right-- Puntaje
-Tarot o-left-- Puntaje
-TarotCarta -up-|> Tarot
-TarotJugada -up-|> Tarot
+
+
+
 }
 @enduml

@@ -1,23 +1,10 @@
 @startuml
 package Model {
 
-    class Puntaje {
-        - puntos: int
-        - multiplicador: int
-
-        + Puntaje(puntos:int, multiplicador:int)
-        + incrementarPuntos(incremento: int)
-        + incrementarMultiplicador(incremento: int)
-        + calcularPuntaje(): int
-        + sumarPuntaje(unPuntaje: Puntaje):Puntaje
-        + compararPuntajecon(otroPuntaje: int): boolean
-        + compararPuntajecon(otroPuntaje: Puntaje): boolean
-        + mostrarPuntos(): string
-        + mostrarMultiplicador(): string
-    }
 
     abstract class CartaPoker {
         - puntajeComodin: Puntaje
+        - puntaje: Puntaje
 
         + CartaPoker(valor: Valor, palo: Palo)
         + comprar(): CartaPoker
@@ -33,22 +20,6 @@ package Model {
         + {abstract}obtenerPuntaje(): Puntaje
     }
 
-    abstract class Jugada {
-        - sumaValores: Puntaje
-        - puntajeComodin: Puntaje
-        # cartasValidas: List<CartaPoker>
-        # siguiente: Jugada
-
-        + Jugada(cartas: Lista<CartaPoker>, puntaje: Puntaje)
-        - configurarCadena(cartas: List<CartaPoker>): Juagada
-        + crearJugada(cartas: List<CartaPoker>): Jugada
-        + evaluar(cartas: List<CartaPoker>): Jugada
-        + sumarValores()
-        + calcularPuntaje(): int
-        + aplicarComodin(unPuntaje: Puntaje)
-        + aplicarTarot(unPuntaje: Puntaje)
-        # {abstract}seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
-    }
 
     class CartaFactory {
         + crearCarta(valor: Valor, palo: Palo): CartaPoker
@@ -97,16 +68,12 @@ package Model {
     }
 
 
-    Jugada *-up- "1..5"CartaPoker
-    Jugada o-right- Puntaje
-    CartaPoker o-- Puntaje
-
     CartaFactory -down-> CartaPoker
     Numero -up-|> CartaPoker
     Figura -up-|> CartaPoker
     As -up-|> CartaPoker
 
     CartaPoker -left-> Palo
-    CartaPoker -right-> Valor
+    CartaPoker -up-> Valor
 }
 @enduml

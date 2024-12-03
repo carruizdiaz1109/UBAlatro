@@ -116,8 +116,8 @@ package Model {
     Jugador o-- Mano
     Jugador ..> CartaPoker
     Jugador ..> Jugada
-    Jugador o-- "0..2" Tarot
-    Jugador o-- "0..5" Comodin
+    Jugador o-left- "0..2" Tarot
+    Jugador o-right- "0..5" Comodin
 
     Ronda o-- "1..*" Jugada
 

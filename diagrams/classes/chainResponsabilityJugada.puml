@@ -61,16 +61,16 @@ package Model {
 
 
     Jugada .left.> evaluable
-    Jugada <|-down- Escalera
-    Jugada <|-down- EscaleraReal
-    Jugada <|-down- EscaleraColor
-    Jugada <|-down- Color
-    Jugada <|-down- Poker
-    Jugada <|-down- Trio
-    Jugada <|-down- Par
-    Jugada <|-down- DoblePar
-    Jugada <|-down- FullHouse
-    Jugada <|-down- Descarte
-    Jugada <|-down- CartaAlta
+    Jugada <|-left- Escalera
+    Jugada <|-left- EscaleraReal
+    Jugada <|-- EscaleraColor
+    Jugada <|-- Color
+    Jugada <|-- Poker
+    Jugada <|-- Trio
+    Jugada <|-- Par
+    Jugada <|-- DoblePar
+    Jugada <|-- FullHouse
+    Jugada <|-- Descarte
+    Jugada <|-- CartaAlta
 }
 @enduml

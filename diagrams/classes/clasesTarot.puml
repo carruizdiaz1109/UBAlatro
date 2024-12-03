@@ -1,0 +1,51 @@
+@startuml
+
+package Model{
+    interface Comprable {
+        + comprar(): Comprable
+    }
+
+    class Puntaje {
+            - puntos: int
+            - multiplicador: int
+
+            + Puntaje(puntos:int, multiplicador:int)
+            + incrementarPuntos(incremento: int)
+            + incrementarMultiplicador(incremento: int)
+            + calcularPuntaje(): int
+            + sumarPuntaje(unPuntaje: Puntaje):Puntaje
+            + compararPuntajecon(otroPuntaje: int): boolean
+            + compararPuntajecon(otroPuntaje: Puntaje): boolean
+    }
+
+    abstract class Tarot {
+        - nombre: String
+        - descripcion: String
+        - sobre: String
+        - ejemplar: String
+
+        + Tarot(nombre: String, descripcion: String,
+        puntaje: Puntaje, sobre: String, ejemplar: String)
+        + {abstract}aplicar(objeto: Object)
+    }
+
+    class TarotCarta{
+        + TarotCarta(nombre: String, descripcion: String,
+        efecto: Puntaje)
+        + aplicar(unaCarta: CartaPoker)
+    }
+
+    class TarotJugada {
+        + TarotCarta(nombre: String, descripcion: String,
+        efecto: Puntaje, ejemplar: String)
+        + aplicar(unaJugada: Jugada)
+    }
+
+    Tarot o-left-- Puntaje
+    TarotCarta -up-|> Tarot
+    TarotJugada -up-|> Tarot
+    Tarot .up.|> Comprable
+
+   }
+
+@enduml

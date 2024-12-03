@@ -66,7 +66,8 @@ class Ronda {
     - JugadasDisponibles: int
     - Jugadas: List<Jugada>
 
-    + Ronda(numero: int, PuntajeMinimo: int, descartesDisponibles: int, jugadasDisponibles: int, tienda: Tienda)    + verificarPuntaje(): boolean
+    + Ronda(numero: int, PuntajeMinimo: int, descartesDisponibles: int,
+    jugadasDisponibles: int, tienda: Tienda)    + verificarPuntaje(): boolean
     + rondaSuperada(): boolean
     + sePuedeSeguirJugando(): boolean
     + agregarJugada(unaJugada: Jugada)
