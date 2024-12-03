@@ -90,9 +90,9 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="78.0" prefWidth="250.0" style="-fx-background-color: #F2E6D2; -fx-border-radius: 10; -fx-background-radius: 10;">
                            <children>
-                              <Label fx:id="lblJugada" alignment="CENTER" prefHeight="47.0" prefWidth="221.0" text="jugada" textAlignment="CENTER" textFill="#383582">
+                              <Label fx:id="lblJugada" alignment="BOTTOM_CENTER" prefHeight="47.0" prefWidth="221.0" text="jugada" textAlignment="CENTER" textFill="#383582">
                                  <font>
-                                    <Font name="Consolas Bold" size="20.0" />
+                                    <Font name="Consolas Bold" size="27.0" />
                                  </font>
                               </Label>
                               <Label fx:id="lblPuntajeJugada" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="222.0" text="puntajeJugada" textAlignment="CENTER" textFill="#383582">
