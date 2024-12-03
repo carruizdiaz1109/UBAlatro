@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
+import edu.fiuba.algo3.modelo.excepciones.TarotsNoDisponiblesError;
 import edu.fiuba.algo3.vistas.CartaVisual;
 import edu.fiuba.algo3.vistas.RondaVisual;
 import javafx.animation.TranslateTransition;
@@ -375,6 +376,8 @@ public class RondaController {
                     .orElse(null);
             VisualManager.mostrarCartelCarta(nodoSeleccionado, cartasSeleccionadas.get(0));
             actualizarMano();
+        } else {
+            throw new TarotsNoDisponiblesError("No se selecciono nignuna carta");
         }
     }
 }
