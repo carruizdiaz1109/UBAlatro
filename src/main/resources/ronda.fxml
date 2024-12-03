@@ -235,15 +235,20 @@
                               </Text>
                            </children>
                         </VBox>
-                        <VBox alignment="TOP_CENTER" prefHeight="45.0" prefWidth="250.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="lblRonda" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="222.0" text="ronda" textAlignment="CENTER" textFill="#383582">
+                              <Label fx:id="lblRonda" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="28.0" prefWidth="106.0" text="ronda" textAlignment="RIGHT" textFill="#383582">
                                  <font>
-                                    <Font name="Consolas" size="21.0" />
+                                    <Font name="Consolas Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblRonda1" prefHeight="4.0" prefWidth="112.0" text="/8" textFill="#383582">
+                                 <font>
+                                    <Font name="Consolas Bold" size="24.0" />
                                  </font>
                               </Label>
                            </children>
-                        </VBox>
+                        </HBox>
                      </children>
                   </VBox>
                </children>
