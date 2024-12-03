@@ -3,11 +3,14 @@
 package Model {
 
 class Tienda {
-    - comodinesAComprar: Lista [Comodin]
-    - tarotAComprar: Lista [Tarot]
-    - cartasAComprar: List[CartaPoker]]
-    + mostrarCartas(): cartasAComprar
-    + venderCarta(): Comprable
+    - comodinesALaVenta: ArrayList<Comodin>
+    - tarotsALaVenta: ArrayList<Tarot>
+    - cartasALaVenta: ArrayList<CartaPoker>
+    + Tienda(tiendaNode: JsonNode)
+    - inicializarComodines(tiendaNode: JsonNode)
+    - procesarComodin (comodinIndividual: JsonNode): Comodin
+    - inicializarTarots(tiendaNode: JsonNode)
+    - crearTarot(tarotNode: JsonNode):Tarot
 }
 
 interface Comprable {

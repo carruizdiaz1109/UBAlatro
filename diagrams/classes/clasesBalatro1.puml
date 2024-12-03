@@ -23,17 +23,6 @@ class Mazo {
    # mezclar()
 }
 
-class ConjuntoCartas{
-   # cartas: List<CartaPoker>
-
-   + ConjuntoCartas(cartas: List<CartaPoker>)
-   + tieneCartas(): boolean
-   + agregarCarta(carta: CartaPoker)
-   + eliminarCartas()
-   + compararCon(otroConjunto: ConjuntoCartas): boolean
-}
-
-
 class Jugador {
     - nombre: string
     # manoActual: Mano
@@ -65,6 +54,9 @@ class Tienda {
     - procesarComodin (comodinIndividual: JsonNode): Comodin
     - inicializarTarots(tiendaNode: JsonNode)
     - crearTarot(tarotNode: JsonNode):Tarot
+    + obtenerComodines(): ArrayList<Comodin>
+    + obtenerTarots(): ArrayList<Tarot>
+    + obtenerCartas(): ArrayList<CartaPoker>
 }
 
 class Ronda {
@@ -99,8 +91,6 @@ Balatro o-- "0..8" Ronda
 Balatro o-- Jugador
 Balatro o-- EstadoJuego
 Balatro o-- Mazo
-
-ConjuntoCartas <|-down- Mazo
 
 Jugador o-- Ronda
 Jugador o-- Mazo
