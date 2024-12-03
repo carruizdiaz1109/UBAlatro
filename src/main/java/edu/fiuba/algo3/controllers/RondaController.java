@@ -81,7 +81,6 @@ public class RondaController {
 
     public void setRondaActual(Ronda rondaActual) {
         this.rondaActual = rondaActual;
-
     }
 
     public void setJugador(Jugador jugador) {
@@ -261,11 +260,12 @@ public class RondaController {
     @FXML
     public void clickDescartar() {
         if (rondaActual.sePuedeDescartar() && rondaActual.sePuedeSeguirJugando()) {
-            manejarAccionCartaSeleccionada(() -> jugador.descartar());
             try {
-                jugador.descartar();
-                verificarFinDeRonda();
-            } catch (NoHayDescarteDisponiblesError e ){
+                manejarAccionCartaSeleccionada(() -> {
+                    jugador.descartar();
+                    verificarFinDeRonda();
+                });
+            } catch (NoHayDescarteDisponiblesError e) {
                 verificarFinDeRonda();
             }
         }

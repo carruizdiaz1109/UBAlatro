@@ -18,7 +18,7 @@ public class ConfiguracionJugadas {
         puntajes.put("doble par", new Puntaje(20, 2));
         puntajes.put("par", new Puntaje(10, 2));
         puntajes.put("carta alta", new Puntaje(5, 1));
-        puntajes.put("descarte", new Puntaje(0, 1));
+        puntajes.put("Descarte", new Puntaje(0, 1));
     }
 
     private ConfiguracionJugadas() {}

@@ -9,7 +9,7 @@ public class Descarte extends Jugada {
     protected Puntaje puntajeComodin;
 
     public Descarte(List<CartaPoker> cartas) {
-        super(cartas,"descarte");
+        super(cartas,"Descarte");
     }
 
     @Override
