@@ -39,7 +39,7 @@ public class TarotController {
 
             Button botonUsar = new Button("Usar");
             botonUsar.setStyle("-fx-background-color: #6FCAA6; -fx-border-radius: 10; -fx-background-radius: 10;");
-            //botonUsar.setOnAction(event -> manejarUsarTarot(tarot, stackPane, carta));
+            botonUsar.setOnAction(event -> manejarUsarTarot(tarot, stackPane));
 
             Button botonEliminar = new Button(" X ");
             botonEliminar.setStyle("-fx-background-color: #ff595a; -fx-border-radius: 10; -fx-background-radius: 10;");
@@ -69,5 +69,15 @@ public class TarotController {
         jugador.eliminarTarot(unTarot);
         lblTarot.getChildren().remove(stackPane);
         System.out.println("Tarot eliminado: " + unTarot.getNombre());
+    }
+
+    private void manejarUsarTarot(Tarot tarot, StackPane stackPane) {
+        try {
+            jugador.utilizarTarot(tarot);
+            System.out.println("Tarot utilizado: " + tarot.getNombre());
+            manejarEliminarTarot(tarot, stackPane);
+        } catch (Exception e) {
+            System.err.println("Error al usar el tarot: " + e.getMessage());
+        }
     }
 }
