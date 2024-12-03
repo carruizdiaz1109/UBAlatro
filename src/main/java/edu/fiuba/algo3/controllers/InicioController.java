@@ -19,6 +19,9 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.util.Objects;
 
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
+
 public class InicioController {
 
     @FXML
@@ -44,6 +47,7 @@ public class InicioController {
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.setAutoPlay(true);
         reproducirSonidoDeFondo();
+        presionarEnter();
         backgroundMediaView.setMediaPlayer(mediaPlayer);
     }
 
@@ -66,6 +70,15 @@ public class InicioController {
         balatroController.setBalatro(balatro);
         balatroController.setStage(stage);
         avanzarRonda();
+    }
+
+    public void presionarEnter()
+    {
+        nombreTextField.setOnKeyPressed((KeyEvent event) -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                iniciarJuego();
+            }
+        });
     }
 
     public void reproducirSonidoDeFondo() {
