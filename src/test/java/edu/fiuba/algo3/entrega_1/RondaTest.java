@@ -90,7 +90,7 @@ public class RondaTest {
 
     @Test
     void test08SeJuegaUnaRondaCompletaConTresManos(){
-        Ronda ronda = new Ronda(1, 120, 3, 3, tiendaMock);
+        Ronda ronda = new Ronda(1, 60, 3, 3, tiendaMock);
         ArrayList<CartaPoker> cartas = new ArrayList<>(List.of(
                 CartaFactory.crearCarta(Valor.CINCO, Palo.PICAS),
                 CartaFactory.crearCarta(Valor.CINCO, Palo.TREBOLES)
