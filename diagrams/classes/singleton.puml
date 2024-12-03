@@ -1,0 +1,29 @@
+@startuml
+
+class Configuracion{
+    - {static} instancia: Configuracion
+    + getInstancia(): Configuracion
+    + getPuntuacion(tipoJugada: String): Puntaje
+    + actualizarPuntuacion(tipoJugada: String, nuevoPuntaje: Puntaje)
+}
+
+abstract class Jugada {
+    - puntaje: Puntaje
+    - sumaValores: Puntaje
+    - puntajeComodin: Puntaje
+    # cartasValidas: List<CartaPoker>
+    # siguienteJugada: Jugada
+    # cartas: List<CartaPoker>
+
+    + Jugada(cartas: Lista<CartaPoker>, puntaje: Puntaje)
+    + crearJugada(List<CartaPoker>): Jugada
+    + sumarValores()
+    + calcularPuntaje(): int
+    + aplicarComodin(puntaje: Puntaje)
+    # {abstract}seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
+    - setSiguiente(unaJugada: Jugada)
+}
+
+Jugada -right-> Configuracion
+Configuracion <-- Configuracion
+@enduml
