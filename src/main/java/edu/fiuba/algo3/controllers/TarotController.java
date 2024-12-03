@@ -67,7 +67,7 @@ public class TarotController {
         }
     }
 
-    private void manejarEliminarTarot(Tarot unTarot, StackPane stackPane) {
+    public void manejarEliminarTarot(Tarot unTarot, StackPane stackPane) {
         jugador.eliminarTarot(unTarot);
         lblTarot.getChildren().remove(stackPane);
         System.out.println("Tarot eliminado: " + unTarot.getNombre());
@@ -75,11 +75,13 @@ public class TarotController {
 
     private void manejarUsarTarot(Tarot tarot, StackPane stackPane) {
         try {
-            jugador.utilizarTarot(tarot);
-            System.out.println("Tarot utilizado: " + tarot.getNombre());
-            manejarEliminarTarot(tarot, stackPane);
+            rondaController.utilizarTarot(tarot);
+            //jugador.utilizarTarot(tarot);
+            //System.out.println("Tarot utilizado: " + tarot.getNombre());
+            //manejarEliminarTarot(tarot, stackPane);
         } catch (Exception e) {
             System.err.println("Error al usar el tarot: " + e.getMessage());
         }
     }
+
 }

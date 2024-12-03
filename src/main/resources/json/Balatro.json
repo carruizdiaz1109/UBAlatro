@@ -42,7 +42,7 @@
             "descripcion": "Mejora 1 carta seleccionada y la convierte en una carta de acero.",
             "efecto": {
               "puntos": 1,
-              "multiplicador": 1.5
+              "multiplicador": 2.5
             },
             "sobre": "carta",
             "ejemplar": "cualquiera"

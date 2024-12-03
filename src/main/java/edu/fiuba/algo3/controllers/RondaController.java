@@ -3,6 +3,7 @@ package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.modelo.entidades.*;
 
+import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
@@ -46,6 +47,7 @@ public class RondaController {
     private RondaVisual rondaVisual;
     private Tienda tienda;
     private BalatroController balatroController;
+
 
     public RondaController() {
         this.cartasSeleccionadas = new ArrayList<>();
@@ -337,6 +339,16 @@ public class RondaController {
         contenedor.setVisible(false); // Inicialmente oculto
 
         return contenedor;
+    }
+
+    public void utilizarTarot(Tarot tarotAAplicar){
+        System.out.println("Cantidad de cartas seleccionadas: " + cartasSeleccionadas.size());
+        if (this.cartasSeleccionadas.size() == 1 ) {
+            System.out.println("Se aplica el tarot a la carta seleccionada");
+            tarotAAplicar.aplicar(this.cartasSeleccionadas.get(0));
+            actualizarMano();
+            //this.cartasSeleccionadas.get(0).aplicarTarot(tarotAAplicar);
+        }
     }
 }
 
