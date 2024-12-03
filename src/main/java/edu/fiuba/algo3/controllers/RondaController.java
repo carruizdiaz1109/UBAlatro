@@ -99,6 +99,7 @@ public class RondaController {
             if (!yaEstaEnMano) {
                 String ImagePath = "/imagenes/cartas/" + cartaPoker.getNombreArchivo();
                 CartaVisual cartaVisual = new CartaVisual(cartaPoker, ImagePath);
+                VisualManager.mostrarCartelCarta(cartaVisual, cartaPoker);
                 cartaVisual.setOnMouseClicked(event -> seleccionarCarta(cartaVisual));
                 agregarCarta(cartaVisual);
             }

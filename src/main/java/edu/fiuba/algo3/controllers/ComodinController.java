@@ -2,7 +2,6 @@ package edu.fiuba.algo3.controllers;
 
 import edu.fiuba.algo3.modelo.entidades.Jugador;
 import edu.fiuba.algo3.modelo.entidades.comodines.Comodin;
-import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.vistas.ComodinVisual;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -30,30 +29,22 @@ public class ComodinController {
         for (Comodin comodin : comodines) {
             String imagePath = "/imagenes/comodines/" + comodin.getNombre() + ".png";
             ComodinVisual comodinVisual = new ComodinVisual(comodin, imagePath);
+            VisualManager.mostrarCartelComodin(comodinVisual,comodin);
 
-            // Crear un StackPane para el comodín y su botón
             StackPane stackPane = new StackPane();
             stackPane.setPrefSize(100, 150);
 
-            // Botón "Eliminar"
             Button botonEliminar = new Button("X");
             botonEliminar.setStyle("-fx-background-color: #ff595a; -fx-border-radius: 10; -fx-background-radius: 10;");
-            botonEliminar.setVisible(false); // Inicialmente oculto
+            botonEliminar.setVisible(false);
             botonEliminar.setOnAction(event -> manejarEliminarTarot(comodin, stackPane));
 
-            // Añadir comodín y botón al StackPane
             stackPane.getChildren().addAll(comodinVisual, botonEliminar);
-
-            // Configurar el clic en el comodín para alternar la visibilidad del botón
             comodinVisual.setOnMouseClicked(event -> {
                 boolean visible = botonEliminar.isVisible();
                 botonEliminar.setVisible(!visible);
             });
-
-            // Centrar el botón sobre el comodín
             StackPane.setAlignment(botonEliminar, Pos.CENTER);
-
-            // Añadir el StackPane al contenedor principal
             lblComodin.getChildren().add(stackPane);
         }
     }
