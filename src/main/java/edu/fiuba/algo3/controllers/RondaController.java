@@ -65,7 +65,7 @@ public class RondaController {
         ComodinController comodinController = new ComodinController(this.jugador, lblComodin);
         comodinController.visualizarComodines();
 
-        TarotController tarotController = new TarotController(this.jugador, lblTarot);
+        TarotController tarotController = new TarotController(this.jugador, lblTarot, this);
         tarotController.visualizarTarots();
     }
 
@@ -150,6 +150,16 @@ public class RondaController {
             onComplete.run();
         }
     }
+
+//    public void deseleccionarCartas() {
+//        if(!cartasSeleccionadas.isEmpty()) {
+//            for(CartaVisual carta : cartasSeleccionadas) {
+//                this.cartasSeleccionadas.remove(carta.getReferencia());
+//                transition.setToY(0);
+//                cartaVisual.getStyleClass().remove("seleccionada");
+//            }
+//        }
+//    }
 
     private void seleccionarCarta(CartaVisual cartaVisual) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(150), cartaVisual);

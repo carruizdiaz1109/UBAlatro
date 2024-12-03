@@ -15,10 +15,12 @@ import java.util.ArrayList;
 public class TarotController {
     private final HBox lblTarot;
     private final Jugador jugador;
+    private final RondaController rondaController;
 
-    public TarotController(Jugador jugador, HBox lblTarot) {
+    public TarotController(Jugador jugador, HBox lblTarot, RondaController rondaController) {
         this.jugador = jugador;
         this.lblTarot = lblTarot;
+        this.rondaController = rondaController;
     }
 
     public void visualizarTarots() {
@@ -72,8 +74,6 @@ public class TarotController {
     }
 
     private void manejarUsarTarot(Tarot tarot, StackPane stackPane) {
-        System.out.println("Seleccione una carta");
-
         try {
             jugador.utilizarTarot(tarot);
             System.out.println("Tarot utilizado: " + tarot.getNombre());

@@ -109,5 +109,7 @@ public abstract class CartaPoker implements Comparable<CartaPoker>, Comprable {
     public Comprable comprar() {
         return this;
     }
+
+    public Puntaje getPuntaje() { return puntaje; }
 }
 
