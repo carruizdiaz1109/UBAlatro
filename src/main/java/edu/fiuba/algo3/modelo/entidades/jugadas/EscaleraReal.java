@@ -10,9 +10,8 @@ public class EscaleraReal extends EscaleraColor {
 
     private static final List<Integer> ROYAL_STRAIGHT = List.of(10, 11, 12, 13, 14);
 
-    public EscaleraReal(List<CartaPoker> cartas) {
-        super(cartas);
-        this.puntaje = new Puntaje(100, 8);
+    public EscaleraReal(List<CartaPoker> cartas, String nombreJugada) {
+        super(cartas, nombreJugada);
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class FullHouse extends Jugada {
 
     public FullHouse(List<CartaPoker> cartas) {
-        super(cartas, new Puntaje(40, 4));
+        super(cartas,"FullHouse");
     }
 
     @Override

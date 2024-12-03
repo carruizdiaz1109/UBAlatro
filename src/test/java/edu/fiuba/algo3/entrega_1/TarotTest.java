@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 
 import edu.fiuba.algo3.modelo.entidades.*;
+import edu.fiuba.algo3.modelo.entidades.comodines.EfectoJugada;
 import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaFactory;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
@@ -65,11 +66,14 @@ public class TarotTest {
                 CartaFactory.crearCarta(Valor.DOS, Palo.PICAS),
                 CartaFactory.crearCarta(Valor.DOS, Palo.TREBOLES)
         ));
-        Jugada jugadaIncompatible = Jugada.crearJugada(cartas);
-        Tarot tarot = new TarotJugada("Fuerza", "Mejora la mano poker", new Puntaje(30, 3), "poker");
 
-        // Assert
-        assertThrows(TarotDistintaJugadaError.class, () -> tarot.aplicar(jugadaIncompatible));
+        TarotJugada tarot = new TarotJugada("Fuerza", "Mejora la mano poker", new Puntaje(30, 3), "par");
+        tarot.aplicarNuevo();
+        int puntajeEsperado = (2+2+30)*3;
+        Jugada jugada = Jugada.crearJugada(cartas);
+        int puntajeObtenido = jugada.calcularPuntaje();
+
+        Assert.assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
 }

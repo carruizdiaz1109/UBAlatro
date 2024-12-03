@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Color extends Jugada {
 
     public Color(List<CartaPoker> cartas) {
-        super(cartas, new Puntaje(35, 4));
+        super(cartas,"Color");
     }
 
     @Override
