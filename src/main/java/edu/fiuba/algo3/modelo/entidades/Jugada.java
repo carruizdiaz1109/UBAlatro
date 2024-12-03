@@ -85,10 +85,9 @@ public abstract class Jugada implements Evaluable {
     }
 
     public void aplicarComodin(Puntaje unPuntaje) {
-        System.out.println("Puntaje del la comodin " +unPuntaje.calcularPuntaje());
-        System.out.println("Puntaje del del descarte antes de aplicarlo "+this.puntajeComodin.calcularPuntaje());
+        System.out.println("Metodo aplicar comodin en jugada. puntaje antes de aplicarlo "+this.puntajeComodin.calcularPuntaje());
         this.puntajeComodin = this.puntajeComodin.sumarPuntaje(unPuntaje);
-        System.out.println("Puntaje del del descarte despues de aplicarlo "+this.puntajeComodin.calcularPuntaje());
+        System.out.println("Metodo aplicar comodin en jugada. puntaje despues de aplicarloo "+this.puntajeComodin.calcularPuntaje());
 
     }
 

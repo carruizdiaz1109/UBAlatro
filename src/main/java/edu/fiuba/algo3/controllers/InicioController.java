@@ -32,7 +32,6 @@ public class InicioController {
     private BalatroController balatroController;
     private MediaPlayer mediaPlayer;
 
-    private MediaPlayer mediaPlayer;
 
     public void setStage(Stage stage) {
         this.stage = stage;
