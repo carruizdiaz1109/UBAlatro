@@ -3,45 +3,76 @@
 package Model {
 
 class Tienda {
-    - comodinesALaVenta: ArrayList<Comodin>
-    - tarotsALaVenta: ArrayList<Tarot>
     - cartasALaVenta: ArrayList<CartaPoker>
+
     + Tienda(tiendaNode: JsonNode)
     - inicializarComodines(tiendaNode: JsonNode)
     - procesarComodin (comodinIndividual: JsonNode): Comodin
     - inicializarTarots(tiendaNode: JsonNode)
     - crearTarot(tarotNode: JsonNode):Tarot
+    + obtenerComodines(): ArrayList<Comodin>
+    + obtenerTarots(): ArrayList<Tarot>
+    + obtenerCartas(): ArrayList<CartaPoker>
+
 }
 
 interface Comprable {
     + comprar(): Comprable
 }
 
+interface Aleatoriedad {
+   + seAplica(): boolean
+}
+
 abstract class Comodin {
     - nombre: string
     - descripcion: string
 
-    + Comodin(valor: int, multiplicador: int, nombre: String, descripcion: String)
+    + Comodin(puntaje: Puntaje, nombre: String, descripcion: String, aleatoriedad: Aleatoreidad)
     + {abstract}aplicar(unaJugada: Jugada)
 }
 
 class EfectoJugada {
+    - jugadaAAplicar: Class <? extends Jugada>
+    + EfectoJugada(unaJugadaAAplicar, puntaje: Puntaje,
+    nombre: string, descripcion: string, aleatoriedad: Aleatoriedad)
     + aplicar(unaJugada: Jugada)
 }
 
 class EfectoCombinado{
-    + EfectoCombinado(lasCombinacines: List <Comodin>, nombre: string, descripcion: string)
+    + EfectoCombinado(nombre: string, descripcion: string,
+    unaAleatoriedad: Aleatoriedad)
+    + agregar(comodin: Comodin)
     + aplicar(unaJugada: Jugada)
+
 }
 class EfectoPuntaje{
-    + aplicarEfecto(unaJugada: Jugada)
+    + EfectoPuntaje(puntaje: Puntaje, nombre: string,
+    descripcion: string, unaAleatoriedad: Aleatoriedad)
+    + aplicar(unaJugada: Jugada)
 }
 
-class Tarot {
+abstract class Tarot {
+    - nombre: String
+    - descripcion: String
+    - sobre: String
+    - ejemplar: String
 
-    + Tarot(valor: int, multiplicador: int)
-    + modificarPuntaje(unPuntaje: Puntaje): Puntaje
+    + Tarot(nombre: String, descripcion: String,
+    puntaje: Puntaje, sobre: String, ejemplar: String)
+    + {abstract}aplicar(objeto: Object)
 }
+
+class TarotCarta {
+    + TarotCarta(nombre: String, descripcion: String, efecto: Puntaje)
+    + aplicar(unaCarta: CartaPoker)
+}
+
+class TarotJugada {
+    + TarotCarta(nombre: String, descripcion: String, efecto: Puntaje, ejemplar: String)
+    + aplicar(unaJugada: Jugada)
+}
+
 
 class Puntaje {
     - puntos: int
@@ -57,14 +88,18 @@ class Puntaje {
 }
 
 
-Tienda o-- Comprable
-Comodin -up-|> Comprable
-Tarot -up-|> Comprable
+Tienda o-- "*" Comprable
+Comodin .up.|> Comprable
+Comodin .up.|> Aleatoriedad
+Tarot .up.|> Comprable
+
+
 EfectoPuntaje -up-|> Comodin
 EfectoJugada -up-|> Comodin
 EfectoCombinado -up-|> Comodin
-EfectoCombinado o-- Comodin
 Comodin o-right-- Puntaje
 Tarot o-left-- Puntaje
+TarotCarta -up-|> Tarot
+TarotJugada -up-|> Tarot
 }
 @enduml
