@@ -4,6 +4,8 @@ package edu.fiuba.algo3.controllers;
 import edu.fiuba.algo3.modelo.entidades.*;
 
 import edu.fiuba.algo3.modelo.entidades.tarots.Tarot;
+import edu.fiuba.algo3.modelo.entidades.tarots.TarotCarta;
+import edu.fiuba.algo3.modelo.entidades.tarots.TarotJugada;
 import edu.fiuba.algo3.modelo.excepciones.NoHayDescarteDisponiblesError;
 import edu.fiuba.algo3.modelo.excepciones.NoHayJugadasDisponiblesError;
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
@@ -43,12 +45,10 @@ public class RondaController {
     public Label lblObjetivo;
     @FXML
     public Label lblDescartesDisponibles;
-
     @FXML
     private HBox lblTarot;
     @FXML
     private HBox lblComodin;
-
     @FXML
     private Label lblResultado;
     @FXML
@@ -60,7 +60,6 @@ public class RondaController {
     private RondaVisual rondaVisual;
     private Tienda tienda;
     private BalatroController balatroController;
-    private MediaPlayer mediaPlayer;
 
 
     public RondaController() {
@@ -93,27 +92,10 @@ public class RondaController {
         this.jugador.iniciarRonda(this.rondaActual);
         this.rondaVisual = new RondaVisual(this.rondaActual, lblPuntajeAcumulado, lblJugadasDisponibles, lblObjetivo, lblDescartesDisponibles);
         actualizarMano();
-        reproducirSonidoDeFondo();
         btnSalir.setOnAction(event -> salir());
 
     }
 
-
-    public void reproducirSonidoDeFondo() {
-        // Ruta del archivo de sonido
-        String rutaSonido = getClass().getResource("/sample/sonidoDeFondo.mp3").toExternalForm();
-        Media media = new Media(rutaSonido);
-        mediaPlayer = new MediaPlayer(media);
-
-        // Configurar el sonido para que se repita en bucle
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-
-        // Ajustar volumen
-        mediaPlayer.setVolume(0.1);
-
-        // Reproducir sonido
-        mediaPlayer.play();
-    }
 
     public void actualizarMano() {
         Mano mano = this.jugador.getManoActual();
@@ -415,7 +397,7 @@ public class RondaController {
 
     public void utilizarTarot(Tarot tarotAAplicar){
         System.out.println("Cantidad de cartas seleccionadas: " + cartasSeleccionadas.size());
-        if (this.cartasSeleccionadas.size() == 1 ) {
+        if (this.cartasSeleccionadas.size() == 1 && tarotAAplicar instanceof TarotCarta) {
             System.out.println("Se aplica el tarot a la carta seleccionada");
             tarotAAplicar.aplicar(this.cartasSeleccionadas.get(0));
             Node nodoSeleccionado = lblMano.getChildren().stream()
@@ -426,8 +408,11 @@ public class RondaController {
                     .orElse(null);
             VisualManager.mostrarCartelCarta(nodoSeleccionado, cartasSeleccionadas.get(0));
             actualizarMano();
+        } else if (tarotAAplicar instanceof TarotJugada) {
+            //Jugada unaJugada =
+            //tarotAAplicar.aplicar(unaJugada);
         } else {
-            throw new TarotsNoDisponiblesError("No se selecciono nignuna carta");
+            throw new TarotsNoDisponiblesError("No se pudo usar el tarot");
         }
     }
 }

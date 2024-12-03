@@ -30,7 +30,6 @@ public class TarotJugada extends Tarot {
     private boolean sePuedeUtilizar(Jugada unaJugada){
         return this.ejemplar.equalsIgnoreCase(unaJugada.getClass().getSimpleName());
     }
-
 }
 
 

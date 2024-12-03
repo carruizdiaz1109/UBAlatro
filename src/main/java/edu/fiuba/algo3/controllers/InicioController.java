@@ -30,6 +30,7 @@ public class InicioController {
 
     private Stage stage;
     private BalatroController balatroController;
+    private MediaPlayer mediaPlayer;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -42,6 +43,7 @@ public class InicioController {
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.setAutoPlay(true);
+        reproducirSonidoDeFondo();
         backgroundMediaView.setMediaPlayer(mediaPlayer);
     }
 
@@ -64,6 +66,22 @@ public class InicioController {
         balatroController.setBalatro(balatro);
         balatroController.setStage(stage);
         avanzarRonda();
+    }
+
+    public void reproducirSonidoDeFondo() {
+        // Ruta del archivo de sonido
+        String rutaSonido = getClass().getResource("/sample/sonidoDeFondo.mp3").toExternalForm();
+        Media media = new Media(rutaSonido);
+        mediaPlayer = new MediaPlayer(media);
+
+        // Configurar el sonido para que se repita en bucle
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
+        // Ajustar volumen
+        mediaPlayer.setVolume(0.1);
+
+        // Reproducir sonido
+        mediaPlayer.play();
     }
 
     public void setBalatroController(BalatroController balatroController) {

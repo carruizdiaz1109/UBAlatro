@@ -53,6 +53,7 @@ public class Mano extends ConjuntoCartas {
         Descarte unDescarte = new Descarte(this.seleccionadas);
         this.cartas.removeAll(this.seleccionadas);
         this.seleccionadas.clear();
+        rellenarse();
         return unDescarte;
    }
 
@@ -74,7 +75,7 @@ public class Mano extends ConjuntoCartas {
         Jugada jugadaNueva = Jugada.crearJugada(this.seleccionadas);
         this.cartas.removeAll(this.seleccionadas);
         this.seleccionadas.clear();
-        //rellenarse();
+        rellenarse();
         return jugadaNueva;
     }
 

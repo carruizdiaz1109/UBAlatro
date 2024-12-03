@@ -8,7 +8,7 @@ import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.jugadas.*;
 import edu.fiuba.algo3.modelo.interfaces.Evaluable;
 
-public abstract class Jugada  implements Evaluable {
+public abstract class Jugada implements Evaluable {
     private final Puntaje sumaValores;
     protected Puntaje puntaje;
     protected List<CartaPoker> cartas;
