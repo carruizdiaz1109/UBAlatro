@@ -10,7 +10,7 @@ import java.util.List;
 public class CartaAlta extends Jugada {
 
     public CartaAlta(List<CartaPoker> cartas) {
-        super(cartas, "CartaAlta");
+        super(cartas, "carta alta");
     }
 
     @Override

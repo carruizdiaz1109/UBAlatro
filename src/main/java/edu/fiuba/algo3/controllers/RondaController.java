@@ -414,8 +414,7 @@ public class RondaController {
             VisualManager.mostrarCartelCarta(nodoSeleccionado, cartasSeleccionadas.get(0));
             actualizarMano();
         } else if (tarotAAplicar instanceof TarotJugada) {
-            //Jugada unaJugada =
-            //tarotAAplicar.aplicar(unaJugada);
+            tarotAAplicar.aplicar(tarotAAplicar); //frula total
         } else {
             throw new TarotsNoDisponiblesError("No se pudo usar el tarot");
         }

@@ -78,7 +78,6 @@ public class TarotController {
         try {
             rondaController.utilizarTarot(tarot);
             manejarEliminarTarot(tarot, stackPane);
-
         } catch (Exception e) {
             System.err.println("Error al usar el tarot: " + e.getMessage());
         }

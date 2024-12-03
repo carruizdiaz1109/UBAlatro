@@ -19,7 +19,7 @@
           {
             "nombre": "Cumbre Mistica",
             "descripcion": "x15 multiplicación por cada descarte",
-            "activacion": "Descarte",
+            "activacion": "descarte",
             "efecto": {
               "puntos": 1,
               "multiplicador": 15
@@ -76,7 +76,7 @@
           {
             "nombre": "Ritual del Valle",
             "descripcion": "+75 fichas por cada descarte",
-            "activacion": "Descarte",
+            "activacion": "descarte",
             "efecto": {
               "puntos": 75,
               "multiplicador": 1
@@ -133,7 +133,7 @@
           {
             "nombre": "Talisman de Descarte",
             "descripcion": "+100 fichas por cada descarte",
-            "activacion": "Descarte",
+            "activacion": "descarte",
             "efecto": {
               "puntos": 100,
               "multiplicador": 1
@@ -181,7 +181,7 @@
           {
             "nombre": "Comodin Abundante",
             "descripcion": "+8 al multiplicador si la mano jugada contiene un full",
-            "activacion": { "Mano Jugada": "full" },
+            "activacion": { "Mano Jugada": "full house" },
             "efecto": {
               "puntos": 1,
               "multiplicador": 8
@@ -295,7 +295,7 @@
           {
             "nombre": "Bandera",
             "descripcion": "+30 fichas por cada descarte",
-            "activacion": "Descarte",
+            "activacion": "descarte",
             "efecto": {
               "puntos": 30,
               "multiplicador": 1
@@ -389,7 +389,7 @@
               {
                 "nombre": "Bandera",
                 "descripcion": "+30 fichas por cada descarte",
-                "activacion": "Descarte",
+                "activacion": "descarte",
                 "efecto": {
                   "puntos": 30,
                   "multiplicador": 1

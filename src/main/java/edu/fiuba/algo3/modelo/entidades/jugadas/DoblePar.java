@@ -11,7 +11,7 @@ import java.util.List;
 public class DoblePar extends Jugada {
 
     public DoblePar(List<CartaPoker> cartas) {
-        super(cartas,"DoblePar");
+        super(cartas,"doble par");
     }
 
     @Override
