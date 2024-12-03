@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.entidades.tarots;
 
 import edu.fiuba.algo3.modelo.entidades.cartas.CartaPoker;
 import edu.fiuba.algo3.modelo.entidades.Puntaje;
+import edu.fiuba.algo3.modelo.excepciones.*;
 
 public class TarotCarta extends Tarot {
 
@@ -16,7 +17,7 @@ public class TarotCarta extends Tarot {
             System.out.println("Se recibió corectamente la carta seleccionada");
             aplicar((CartaPoker) objeto);
         } else {
-            throw new IllegalArgumentException("El objeto no es una Carta");
+            throw new NoEsCartaError("El objeto no es una Carta");
         }
     }
 
