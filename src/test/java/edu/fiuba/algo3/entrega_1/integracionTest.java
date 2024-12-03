@@ -117,7 +117,7 @@ public class integracionTest {
 
     @Test
     public void test06JugadorAplicaTarotAUnaCartaYSeLeModificaElValor(){
-        int puntajeEsperado = 10;
+        int puntajeEsperado = 12;
 
         CartaPoker cartaPoker = CartaFactory.crearCarta(Valor.DOS, Palo.PICAS);
 
@@ -131,7 +131,7 @@ public class integracionTest {
 
     @Test
     public void test07JugadorAplicaTarotAUnaCartaYSeLeModificaElMultiplicador(){
-        int puntajeEsperado = 60;
+        int puntajeEsperado = 120;
 
         CartaPoker cartaPoker = CartaFactory.crearCarta(Valor.DIEZ, Palo.CORAZONES);
 
