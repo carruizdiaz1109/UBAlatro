@@ -19,11 +19,7 @@ public class TarotJugada extends Tarot {
 
     @Override
     public void aplicar(Object objeto) {
-        if (objeto instanceof Jugada) {
-            aplicarNuevo();
-        } else {
-            throw new IllegalArgumentException("El objeto no es una Jugada");
-        }
+        aplicarNuevo();
     }
 
     public void aplicarNuevo() {

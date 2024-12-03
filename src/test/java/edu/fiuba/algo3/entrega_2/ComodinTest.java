@@ -68,15 +68,17 @@ public class ComodinTest {
                 CartaFactory.crearCarta(Valor.CINCO, Palo.CORAZONES),
                 CartaFactory.crearCarta(Valor.SEIS, Palo.PICAS)
         );
+        int puntajeEsperado = (2+3+4+5+6+30)*4;
         Jugada unaJugada = Jugada.crearJugada(cartas);
         Puntaje puntaje = new Puntaje(0, 3);
         NoAleatorio noAleatorio = new NoAleatorio();
+
         Comodin unComodin = new EfectoJugada(CartaAlta.class, puntaje, "Alta carta" , "x3 si se juega cartaAlta", noAleatorio);
         //Act
         unComodin.aplicar(unaJugada);
         int puntajeObtenido = unaJugada.calcularPuntaje();
         //Assert
-        Assertions.assertEquals(200, puntajeObtenido);
+        Assertions.assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test

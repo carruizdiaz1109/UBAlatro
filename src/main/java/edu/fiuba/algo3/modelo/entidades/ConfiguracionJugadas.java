@@ -8,17 +8,17 @@ public class ConfiguracionJugadas {
     private static Map<String, Puntaje> puntajes = new HashMap<>();
 
     static {
-        puntajes.put("EscaleraReal", new Puntaje(100, 8));
-        puntajes.put("EscaleraColor", new Puntaje(100, 8));
-        puntajes.put("Poker", new Puntaje(60, 7));
-        puntajes.put("FullHouse", new Puntaje(40, 4));
-        puntajes.put("Color", new Puntaje(35, 4));
-        puntajes.put("Escalera", new Puntaje(30, 4));
-        puntajes.put("Trio", new Puntaje(30, 3));
-        puntajes.put("DoblePar", new Puntaje(20, 2));
-        puntajes.put("Par", new Puntaje(10, 2));
-        puntajes.put("CartaAlta", new Puntaje(5, 1));
-        puntajes.put("Descarte", new Puntaje(0, 1));
+        puntajes.put("escalera real", new Puntaje(100, 8));
+        puntajes.put("escalera color", new Puntaje(100, 8));
+        puntajes.put("poker", new Puntaje(60, 7));
+        puntajes.put("full house", new Puntaje(40, 4));
+        puntajes.put("color", new Puntaje(35, 4));
+        puntajes.put("escalera", new Puntaje(30, 4));
+        puntajes.put("trio", new Puntaje(30, 3));
+        puntajes.put("doble par", new Puntaje(20, 2));
+        puntajes.put("par", new Puntaje(10, 2));
+        puntajes.put("carta alta", new Puntaje(5, 1));
+        puntajes.put("descarte", new Puntaje(0, 1));
     }
 
     private ConfiguracionJugadas() {}

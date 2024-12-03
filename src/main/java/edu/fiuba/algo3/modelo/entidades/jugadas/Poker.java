@@ -11,7 +11,7 @@ import java.util.Collections;
 public class Poker extends Jugada {
 
     public Poker(List<CartaPoker> cartas) {
-        super(cartas, "Poker");
+        super(cartas, "poker");
     }
 
     @Override

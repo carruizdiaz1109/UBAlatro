@@ -48,10 +48,10 @@ public class TarotTest {
                 CartaFactory.crearCarta(Valor.DOS, Palo.PICAS),
                 CartaFactory.crearCarta(Valor.DOS, Palo.TREBOLES)
         ));
-        Jugada jugada = Jugada.crearJugada(cartas);
-        Tarot tarot = new TarotJugada("El Tonto", "Mejora la mano carta mas alta", new Puntaje(15, 2), "par");
+        TarotJugada tarot = new TarotJugada("El Tonto", "Mejora la mano carta mas alta", new Puntaje(15, 2), "par");
         // Act
-        tarot.aplicar(jugada);
+        tarot.aplicarNuevo();
+        Jugada jugada = Jugada.crearJugada(cartas);
         int puntajeCalculado = jugada.calcularPuntaje();
         // Assert
         int puntajeEsperado = (2 + 2 + 15) * 2;

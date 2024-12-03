@@ -122,7 +122,7 @@ public class Tienda {
                 return Trio.class;
             case "escalera":
                 return Escalera.class;
-            case "full":
+            case "full house":
                 return FullHouse.class;
             case "color":
                 return Color.class;
