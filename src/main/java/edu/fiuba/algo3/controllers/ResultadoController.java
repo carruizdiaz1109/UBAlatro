@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -40,6 +42,8 @@ public class ResultadoController {
     private VBox resultadoBox;
     private BalatroController balatroController;
 
+    private MediaPlayer mediaPlayer;
+
     @FXML
     public void initialize() {
         root.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles.css")).toExternalForm());
@@ -47,6 +51,32 @@ public class ResultadoController {
         btnSalir.setOnAction(event -> salir());
         btnRondaSiguiente.setOnAction(event -> siguienteRonda());
         aplicarTransicion();
+    }
+
+    public void reproducirSonidoGanador() {
+        // Ruta del archivo de sonido
+        String rutaSonido = getClass().getResource("/sample/sonidoGanador.mp3").toExternalForm();
+        Media media = new Media(rutaSonido);
+        mediaPlayer = new MediaPlayer(media);
+
+        // Ajustar volumen
+        mediaPlayer.setVolume(0.5);
+
+        // Reproducir sonido
+        mediaPlayer.play();
+    }
+
+    public void reproducirSonidoPerdedor() {
+        // Ruta del archivo de sonido
+        String rutaSonido = getClass().getResource("/sample/sonidoDerrota.mp3").toExternalForm();
+        Media media = new Media(rutaSonido);
+        mediaPlayer = new MediaPlayer(media);
+
+        // Ajustar volumen
+        mediaPlayer.setVolume(0.5);
+
+        // Reproducir sonido
+        mediaPlayer.play();
     }
 
     public void setBalatroController(BalatroController balatroController) {
@@ -65,6 +95,7 @@ public class ResultadoController {
             btnRondaSiguiente.setVisible(true);
             btnVolverAJugar.setVisible(false);
         } else if (estadoJuego == Balatro.EstadoJuego.GANADO) {
+            reproducirSonidoGanador();
             // Recuadro verde para la victoria final
             resultadoBox.setStyle("-fx-background-color: #6fcaa4; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0, 0);");
 
@@ -72,6 +103,7 @@ public class ResultadoController {
             btnRondaSiguiente.setVisible(false);
             btnVolverAJugar.setVisible(true);
         } else {
+            reproducirSonidoPerdedor();
             // Recuadro rojo para la derrota
             resultadoBox.setStyle("-fx-background-color: #f37374; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0, 0);");
 
