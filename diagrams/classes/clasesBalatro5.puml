@@ -1,60 +1,61 @@
 @startuml
 'https://plantuml.com/class-diagram
+package Model {
+    class ConjuntoCartas{
 
-class ConjuntoCartas{
+       + ConjuntoCartas(cartas: List<CartaPoker>)
+       + tieneCartas(): boolean
+       + agregarCarta(carta: CartaPoker)
+       + eliminarCartas()
+       + compararCon(otroConjunto: ConjuntoCartas): boolean
+    }
 
-   + ConjuntoCartas(cartas: List<CartaPoker>)
-   + tieneCartas(): boolean
-   + agregarCarta(carta: CartaPoker)
-   + eliminarCartas()
-   + compararCon(otroConjunto: ConjuntoCartas): boolean
+    abstract class CartaPoker {
+      - valor: Valor
+      - palo: Palo
+      - puntaje: Puntaje
+      - puntajeComodin: Puntaje
+
+      + CartaPoker(valor: Valor, palo: Palo)
+      + comprar(): CartaPoker
+      + modificarPuntaje(Puntaje: unPuntaje
+      + esMismoValor(otraCarta: CartaPoker): boolean
+      + esMismoPalo(otraCarta: CartaPoker): boolean
+      + esConsecutiva(otraCarta: CartaPoker): boolean
+      + compararCartaCon(otraCarta: CartaPoker): boolean
+      + aplicarTarot(unPuntaje: Puntaje)
+      + aplicarComodin(unPuntaje: Puntaje)
+      + comprar(): Comprable
+      + {abstract}obtenerPuntaje(): Puntaje
+      + {abstract}obtenerValoresPosibles(): List<Integer>
+    }
+
+
+    class Mazo extends ConjuntoCartas {
+       + Mazo(cartas: ArrayList<CartaPoker>)
+       # mezclar()
+       + darCarta(): CartaPoker
+       + inicializarMazo()
+       + recargarMazo()
+    + agregarCartaPoker(carta: CartaPoker)
+    }
+
+    class Mano extends ConjuntoCartas{
+       - capacidad: int
+
+       + Mano(unMazo: Mazo)
+       + Mano(cartas: ArrayList<CartaPoker>)
+       + manoLlena():boolean
+       + rellenarse()
+       + seleccionarCarta(cartasASeleccionar: ArrayList<CartaPoker>)
+       + descartar(): Descarte
+       + compararSeleccionadasCon(otrasSeleccionadas: ArrayList<CartaPoker>): boolean
+       + jugar(): Jugada
+    }
+
+    ConjuntoCartas o-- "1..*" CartaPoker
+    Mano o-- "1..5" CartaPoker
+    Mano o-left- Mazo
+    Mazo o-- "*" CartaPoker
 }
-
-abstract class CartaPoker {
-  - valor: Valor
-  - palo: Palo
-  - puntaje: Puntaje
-  - puntajeComodin: Puntaje
-
-  + CartaPoker(valor: Valor, palo: Palo)
-  + comprar(): CartaPoker
-  + modificarPuntaje(Puntaje: unPuntaje
-  + esMismoValor(otraCarta: CartaPoker): boolean
-  + esMismoPalo(otraCarta: CartaPoker): boolean
-  + esConsecutiva(otraCarta: CartaPoker): boolean
-  + compararCartaCon(otraCarta: CartaPoker): boolean
-  + aplicarTarot(unPuntaje: Puntaje)
-  + aplicarComodin(unPuntaje: Puntaje)
-  + comprar(): Comprable
-  + {abstract}obtenerPuntaje(): Puntaje
-  + {abstract}obtenerValoresPosibles(): List<Integer>
-}
-
-
-class Mazo extends ConjuntoCartas {
-   + Mazo(cartas: ArrayList<CartaPoker>)
-   # mezclar()
-   + darCarta(): CartaPoker
-   + inicializarMazo()
-   + recargarMazo()
-+ agregarCartaPoker(carta: CartaPoker)
-}
-
-class Mano extends ConjuntoCartas{
-   - capacidad: int
-
-   + Mano(unMazo: Mazo)
-   + Mano(cartas: ArrayList<CartaPoker>)
-   + manoLlena():boolean
-   + rellenarse()
-   + seleccionarCarta(cartasASeleccionar: ArrayList<CartaPoker>)
-   + descartar(): Descarte
-   + compararSeleccionadasCon(otrasSeleccionadas: ArrayList<CartaPoker>): boolean
-   + jugar(): Jugada
-}
-
-ConjuntoCartas o-- "1..*" CartaPoker
-Mano o-- "1..5" CartaPoker
-Mano o-left- Mazo
-Mazo o-- "*" CartaPoker
 @enduml
