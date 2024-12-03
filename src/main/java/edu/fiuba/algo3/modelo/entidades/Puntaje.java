@@ -34,8 +34,4 @@ public class Puntaje {
     public boolean compararPuntajecon(Puntaje otroPuntaje){
         return (this.puntos == otroPuntaje.puntos && this.multiplicador == otroPuntaje.multiplicador);
     }
-
-    public int getMultiplicador() { return this.multiplicador; }
-
-    public int getPuntos() { return this.puntos; }
 }

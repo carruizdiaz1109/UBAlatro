@@ -21,10 +21,9 @@ public class TarotCarta extends Tarot {
     }
 
     public void aplicar(CartaPoker unaCarta) {
-        System.out.println("Puntaje Tarot antes del tarot: " + this.puntaje.calcularPuntaje());
+        System.out.println("Puntaje Tarot: " + this.puntaje.calcularPuntaje());
         System.out.println("Puntaje Carta antes del tarot: " + unaCarta.getPuntaje().calcularPuntaje());
         unaCarta.aplicarTarot(this.puntaje);
-        System.out.println("Puntaje Tarot después del tarot: " + this.puntaje.calcularPuntaje());
         System.out.println("Puntaje Carta después del tarot: " + unaCarta.getPuntaje().calcularPuntaje());
     }
 }
