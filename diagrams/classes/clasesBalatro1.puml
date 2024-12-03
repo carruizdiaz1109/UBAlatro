@@ -3,38 +3,68 @@
 package Model {
 
 class Balatro {
-    - mazo: Mazo
+    - indiceRondaActual: int
 
-    + Balatro(nombreJugador: string, jugador: Jugador)
-    +cargarRondasDesdeJSON(rutaArchivo: string)
-    + iniciarJuego()
+    + Balatro(nombreJugador: string)
+    + cargarRondasDesdeJSON()
+    + jugarRonda()
+    + avanzaRonda()
+    + verificarEstadoJuego()
 }
+
+class Mazo {
+   - mazoDescarte: List<CartaPoker>
+
+   + Mazo(cartas: ArrayList<CartaPoker>)
+   + darCarta(): CartaPoker
+   + inicializarMazo()
+   + recargarMazo()
+   + agregarCartaPoker(carta: CartaPoker)
+   # mezclar()
+}
+
+class ConjuntoCartas{
+   # cartas: List<CartaPoker>
+
+   + ConjuntoCartas(cartas: List<CartaPoker>)
+   + tieneCartas(): boolean
+   + agregarCarta(carta: CartaPoker)
+   + eliminarCartas()
+   + compararCon(otroConjunto: ConjuntoCartas): boolean
+}
+
 
 class Jugador {
     - nombre: string
-    - manoActual: Mano
-    - mazo: Mazo
-    - cartasTarot: ArrayList<Tarot>
+    # manoActual: Mano
+    - tarots: ArrayList<Tarot>
     - comodines: ArrayList<Comodin>
 
     + Jugador(nombre: string, mazo: Mazo)
     + esPosibleIniciarRonda(): boolean
     + iniciarRonda(rondaActual: Ronda)
     + jugar()
-    + seleccionarCarta(unaCarta: CartaPoker)
-    + aniadirTarots(cartaTarot: Tarot)
-    + utilizarTarot(tarotaAplicar: Tarot, carta: CartaPoker)
-    + aniadirComodin(unComodin: Comodin)
-    + aplicarComodin(unaJugada: Jugada)
     + descartar()
+    + seleccionarCarta(cartasASeleccionar: ArrayList<CartaPoker>)
+    + aniadirTarots(unTarot: Tarot)
+    + aniadirComodin(unComodin: Comodin)
+    + aniadirCartaPoker(cartaPoker: CartaPoker)
+    + eliminarTarot(unTarot: Tarot)
+    + eliminarComodin(unComodin: Comodin)
+    + utilizarTarot(tarotaAplicar: Tarot)
+    + aplicarComodin(unaJugada: Jugada)
 }
 
 class Tienda {
-    - comodinesAComprar: List<Comodin>
-    - tarotAComprar: List<Tarot>
-    - cartasAComprar: List<CartaPoker>
-    + mostrarCartas(): cartasAComprar
-    + venderCarta(): Comprable
+    - comodinesALaVenta: ArrayList<Comodin>
+    - tarotsALaVenta: ArrayList<Tarot>
+    - cartasALaVenta: ArrayList<CartaPoker>
+
+    + Tienda(tiendaNode: JsonNode)
+    - inicializarComodines(tiendaNode: JsonNode)
+    - procesarComodin (comodinIndividual: JsonNode): Comodin
+    - inicializarTarots(tiendaNode: JsonNode)
+    - crearTarot(tarotNode: JsonNode):Tarot
 }
 
 class Ronda {
@@ -44,25 +74,37 @@ class Ronda {
     - JugadasDisponibles: int
     - Jugadas: List<Jugada>
 
-    + Ronda(numero: int, PuntajeMinimo: int, descartesDisponibles: int, jugadasDisponibles: int)
-    + verificarPuntaje(): boolean
+    + Ronda(numero: int, PuntajeMinimo: int, descartesDisponibles: int, jugadasDisponibles: int, tienda: Tienda)    + verificarPuntaje(): boolean
+    + rondaSuperada(): boolean
+    + sePuedeSeguirJugando(): boolean
     + agregarJugada(unaJugada: Jugada)
-    + estadoRonda(): boolean
     + agregarDescarte(unDescarte: Descarte)
     + calcularTotalRonda(): int
+    - actualizarPropiedades()
 }
 
-class Panel {
-    + mostrarInformacion(rondaActual: Ronda)
+enum EstadoJuego {
+    EMPEZADO
+    GANADO
+    PERDIDO
 }
 
-Balatro o-- Jugador
-Jugador o-- Ronda
-Panel .left.> Ronda
-Balatro *-- Tienda
+enum RondaEstado {
+        GANADA
+        PERDIDA
+        EN_CURSO
+}
+
 Balatro o-- "0..8" Ronda
-Balatro *-- Panel
-Panel .right.> Tienda
+Balatro o-- Jugador
+Balatro o-- EstadoJuego
+Balatro o-- Mazo
 
+ConjuntoCartas <|-down- Mazo
+
+Jugador o-- Ronda
+Jugador o-- Mazo
+Ronda o-- Tienda
+Ronda o-- RondaEstado
 }
 @enduml
