@@ -82,8 +82,7 @@ public class Balatro {
     }
 
     public EstadoJuego getEstadoJuego(){
-    //    return this.estadoJuego;
-        return EstadoJuego.GANADO;
+       return this.estadoJuego;
     }
 
     public void verificarEstadoJuego() {
