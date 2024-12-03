@@ -1,46 +1,60 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class Comodin {
-    - nombre: string
-    - descripcion: string
+class ConjuntoCartas{
 
-    + Comodin(valor: int, multiplicador: int, nombre: String, descripcion: String)
-    + {abstract}aplicar(unaJugada: Jugada)
+   + ConjuntoCartas(cartas: List<CartaPoker>)
+   + tieneCartas(): boolean
+   + agregarCarta(carta: CartaPoker)
+   + eliminarCartas()
+   + compararCon(otroConjunto: ConjuntoCartas): boolean
 }
 
-class EfectoJugada {
-    + aplicar(unaJugada: Jugada)
+abstract class CartaPoker {
+  - valor: Valor
+  - palo: Palo
+  - puntaje: Puntaje
+  - puntajeComodin: Puntaje
+
+  + CartaPoker(valor: Valor, palo: Palo)
+  + comprar(): CartaPoker
+  + modificarPuntaje(Puntaje: unPuntaje
+  + esMismoValor(otraCarta: CartaPoker): boolean
+  + esMismoPalo(otraCarta: CartaPoker): boolean
+  + esConsecutiva(otraCarta: CartaPoker): boolean
+  + compararCartaCon(otraCarta: CartaPoker): boolean
+  + aplicarTarot(unPuntaje: Puntaje)
+  + aplicarComodin(unPuntaje: Puntaje)
+  + comprar(): Comprable
+  + {abstract}obtenerPuntaje(): Puntaje
+  + {abstract}obtenerValoresPosibles(): List<Integer>
 }
 
-interface Aplicabilidad {
-    + seAplica(): boolean
+
+class Mazo extends ConjuntoCartas {
+   + Mazo(cartas: ArrayList<CartaPoker>)
+   # mezclar()
+   + darCarta(): CartaPoker
+   + inicializarMazo()
+   + recargarMazo()
++ agregarCartaPoker(carta: CartaPoker)
 }
 
-class Aleatorio {
-    - probabilidad: int
-    + Aleatorio(probabilidad: int)
-    + seAplica(): boolean
+class Mano extends ConjuntoCartas{
+   - capacidad: int
+
+   + Mano(unMazo: Mazo)
+   + Mano(cartas: ArrayList<CartaPoker>)
+   + manoLlena():boolean
+   + rellenarse()
+   + seleccionarCarta(cartasASeleccionar: ArrayList<CartaPoker>)
+   + descartar(): Descarte
+   + compararSeleccionadasCon(otrasSeleccionadas: ArrayList<CartaPoker>): boolean
+   + jugar(): Jugada
 }
 
-class NoAleatorio {
-    + seAplica(): boolean
-}
-
-class EfectoCombinado{
-    + EfectoCombinado(lasCombinacines: List <Comodin>, nombre: string, descripcion: string)
-    + aplicar(unaJugada: Jugada)
-}
-class EfectoPuntaje{
-    + aplicarEfecto(unaJugada: Jugada)
-}
-
-EfectoJugada -up-|> Comodin
-EfectoCombinado -up-|> Comodin
-EfectoCombinado o-- Comodin
-EfectoPuntaje -up-|> Comodin
-Comodin o-right- Aplicabilidad
-Aplicabilidad <|.down. Aleatorio
-Aplicabilidad <|.down. NoAleatorio
-
+ConjuntoCartas o-- "1..*" CartaPoker
+Mano o-- "1..5" CartaPoker
+Mano o-left- Mazo
+Mazo o-- "*" CartaPoker
 @enduml
