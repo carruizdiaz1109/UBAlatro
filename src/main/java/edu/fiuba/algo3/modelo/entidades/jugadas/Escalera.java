@@ -11,8 +11,8 @@ import java.util.Collections;
 
 public class Escalera extends Jugada {
 
-    public Escalera(List<CartaPoker> cartas) {
-        super(cartas, new Puntaje(30, 4));
+    public Escalera(List<CartaPoker> cartas, String nombreJugada) {
+        super(cartas, nombreJugada);
     }
 
     @Override

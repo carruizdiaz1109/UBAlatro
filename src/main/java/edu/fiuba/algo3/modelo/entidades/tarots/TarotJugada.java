@@ -4,7 +4,7 @@ import edu.fiuba.algo3.modelo.entidades.ConfiguracionJugadas;
 import edu.fiuba.algo3.modelo.excepciones.TarotDistintaJugadaError;
 import edu.fiuba.algo3.modelo.entidades.Jugada;
 import edu.fiuba.algo3.modelo.entidades.Puntaje;
-import edu.fiuba.algo3.modelo.entidades.ConfiguracionCadena;
+import edu.fiuba.algo3.modelo.entidades.ConfiguracionJugadas;
 
 import java.lang.module.Configuration;
 
@@ -20,7 +20,7 @@ public class TarotJugada extends Tarot {
     @Override
     public void aplicar(Object objeto) {
         if (objeto instanceof Jugada) {
-            aplicar();
+            aplicarNuevo();
         } else {
             throw new IllegalArgumentException("El objeto no es una Jugada");
         }
@@ -30,7 +30,6 @@ public class TarotJugada extends Tarot {
         ConfiguracionJugadas singleton = ConfiguracionJugadas.getInstancia();
         singleton.actualizarPuntuacion(ejemplar, puntaje);
     }
-
 }
 
 

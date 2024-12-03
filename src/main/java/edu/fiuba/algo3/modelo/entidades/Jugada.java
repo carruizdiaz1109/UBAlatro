@@ -29,8 +29,8 @@ public abstract class Jugada implements Evaluable {
     protected abstract List<CartaPoker> seleccionarCartasValidas(List<CartaPoker> cartas);
 
     private static Jugada configurarCadena(List<CartaPoker> cartas) {
-        Jugada escaleraReal = new EscaleraReal(cartas);
-        Jugada escaleraColor = new EscaleraColor(cartas);
+        Jugada escaleraReal = new EscaleraReal(cartas, "EscaleraReal");
+        Jugada escaleraColor = new EscaleraColor(cartas, "EscaleraColor");
         Jugada poker = new Poker(cartas);
         Jugada fullHouse = new FullHouse(cartas);
         Jugada color = new Color(cartas);
