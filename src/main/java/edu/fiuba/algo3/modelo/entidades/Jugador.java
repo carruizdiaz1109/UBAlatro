@@ -56,8 +56,8 @@ public class Jugador {
         if (unDesarte != null) {
             aplicarComodin(unDesarte);
             unDesarte.calcularPuntaje();
+            this.rondaActual.agregarDescarte(unDesarte);
         }
-        this.rondaActual.agregarDescarte(unDesarte);
         this.manoActual.rellenarse();
     }
 
