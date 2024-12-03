@@ -410,7 +410,7 @@ public class RondaController {
             actualizarMano();
         } else if (tarotAAplicar instanceof TarotJugada) {
             //Jugada unaJugada =
-            //tarotAAplicar.aplicar(unaJugada);
+            tarotAAplicar.aplicar(unaJugada);
         } else {
             throw new TarotsNoDisponiblesError("No se pudo usar el tarot");
         }

@@ -4,10 +4,16 @@ import edu.fiuba.algo3.modelo.excepciones.TarotDistintaJugadaError;
 import edu.fiuba.algo3.modelo.entidades.Jugada;
 import edu.fiuba.algo3.modelo.entidades.Puntaje;
 
+import java.lang.reflect.Field;
+
 public class TarotJugada extends Tarot {
 
-    public TarotJugada(String nombre, String descripcion, Puntaje efecto, String ejemplar) {
-        super(nombre, descripcion, efecto, "mano", ejemplar);
+    private final Class<? extends Jugada> claseJugada; // Class of the associated Jugada
+
+    public TarotJugada(String nombre, String descripcion, Puntaje puntaje, String ejemplar,
+                       Class<? extends Jugada> claseJugada) {
+        super(nombre, descripcion, puntaje, "mano", ejemplar);
+        this.claseJugada = claseJugada;
     }
 
     @Override
@@ -20,15 +26,21 @@ public class TarotJugada extends Tarot {
     }
 
     public void aplicar(Jugada unaJugada) {
-        if(sePuedeUtilizar(unaJugada)){
-            unaJugada.aplicarTarot(this.puntaje);
-        }else{
+        // Check if the class of the provided Jugada is compatible
+        if (!claseJugada.isInstance(unaJugada)) {
             throw new TarotDistintaJugadaError();
         }
-    }
 
-    private boolean sePuedeUtilizar(Jugada unaJugada){
-        return this.ejemplar.equalsIgnoreCase(unaJugada.getClass().getSimpleName());
+        try {
+            Field puntajeField = claseJugada.getDeclaredField("puntaje");
+            puntajeField.setAccessible(true);
+            puntajeField.set(null, this.puntaje);
+
+            System.out.println("Puntaje de clase actualizado para " + claseJugada.getSimpleName());
+
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("Error al modificar el puntaje de clase: " + e.getMessage(), e);
+        }
     }
 }
 

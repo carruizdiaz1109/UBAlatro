@@ -95,7 +95,7 @@ public class Tienda {
         }
     }
 
-    private Tarot crearTarot(JsonNode tarotNode) {
+    private Tarot crearTarot(JsonNode tarotNode, Class<? extends Jugada> claseJugada) {
         String nombre = tarotNode.get("nombre").asText();
         String descripcion = tarotNode.get("descripcion").asText();
         JsonNode efectoNode = tarotNode.get("efecto");
@@ -104,15 +104,15 @@ public class Tienda {
         Puntaje puntaje = new Puntaje(puntos, multiplicador);
 
         String sobre = tarotNode.get("sobre").asText();
-        String ejemplar = tarotNode.get("ejemplar").asText();
 
         if (sobre.equalsIgnoreCase("carta")) {
             return new TarotCarta(nombre, descripcion, puntaje);
         } else if (sobre.equalsIgnoreCase("mano")) {
-            return new TarotJugada(nombre, descripcion, puntaje, ejemplar);
+            return new TarotJugada(nombre, descripcion, puntaje, claseJugada.getSimpleName(), claseJugada);
         }
         return null;
     }
+
 
     private Class<? extends Jugada> obtenerClaseJugada(String tipoJugada) {
         switch (tipoJugada) {
