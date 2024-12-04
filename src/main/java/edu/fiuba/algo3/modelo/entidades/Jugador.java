@@ -56,7 +56,6 @@ public class Jugador {
         Descarte unDescarte = this.manoActual.descartar();
         if (unDescarte != null) {
             aplicarComodin(unDescarte);
-            unDescarte.calcularPuntaje();
             this.rondaActual.setUltimaJugada("");
             this.rondaActual.agregarDescarte(unDescarte);
         }
