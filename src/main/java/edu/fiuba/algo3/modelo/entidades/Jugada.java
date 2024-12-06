@@ -8,7 +8,6 @@ import edu.fiuba.algo3.modelo.entidades.jugadas.*;
 import edu.fiuba.algo3.modelo.interfaces.Evaluable;
 
 public abstract class Jugada implements Evaluable {
-    private final Puntaje sumaValores;
     protected Puntaje puntaje;
     protected List<CartaPoker> cartas;
     protected List<CartaPoker> cartasValidas;
@@ -17,11 +16,8 @@ public abstract class Jugada implements Evaluable {
 
     public Jugada(List<CartaPoker> cartas, String nombreJugada) {
         this.cartas = cartas;
-        this.sumaValores = new Puntaje (0,1);
-
         ConfiguracionJugadas instancia = ConfiguracionJugadas.getInstancia();
         this.puntaje = instancia.getPuntuacion(nombreJugada);
-
         this.cartasValidas = new ArrayList<>();
         this.puntajeComodin = new Puntaje(0,1);
     }
@@ -80,16 +76,8 @@ public abstract class Jugada implements Evaluable {
     }
 
     public int calcularPuntaje() {
-        System.out.println("\npuntaje de la jugada:\n     " + this.puntaje.mostrarPuntos() +" "+ this.puntaje.mostrarMultiplicador());
-
         sumarValores();
-
-        System.out.println("puntaje de la juagda + cartas sumadas:\n     " + this.puntaje.mostrarPuntos() +" "+ this.puntaje.mostrarMultiplicador());
-
         this.puntaje = this.puntaje.sumarPuntaje(this.puntajeComodin);
-
-        System.out.println("puntaje de la juagda + cartas sumadas + comodines aplicados:\n     " + this.puntaje.mostrarPuntos() +" "+ this.puntaje.mostrarMultiplicador() + "\n");
-
         return this.puntaje.calcularPuntaje();
     }
 

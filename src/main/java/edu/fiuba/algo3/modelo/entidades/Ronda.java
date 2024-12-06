@@ -12,7 +12,6 @@ import javafx.beans.property.StringProperty;
 
 public class Ronda {
 
-    private final int numero;
     private final int puntajeMinimo; //puntajeASuperar
     private int descartesDisponibles; //Descartes
     private int jugadasDisponibles; //manos
@@ -31,11 +30,10 @@ public class Ronda {
     private RondaEstado estado;
 
     public Ronda(int numero, int puntajeMinimo, int descartesDisponibles, int jugadasDisponibles, Tienda tienda) {
-        this.numero = numero;
         this.puntajeMinimo = puntajeMinimo;
         this.descartesDisponibles = descartesDisponibles;
         this.jugadasDisponibles = jugadasDisponibles;
-        this.jugadas = new ArrayList<Jugada>();
+        this.jugadas = new ArrayList<>();
         this.tienda = tienda;
 
         this.puntajeAcumulado.set(0); // Puntaje inicial es 0
@@ -46,8 +44,6 @@ public class Ronda {
         this.estado = RondaEstado.EN_CURSO;
     }
 
-    public RondaEstado getEstado() { return estado; }
-
     public enum RondaEstado {
         GANADA,
         PERDIDA,
@@ -56,7 +52,6 @@ public class Ronda {
 
     public boolean rondaSuperada() {
         int totalRonda = calcularTotalRonda();
-        System.out.println("En ronda superada!!!! Total ronda: " + totalRonda);
         return (this.puntajeMinimo <= totalRonda);
     }
 
@@ -104,16 +99,8 @@ public class Ronda {
         return acumulador;
     }
 
-    public void verificarEstadoRonda() {
-        if (rondaSuperada()) {
-            this.estado = RondaEstado.GANADA;
-        } else if(!sePuedeSeguirJugando()) {
-            this.estado = RondaEstado.PERDIDA;
-        }
-    }
-
     private void actualizarPropiedades() {
-        int puntaje = calcularTotalRonda();;
+        int puntaje = calcularTotalRonda();
         manosDisponibles.set(jugadasDisponibles);
         cantidadDescartes.set(descartesDisponibles);
         puntajeAcumulado.set(puntaje);

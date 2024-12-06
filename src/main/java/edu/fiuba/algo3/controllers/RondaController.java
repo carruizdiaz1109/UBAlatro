@@ -18,14 +18,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -60,15 +56,12 @@ public class RondaController {
     @FXML
     private HBox lblComodin;
     @FXML
-    private Label lblResultado;
-    @FXML
     private Button btnSalir;
 
     private Jugador jugador;
     private ArrayList<CartaPoker> cartasSeleccionadas;
     private Ronda rondaActual;
     private RondaVisual rondaVisual;
-    private Tienda tienda;
     private BalatroController balatroController;
 
     public RondaController() {
@@ -290,9 +283,7 @@ public class RondaController {
 
         Button btnSalir = new Button("Salir");
         btnSalir.setStyle("-fx-background-color: #d9534f; -fx-text-fill: white; -fx-font-size: 14px;");
-        btnSalir.setOnAction(e -> {
-            System.exit(0);
-        });
+        btnSalir.setOnAction(e -> System.exit(0));
 
         Button btnCancelar = new Button("Cancelar");
         btnCancelar.setStyle("-fx-background-color: #5bc0de; -fx-text-fill: white; -fx-font-size: 14px;");
@@ -359,48 +350,6 @@ public class RondaController {
         }
     }
 
-    @FXML
-    private void manejarClickCarta(Node cartaVisual, Node contenedorBoton) {
-        // Si el botón ya está visible, lo ocultamos
-        if (contenedorBoton.isVisible()) {
-            contenedorBoton.setVisible(false);
-            return;
-        }
-
-        // Ocultar cualquier otro botón visible
-        lblComodin.getChildren().forEach(node -> {
-            if (node instanceof HBox) {
-                node.setVisible(false);
-            }
-        });
-        lblTarot.getChildren().forEach(node -> {
-            if (node instanceof HBox) {
-                node.setVisible(false);
-            }
-        });
-
-        // Mostrar el botón asociado a la carta
-        contenedorBoton.setVisible(true);
-    }
-
-    private HBox crearContenedorConBoton(Node cartaVisual, String textoBoton) {
-        // Crear un botón
-        Button boton = new Button(textoBoton);
-        boton.getStyleClass().add("boton-accion"); // Clase CSS para el botón
-        boton.setOnAction(event -> {
-            // Aquí se define la acción del botón
-            System.out.println("Botón de carta clickeado");
-        });
-
-        // Crear un contenedor que incluye la carta y el botón
-        HBox contenedor = new HBox();
-        contenedor.getChildren().addAll(cartaVisual, boton);
-        contenedor.setSpacing(5); // Espaciado entre carta y botón
-        contenedor.setVisible(false); // Inicialmente oculto
-
-        return contenedor;
-    }
-
     public void utilizarTarot(Tarot tarotAAplicar){
         System.out.println("Cantidad de cartas seleccionadas: " + cartasSeleccionadas.size());
         if (this.cartasSeleccionadas.size() == 1 && tarotAAplicar instanceof TarotCarta) {
@@ -415,7 +364,7 @@ public class RondaController {
             VisualManager.mostrarCartelCarta(nodoSeleccionado, cartasSeleccionadas.get(0));
             actualizarMano();
         } else if (tarotAAplicar instanceof TarotJugada) {
-            tarotAAplicar.aplicar(tarotAAplicar); //frula total
+            tarotAAplicar.aplicar(tarotAAplicar);
         } else {
             throw new TarotsNoDisponiblesError("No se pudo usar el tarot");
         }

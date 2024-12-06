@@ -1,76 +1,80 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class Jugada
-interface evaluable
-class Escalera {
-     + esJugada(List<CartaPoker> cartas)
-}
-class Poker{
-     + esJugada(List<CartaPoker> cartas)
-}
-class Par{
-              + esJugada(List<CartaPoker> cartas)
-         }
-class Trio{
-               + esJugada(List<CartaPoker> cartas)
-          }
-class DoblePar{
+package Model {
+
+    abstract class Jugada
+    interface Evaluable
+
+    class Escalera {
+         + esJugada(List<CartaPoker> cartas)
+    }
+    class Poker{
+         + esJugada(List<CartaPoker> cartas)
+    }
+    class Par{
+                  + esJugada(List<CartaPoker> cartas)
+             }
+    class Trio{
                    + esJugada(List<CartaPoker> cartas)
               }
-class FullHouse{
-                    + esJugada(List<CartaPoker> cartas)
-               }
-class EscaleraReal{
+    class DoblePar{
                        + esJugada(List<CartaPoker> cartas)
                   }
-class EscaleraColor{
+    class FullHouse{
                         + esJugada(List<CartaPoker> cartas)
                    }
-class Color{
-                + esJugada(List<CartaPoker> cartas)
-           }
-class CartaAlta{
+    class EscaleraReal{
+                           + esJugada(List<CartaPoker> cartas)
+                      }
+    class EscaleraColor{
+                            + esJugada(List<CartaPoker> cartas)
+                       }
+    class Color{
                     + esJugada(List<CartaPoker> cartas)
                }
-class Descarte {
-                   + esJugada(List<CartaPoker> cartas)
-              }
+    class CartaAlta{
+                        + esJugada(List<CartaPoker> cartas)
+                   }
+    class Descarte {
+        + esJugada(List<CartaPoker> cartas)
+    }
 
-interface evaluable {
-     + esJugada(List<CartaPoker> cartas)
+    interface Evaluable {
+         + esJugada(List<CartaPoker> cartas)
+    }
+
+    abstract class Jugada {
+        - puntaje: Puntaje
+        - sumaValores: Puntaje
+        - puntajeComodin: Puntaje
+        # cartasValidas: List<CartaPoker>
+        # siguienteJugada: Jugada
+        # cartas: List<CartaPoker>
+
+        + Jugada(cartas: Lista<CartaPoker>, puntaje: Puntaje)
+        + crearJugada(List<CartaPoker>): Jugada
+        + sumarValores()
+        + calcularPuntaje(): int
+        + aplicarComodin(puntaje: Puntaje)
+        # {abstract}seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
+        - setSiguiente(unaJugada: Jugada)
+    }
+
+
+
+    Evaluable .left.> Jugada
+    CartaAlta -up-|> Jugada
+    Par --up-|> Jugada
+    DoblePar -up--|> Jugada
+    Trio --up--|> Jugada
+    Escalera -up-|> Jugada
+    Color --up-|> Jugada
+    FullHouse --up--|> Jugada
+    Poker -up-|> Jugada
+    EscaleraColor -up-|> Escalera
+    EscaleraReal -up-|> EscaleraColor
+    Descarte -right-|> Jugada
+
 }
-
-abstract class Jugada {
-    - puntaje: Puntaje
-    - sumaValores: Puntaje
-    - puntajeComodin: Puntaje
-    # cartasValidas: List<CartaPoker>
-    # siguienteJugada: Jugada
-    # cartas: List<CartaPoker>
-
-    + Jugada(cartas: Lista<CartaPoker>, puntaje: Puntaje)
-    + crearJugada(List<CartaPoker>): Jugada
-    + sumarValores()
-    + calcularPuntaje(): int
-    + aplicarComodin(puntaje: Puntaje)
-    # {abstract}seleccionarCartasValidas(cartas: List<CartaPoker>): List<CartaPoker>
-    - setSiguiente(unaJugada: Jugada)
-}
-
-
-
-Jugada .left.> evaluable
-Jugada <|-down- Escalera
-Jugada <|-down- EscaleraReal
-Jugada <|-down- EscaleraColor
-Jugada <|-down- Color
-Jugada <|-down- Poker
-Jugada <|-down- Trio
-Jugada <|-down- Par
-Jugada <|-down- DoblePar
-Jugada <|-down- FullHouse
-Jugada <|-down- Descarte
-Jugada <|-down- CartaAlta
-
 @enduml
